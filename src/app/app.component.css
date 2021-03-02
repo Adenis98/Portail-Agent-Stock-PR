@@ -1,0 +1,31 @@
+/* theme colors : 
+color1: #e1eceb 
+color2: #c99c33 
+color3: #425c5a 
+color4:#3d5654 
+fontcolor:#718684 */
+.circleShape{
+    background-color:#d6a217 ;
+    height: 300px;
+    width : 300px;
+    position : absolute ; 
+    z-index: -1;
+    border-top-left-radius: 70%;
+    border-top-right-radius: 40%;
+    border-bottom-right-radius: 70%;
+    border-bottom-left-radius: 50%;
+    top : 30px;left : -30px
+}
+@media(min-width:400px)
+{
+    .circleShape{
+        width : 400px;
+        height: 320px;
+    }
+}
+.bottomShape{
+    position : fixed ; 
+    bottom: 0px;
+    min-width: 300px;
+}
+
