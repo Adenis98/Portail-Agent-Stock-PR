@@ -1,4 +1,7 @@
 
+*{
+    user-select:none;
+}
 .conBox{
     min-width : 300px;
     max-width : 800px;
@@ -10,6 +13,9 @@
     color : #415959;
     text-align: center;
     font-size: 16px;
+    z-index: 50;
+
+
 }
 .boxTitle{
     padding-top :10;
@@ -22,6 +28,12 @@
 }
 .mdpStyle{
     margin-top:20px ;
+    position : relative;
+}
+.psdBtn{
+    position : absolute ; 
+    right : 0px;
+    bottom : 0px 
 }
 .example-full-width {
     width: 75%;
