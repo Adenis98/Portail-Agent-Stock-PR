@@ -1,7 +1,7 @@
 <div class="container ">
     <div class="row ">
         <div class="col-md">
-            <div class="conBox shadow ">
+            <div *ngIf="showLoginBox" class="conBox shadow " @loginFade>
                 <div class="row ">
                     <div class="col-md firstHalf">
                         <div class="row">
@@ -32,11 +32,11 @@
         
                         <div class="row ">
                             <div class="col-md">
-                                <button class="conBtn"  mat-raised-button color="primary">Connexion</button>
+                                <button (click)="showLoginBox=!showLoginBox" class="conBtn"  mat-raised-button color="primary">Connexion</button>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md secondHalf">
+                    <div class="col-md secondHalf shadow">
                         <img class="imgDim" src="../../../assets/image/login.png" alt="">
                     </div>
                 </div>
