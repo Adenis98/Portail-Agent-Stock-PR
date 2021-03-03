@@ -1,4 +1,4 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,7 +9,12 @@ import { Component, OnInit } from '@angular/core';
     trigger('loginFade',[
       transition('* => void',animate('0.7s 0.2s ease-in',
         style({transform :'translateX(200%)' })
-        )  
+        )
+      ),
+      transition('void => *',
+      [style({transform :'translateX(-200%)' })
+      ,animate('0.7s 0.2s ease-out'
+        )]  
       )
     ])
   ]
