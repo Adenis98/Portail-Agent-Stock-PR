@@ -1,8 +1,8 @@
-<div class="container">
-    <div class="row">
+<div class="container ">
+    <div class="row ">
         <div class="col-md">
-            <div class="conBox shadow">
-                <div class="row">
+            <div class="conBox shadow ">
+                <div class="row ">
                     <div class="col-md firstHalf">
                         <div class="row">
                             <div class="col-md boxTitle">
@@ -21,7 +21,11 @@
                             <div class="col-md">
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Mot de passe</mat-label>
-                                    <input type="password" matInput placeholder="Ex. • • • • • • • •">
+                                    <input type="password" [type]="hide ? 'password' : 'text'" matInput placeholder="">
+                               
+                                    <button class="psdBtn" (click)="hide=!hide" mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+                                        <mat-icon>remove_red_eye</mat-icon>
+                                    </button>
                                 </mat-form-field>
                             </div>
                         </div>
