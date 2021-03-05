@@ -9,12 +9,12 @@
     position: absolute;
     bottom: 0px;
     top: 0px;
-    transition: all 1s ease-in ;
+    transition: all 0.3s ease-in;
 }
 .hideSideBar
 {
-    left: -204px;
-    transition: all 1s
+    transform: translate(-204px, 0);
+    transition : all 0.3 ease-out 
 }
 .miniFab
 {
@@ -31,7 +31,11 @@
     margin-top:30px;
     object-fit: contain;
     background: #223836;
+    transition: 3s ease 2s;
 }
+
+
+
 div.user-logo
 {
     background-color: #3D5654;
@@ -105,16 +109,12 @@ div.user-logo
     right : 1px;
     top: 15px;
 }
-.hideImgSection{
-    display: none;
-}
 
 
 .list-unstyled
 {
     position: absolute;
     right: 0px;
-    transition: .3s ease;
 }
 .listUnstyledMarginTop{
     margin-top : 50px;
