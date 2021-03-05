@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Route } from '@angular/compiler/src/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Button } from 'protractor';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -15,6 +16,19 @@ export class SidebarComponent implements OnInit {
     this.document.body.classList.add('paddingBody');
   }
   avatar:string ="../../../assets/image/avatar.jpg";
+  
+inputFunction()
+{
+  let bt=<HTMLInputElement>document.getElementById("shoseImage");
+  bt.click();
+}
+inputFunctionValue()
+{
+  let bt=(<HTMLInputElement>document.getElementById("shoseImage")).value;
+  console.log(bt);
+
+}
+  
   sideBarToggeleClicked()
   {
     if(this.hideSideBar==false)

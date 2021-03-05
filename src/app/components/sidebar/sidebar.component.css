@@ -39,7 +39,30 @@
     background: #223836;
 }
 
+input[type="file"]
+{
+    width: 40px;
+    height: 40px;
+    border-radius: 50px;
+    position: absolute;
+    opacity: 0%;
+    left: 0px;   
+}
+input[type="file"]:hover
+{
+    cursor: pointer !important;
+}
 
+
+.imagButton
+{   
+    position: relative;
+    left: 100px;
+    top: 50px;
+    background-color: transparent;
+    color: white;
+    cursor:pointer !important;
+}
 
 div.user-logo
 {
@@ -100,6 +123,7 @@ div.user-logo
     text-align: left;
     margin-top: -1px;
     text-transform: uppercase;
+    transition: 0.3s;
 }
 .active
 {
