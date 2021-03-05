@@ -5,10 +5,15 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
 
-import {MatInputModule} from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { DashboardComponent } from './components/sidebarcpnts/dashboard/dashboard.component';
+import { Page2Component } from './components/sidebarcpnts/page2/page2.component';
+import { Page3Component } from './components/sidebarcpnts/page3/page3.component';
+import { Page4Component } from './components/sidebarcpnts/page4/page4.component';
+import { Page5Component } from './components/sidebarcpnts/page5/page5.component';
 
 
 
@@ -17,7 +22,12 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    SidebarComponent
+    SidebarComponent,
+    DashboardComponent,
+    Page2Component,
+    Page3Component,
+    Page4Component,
+    Page5Component
   ],
   imports: [
     BrowserModule,

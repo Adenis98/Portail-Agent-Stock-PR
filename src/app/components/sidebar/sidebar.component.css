@@ -1,7 +1,7 @@
 .sidebar {
-    min-width: 257px;
-    max-width: 257px;
-    min-height: 600px;
+    min-width: 250px;
+    max-width: 250px;
+    min-height: 100VH;
     background: #425C5A;
     color: #fff;
     border-top-right-radius: 30px;
@@ -10,11 +10,12 @@
     bottom: 0px;
     top: 0px;
     left:0px;
+
     transition: all 0.3s ease-in;
 }
 .hideSideBar
 {
-    transform: translate(-212px, 0);
+    transform: translate(-205px, 0);
     transition : all 0.3 ease-out 
 }
 .miniFab
@@ -23,6 +24,10 @@
     right : -5px; 
     margin: 10px;
     background-color: transparent;
+    transition : all 0.3s ;
+}
+.miniFab:hover{
+    color : #d6a217;
 }
 .img img
 {
@@ -32,7 +37,6 @@
     margin-top:30px;
     object-fit: contain;
     background: #223836;
-    transition: 3s ease 2s;
 }
 
 
@@ -61,6 +65,7 @@ div.user-logo
     padding-top: 30px;
     margin-bottom: 3px;
     font-weight: 400;
+    transition: 0.3s;;
 }
 .bg-wrap .user-logo h4
 {
@@ -68,6 +73,10 @@ div.user-logo
     font-size: 14px; 
     margin-top: 0px;
     font-weight: 100;
+    transition: 0.3s;;
+}
+.smallerTextSize{
+    font-size: 10px !important;
 }
 /*second section navside*/
 
@@ -89,6 +98,7 @@ div.user-logo
     padding-right: 30px;
     padding-top: 7px;
     text-align: left;
+    margin-top: -1px;
     text-transform: uppercase;
 }
 .active
@@ -107,7 +117,7 @@ div.user-logo
 .iconButtonHided
 {
     position : absolute ; 
-    right : 1px;
+    right : 0px;
     top: 15px;
 }
 
@@ -120,6 +130,13 @@ div.user-logo
 .listUnstyledMarginTop{
     margin-top : 50px;
 }
+.listUnstyledBgColor{
+    position :absolute;
+    right: 0px;
+    background-color: #E3F2F1;
+    width:50px;
+    height: 100%;
+}
 
 ::ng-deep .paddingBody{
     padding-left:257px;
@@ -128,4 +145,11 @@ div.user-logo
 ::ng-deep .removePaddingBody{
     padding-left:45px;
     padding-right: 10px;
+}
+
+.topButtonRadius{
+    border-bottom-right-radius: 30px;
+}
+.botButtonRadius{
+    border-top-right-radius: 30px;
 }

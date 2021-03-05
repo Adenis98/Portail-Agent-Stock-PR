@@ -1,46 +1,63 @@
 
-    <div class="sidebar" [class.hideSideBar]="hideSideBar">
-        <div class="img bg-wrap text-center ">
-        
-            <button mat-icon-button class="miniFab" (click)="hideSideBar=!hideSideBar;sideBarToggeleClicked()" >
-                <mat-icon>menu</mat-icon>
-            </button>
+<div class="sidebar" [class.hideSideBar]="hideSideBar">
+    <div class="img bg-wrap text-center ">
+    
+        <button mat-icon-button class="miniFab" (click)="hideSideBar=!hideSideBar;sideBarToggeleClicked()" >
+            <mat-icon >{{(hideSideBar)?'menu':'keyboard_arrow_left'}}</mat-icon>
+        </button>
 
-            <div class="user-logo" >
-                <div class="img" >
-                    <img [src]="avatar" alt="erreur" >
-                </div>
-                <h3>Catriona Henderson</h3>
-                <h4>jozefjobrane@gmail.com</h4>
+        <div class="user-logo" >
+            <div class="img" >
+                <img [src]="avatar" alt="erreur" >
             </div>
-            <div>
-                <ul  class="list-unstyled ">
-                    <li class="item " >
-                        <a mat-flat-button  class="linkBtn">
-                            <mat-icon aria-hidden="false"[class.iconButtonHided]="hideSideBar" class="iconButton" >account_box</mat-icon>account
-                        </a>
-                    </li>
-                    <li class="item " >
-                        <a mat-flat-button  class="linkBtn active">
-                            <mat-icon aria-hidden="false"[class.iconButtonHided]="hideSideBar" class="iconButton">home</mat-icon>Dashbord 
-                        </a>
-                    </li>
-                    <li class="item " >
-                        <a mat-flat-button  class="linkBtn">
-                            <mat-icon aria-hidden="false"[class.iconButtonHided]="hideSideBar" class="iconButton">assignment</mat-icon>assignment 
-                        </a>
-                    </li>
-                    <li class="item " >
-                        <a mat-flat-button  class="linkBtn">
-                            <mat-icon aria-hidden="false"[class.iconButtonHided]="hideSideBar" class="iconButton">dns</mat-icon>Stock 
-                        </a>
-                    </li>
-                    <li class="item " >
-                        <a mat-flat-button  class="linkBtn">
-                            <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar"class="iconButton">comment_bank</mat-icon>Bank 
-                        </a>
-                    </li>
-                </ul>           
-            </div>
+            <h3 [class.smallerTextSize]="hideSideBar">Catriona Henderson</h3>
+            <h4 [class.smallerTextSize]="hideSideBar">ramezzormati1998@gmail.com</h4>
+        </div>
+
+        <div>
+            <ul  class="list-unstyled ">
+                <div class="listUnstyledBgColor"></div>
+                <li class="item " >
+                    <a mat-flat-button routerLink="/dashboard" routerLinkActive="active"  class="linkBtn" [class]="(this.page2)?'topButtonRadius':''" (click)="dash('dashboard')">
+                        <mat-icon aria-hidden="false"[class.iconButtonHided]="hideSideBar" class="iconButton" >
+                            account_box
+                        </mat-icon>
+                        Dashboard
+                    </a>
+                </li>
+                <li class="item " >
+                    <a mat-flat-button routerLink="/page2" routerLinkActive="active" class="linkBtn" [class]="(this.page3)?'topButtonRadius':((this.dsh)?'botButtonRadius':'')" (click)="dash('commande')">
+                        <mat-icon aria-hidden="false"[class.iconButtonHided]="hideSideBar" class="iconButton">
+                            home
+                        </mat-icon>
+                        Commande
+                    </a>
+                </li>
+                <li class="item " >
+                    <a mat-flat-button routerLink="/page3" routerLinkActive="active"  class="linkBtn" [class]="(this.page2)?'botButtonRadius':((this.page4)?'topButtonRadius':'')" (click)="dash('pr')">
+                        <mat-icon aria-hidden="false"[class.iconButtonHided]="hideSideBar" class="iconButton">
+                            assignment
+                        </mat-icon>
+                        Stock PR 
+                    </a>
+                </li>
+                <li class="item " >
+                    <a mat-flat-button routerLink="/page4" routerLinkActive="active"  class="linkBtn" [class]="(this.page3)?'botButtonRadius':((this.page5)?'topButtonRadius':'')" (click)="dash('agent')">
+                        <mat-icon aria-hidden="false"[class.iconButtonHided]="hideSideBar" class="iconButton" >
+                            dns
+                        </mat-icon>
+                        inter Agent
+                    </a>
+                </li>
+                <li class="item " >
+                    <a mat-flat-button routerLink="/page5" routerLinkActive="active"  class="linkBtn" [class]="(this.page4)?'botButtonRadius':''"(click)="dash('local')">
+                        <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar"class="iconButton">
+                            comment_bank
+                        </mat-icon>
+                        Stock Local 
+                    </a>
+                </li>
+            </ul>           
         </div>
     </div>
+</div>
