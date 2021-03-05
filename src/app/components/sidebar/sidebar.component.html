@@ -1,0 +1,37 @@
+<div class="wrapper " >
+    <nav class="sidebar" [class.hideSideBar]="hideSideBar">
+      <div class="img bg-wrap text-center ">
+          <div style="position: absolute;right: 0px;">
+                <button mat-icon-button class="miniFab" (click)="hideSideBar=!hideSideBar" >
+                <mat-icon>menu</mat-icon>
+              </button>
+          </div>
+          <div class="user-logo">
+              <div class="img" >
+                  <img [src]="avatar" alt="erreur" >
+              </div>
+              <h3>Catriona Henderson</h3>
+              <h4>jozefjobrane@gmail.com</h4>
+          </div>
+          <div >
+                <ul class="list-unstyled ">
+                    <li class="item " >
+                        <a mat-flat-button  class="linkBtn"><mat-icon aria-hidden="false" class="iconButton">account_box</mat-icon>account </a>
+                    </li>
+                    <li class="item " >
+                        <a mat-flat-button  class="linkBtn active"><mat-icon aria-hidden="false" class="iconButton">home</mat-icon>Dashbord </a>
+                    </li>
+                    <li class="item " >
+                        <a mat-flat-button  class="linkBtn"><mat-icon aria-hidden="false" class="iconButton">assignment</mat-icon>assignment </a>
+                    </li>
+                    <li class="item " >
+                        <a mat-flat-button  class="linkBtn"><mat-icon aria-hidden="false" class="iconButton">dns</mat-icon>Stock </a>
+                    </li>
+                    <li class="item " >
+                        <a mat-flat-button  class="linkBtn"><mat-icon aria-hidden="false" class="iconButton">comment_bank</mat-icon>Bank </a>
+                    </li>
+                </ul>           
+          </div>
+      </div>
+</nav>
+</div>
