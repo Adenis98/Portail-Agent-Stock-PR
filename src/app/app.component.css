@@ -16,6 +16,7 @@ fontcolor:#718684 */
     border-bottom-left-radius: 50%;
     top : 30px;left : -30px
 }
+
 @media(min-width:400px)
 {
     .circleShape{
@@ -26,6 +27,7 @@ fontcolor:#718684 */
 .bottomShape{
     position : fixed ; 
     bottom: 0px;
+    left:0px;
     min-width: 300px;
 }
 

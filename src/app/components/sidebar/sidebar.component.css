@@ -4,11 +4,12 @@
     min-height: 600px;
     background: #425C5A;
     color: #fff;
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
     position: absolute;
     bottom: 0px;
     top: 0px;
+    left:0px;
     transition: all 0.3s ease-in;
 }
 .hideSideBar
@@ -40,7 +41,7 @@ div.user-logo
 {
     background-color: #3D5654;
     padding-bottom: 10px;
-    border-top-right-radius: 20px;
+    border-top-right-radius: 30px;
     margin-bottom: 30px;
     padding-top: 20px;
 }
@@ -118,4 +119,13 @@ div.user-logo
 }
 .listUnstyledMarginTop{
     margin-top : 50px;
+}
+
+::ng-deep .paddingBody{
+    padding-left:257px;
+    padding-right: 10px;
+}
+::ng-deep .removePaddingBody{
+    padding-left:45px;
+    padding-right: 10px;
 }

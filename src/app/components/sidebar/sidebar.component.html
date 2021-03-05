@@ -2,7 +2,7 @@
     <div class="sidebar" [class.hideSideBar]="hideSideBar">
         <div class="img bg-wrap text-center ">
         
-            <button mat-icon-button class="miniFab" (click)="hideSideBar=!hideSideBar" >
+            <button mat-icon-button class="miniFab" (click)="hideSideBar=!hideSideBar;sideBarToggeleClicked()" >
                 <mat-icon>menu</mat-icon>
             </button>
 
