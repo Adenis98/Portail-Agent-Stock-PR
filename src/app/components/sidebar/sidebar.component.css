@@ -9,12 +9,19 @@
     position: absolute;
     bottom: 0px;
     top: 0px;
-    transition: all 1s ease 0s;
+    transition: all 1s ease-in ;
 }
 .hideSideBar
 {
-    left: -205px;
+    left: -204px;
     transition: all 1s
+}
+.miniFab
+{
+    position: absolute ;
+    right : -5px; 
+    margin: 10px;
+    background-color: transparent;
 }
 .img img
 {
@@ -42,8 +49,8 @@ div.user-logo
     border-radius: 50%;
     margin-bottom: 10px; 
 }
-  .bg-wrap .user-logo h3
-   {
+.bg-wrap .user-logo h3
+{
     color: #fff;
     font-size: 18px; 
     padding-top: 30px;
@@ -57,28 +64,25 @@ div.user-logo
  font-weight:lighter;
  
 }
-.list-unstyled
-{
-    position: absolute;
-    right: 0px;
-}
+/*second section navside*/
+
 
 /*class angular material d'un bouton*/
 .linkBtn
 {
-    min-width: 200px;
-    height: 45px;
+    min-width: 230px;
+    height: 50px;
     font-size:17px !important ;
     border-top-left-radius: 30px ;
     border-bottom-left-radius: 30px;
     background-color:#425C5A;
     text-decoration: none;
-    padding-top: 4px;
     font-weight: 400!important;
     border-top-right-radius: 0px;
     border-bottom-right-radius: 0px ;
     color: #E3F2F1;
     padding-right: 30px;
+    padding-top: 7px;
     text-align: left;
     text-transform: uppercase;
 }
@@ -87,11 +91,7 @@ div.user-logo
     background-color:#E3F2F1;
     color: #425C5A;
 }
-.miniFab
-{
-    margin: 10px;
-    background-color: transparent;
-}
+
 .iconButton
 {
     color: #d6a217 !important;
@@ -99,4 +99,23 @@ div.user-logo
     text-align: left;
     margin-right: 10px;
 }
-/*class angular material d'un bouton*/
+.iconButtonHided
+{
+    position : absolute ; 
+    right : 1px;
+    top: 15px;
+}
+.hideImgSection{
+    display: none;
+}
+
+
+.list-unstyled
+{
+    position: absolute;
+    right: 0px;
+    transition: .3s ease;
+}
+.listUnstyledMarginTop{
+    margin-top : 50px;
+}
