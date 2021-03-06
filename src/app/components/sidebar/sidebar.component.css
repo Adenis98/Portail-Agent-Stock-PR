@@ -1,7 +1,7 @@
 .sidebar {
     min-width: 250px;
     max-width: 250px;
-    min-height: 100VH;
+    min-height:600px;
     background: #425C5A;
     color: #fff;
     border-top-right-radius: 30px;
@@ -56,9 +56,9 @@ input[type="file"]:hover
 
 .imagButton
 {   
-    position: relative;
-    left: 100px;
-    top: 50px;
+    position: absolute;
+    left: 145px;
+    top: 110px;
     background-color: transparent;
     color: white;
     cursor:pointer !important;

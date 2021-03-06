@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { Route } from '@angular/compiler/src/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Button } from 'protractor';
+import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -10,24 +10,25 @@ import { Button } from 'protractor';
 })
 export class SidebarComponent implements OnInit {
   hideSideBar=false;
-  constructor(@Inject(DOCUMENT) private document: Document,private router:Router) { }
+
+  public dsh=false ;
+  public page2=false;
+  public page3=false;
+  public page4=false;
+  public page5=false;
+
+  private s: Subscription = new Subscription;//buttons border radius onPageLoad 
+  
+  constructor(@Inject(DOCUMENT) private document: Document,private router : Router) { }
 
   ngOnInit(): void {
-    this.document.body.classList.add('paddingBody');
-  }
-  avatar:string ="../../../assets/image/avatar.jpg";
-  
-inputFunction()
-{
-  let bt=<HTMLInputElement>document.getElementById("shoseImage");
-  bt.click();
-}
-inputFunctionValue()
-{
-  let bt=(<HTMLInputElement>document.getElementById("shoseImage")).value;
-  console.log(bt);
+    this.document.body.classList.add('paddingBody');//ajouter le padding au body si le sideBar est ouvert
 
-}
+    this.s = this.router.events.subscribe(val => {
+      this.dash(location.pathname.substring(1));
+      this.s.unsubscribe();
+    });
+  }
   
   sideBarToggeleClicked()
   {
@@ -40,40 +41,52 @@ inputFunctionValue()
     {
       this.document.body.classList.add('removePaddingBody');
       this.document.body.classList.remove('paddingBody');
-    }
-      
+    } 
   }
-  public dsh=false ;
-  public page2=false;
-  public page3=false;
-  public page4=false;
-  public page5=false;
+  
   dash(current:any)
   {    
     if(current=="dashboard")
     {
+      console.log(current);
       this.dsh=true;
       this.page2=this.page3=this.page4=this.page5=false;
     }
-    if(current=="commande")
+    if(current=="page2")
     {
       this.page2=true;
       this.dsh=this.page3=this.page4=this.page5=false;
     }
-    if(current=="pr")
+    if(current=="page3")
     {
       this.page3=true;
       this.dsh=this.page2=this.page4=this.page5=false;
     }
-    if(current=="agent")
+    if(current=="page4")
     {
       this.page4=true;
       this.dsh=this.page2=this.page3=this.page5=false;
     }
-    if(current=="local")
+    if(current=="page5")
     {
       this.page5=true;
       this.dsh=this.page2=this.page3=this.page4=false;
     }
+  }
+
+  avatar:string ="../../../assets/image/avatar.jpg";
+
+  inputFunction()
+  {
+    let bt=<HTMLInputElement>document.getElementById("shoseImage");
+    bt.click();
+  }
+  inputFunctionValue(file:any)
+  {
+    //let bt=(<HTMLInputElement>document.getElementById("shoseImage")).value;
+    console.log("ramez",file.files[0]);
+    /*his.imageService
+        .getBase64(file[0])
+        .subscribe(str => this.profilePicture = str);*/
   }
 }
