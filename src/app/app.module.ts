@@ -14,6 +14,7 @@ import { Page2Component } from './components/sidebarcpnts/page2/page2.component'
 import { Page3Component } from './components/sidebarcpnts/page3/page3.component';
 import { Page4Component } from './components/sidebarcpnts/page4/page4.component';
 import { Page5Component } from './components/sidebarcpnts/page5/page5.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -34,7 +35,8 @@ import { Page5Component } from './components/sidebarcpnts/page5/page5.component'
     AppRoutingModule,
     BrowserAnimationsModule,
     MatInputModule,
-    MatButtonModule,MatIconModule
+    MatButtonModule,MatIconModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

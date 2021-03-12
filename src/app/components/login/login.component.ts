@@ -1,5 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { LoginServiceService } from 'src/app/services/login/login-service.service';
 
 @Component({
   selector: 'app-login',
@@ -20,11 +21,14 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class LoginComponent implements OnInit {
-
-  constructor() { }
   hide = true ; 
   showLoginBox = true ; 
+  constructor(private log:LoginServiceService) { }
   ngOnInit(): void {
+  }
+  sendRequest()
+  {
+    this.log.login();
   }
 
 }
