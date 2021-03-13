@@ -2,16 +2,27 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { animate, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
+  styleUrls: ['./sidebar.component.css'],
+  animations:[
+    trigger('sideNavFade',[
+      transition('void => *',
+        [
+          style({transform :'translateX(-300px)' })
+          ,animate('0.5s 0.7s ease-out')
+        ]
+      )
+    ])
+  ]
 })
 export class SidebarComponent implements OnInit {
   hideSideBar=false;
 
-  public dsh=false ;
+  public dsh=true ;
   public page2=false;
   public page3=false;
   public page4=false;

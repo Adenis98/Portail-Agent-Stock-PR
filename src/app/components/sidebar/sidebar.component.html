@@ -1,5 +1,5 @@
 
-<div class="sidebar" [class.hideSideBar]="hideSideBar">
+<div class="sidebar" [class.hideSideBar]="hideSideBar" @sideNavFade>
     <div class="img bg-wrap text-center ">
     
         <button mat-icon-button class="miniFab" (click)="hideSideBar=!hideSideBar;sideBarToggeleClicked()" >

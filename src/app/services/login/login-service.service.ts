@@ -9,13 +9,9 @@ export class LoginServiceService {
 
   constructor(private http:HttpClient) { }
 
-  login()
+  login(usr: String, psd:String )
   {
-    let body = {username : "ramez" , password : "zormati"} ; 
-    
-    this.http.post("http://localhost:8080/authenticate",body)
-    .subscribe(resp=>{
-      console.log(resp);
-    });
+    let body = {username : usr , password : psd} ; 
+    return this.http.post("http://localhost:8080/authenticate",body);
   }
 }

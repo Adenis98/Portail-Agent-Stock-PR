@@ -7,3 +7,9 @@ body {
     background-color: #e3f2f1;
     transition: 0.5s ease-in-out;
 }
+.blue-snackbar {
+    background: #eb4d4b !important;
+    padding-left:29% !important;
+    border-radius: 35px!important;
+    color: white !important;
+  }

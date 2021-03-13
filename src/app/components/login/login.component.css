@@ -44,6 +44,10 @@
     background-color: #e9b423;
     color:#415959 
 }
+.conBtn:disabled{
+    background-color: #e9b42362;
+    color:#4159598c 
+}
 .firstHalf{
     padding : 50px
 }

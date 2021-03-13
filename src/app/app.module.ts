@@ -15,6 +15,9 @@ import { Page3Component } from './components/sidebarcpnts/page3/page3.component'
 import { Page4Component } from './components/sidebarcpnts/page4/page4.component';
 import { Page5Component } from './components/sidebarcpnts/page5/page5.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FormControl, FormsModule, NgForm, NgModel } from '@angular/forms';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 
 
@@ -36,7 +39,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MatInputModule,
     MatButtonModule,MatIconModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    MatSnackBarModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

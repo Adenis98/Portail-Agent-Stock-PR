@@ -1,46 +1,59 @@
-<div class="container ">
-    <div class="row ">
-        <div class="col-md">
-            <div *ngIf="showLoginBox" class="conBox shadow " @loginFade>
-                <div class="row ">
-                    <div class="col-md firstHalf">
-                        <div class="row">
-                            <div class="col-md boxTitle">
-                                Bienvenue
+<form #f="ngForm" (keydown.enter)="$event.preventDefault()">
+    <div class="container ">
+        <div class="row ">
+            <div class="col-md">
+                <div *ngIf="showLoginBox" class="conBox shadow " @loginFade>
+                    <div class="row ">
+                        <div class="col-md firstHalf">
+                            <div class="row">
+                                <div class="col-md boxTitle">
+                                    Bienvenue
+                                </div>
                             </div>
-                        </div>
-                        <div class="row userStyle">
-                            <div class="col-md">
-                                <mat-form-field class="example-full-width">
-                                    <mat-label>Nom d'utilisateur</mat-label>
-                                    <input matInput placeholder="Ex. Ramez">
-                                </mat-form-field>
+
+                            <div class="row userStyle">
+                                <div class="col-md">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Nom d'utilisateur</mat-label>
+                                        <input name="user" required [(ngModel)]="user" #usr="ngModel" matInput placeholder="Ex. Ramez">
+                                    </mat-form-field>
+                                </div>
                             </div>
-                        </div>
-                        <div class="row mdpStyle">
-                            <div class="col-md">
-                                <mat-form-field class="example-full-width">
-                                    <mat-label>Mot de passe</mat-label>
-                                    <input type="password" [type]="hide ? 'password' : 'text'" matInput placeholder="">
-                               
-                                    <button class="psdBtn" (click)="hide=!hide" mat-icon-button color="primary" aria-label="Example icon button with a home icon">
-                                        <mat-icon>{{(hide)?'visibility_off':'visibility_on'}}</mat-icon>
+                            
+                            <div class="row mdpStyle">
+                                <div class="col-md">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-label>Mot de passe</mat-label>
+                                        <input name="psd" required [(ngModel)]="psd" type="password"
+                                            [type]="hide ? 'password' : 'text'" matInput placeholder=""
+                                            (keydown.enter)="f.valid?sendRequest():''">
+
+                                        <button class="psdBtn" (click)="hide=!hide" mat-icon-button color="primary"
+                                            aria-label="Example icon button with a home icon">
+                                            <mat-icon>{{(hide)?'visibility_off':'visibility_on'}}</mat-icon>
+                                        </button>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+
+                            <div class="row ">
+                                <div class="col-md">
+                                    <button type="submit" (click)="sendRequest()" class="conBtn"
+                                        mat-raised-button [disabled]="!f.valid||loading" >
+                                        <span *ngIf="!loading">Connexion</span>
+                                        <mat-spinner  *ngIf="loading" style="margin:auto" diameter="30"></mat-spinner>
                                     </button>
-                                </mat-form-field>
+                                </div>
                             </div>
+                            
                         </div>
-        
-                        <div class="row ">
-                            <div class="col-md">
-                                <button (click)="showLoginBox=!showLoginBox;sendRequest()" class="conBtn"  mat-raised-button >Connexion</button>
-                            </div>
+                        <div class="col-md secondHalf shadow">
+                            <img class="imgDim" src="../../../assets/image/login.png" alt="">
                         </div>
                     </div>
-                    <div class="col-md secondHalf shadow">
-                        <img class="imgDim" src="../../../assets/image/login.png" alt="">
-                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-</div>
+</form>
