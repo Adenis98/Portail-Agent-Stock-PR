@@ -38,7 +38,7 @@
 
                             <div class="row ">
                                 <div class="col-md">
-                                    <button type="submit" (click)="sendRequest()" class="conBtn"
+                                    <button type="submit" (click)="sendRequest() " class="conBtn"
                                         mat-raised-button [disabled]="!f.valid||loading" >
                                         <span *ngIf="!loading">Connexion</span>
                                         <mat-spinner  *ngIf="loading" style="margin:auto" diameter="30"></mat-spinner>

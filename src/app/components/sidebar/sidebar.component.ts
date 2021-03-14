@@ -1,8 +1,10 @@
+import { LoginServiceService } from 'src/app/services/login/login-service.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-sidebar',
@@ -20,8 +22,10 @@ import { animate, style, transition, trigger } from '@angular/animations';
   ]
 })
 export class SidebarComponent implements OnInit {
-  hideSideBar=false;
 
+  userNameDash = "BOT"
+  
+  hideSideBar=false;
   public dsh=true ;
   public page2=false;
   public page3=false;
@@ -30,7 +34,7 @@ export class SidebarComponent implements OnInit {
 
   private s: Subscription = new Subscription;//buttons border radius onPageLoad 
   
-  constructor(@Inject(DOCUMENT) private document: Document,private router : Router) { }
+  constructor(@Inject(DOCUMENT) private document: Document,private router : Router,private auth :LoginServiceService) { }
 
   ngOnInit(): void {
     this.document.body.classList.add('paddingBody');//ajouter le padding au body si le sideBar est ouvert
@@ -39,6 +43,7 @@ export class SidebarComponent implements OnInit {
       this.dash(location.pathname.substring(1));
       this.s.unsubscribe();
     });
+    this.setUsername()
   }
   
   sideBarToggeleClicked()
@@ -99,5 +104,11 @@ export class SidebarComponent implements OnInit {
     /*his.imageService
         .getBase64(file[0])
         .subscribe(str => this.profilePicture = str);*/
+  }
+  setUsername()
+  {
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(localStorage.jwt);
+    this.userNameDash=decodedToken["sub"];
   }
 }
