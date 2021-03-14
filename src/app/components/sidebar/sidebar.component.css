@@ -28,9 +28,10 @@
     background-color: transparent;
     transition : all 0.3s ;
 }
-.miniFab:hover , .logout:hover{
+.miniFab:hover {
     color : #d6a217;
 }
+
 .logout
 {
     position: absolute ;
@@ -39,6 +40,9 @@
     margin: 10px;
     background-color: transparent;
     transition : all 0.3s ;
+}
+.logout:hover{
+    color : #eb4d4b;
 }
 
 
