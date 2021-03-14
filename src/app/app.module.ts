@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormControl, FormsModule, NgForm, NgModel } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { NotFoundComponent } from './components/not-found/not-found.component';
 
 
 
@@ -31,7 +32,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
     Page2Component,
     Page3Component,
     Page4Component,
-    Page5Component
+    Page5Component,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,

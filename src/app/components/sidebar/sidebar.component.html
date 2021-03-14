@@ -1,73 +1,88 @@
-
 <div class="sidebar" [class.hideSideBar]="hideSideBar" @sideNavFade>
     <div class="img bg-wrap text-center ">
-    
-        <button mat-icon-button class="miniFab" (click)="hideSideBar=!hideSideBar;sideBarToggeleClicked()" >
-            <mat-icon >{{(hideSideBar)?'menu':'keyboard_arrow_left'}}</mat-icon>
+
+        <button mat-icon-button class="miniFab" (click)="hideSideBar=!hideSideBar;sideBarToggeleClicked()">
+            <mat-icon>{{(hideSideBar)?'menu':'keyboard_arrow_left'}}</mat-icon>
         </button>
 
-        <div class="user-logo" >
-            <div class="img" >
-                <button _ngcontent-xuo-c129="" class="mat-focus-indicator mat-mini-fab mat-button-base mat-warn imagButton" (click)="inputFunction()" >
-                    <input type="file" accept="image/*" hidden="hidden" id="shoseImage" (change)="inputFunctionValue($event.target)" >
+        <button mat-icon-button class="logout" (click)="logOut()">
+            <mat-icon>logout</mat-icon>
+        </button>
+
+        <div class="user-logo">
+            <div class="img">
+                <button class="mat-focus-indicator mat-mini-fab mat-button-base mat-warn imagButton"
+                    (click)="inputFunction()">
+                    <input type="file" accept="image/*" hidden="hidden" id="shoseImage"
+                        (change)="inputFunctionValue($event.target)">
                     <span class="mat-button-wrapper">
-                        <mat-icon _ngcontent-xuo-c129="" role="img" class="mat-icon notranslate material-icons mat-icon-no-color" aria-hidden="true" data-mat-icon-type="font">
+                        <mat-icon role="img" class="mat-icon notranslate material-icons mat-icon-no-color"
+                            aria-hidden="true" data-mat-icon-type="font">
                             camera_enhance
                         </mat-icon>
                     </span>
                     <span matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></span>
                     <span class="mat-button-focus-overlay"></span>
                 </button>
-                <img [src]="avatar" alt="erreur" >
+                <img [src]="avatar" alt="erreur">
             </div>
             <h3 [class.smallerTextSize]="hideSideBar">{{userNameDash}}</h3>
             <h4 [class.smallerTextSize]="hideSideBar">ramezzormati1998@gmail.com</h4>
         </div>
 
         <div>
-            <ul  class="list-unstyled ">
+            <ul class="list-unstyled ">
                 <div class="listUnstyledBgColor"></div>
-                <li class="item " >
-                    <a mat-flat-button routerLink="/dashboard" routerLinkActive="active"  class="linkBtn" [class]="(this.page2)?'topButtonRadius':''" (click)="dash('dashboard')">
-                        <mat-icon aria-hidden="false"[class.iconButtonHided]="hideSideBar" class="iconButton" >
+                <li class="item ">
+                    <a mat-flat-button routerLink="/dashboard" [class.active]="dsh" routerLinkActive="active"
+                        class="linkBtn" [class]="(this.page2)?'topButtonRadius':''" (click)="dash('dashboard')">
+
+                        <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar" class="iconButton">
                             account_box
                         </mat-icon>
                         Dashboard
                     </a>
                 </li>
-                <li class="item " >
-                    <a mat-flat-button routerLink="/page2" routerLinkActive="active" class="linkBtn" [class]="(this.page3)?'topButtonRadius':((this.dsh)?'botButtonRadius':'')" (click)="dash('page2')">
-                        <mat-icon aria-hidden="false"[class.iconButtonHided]="hideSideBar" class="iconButton">
+                <li class="item ">
+                    <a mat-flat-button routerLink="/page2" routerLinkActive="active" class="linkBtn"
+                        [class]="(this.page3)?'topButtonRadius':((this.dsh)?'botButtonRadius':'')"
+                        (click)="dash('page2')">
+                        <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar" class="iconButton">
                             home
                         </mat-icon>
                         Commande
                     </a>
                 </li>
-                <li class="item " >
-                    <a mat-flat-button routerLink="/page3" routerLinkActive="active"  class="linkBtn" [class]="(this.page2)?'botButtonRadius':((this.page4)?'topButtonRadius':'')" (click)="dash('page3')">
-                        <mat-icon aria-hidden="false"[class.iconButtonHided]="hideSideBar" class="iconButton">
+                <li class="item ">
+                    <a mat-flat-button routerLink="/page3" routerLinkActive="active" class="linkBtn"
+                        [class]="(this.page2)?'botButtonRadius':((this.page4)?'topButtonRadius':'')"
+                        (click)="dash('page3')">
+                        <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar" class="iconButton">
                             assignment
                         </mat-icon>
-                        Stock PR 
+                        Stock PR
                     </a>
                 </li>
-                <li class="item " >
-                    <a mat-flat-button routerLink="/page4" routerLinkActive="active"  class="linkBtn" [class]="(this.page3)?'botButtonRadius':((this.page5)?'topButtonRadius':'')" (click)="dash('page4')">
-                        <mat-icon aria-hidden="false"[class.iconButtonHided]="hideSideBar" class="iconButton" >
+                <li class="item ">
+                    <a mat-flat-button routerLink="/page4" routerLinkActive="active" class="linkBtn"
+                        [class]="(this.page3)?'botButtonRadius':((this.page5)?'topButtonRadius':'')"
+                        (click)="dash('page4')">
+                        <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar" class="iconButton">
                             dns
                         </mat-icon>
                         inter Agent
                     </a>
                 </li>
-                <li class="item " >
-                    <a mat-flat-button routerLink="/page5" routerLinkActive="active"  class="linkBtn" [class]="(this.page4)?'botButtonRadius':''"(click)="dash('page5')">
-                        <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar"class="iconButton">
+                <li class="item ">
+                    <a mat-flat-button routerLink="/page5" routerLinkActive="active" class="linkBtn"
+                        [class]="(this.page4)?'botButtonRadius':''" (click)="dash('page5')">
+                        <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar" class="iconButton">
                             comment_bank
                         </mat-icon>
-                        Stock Local 
+                        Stock Local
                     </a>
                 </li>
-            </ul>           
+            </ul>
         </div>
     </div>
 </div>

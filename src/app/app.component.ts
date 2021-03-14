@@ -1,5 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,7 @@ import { Component } from '@angular/core';
       transition('* => void',animate('0.7s 0.7s ease-in',
         style({transform :'translateX(400%)' })
         )
-      )
+      ),
     ]),
     trigger('botShapeFade',[
       transition('* => void',animate('0.7s 0.3s ease-in',
@@ -18,7 +19,7 @@ import { Component } from '@angular/core';
         )
       )
     ])
-  ]
+  ],
 })
 export class AppComponent {
   title = 'hello';
@@ -27,6 +28,8 @@ export class AppComponent {
     if(localStorage.getItem("jwt")!=null)
       this.showNavSide=true; 
   }
+  public localStrg()//if the JWT is deleted the sideNav will disappear 
+  {return localStorage.getItem("jwt")!=null;}
 }
 
 

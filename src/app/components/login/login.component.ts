@@ -1,6 +1,6 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { LoginServiceService } from 'src/app/services/login/login-service.service';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AppComponent } from '../../app.component'
 import { Router } from '@angular/router';
@@ -31,7 +31,7 @@ export class LoginComponent implements OnInit {
   public psd = "";
   private token: any = [];
 
-  constructor(private log: LoginServiceService, private _snackBar: MatSnackBar, private app: AppComponent, private router: Router) { }
+  constructor(private log: AuthService, private _snackBar: MatSnackBar, private app: AppComponent, private router: Router) { }
   ngOnInit(): void {
     
   }
@@ -47,14 +47,13 @@ export class LoginComponent implements OnInit {
       setTimeout(() => {
         this.router.navigate(['/dashboard']);
       }, 1000);
-      setTimeout(() => {
-        localStorage.clear();
-      }, 10000);
 
     }, (error) => {
 
       this.loading = false;
-      this._snackBar.open("Verifier votre Login", "", {
+      console.log(error);
+      this._snackBar.open(
+        (error.status==0)?"connexion au serveur impossible !!":error.error.message, "", {
         verticalPosition: 'top',
         panelClass: 'blue-snackbar'
       });

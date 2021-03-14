@@ -18,6 +18,8 @@
     transform: translate(-205px, 0);
     transition : all 0.3 ease-out 
 }
+
+
 .miniFab
 {
     position: absolute ;
@@ -26,9 +28,20 @@
     background-color: transparent;
     transition : all 0.3s ;
 }
-.miniFab:hover{
+.miniFab:hover , .logout:hover{
     color : #d6a217;
 }
+.logout
+{
+    position: absolute ;
+    right : -5px; 
+    bottom: 0px;
+    margin: 10px;
+    background-color: transparent;
+    transition : all 0.3s ;
+}
+
+
 .img img
 {
     width:100px ;

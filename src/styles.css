@@ -9,7 +9,9 @@ body {
 }
 .blue-snackbar {
     background: #eb4d4b !important;
-    padding-left:29% !important;
     border-radius: 35px!important;
     color: white !important;
+    min-width : auto !important ; 
+    padding-left:60px  !important;
+    padding-right:60px !important;
   }
