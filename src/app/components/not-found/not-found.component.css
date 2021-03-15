@@ -1,0 +1,71 @@
+
+
+        /*div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 600px;
+        
+        }
+        .imgNotFound ,h1
+        {
+            min-width: 30%;
+            max-width: 30%;
+            position: fixed;
+        
+        }
+        h3{
+            position:absolute;
+            top: 70%;
+            font-weight: bold;
+
+        }
+        h5
+        {
+            position: absolute;
+            top: 73%;
+            text-align: center;
+        }
+*/
+div.container
+{
+    position: relative;
+    height: 600px;
+    
+}
+
+h3
+{
+    padding-top: 7px;
+    margin-bottom: 0px;
+    text-align: center;
+    font-weight: bold;
+    width: 350px;
+
+}
+h5
+{
+    text-align: center;
+   width: 350px;
+}
+div.box{
+    position: absolute;
+    
+    top: 50%;
+    left: 50%;
+    transform: translate(-25%,-40%);
+    
+}
+@media(max-width:375px)
+{
+    img{
+        width: 100%;
+    } 
+}
+@media(min-width:375px)
+{
+    img 
+    {
+        max-width: 63%;
+    }
+}

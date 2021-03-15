@@ -1,7 +1,7 @@
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { Router } from '@angular/router';
+import { Router, ActivatedRouteSnapshot } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -24,8 +24,7 @@ import {AppComponent} from "../../app.component" ;
 })
 export class SidebarComponent implements OnInit {
 
-  userNameDash = "BOT"
-  
+  userNameDash = "BOT";
   hideSideBar=false;
   public dsh=true ;
   public page2=false;
@@ -51,7 +50,8 @@ export class SidebarComponent implements OnInit {
     });
 
 
-    this.setUsername()
+    this.setUsername();
+
   }
   
   sideBarToggeleClicked()
@@ -134,4 +134,5 @@ export class SidebarComponent implements OnInit {
     this.appCmp.showNavSide=false; 
     this.router.navigate(["/login"]);
   }
+
 }

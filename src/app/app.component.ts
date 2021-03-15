@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
     ]),
     trigger('botShapeFade',[
       transition('* => void',animate('0.7s 0.3s ease-in',
-        style({transform :'translateY(200%)' })
+        style({transform :'translateY(200%)'})
         )
       )
     ])
@@ -30,6 +30,7 @@ export class AppComponent {
   }
   public localStrg()//if the JWT is deleted the sideNav will disappear 
   {return localStorage.getItem("jwt")!=null;}
+  
 }
 
 
