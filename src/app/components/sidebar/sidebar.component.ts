@@ -1,7 +1,7 @@
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { Router, ActivatedRouteSnapshot } from '@angular/router';
+import { Router, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -38,6 +38,11 @@ export class SidebarComponent implements OnInit {
               private router : Router,
               private auth :AuthService , 
               private appCmp:AppComponent){
+                router.events.subscribe((val)=>{
+                  console.log(val  );
+                  if(val instanceof NavigationEnd)
+                    this.dash(val.url.substring(1));
+                })
               }
 
   ngOnInit(): void {
@@ -136,5 +141,4 @@ export class SidebarComponent implements OnInit {
     this.appCmp.showNavSide=false; 
     this.router.navigate(["/login"]);
   }
-
 }

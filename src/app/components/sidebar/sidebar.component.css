@@ -194,3 +194,11 @@ div.user-logo
 .botButtonRadius{
     border-top-right-radius: 30px;
 }
+
+@media(max-width:450px)
+{
+    ::ng-deep .paddingBody{
+        padding-left: 50px;
+        padding-right: 10px;
+    }
+}
