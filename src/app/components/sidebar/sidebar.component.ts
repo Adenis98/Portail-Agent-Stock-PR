@@ -26,7 +26,7 @@ export class SidebarComponent implements OnInit {
 
   userNameDash = "BOT";
   hideSideBar=false;
-  public dsh=true ;
+  public dsh=false ;
   public page2=false;
   public page3=false;
   public page4=false;
@@ -52,6 +52,8 @@ export class SidebarComponent implements OnInit {
 
     this.setUsername();
 
+    if(this.router.url =="/login")
+      this.dsh=true;
   }
   
   sideBarToggeleClicked()

@@ -1,11 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.css";
-html, body { height: 100%; }
+html{ height: 100%;}
+body{ min-height: 100% !important;}
 body { 
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif; 
     background-color: #e3f2f1;
     transition: 0.5s ease-in-out;
+    position:relative
 }
 .blue-snackbar {
     background: #eb4d4b !important;
