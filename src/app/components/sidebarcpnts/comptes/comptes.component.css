@@ -31,12 +31,12 @@ table tr:last-child td /To remove the last border/
   border-radius: 20px;
   margin: auto;
   width: 90%;
-  margin-right: 50px;
+ 
   margin-top: 20px;
   vertical-align: center;
   font-weight: 500;
   max-height: 500px;
-  
+  max-width: 1000px;;
 }
 .data
 {
@@ -55,7 +55,6 @@ h1
   font-size: 30px;
   color:#425C5A ;
   font-weight: 700;
-  
 }
 
 .editBtn
@@ -85,4 +84,7 @@ h1
 .deleteBtnContainer
 {
   width: 50px;
+}
+.table th{
+  border-top:0px !important;
 }

@@ -1,15 +1,18 @@
 <div style="max-height: 300px;">
-    <h1 class="">Table de Compte</h1>
     <table cellspacing="0" cellpadding="0" class="table table-striped shadow">
         <tr>
             <th>Code</th>
-            <th>user name</th>
-            <th>dealer number</th>
+            <th>User name</th>
+            <th>Dealer number</th>
+            <th>Permis</th>
+            <th>Mot de passe</th>
         </tr>
-        <tr *ngFor="let cmpt of listcompte">
+        <tr  *ngFor="let cmpt of listcompte">
             <td class="data code">{{cmpt.code}}</td>
             <td class="data">{{cmpt.userName}}</td>
             <td class="data">{{cmpt.dealer_Number}}</td>
+            <td class="data">{{cmpt.permis}}</td>
+            <td class="data">{{cmpt.password}}</td>
             <td class="editBtnContainer">
                 <button mat-mini-fab class="editBtn" color="primary" (click)="editUser(cmpt)">
                     <mat-icon class="editIcon">edit</mat-icon>

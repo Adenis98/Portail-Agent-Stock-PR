@@ -10,31 +10,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ComptesComponent implements OnInit {
 
-  listcompte: any = [
-    {
-      "code": 1,
-      "userName": "youssef",
-      "dealer_Number": "55243382"
-    },
-    {
-      "code": 1,
-      "userName": "youssef",
-      "dealer_Number": "55243382"
-    },
-    {
-      "code": 1,
-      "userName": "youssef",
-      "dealer_Number": "55243382"
-    },
-    {
-      "code": 1,
-      "userName": "youssef",
-      "dealer_Number": "55243382"
-    }
-  ];
+  listcompte:any;
   constructor(private Comptes: GetcomptesService) {
     this.Comptes.getComptes().toPromise().then(data => {
-      console.log(HttpHeaders);
+      console.log(data);
+      this.listcompte=data;
     })
   }
 
