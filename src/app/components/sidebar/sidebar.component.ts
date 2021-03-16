@@ -31,6 +31,7 @@ export class SidebarComponent implements OnInit {
   public page3=false;
   public page4=false;
   public page5=false;
+  public comptes=false
 
   private s: Subscription = new Subscription;//buttons border radius onPageLoad 
   
@@ -39,7 +40,6 @@ export class SidebarComponent implements OnInit {
               private auth :AuthService , 
               private appCmp:AppComponent){
                 router.events.subscribe((val)=>{
-                  console.log(val  );
                   if(val instanceof NavigationEnd)
                     this.dash(val.url.substring(1));
                 })
@@ -85,27 +85,32 @@ export class SidebarComponent implements OnInit {
     {
       console.log(current);
       this.dsh=true;
-      this.page2=this.page3=this.page4=this.page5=false;
+      this.page2=this.page3=this.page4=this.page5=this.comptes=false;
     }
     if(current=="page2")
     {
       this.page2=true;
-      this.dsh=this.page3=this.page4=this.page5=false;
+      this.dsh=this.page3=this.page4=this.page5=this.comptes=false;
     }
     if(current=="page3")
     {
       this.page3=true;
-      this.dsh=this.page2=this.page4=this.page5=false;
+      this.dsh=this.page2=this.page4=this.page5=this.comptes=false;
     }
     if(current=="page4")
     {
       this.page4=true;
-      this.dsh=this.page2=this.page3=this.page5=false;
+      this.dsh=this.page2=this.page3=this.page5=this.comptes=false;
     }
     if(current=="page5")
     {
       this.page5=true;
-      this.dsh=this.page2=this.page3=this.page4=false;
+      this.dsh=this.page2=this.page3=this.page4=this.comptes=false;
+    }
+    if(current=="comptes")
+    {
+      this.comptes=true;
+      this.dsh=this.page2=this.page3=this.page4=this.page5=false;
     }
   }
 

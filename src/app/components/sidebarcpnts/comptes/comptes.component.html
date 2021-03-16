@@ -1,0 +1,26 @@
+<div style="max-height: 300px;">
+    <h1 class="">Table de Compte</h1>
+    <table cellspacing="0" cellpadding="0" class="table table-striped shadow">
+        <tr>
+            <th>Code</th>
+            <th>user name</th>
+            <th>dealer number</th>
+        </tr>
+        <tr *ngFor="let cmpt of listcompte">
+            <td class="data code">{{cmpt.code}}</td>
+            <td class="data">{{cmpt.userName}}</td>
+            <td class="data">{{cmpt.dealer_Number}}</td>
+            <td class="editBtnContainer">
+                <button mat-mini-fab class="editBtn" color="primary" (click)="editUser(cmpt)">
+                    <mat-icon class="editIcon">edit</mat-icon>
+                </button>
+            </td>
+            <td class="deleteBtnContainer">
+                <button mat-mini-fab class="deleteBtn " color="primary" (click)="editUser(cmpt)">
+                    <mat-icon class="deleteIcon">delete</mat-icon>
+                </button>
+            </td>
+        </tr>
+
+    </table>
+</div>

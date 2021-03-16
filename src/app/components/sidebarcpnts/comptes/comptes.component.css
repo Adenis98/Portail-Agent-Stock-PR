@@ -1,0 +1,88 @@
+
+ /*.mat-elevation-z8
+{
+    position: relative;
+    top: 70px;
+    margin: auto;
+    margin-left: 60px;
+    border-radius: 100% !important;
+    margin-right: 50px !important;
+    width: 80%;
+    background-color: transparent;
+}*/
+/*.mat-table
+{
+  background-color:transparent!important;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 10px;
+}
+table tr:last-child td /To remove the last border/
+{
+  border-bottom:0 solid
+}
+*/
+.table-striped
+{
+  background-color: white;
+  color: #425C5A;
+  border-radius: 20px;
+  margin: auto;
+  width: 90%;
+  margin-right: 50px;
+  margin-top: 20px;
+  vertical-align: center;
+  font-weight: 500;
+  max-height: 500px;
+  
+}
+.data
+{
+  max-height: 80px;
+  padding-top: 20px;
+  font-size: 15px;
+}
+
+div{
+  padding-top:100px;
+  text-align: center;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+h1
+{
+  font-size: 30px;
+  color:#425C5A ;
+  font-weight: 700;
+  
+}
+
+.editBtn
+{
+  color: #425C5A !important;
+  padding: 0px i !important;
+  
+}
+.editIcon
+{
+  color: #d6a217 !important;
+}
+.deleteBtn
+{
+  color: #425C5A !important;
+}
+.deleteIcon
+{
+  color: #d6a217 !important;
+ 
+}
+.editBtnContainer
+{
+  width: 50px;
+  padding-right: 0px;
+}
+.deleteBtnContainer
+{
+  width: 50px;
+}

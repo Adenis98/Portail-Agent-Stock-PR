@@ -19,6 +19,11 @@ import { FormControl, FormsModule, NgForm, NgModel } from '@angular/forms';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { ComptesComponent } from './components/sidebarcpnts/comptes/comptes.component';
+
+
+
+
 
 
 
@@ -33,7 +38,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     Page3Component,
     Page4Component,
     Page5Component,
-    NotFoundComponent
+    NotFoundComponent,
+    ComptesComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,7 +50,9 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     HttpClientModule,
     FormsModule,
     MatSnackBarModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]

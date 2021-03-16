@@ -76,11 +76,21 @@
                 
                 <li class="item ">
                     <a mat-flat-button routerLink="/page5" routerLinkActive="active" class="linkBtn"
-                        [class]="(this.page4)?'botButtonRadius':''" (click)="dash('page5')">
+                        [class]="(this.page4)?'botButtonRadius':((this.comptes)?'topButtonRadius':'')"
+                         (click)="dash('page5')">
                         <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar" class="iconButton">
                             comment_bank
                         </mat-icon>
                         Stock Local
+                    </a>
+                </li>
+                <li class="item ">
+                    <a mat-flat-button routerLink="/comptes" routerLinkActive="active" class="linkBtn"
+                        [class]="(this.page5)?'botButtonRadius':''" (click)="dash('comptes')">
+                        <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar" class="iconButton">
+                            manage_accounts
+                        </mat-icon>
+                        Comptes
                     </a>
                 </li>
             </ul>

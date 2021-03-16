@@ -1,3 +1,4 @@
+
 import { AuthGuardService } from './services/authGuard/auth-guard.service';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -9,6 +10,7 @@ import { Page4Component } from './components/sidebarcpnts/page4/page4.component'
 import { Page5Component } from './components/sidebarcpnts/page5/page5.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoginGuardService } from './services/loginGuard/login-guard.service';
+import { ComptesComponent } from './components/sidebarcpnts/comptes/comptes.component';
 
 const routes: Routes = [
   { 
@@ -43,6 +45,11 @@ const routes: Routes = [
   {
     path: "page5",
     component: Page5Component,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: "comptes",
+    component: ComptesComponent,
     canActivate: [AuthGuardService]
   },
   { 
