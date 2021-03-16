@@ -24,6 +24,11 @@
                 </button>
             </td>
         </tr>
+        <tr *ngIf="loading">
+            <td colspan="5">
+                <mat-spinner   style="margin:auto" diameter="30"></mat-spinner>
+            </td>
+        </tr>
 
     </table>
 </div>
