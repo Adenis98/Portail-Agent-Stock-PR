@@ -1,30 +1,4 @@
-
- /*.mat-elevation-z8
-{
-    position: relative;
-    top: 70px;
-    margin: auto;
-    margin-left: 60px;
-    border-radius: 100% !important;
-    margin-right: 50px !important;
-    width: 80%;
-    background-color: transparent;
-}*/
-/*.mat-table
-{
-  background-color:transparent!important;
-}
-table {
-  width: 100%;
-  border-collapse: collapse;
-  border-radius: 10px;
-}
-table tr:last-child td /To remove the last border/
-{
-  border-bottom:0 solid
-}
-*/
-.table-striped
+/*.table-striped
 {
   background-color: white;
   color: #425C5A;
@@ -87,4 +61,65 @@ h1
 }
 .table th{
   border-top:0px !important;
+}*/
+div.tableHeader
+{
+  background-color: aliceblue;
+  border-radius: 20px;
+  height: 50px;
+  text-align: center;
+  max-width: 800px;
+  padding: 13px;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+.box
+{
+  background-color: #425C5A ;
+  height: 600px;
+  min-width:200px;
+  border-radius: 20px;
+}
+mat-icon.thCard
+{
+  color: #d6a217
+
+}
+
+div.containerPadding
+{
+  padding-top: 100px;
+  margin: auto;
+  padding-bottom: 100px;
+  width: 95%;
+}
+.thCard
+{
+  
+  text-align: center;
+}
+div.composant
+{
+  margin-top: 10px;
+  padding-top: 16px;
+  font-weight: 500;
+  font-size: 16px;
+  position: relative;
+}
+.editBtn
+{
+  position: absolute;
+  top: -12px;
+}
+.deleteBtn
+{
+  position: absolute;
+  top: -12px;
+}
+.btn1{
+  max-width: 50px;
+  margin-right: 10px;
+}
+.btn2{
+  max-width: 50px;
 }

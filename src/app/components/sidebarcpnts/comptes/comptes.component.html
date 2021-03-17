@@ -1,4 +1,4 @@
-<div style="max-height: 300px;">
+<!--<div style="max-height: 300px;">
     <table cellspacing="0" cellpadding="0" class="table table-striped shadow">
         <tr>
             <th>Code</th>
@@ -26,4 +26,47 @@
         </tr>
 
     </table>
+</div>-->
+<div class="container containerPadding">
+    <div class="row">
+        <div class="col-9">
+            <div class="row tableHeader shadow">
+                <div class="col">
+                    <mat-icon class="thCard">fingerprint</mat-icon>
+                </div>
+                <div class="col">
+                    <mat-icon class="thCard">assignment_ind</mat-icon>
+                </div>
+                <div class="col">
+                    <mat-icon class="thCard">perm_phone_msg</mat-icon>
+                </div>
+                <div class="col">
+                    <mat-icon class="thCard">verified_user</mat-icon>
+                </div>
+                <div class="col">
+                    <mat-icon class="thCard">lock</mat-icon>
+                </div>
+                <div class="col btn2"></div><div class="col btn1"></div>
+            </div>
+            <div *ngFor="let cmpt of listcompte" class="row tableHeader composant shadow">
+                <div class="col"><span>{{cmpt.code}}</span></div>
+                <div class="col"><span>{{cmpt.userName}}</span></div>
+                <div class="col"><span>{{cmpt.dealer_Number}}</span></div>
+                <div class="col"><span>{{cmpt.permis}}</span></div>
+                <div class="col"><span>{{cmpt.password}}</span></div>
+                <div class="col btn2">
+                    <button mat-mini-fab class="editBtn" color="primary" (click)="editUser(cmpt)">
+                        <mat-icon class="editIcon">edit</mat-icon>
+                    </button>
+                </div>
+                <div class="col btn1">
+                    <button mat-mini-fab class="deleteBtn " color="primary" (click)="editUser(cmpt)">
+                        <mat-icon class="deleteIcon">delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-3 box shadow">
+        </div>
+    </div>
 </div>

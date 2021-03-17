@@ -24,4 +24,5 @@ export class ComptesComponent implements OnInit {
   editUser(user: {}) {
     console.log(user)
   }
+  
 }
