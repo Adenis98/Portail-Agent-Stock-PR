@@ -15,11 +15,10 @@ export class GetcomptesService {
     let url = "http://localhost:8080/compte/avoirTout";
     return this.http.get(url, { headers:this.headers_object });
   }
-  deleteCompte(data:any)
+  deletCompt(compt:any)
   {
-
-    let url = "http://localhost:8080/compte/supprimer"
-    return this.http.delete(url+'/'+ data.code, { headers:new HttpHeaders().append("Authorization","Bearer "+localStorage.getItem("jwt")) }).subscribe(Response=>{console.log(Response)})
+    let url = "http://localhost:8080/compte/supprimer/"+compt.code;
+    return this.http.delete(url, { headers:this.headers_object });
   }
   
 }

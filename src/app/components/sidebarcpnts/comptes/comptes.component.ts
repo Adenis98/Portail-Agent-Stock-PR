@@ -27,5 +27,13 @@ export class ComptesComponent implements OnInit {
   editUser(user: {}) {
     console.log(user)
   }
-  
+  deleteUser(compt:any)
+  {
+    this.Compte.deletCompt(compt).subscribe(Response=>{
+      let index =this.listcompte.indexOf(compt);
+      this.listcompte.splice(index,1);
+      console.log(compt.code)
+    })
+  }
+
 }
