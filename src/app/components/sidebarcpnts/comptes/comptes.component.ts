@@ -11,15 +11,18 @@ import { Component, OnInit } from '@angular/core';
 export class ComptesComponent implements OnInit {
 
   listcompte:any;
-  constructor(private Comptes: GetcomptesService) {
-    this.Comptes.getComptes().toPromise().then(data => {
-      console.log(data);
-      this.listcompte=data;
-    })
-  }
+  loading=true;
+  constructor(private Compte: GetcomptesService) {}
 
   ngOnInit(): void {
-
+    this.Compte.getComptes().subscribe(data=>{
+      this.loading=false;
+      console.log(data);
+      this.listcompte=data;
+    },erreur=>{
+      this.loading=false;
+      console.log("erreur : "+erreur.message);
+    });
   }
   editUser(user: {}) {
     console.log(user)
