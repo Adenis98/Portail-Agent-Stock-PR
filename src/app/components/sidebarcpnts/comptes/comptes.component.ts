@@ -9,7 +9,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./comptes.component.css']
 })
 export class ComptesComponent implements OnInit {
-
   listcompte:any;
   loading=true;
   constructor(private Compte: GetcomptesService) {}

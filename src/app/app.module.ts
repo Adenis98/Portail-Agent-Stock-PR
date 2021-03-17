@@ -4,6 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -51,8 +52,7 @@ import { ComptesComponent } from './components/sidebarcpnts/comptes/comptes.comp
     FormsModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
-    
- 
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -71,7 +71,35 @@
                 </div>
             </div>
         </div>
-        <div class="col-3 box shadow">
+        
+        <div class="col-3 boxAdd shadow">
+            <img class="img-fluid" src="../../../../assets/image/Add-User.png" alt="">
+            <div class="inputContainer">
+                <mat-form-field class="example-full-width matLabel">
+                    <mat-label class="matLabel">Nom d'utilisateur</mat-label>
+                    <input name="user" required  matInput placeholder="Ex. Youssef">
+                </mat-form-field>
+                <mat-form-field class="example-full-width matLabel">
+                    <mat-label class="matLabel">Numéro</mat-label>
+                    <input name="dealer_Number" required  matInput placeholder="Ex 55 2433...">
+                </mat-form-field>
+                <mat-radio-group  class="example-full-width permisInpute" aria-label="Select an option">
+                    <mat-radio-button class="radioBtn1" value="1">Admin</mat-radio-button>
+                    <mat-radio-button class="radioBtn2" value="2">Agent</mat-radio-button>
+                  </mat-radio-group>
+                <mat-form-field class="example-full-width matLabel">
+                    <mat-label class="matLabel">Mot de passe</mat-label>
+                    <input  name="password" type="password" matInput placeholder="">
+                </mat-form-field>
+                
+            </div>
+            <div class="btnAddContainer">
+                <button type="submit"  class="addBtn"
+                mat-raised-button  >
+                <span *ngIf="!loading">Ajouter</span>
+                <mat-spinner  *ngIf="loading" style="margin:auto" diameter="30"></mat-spinner>
+            </button>
+            </div>
         </div>
     </div>
 </div>

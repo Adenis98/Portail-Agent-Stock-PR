@@ -73,7 +73,7 @@ div.tableHeader
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
-.box
+.boxAdd
 {
   background-color: #425C5A ;
   height: 600px;
@@ -122,4 +122,39 @@ div.composant
 }
 .btn2{
   max-width: 50px;
+}
+/*****AddUser*********/
+
+.matLabel
+{
+  color: aliceblue;
+}
+.permisInpute
+{
+  padding-left: 20px;
+  border-color: antiquewhite;
+}
+.radioBtn1
+{
+  color: #d6a217;
+  margin-right: 5px;
+  
+}
+.radioBtn2
+{
+  color: #d6a217;
+}
+.inputContainer
+{
+  margin:auto;
+  padding-left:35px;
+  padding-top: 50px;
+}
+.addBtn
+{
+    background-color: #e9b423 !important;
+    color:#415959 ;
+}
+.btnAddContainer{
+  padding-left: 85px;
 }
