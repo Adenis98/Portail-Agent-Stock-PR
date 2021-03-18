@@ -57,10 +57,15 @@ export class ComptesComponent implements OnInit {
 
   }
 
-  editUser(user: {}) {
-    this.afficherAMUsr = true ;
-    console.log(user)
+  public us:any ; 
+  //edit the user
+  editUser(user:any) {
+    this.afficherAMUsr = true;
+    this.us = user; 
+    console.log(user);
   }
+
+  //delete the user
   deleteUser(compt:any)
   {
     this.Compte.deletCompt(compt).subscribe(Response=>{
@@ -75,9 +80,8 @@ export class ComptesComponent implements OnInit {
     })
   }
 
-  animal: string="";
-  name: string="";
-  
+
+  //Delete Dialog
   openDialog(compt:any): void {
     const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
       width: '500px',

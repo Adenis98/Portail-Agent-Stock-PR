@@ -204,6 +204,6 @@ div.user-logo
 {
     ::ng-deep .sidebar{
        position : absolute  !important; 
-       height : 700px
+       height : 100%
     }
 }

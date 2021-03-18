@@ -55,7 +55,7 @@
         <div class="col btn2"></div>
         <div class="col btn1"></div>
     </div>
-    <div *ngFor="let cmpt of listcompte"  @ajouterModifierAnim class="row tableHeader composant shadow">
+    <div *ngFor="let cmpt of listcompte" @ajouterModifierAnim class="row tableHeader composant shadow">
         <div class="col"><span>{{cmpt.code}}</span></div>
         <div class="col"><span>{{cmpt.userName}}</span></div>
         <div class="col"><span>{{cmpt.dealer_Number}}</span></div>
@@ -81,18 +81,23 @@
 
     <div *ngIf="afficherAMUsr" @ajouterModifierAnim class="row boxAdd shadow firstCol">
         <!--<img class="img-fluid" src="../../../../assets/image/Add-User.png" alt="">-->
-        <form #f="ngForm">
+        <form #f="ngForm" ngForm>
             <div class="row inputContainer">
                 <div class="col">
                     <mat-form-field class="inputField">
                         <mat-label>Nom d'utilisateur</mat-label>
-                        <input name="user" required matInput placeholder="Ex. Youssef" ngModel #usr="ngModel">
+                        <input name="user" required matInput placeholder="Ex. Youssef" ngModel
+                            #usr="ngModel" [value]="us.userName" >
                     </mat-form-field>
+                   
                     <mat-form-field class="inputField">
-                        <mat-label>Numéro</mat-label>
-                        <input name="dealer_Number" required matInput placeholder="Ex 55 2433..."  ngModel #dNumber="ngModel">
+                        <mat-label>Téléphone</mat-label>
+                        <span matPrefix>+216 &nbsp;</span>
+                        <input required type="tel" matInput placeholder="555-555-1234" ngModel
+                        #dNumber="ngModel">
                     </mat-form-field>
-                    <mat-radio-group required class="inputField" ngModel aria-label="Select an option">
+
+                    <mat-radio-group required class="inputField"  aria-label="Select an option">
                         <mat-radio-button class="radioBtn1" value="1">Responsable</mat-radio-button>
                         <mat-radio-button class="radioBtn2" value="2">Agent</mat-radio-button>
                     </mat-radio-group>
@@ -100,15 +105,16 @@
                 <div class="col">
                     <mat-form-field class="inputField">
                         <mat-label>Mot de passe</mat-label>
-                        <input required name="password" [type]="(hidePsd)?'password':'text'" matInput placeholder=""  ngModel #psd="ngModel">
+                        <input required name="password" [type]="(hidePsd)?'password':'text'" matInput placeholder=""
+                            ngModel #psd="ngModel">
                         <button class="psdBtn" (click)="hidePsd=!hidePsd" mat-icon-button color="primary"
-                        aria-label="Example icon button with a home icon">
-                        <mat-icon>{{(hidePsd)?'visibility_off':'visibility_on'}}</mat-icon>
-                    </button>
+                            aria-label="Example icon button with a home icon">
+                            <mat-icon>{{(hidePsd)?'visibility_off':'visibility_on'}}</mat-icon>
+                        </button>
                     </mat-form-field>
                     <mat-form-field class="inputField">
                         <mat-label>Verifier mot de passe</mat-label>
-                        <input required name="password" type="password" matInput placeholder=""  ngModel #psd2="ngModel">
+                        <input required name="password" type="password" matInput placeholder="" ngModel #psd2="ngModel">
                     </mat-form-field>
                 </div>
             </div>
@@ -120,8 +126,7 @@
                 </button>
             </div>
         </form>
-
-
+        <!--  LENA TZID EL DIV ELE FIH EL TASWIRA  -->
     </div>
 
 
