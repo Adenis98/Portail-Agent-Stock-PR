@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-not-found',
@@ -22,11 +23,11 @@ import { Router } from '@angular/router';
 })
 export class NotFoundComponent implements OnInit {
 
-  constructor(private router :Router) { }
+  constructor(private router :Router,private auth : AuthService) { }
   back=false;
   deleteElmnt=true;
   ngOnInit(): void {
-    if(localStorage.getItem("jwt")==null)
+    if(localStorage.getItem("jwt")==null||!this.auth.isLoggedIn())
       this.back=true ; 
   }
   goBack()
