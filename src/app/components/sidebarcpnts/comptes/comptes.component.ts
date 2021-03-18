@@ -2,6 +2,7 @@ import { GetcomptesService } from '../../../services/comptes/comptes.service';
 import { Component, Inject, NgZone, OnInit } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -18,7 +19,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
       ),
       transition('void => *',
         [style({ transform: 'translateX(-200%)' })
-          , animate('0.7s 0.2s ease-out'
+          , animate('0.5s 0.2s ease-out'
           )]
       )
     ])
@@ -37,7 +38,9 @@ export class ComptesComponent implements OnInit {
   permis:Number=0;
   dNumber:Number=0;
 
-  constructor(private Compte: GetcomptesService,public dialog: MatDialog) {}
+  constructor(private Compte: GetcomptesService,
+              public dialog: MatDialog,
+              private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.Compte.getComptes().subscribe(data=>{
@@ -49,9 +52,13 @@ export class ComptesComponent implements OnInit {
       console.log("erreur : "+erreur.message);
     });
   }
+
+  spliceAllButOne(){
+
+  }
+
   editUser(user: {}) {
     this.afficherAMUsr = true ;
-    
     console.log(user)
   }
   deleteUser(compt:any)
@@ -59,7 +66,12 @@ export class ComptesComponent implements OnInit {
     this.Compte.deletCompt(compt).subscribe(Response=>{
       let index =this.listcompte.indexOf(compt);
       this.listcompte.splice(index,1);
-      console.log("COOOOOOOOOOODe"+compt.code)
+      this._snackBar.open(
+        "L'utilisateur '"+compt.userName+"' a été supprimé", "", {
+        verticalPosition: 'top',
+        panelClass: 'red-snackbar',
+        duration: 5000,
+      });
     })
   }
 
@@ -84,7 +96,6 @@ export class ComptesComponent implements OnInit {
   }
 }
 
-
 @Component({
   selector: 'dialog-overview-example-dialog',
   templateUrl: 'dialog-overview-example-dialog.html',
@@ -103,5 +114,4 @@ export class DialogOverviewExampleDialog {
     this.dialogRef.close("true");
   }
  
-
 }

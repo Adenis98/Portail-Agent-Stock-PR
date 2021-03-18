@@ -12,14 +12,16 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./login.component.css'],
   animations: [
     trigger('loginFade', [
-      transition('* => void', animate('0.7s 0.2s ease-in',
+      transition('* => void',
+        animate('0.7s 0.2s ease-in',
         style({ transform: 'translateX(200%)' })
-      )
+        )
       ),
       transition('void => *',
-        [style({ transform: 'translateX(-200%)' })
-          , animate('0.7s 0.2s ease-out'
-          )]
+        [ 
+          style({ transform: 'translateX(-200%)' }),
+          animate('0.7s 0.2s ease-out')
+        ]
       )
     ])
   ]
@@ -61,7 +63,7 @@ export class LoginComponent implements OnInit {
       this._snackBar.open(
         (error.status==0)?"connexion au serveur impossible !!":error.error.message, "", {
         verticalPosition: 'top',
-        panelClass: 'blue-snackbar'
+        panelClass: 'red-snackbar'
       });
     });
   }

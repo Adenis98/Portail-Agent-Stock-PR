@@ -2,6 +2,7 @@
     min-width: 250px;
     max-width: 250px;
     height:100vh;
+    min-height:700px;
     background: #425C5A;
     color: #fff;
     border-top-right-radius: 30px;
@@ -17,7 +18,6 @@
     transform: translate(-205px, 0);
     transition : all 0.3 ease-out 
 }
-
 
 .miniFab
 {
@@ -68,7 +68,6 @@ input[type="file"]:hover
 {
     cursor: pointer !important;
 }
-
 
 .imagButton
 {   
@@ -161,7 +160,6 @@ div.user-logo
     top: 15px;
 }
 
-
 .list-unstyled
 {
     position: absolute;
@@ -199,5 +197,13 @@ div.user-logo
     ::ng-deep .paddingBody{
         padding-left: 50px;
         padding-right: 10px;
+    }
+}
+
+@media(max-height:700px)
+{
+    ::ng-deep .sidebar{
+       position : absolute  !important; 
+       height : 700px
     }
 }

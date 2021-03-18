@@ -58,7 +58,6 @@ export class SidebarComponent implements OnInit {
     this.setUsername();
 
 
-    console.log("************************"+this.router.url );
     if(this.router.url =="/dashboard")
       this.dsh=true;
   }
@@ -85,7 +84,6 @@ export class SidebarComponent implements OnInit {
       
     if(current=="dashboard")
     {
-      console.log(current);
       this.dsh=true;
       this.page2=this.page3=this.page4=this.page5=this.comptes=false;
     }
@@ -139,13 +137,18 @@ export class SidebarComponent implements OnInit {
   }
   logOut()
   {
-    //clear the local storage
-    this.auth.logout();
+    setTimeout(()=>{
+      this.router.navigate(["/login"]);
+      //clear the local storage
+      this.auth.logout();
+    },400)
+   
     //delete the padding body class from the body
     this.document.body.classList.remove('paddingBody');
     this.document.body.classList.remove('removePaddingBody');
     //hide the sideNav 
     this.appCmp.showNavSide=false; 
-    this.router.navigate(["/login"]);
+    
+   
   }
 }

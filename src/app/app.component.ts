@@ -13,11 +13,20 @@ import { AuthService } from './services/auth/auth.service';
         style({transform :'translateX(400%)' })
         )
       ),
+      transition('void => *',[
+        style({transform :'translateX(400%)'}),
+        animate('0.7s 0.7s ease-out')
+        ]
+      )
     ]),
     trigger('botShapeFade',[
       transition('* => void',animate('0.7s 0.3s ease-in',
         style({transform :'translateY(200%)'})
         )
+      ),
+      transition(
+        'void => *',
+        [style({transform :'translateY(200%)'}),animate('0.7s 0.3s ease-out')]
       )
     ])
   ],

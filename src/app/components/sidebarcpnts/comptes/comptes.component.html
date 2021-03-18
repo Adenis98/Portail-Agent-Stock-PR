@@ -55,7 +55,7 @@
         <div class="col btn2"></div>
         <div class="col btn1"></div>
     </div>
-    <div *ngFor="let cmpt of listcompte" class="row tableHeader composant shadow">
+    <div *ngFor="let cmpt of listcompte"  @ajouterModifierAnim class="row tableHeader composant shadow">
         <div class="col"><span>{{cmpt.code}}</span></div>
         <div class="col"><span>{{cmpt.userName}}</span></div>
         <div class="col"><span>{{cmpt.dealer_Number}}</span></div>
@@ -92,7 +92,7 @@
                         <mat-label>Numéro</mat-label>
                         <input name="dealer_Number" required matInput placeholder="Ex 55 2433..."  ngModel #dNumber="ngModel">
                     </mat-form-field>
-                    <mat-radio-group class="inputField" aria-label="Select an option">
+                    <mat-radio-group required class="inputField" ngModel aria-label="Select an option">
                         <mat-radio-button class="radioBtn1" value="1">Responsable</mat-radio-button>
                         <mat-radio-button class="radioBtn2" value="2">Agent</mat-radio-button>
                     </mat-radio-group>
@@ -115,7 +115,7 @@
 
             <div class="row btnAddContainer inputField">
                 <button type="submit" class="addBtn" mat-raised-button [disabled]="!f.valid">
-                    <span *ngIf="!loadingBtn">Ajouter</span>
+                    <span *ngIf="!loadingBtn">Modifier</span>
                     <mat-spinner *ngIf="loadingBtn" style="margin:auto" diameter="30"></mat-spinner>
                 </button>
             </div>
