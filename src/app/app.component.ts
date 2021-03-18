@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from './services/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -24,8 +25,8 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'hello';
   public showNavSide=false;
-  constructor(){
-    if(localStorage.getItem("jwt")!=null)
+  constructor(public router:Router ,public auth : AuthService){
+    if(this.auth.isLoggedIn())
       this.showNavSide=true; 
   }
   public localStrg()//if the JWT is deleted the sideNav will disappear 

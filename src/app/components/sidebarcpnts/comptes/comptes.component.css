@@ -62,28 +62,31 @@ h1
 .table th{
   border-top:0px !important;
 }*/
+
 div.tableHeader
 {
   background-color: aliceblue;
   border-radius: 20px;
   height: 50px;
   text-align: center;
-  max-width: 800px;
+  width:95%;
+  min-width: 690px;
   padding: 13px;
-  margin-left: 0px !important;
-  margin-right: 0px !important;
+  margin:auto;
 }
 .boxAdd
 {
-  background-color: #425C5A ;
-  height: 600px;
-  min-width:200px;
+  background-color: aliceblue ;
+  height:fit-content;
+  width:fit-content;
+  padding:20px;
   border-radius: 20px;
+  margin: auto;
+  margin-top:30px;
 }
 mat-icon.thCard
 {
   color: #d6a217
-
 }
 
 div.containerPadding
@@ -110,11 +113,21 @@ div.composant
 {
   position: absolute;
   top: -12px;
+  z-index: 10;
+  transition : 0.3s;
+}
+.editBtn:hover{
+  color : #d6a217
 }
 .deleteBtn
 {
   position: absolute;
   top: -12px;
+  z-index: 10;
+  transition : 0.3s;
+}
+.deleteBtn:hover{
+  color: #eb4d4b;
 }
 .btn1{
   max-width: 50px;
@@ -123,16 +136,17 @@ div.composant
 .btn2{
   max-width: 50px;
 }
-/*****AddUser*********/
+.cploading{
+  margin-top: 10px;
+  padding: 10px !important;
+  position: relative;
+}
 
+/*****AddUser*********/
 .matLabel
 {
-  color: aliceblue;
-}
-.permisInpute
-{
-  padding-left: 20px;
-  border-color: antiquewhite;
+  color: black;
+  margin:auto
 }
 .radioBtn1
 {
@@ -144,17 +158,34 @@ div.composant
 {
   color: #d6a217;
 }
-.inputContainer
-{
-  margin:auto;
-  padding-left:35px;
-  padding-top: 50px;
-}
 .addBtn
 {
-    background-color: #e9b423 !important;
-    color:#415959 ;
+  background-color: #e9b423 !important;
+  display: block !important;
+  margin:auto;
+  margin-top:30px;
+  width : 170px;
+  color:#415959 ;
 }
-.btnAddContainer{
-  padding-left: 85px;
+.inputField{
+  margin:auto;
+  min-width:170px;
+  max-width:200px;
+  display: block !important;
+  margin-top:20px;
+}
+
+.inputContainer{
+  margin:auto
+}
+
+.psdBtn{
+  position : absolute ; 
+  right : 0px;
+  bottom : 0px 
+}
+
+::ng-deep mat-dialog-container{
+  border-radius: 25px !important;
+  position : relative !important;
 }

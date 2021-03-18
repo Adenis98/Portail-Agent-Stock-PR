@@ -32,74 +32,97 @@
 
     </table>
 </div>-->
-<div class="container containerPadding">
-    <div class="row">
-        <div class="col-9">
-            <div class="row tableHeader shadow">
-                <div class="col">
-                    <mat-icon class="thCard">fingerprint</mat-icon>
-                </div>
-                <div class="col">
-                    <mat-icon class="thCard">assignment_ind</mat-icon>
-                </div>
-                <div class="col">
-                    <mat-icon class="thCard">perm_phone_msg</mat-icon>
-                </div>
-                <div class="col">
-                    <mat-icon class="thCard">verified_user</mat-icon>
-                </div>
-                <div class="col">
-                    <mat-icon class="thCard">lock</mat-icon>
-                </div>
-                <div class="col btn2"></div><div class="col btn1"></div>
-            </div>
-            <div *ngFor="let cmpt of listcompte" class="row tableHeader composant shadow">
-                <div class="col"><span>{{cmpt.code}}</span></div>
-                <div class="col"><span>{{cmpt.userName}}</span></div>
-                <div class="col"><span>{{cmpt.dealer_Number}}</span></div>
-                <div class="col"><span>{{cmpt.permis}}</span></div>
-                <div class="col"><span>{{cmpt.password}}</span></div>
-                <div class="col btn2">
-                    <button mat-mini-fab class="editBtn" color="primary" (click)="editUser(cmpt)">
-                        <mat-icon class="editIcon">edit</mat-icon>
-                    </button>
-                </div>
-                <div class="col btn1">
-                    <button mat-mini-fab class="deleteBtn " color="primary" (click)="deleteUser(cmpt)">
-                        <mat-icon class="deleteIcon">delete</mat-icon>
-                    </button>
-                </div>
-            </div>
+
+<div class=" container containerPadding">
+
+
+    <div class="row tableHeader shadow">
+        <div class="col">
+            <mat-icon class="thCard">fingerprint</mat-icon>
         </div>
-        
-        <div class="col-3 boxAdd shadow">
-            <img class="img-fluid" src="../../../../assets/image/Add-User.png" alt="">
-            <div class="inputContainer">
-                <mat-form-field class="example-full-width matLabel">
-                    <mat-label class="matLabel">Nom d'utilisateur</mat-label>
-                    <input name="user" required  matInput placeholder="Ex. Youssef">
-                </mat-form-field>
-                <mat-form-field class="example-full-width matLabel">
-                    <mat-label class="matLabel">Numéro</mat-label>
-                    <input name="dealer_Number" required  matInput placeholder="Ex 55 2433...">
-                </mat-form-field>
-                <mat-radio-group  class="example-full-width permisInpute" aria-label="Select an option">
-                    <mat-radio-button class="radioBtn1" value="1">Admin</mat-radio-button>
-                    <mat-radio-button class="radioBtn2" value="2">Agent</mat-radio-button>
-                  </mat-radio-group>
-                <mat-form-field class="example-full-width matLabel">
-                    <mat-label class="matLabel">Mot de passe</mat-label>
-                    <input  name="password" type="password" matInput placeholder="">
-                </mat-form-field>
-                
-            </div>
-            <div class="btnAddContainer">
-                <button type="submit"  class="addBtn"
-                mat-raised-button  >
-                <span *ngIf="!loading">Ajouter</span>
-                <mat-spinner  *ngIf="loading" style="margin:auto" diameter="30"></mat-spinner>
+        <div class="col">
+            <mat-icon class="thCard">assignment_ind</mat-icon>
+        </div>
+        <div class="col">
+            <mat-icon class="thCard">perm_phone_msg</mat-icon>
+        </div>
+        <div class="col">
+            <mat-icon class="thCard">verified_user</mat-icon>
+        </div>
+        <div class="col">
+            <mat-icon class="thCard">lock</mat-icon>
+        </div>
+        <div class="col btn2"></div>
+        <div class="col btn1"></div>
+    </div>
+    <div *ngFor="let cmpt of listcompte" class="row tableHeader composant shadow">
+        <div class="col"><span>{{cmpt.code}}</span></div>
+        <div class="col"><span>{{cmpt.userName}}</span></div>
+        <div class="col"><span>{{cmpt.dealer_Number}}</span></div>
+        <div class="col"><span>{{cmpt.permis}}</span></div>
+        <div class="col"><span>{{cmpt.password}}</span></div>
+        <div class="col btn2">
+            <button mat-mini-fab class="editBtn" color="primary" (click)="editUser(cmpt)">
+                <mat-icon class="editIcon">edit</mat-icon>
             </button>
-            </div>
+        </div>
+        <div class="col btn1">
+            <button mat-mini-fab class="deleteBtn " color="primary" (click)="openDialog(cmpt)">
+                <mat-icon class="deleteIcon">delete</mat-icon>
+            </button>
         </div>
     </div>
+    <div *ngIf="loading" class="row tableHeader cploading shadow">
+        <div class="col">
+            <mat-spinner style="margin:auto" diameter="30"></mat-spinner>
+        </div>
+    </div>
+
+
+    <div *ngIf="afficherAMUsr" @ajouterModifierAnim class="row boxAdd shadow firstCol">
+        <!--<img class="img-fluid" src="../../../../assets/image/Add-User.png" alt="">-->
+        <form #f="ngForm">
+            <div class="row inputContainer">
+                <div class="col">
+                    <mat-form-field class="inputField">
+                        <mat-label>Nom d'utilisateur</mat-label>
+                        <input name="user" required matInput placeholder="Ex. Youssef" ngModel #usr="ngModel">
+                    </mat-form-field>
+                    <mat-form-field class="inputField">
+                        <mat-label>Numéro</mat-label>
+                        <input name="dealer_Number" required matInput placeholder="Ex 55 2433..."  ngModel #dNumber="ngModel">
+                    </mat-form-field>
+                    <mat-radio-group class="inputField" aria-label="Select an option">
+                        <mat-radio-button class="radioBtn1" value="1">Responsable</mat-radio-button>
+                        <mat-radio-button class="radioBtn2" value="2">Agent</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+                <div class="col">
+                    <mat-form-field class="inputField">
+                        <mat-label>Mot de passe</mat-label>
+                        <input required name="password" [type]="(hidePsd)?'password':'text'" matInput placeholder=""  ngModel #psd="ngModel">
+                        <button class="psdBtn" (click)="hidePsd=!hidePsd" mat-icon-button color="primary"
+                        aria-label="Example icon button with a home icon">
+                        <mat-icon>{{(hidePsd)?'visibility_off':'visibility_on'}}</mat-icon>
+                    </button>
+                    </mat-form-field>
+                    <mat-form-field class="inputField">
+                        <mat-label>Verifier mot de passe</mat-label>
+                        <input required name="password" type="password" matInput placeholder=""  ngModel #psd2="ngModel">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row btnAddContainer inputField">
+                <button type="submit" class="addBtn" mat-raised-button [disabled]="!f.valid">
+                    <span *ngIf="!loadingBtn">Ajouter</span>
+                    <mat-spinner *ngIf="loadingBtn" style="margin:auto" diameter="30"></mat-spinner>
+                </button>
+            </div>
+        </form>
+
+
+    </div>
+
+
 </div>

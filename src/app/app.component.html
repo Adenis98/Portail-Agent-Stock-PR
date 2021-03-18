@@ -5,4 +5,4 @@
 </svg>
 
 <router-outlet></router-outlet>
-<app-sidebar *ngIf="showNavSide" ></app-sidebar>
+<app-sidebar *ngIf="showNavSide&&this.router.url!='/login'" ></app-sidebar>

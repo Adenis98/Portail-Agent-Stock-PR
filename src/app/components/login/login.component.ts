@@ -1,10 +1,11 @@
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AppComponent } from '../../app.component'
 import { Router } from '@angular/router';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { DOCUMENT } from '@angular/common';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -31,9 +32,14 @@ export class LoginComponent implements OnInit {
   public psd = "";
   private token: any = [];
 
-  constructor(private log: AuthService, private _snackBar: MatSnackBar, private app: AppComponent, private router: Router) { }
+  constructor(@Inject(DOCUMENT) private document: Document,
+              private log: AuthService,
+              private _snackBar: MatSnackBar,
+              private app: AppComponent, 
+              private router: Router) { }
   ngOnInit(): void {
-    
+    this.document.body.classList.remove('removePaddingBody');
+    this.document.body.classList.remove('paddingBody');
   }
   sendRequest() {
     this.loading = true;

@@ -57,7 +57,9 @@ export class SidebarComponent implements OnInit {
 
     this.setUsername();
 
-    if(this.router.url =="/login")
+
+    console.log("************************"+this.router.url );
+    if(this.router.url =="/dashboard")
       this.dsh=true;
   }
   
