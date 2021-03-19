@@ -20,5 +20,10 @@ export class GetcomptesService {
     let url = "http://localhost:8080/compte/supprimer/"+compt.code;
     return this.http.delete(url, { headers:this.headers_object });
   }
+  addCompt(body:any)
+  {
+    let url = "http://localhost:8080/compte/ajout"
+    return this.http.post(url,body,{headers:this.headers_object})
+  }
   
 }

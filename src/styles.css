@@ -23,3 +23,11 @@ mat-dialog-container{
     border-radius: 25px !important;
     position : relative !important;
   }
+  .green-snackbar {
+    background: #06b440 !important;
+    border-radius: 35px!important;
+    color: white !important;
+    min-width : auto !important ; 
+    padding-left:60px  !important;
+    padding-right:60px !important;
+}

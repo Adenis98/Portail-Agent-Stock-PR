@@ -52,8 +52,9 @@
         <div class="col">
             <mat-icon class="thCard">lock</mat-icon>
         </div>
-        <div class="col btn2"></div>
-        <div class="col btn1"></div>
+        <div class=" col btn1"></div>
+        <div class="col btn2 "></div>
+
     </div>
     <div *ngFor="let cmpt of listcompte" @ajouterModifierAnim class="row tableHeader composant shadow">
         <div class="col"><span>{{cmpt.code}}</span></div>
@@ -77,36 +78,42 @@
             <mat-spinner style="margin:auto" diameter="30"></mat-spinner>
         </div>
     </div>
+    <div *ngIf="!loading" class="row tableHeader cploading shadow">
+        <div class="col">
+            <button mat-button class="addComptBtn" (click)="openAddUserDialoge()">Ajouter un compte 
+                <mat-icon class="editIcon">add</mat-icon>
+            </button>
+        </div>
 
 
-    <div *ngIf="afficherAMUsr" @ajouterModifierAnim class="row boxAdd shadow firstCol">
+    <div *ngIf="afficherAMUsr" @ajouterModifierAnim class="row boxAdd firstCol ">
         <!--<img class="img-fluid" src="../../../../assets/image/Add-User.png" alt="">-->
-        <form #f="ngForm" ngForm>
+        <form #f="ngForm" ngForm class="formStyle shadow col-8">
             <div class="row inputContainer">
                 <div class="col">
                     <mat-form-field class="inputField">
                         <mat-label>Nom d'utilisateur</mat-label>
-                        <input name="user" required matInput placeholder="Ex. Youssef" ngModel
-                            #usr="ngModel" [value]="us.userName" >
+                        <input required matInput placeholder="Ex. Youssef" [(ngModel)]="userName" name="userName">
                     </mat-form-field>
-                   
+
                     <mat-form-field class="inputField">
                         <mat-label>Téléphone</mat-label>
                         <span matPrefix>+216 &nbsp;</span>
-                        <input required type="tel" matInput placeholder="555-555-1234" ngModel
-                        #dNumber="ngModel">
+                        <input required type="tel" matInput placeholder="555-555-1234" [(ngModel)]="dNumber"
+                            name="dNumber">
                     </mat-form-field>
 
-                    <mat-radio-group required class="inputField"  aria-label="Select an option">
-                        <mat-radio-button class="radioBtn1" value="1">Responsable</mat-radio-button>
-                        <mat-radio-button class="radioBtn2" value="2">Agent</mat-radio-button>
+                    <mat-radio-group required class="inputField" aria-label="Select an option" [(ngModel)]="permis"
+                        name="permis">
+                        <mat-radio-button class="radioBtn1" value="1" selected=1>Responsable</mat-radio-button>
+                        <mat-radio-button class="radioBtn2" value="2" selected=2>Agent</mat-radio-button>
                     </mat-radio-group>
                 </div>
                 <div class="col">
                     <mat-form-field class="inputField">
                         <mat-label>Mot de passe</mat-label>
-                        <input required name="password" [type]="(hidePsd)?'password':'text'" matInput placeholder=""
-                            ngModel #psd="ngModel">
+                        <input required name="psd1" [type]="(hidePsd)?'password':'text'" matInput placeholder=""
+                            [(ngModel)]="psd1">
                         <button class="psdBtn" (click)="hidePsd=!hidePsd" mat-icon-button color="primary"
                             aria-label="Example icon button with a home icon">
                             <mat-icon>{{(hidePsd)?'visibility_off':'visibility_on'}}</mat-icon>
@@ -114,19 +121,23 @@
                     </mat-form-field>
                     <mat-form-field class="inputField">
                         <mat-label>Verifier mot de passe</mat-label>
-                        <input required name="password" type="password" matInput placeholder="" ngModel #psd2="ngModel">
+                        <input required name="psd2" type="password" matInput placeholder="" [(ngModel)]="psd2">
                     </mat-form-field>
                 </div>
             </div>
 
             <div class="row btnAddContainer inputField">
-                <button type="submit" class="addBtn" mat-raised-button [disabled]="!f.valid">
-                    <span *ngIf="!loadingBtn">Modifier</span>
+                <button type="submit" class="addBtn" mat-raised-button [disabled]="!f.valid" (click)="addUser()">
+                    <span *ngIf="!loadingBtn">Ajouter</span>
                     <mat-spinner *ngIf="loadingBtn" style="margin:auto" diameter="30"></mat-spinner>
                 </button>
             </div>
         </form>
         <!--  LENA TZID EL DIV ELE FIH EL TASWIRA  -->
+        <div class="boxImage shadow col">
+            <img src="../../../../assets/image/Add User.png" alt="" class="addUserImage img-fluid">
+        </div>
+
     </div>
 
 

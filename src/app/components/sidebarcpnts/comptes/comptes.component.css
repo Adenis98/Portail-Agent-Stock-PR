@@ -70,19 +70,19 @@ div.tableHeader
   height: 50px;
   text-align: center;
   width:95%;
-  min-width: 690px;
+  min-width: 600px;
   padding: 13px;
   margin:auto;
 }
 .boxAdd
 {
-  background-color: aliceblue ;
+
   height:fit-content;
   width:fit-content;
   padding:20px;
   border-radius: 20px;
   margin: auto;
-  margin-top:30px;
+  margin-top:18px;
   transition: 0.3s all ease-in-out;
 }
 mat-icon.thCard
@@ -169,14 +169,14 @@ div.composant
 }
 .inputField{
   margin:auto;
-  min-width:170px;
+  width:250px;
   max-width:200px;
   display: block !important;
   margin-top:20px;
 }
 
 .inputContainer{
-  margin:auto
+  margin:auto;
 }
 
 .psdBtn{
@@ -188,4 +188,50 @@ div.composant
 ::ng-deep mat-dialog-container{
   border-radius: 25px !important;
   position : relative !important;
+}
+.boxImage
+{ 
+  width: 300px !important;
+  height: 300px;
+  background-color: #425C5A;
+  border-radius: 25px;
+  position: relative;
+  margin-left: 25px;
+}
+.addUserImage
+{
+  width:90%;
+  position: absolute;
+  left: 50%; 
+  top: 50%; 
+   transform: translate(-50%, -50%); 
+}
+
+.formStyle
+{
+  background-color: aliceblue;
+  border-radius: 25px;
+  width: 685px !important;
+  min-width: fit-content
+}
+
+@media(max-width:1133px)
+{
+  .boxImage 
+  {
+    display: none;
+  }
+  .formStyle
+{
+  width: fit-content !important;
+  height: 450px;
+}  
+}
+.addComptBtn
+{
+  position: relative;
+  height: 100% !important;
+  top: -3px;
+  width: 100%;
+  padding: 0px !important;
 }
