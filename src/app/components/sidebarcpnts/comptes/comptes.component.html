@@ -56,7 +56,7 @@
         <div class="col btn2 "></div>
 
     </div>
-    <div *ngFor="let cmpt of listcompte" @ajouterModifierAnim class="row tableHeader composant shadow">
+    <div *ngFor="let cmpt of listcompte" @ajouterSupprimerCompteAnim class="row tableHeader composant shadow">
         <div class="col"><span>{{cmpt.code}}</span></div>
         <div class="col"><span>{{cmpt.userName}}</span></div>
         <div class="col"><span>{{cmpt.dealer_Number}}</span></div>
@@ -80,17 +80,23 @@
     </div>
     <div *ngIf="!loading" class="row tableHeader cploading shadow">
         <div class="col">
-            <button mat-button class="addComptBtn" (click)="openAddUserDialoge()">Ajouter un compte 
+            <button mat-button class="addComptBtn" (click)="openAddUserDialoge()">
+                Ajouter un compte 
                 <mat-icon class="editIcon">add</mat-icon>
             </button>
         </div>
 
 
-    <div *ngIf="afficherAMUsr" @ajouterModifierAnim class="row boxAdd firstCol ">
-        <!--<img class="img-fluid" src="../../../../assets/image/Add-User.png" alt="">-->
+    <div *ngIf="afficherMUsrImg||afficherAUsrImg" @ajouterModifierAnim class="row boxAdd firstCol ">
+        <!--  LENA TZID EL DIV ELE FIH EL TASWIRA MTA3 EL MODIFIER  -->
+        <div *ngIf="afficherMUsrImg" class="boxImage shadow col">
+            <img src="../../../../assets/image/Add User.png" alt="" class="addUserImage img-fluid">
+        </div>
+        <!--  LENA EL DIV MTA3 EL FORM -->
         <form #f="ngForm" ngForm class="formStyle shadow col-8">
             <div class="row inputContainer">
                 <div class="col">
+                    <input type="text" class="d-none" [(ngModel)]="id" name="id" >
                     <mat-form-field class="inputField">
                         <mat-label>Nom d'utilisateur</mat-label>
                         <input required matInput placeholder="Ex. Youssef" [(ngModel)]="userName" name="userName">
@@ -127,17 +133,20 @@
             </div>
 
             <div class="row btnAddContainer inputField">
-                <button type="submit" class="addBtn" mat-raised-button [disabled]="!f.valid" (click)="addUser()">
+                <button *ngIf="afficherAUsrImg" type="submit" class="addBtn" mat-raised-button [disabled]="!f.valid" (click)="addUser()">
                     <span *ngIf="!loadingBtn">Ajouter</span>
+                    <mat-spinner *ngIf="loadingBtn" style="margin:auto" diameter="30"></mat-spinner>
+                </button>
+                <button *ngIf="afficherMUsrImg" type="submit" class="addBtn" mat-raised-button [disabled]="!f.valid" (click)="updateUser()">
+                    <span *ngIf="!loadingBtn">Modifier</span>
                     <mat-spinner *ngIf="loadingBtn" style="margin:auto" diameter="30"></mat-spinner>
                 </button>
             </div>
         </form>
-        <!--  LENA TZID EL DIV ELE FIH EL TASWIRA  -->
-        <div class="boxImage shadow col">
+        <!--  LENA TZID EL DIV ELE FIH EL TASWIRA MTA3 EL AJOUTER  -->
+        <div *ngIf="afficherAUsrImg" class="boxImage shadow col">
             <img src="../../../../assets/image/Add User.png" alt="" class="addUserImage img-fluid">
         </div>
-
     </div>
 
 

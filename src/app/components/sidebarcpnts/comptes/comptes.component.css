@@ -92,7 +92,7 @@ mat-icon.thCard
 
 div.containerPadding
 {
-  padding-top: 100px;
+  padding-top: 20px;
   margin: auto;
   padding-bottom: 100px;
   width: 95%;
@@ -152,7 +152,6 @@ div.composant
 .radioBtn1
 {
   margin-right: 10px;
-  
 }
 
 .addBtn
@@ -196,7 +195,6 @@ div.composant
   background-color: #425C5A;
   border-radius: 25px;
   position: relative;
-  margin-left: 25px;
 }
 .addUserImage
 {
@@ -212,7 +210,9 @@ div.composant
   background-color: aliceblue;
   border-radius: 25px;
   width: 685px !important;
-  min-width: fit-content
+  min-width: fit-content;
+  margin-right: 25px;
+  margin-left: 25px;
 }
 
 @media(max-width:1133px)
@@ -222,16 +222,17 @@ div.composant
     display: none;
   }
   .formStyle
-{
-  width: fit-content !important;
-  height: 450px;
-}  
+  {
+    width: fit-content !important;
+    height: 450px;
+  }  
 }
 .addComptBtn
 {
+  border-radius: 15px;
   position: relative;
   height: 100% !important;
   top: -3px;
-  width: 100%;
+  min-width: 100%;
   padding: 0px !important;
 }

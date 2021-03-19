@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient,  HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
@@ -11,19 +11,24 @@ export class GetcomptesService {
       this.headers_object = new HttpHeaders().append("Authorization","Bearer "+localStorage.getItem("jwt"));
    }
 
-  getComptes() {
+  getCompte() {
     let url = "http://localhost:8080/compte/avoirTout";
     return this.http.get(url, { headers:this.headers_object });
   }
-  deletCompt(compt:any)
+  deletCompte(compt:any)
   {
     let url = "http://localhost:8080/compte/supprimer/"+compt.code;
     return this.http.delete(url, { headers:this.headers_object });
   }
-  addCompt(body:any)
+  addCompte(body:any)
   {
-    let url = "http://localhost:8080/compte/ajout"
-    return this.http.post(url,body,{headers:this.headers_object})
+    let url = "http://localhost:8080/compte/ajout";
+    return this.http.post(url,body,{ headers:this.headers_object })
+  }
+  updateCompte(id:String,body:any)
+  {
+    let url = "http://localhost:8080/compte/maj/"+id;
+    return this.http.put(url,body,{ headers:this.headers_object })
   }
   
 }
