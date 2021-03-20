@@ -202,8 +202,9 @@ div.user-logo
 
 @media(max-height:700px)
 {
-    ::ng-deep .sidebar{
-       position : absolute  !important; 
-       height : 100%
+    .sidebar{
+       position :absolute  !important; 
+       height : 100%;
+       bottom:0px;
     }
 }

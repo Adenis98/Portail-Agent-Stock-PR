@@ -34,8 +34,6 @@
 </div>-->
 
 <div class=" container containerPadding">
-
-
     <div class="row tableHeader shadow">
         <div class="col">
             <mat-icon class="thCard">fingerprint</mat-icon>
@@ -85,7 +83,7 @@
                 <mat-icon class="editIcon">add</mat-icon>
             </button>
         </div>
-
+    </div>
 
     <div *ngIf="afficherMUsrImg||afficherAUsrImg" @ajouterModifierAnim class="row boxAdd firstCol ">
         <!--  LENA TZID EL DIV ELE FIH EL TASWIRA MTA3 EL MODIFIER  -->
@@ -93,23 +91,44 @@
             <img src="../../../../assets/image/Version control-bro.png" alt="" class="addUserImage img-fluid">
         </div>
         <!--  LENA EL DIV MTA3 EL FORM -->
+       
         <form #f="ngForm" ngForm class="formStyle shadow col-8" (keydown.enter)="$event.preventDefault()">
-            <button mat-icon-button class="closeBtn" (click)="closeAU()" >
-                <mat-icon>close</mat-icon>
-              </button>
+            
             <div class="row inputContainer">
                 <div class="col">
                     <input type="text" class="d-none" [(ngModel)]="id" name="id" >
                     <mat-form-field class="inputField">
                         <mat-label>Nom d'utilisateur</mat-label>
-                        <input required minlength="3" maxlength="30" matInput placeholder="Ex. Youssef" [(ngModel)]="userName" name="userName">
+                        <input  required 
+                                minlength="3" 
+                                maxlength="30" 
+                                matInput 
+                                placeholder="Ex. Youssef" 
+                                [(ngModel)]="userName" 
+                                #usr="ngModel"
+                                name="userName">
+                        <mat-hint *ngIf="usr.touched&&!usr.valid" class="hintPsd" >
+                            <mat-icon>error</mat-icon>
+                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez votre nom d'utilisateur
+                        </mat-hint>
                     </mat-form-field>
 
                     <mat-form-field class="inputField">
                         <mat-label>Téléphone</mat-label>
                         <span matPrefix>+216 &nbsp;</span>
-                        <input required type="tel" minlength="8" maxlength="8" pattern="^\d*(\.\d{0,2})?$" matInput placeholder="555-555-1234" [(ngModel)]="dNumber"
-                            name="dNumber">
+                        <input  required 
+                                type="tel" 
+                                minlength="8" 
+                                maxlength="8" 
+                                pattern="^\d*(\.\d{0,2})?$" 
+                                matInput placeholder="555-555-1234" 
+                                [(ngModel)]="dNumber"
+                                #tel="ngModel" 
+                                name="dNumber">
+                            <mat-hint *ngIf="tel.touched&&!tel.valid" class="hintPsd" >
+                                <mat-icon>error</mat-icon>
+                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez un numéro de téléphone valide 
+                            </mat-hint>
                     </mat-form-field>
 
                     <mat-radio-group required class="inputField" aria-label="Select an option" [(ngModel)]="permis"
@@ -121,17 +140,41 @@
                 <div class="col">
                     <mat-form-field class="inputField">
                         <mat-label>Mot de passe</mat-label>
-                        <input required name="psd1" [type]="(hidePsd)?'password':'text'" pattern ="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,30})" matInput placeholder="" [(ngModel)]="psd1" (keydown.enter)="f.valid?addUser():''">
-                        <mat-hint class="hintPsd" >munimume une lettre majucule ,une letttre minicule et un numéro!</mat-hint>
+                        <input  matInput 
+                                placeholder="" 
+                                [type]="(hidePsd)?'password':'text'" 
+                                name="mdp1" 
+                                required
+                                minlength="8"
+                                pattern ="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,30})" 
+                                [(ngModel)]="psd1"
+                                #mdp1="ngModel" 
+                                (keydown.enter)="f.valid?addUser():''"
+                                >
+                        
+                        
+                        <mat-hint *ngIf="mdp1.touched&&!mdp1.valid" class="hintPsd" >
+                            <mat-icon>error</mat-icon>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8 caractères au moins avec des majuscules et des nombres.
+                        </mat-hint>
+                        
+  
                         <button class="psdBtn" (click)="hidePsd=!hidePsd" mat-icon-button color="primary"
                             aria-label="Example icon button with a home icon">
                             <mat-icon>{{(hidePsd)?'visibility_off':'visibility_on'}}</mat-icon>
                         </button>
                     </mat-form-field>
                     <mat-form-field class="inputField">
-                        <mat-label>Verifier mot de passe</mat-label>
-                        <input required name="psd2" [type]="(hidePsd)?'password':'text'" pattern ="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,30})"  matInput placeholder="" [(ngModel)]="psd2"  (keydown.enter)="f.valid?addUser():''">
-                        <mat-hint class="hintPsd" >munimume une lettre majucule,une letttre minicule et un numéro!</mat-hint>
+                        <mat-label>Confirmer le mot de passe</mat-label>
+                        <input  required 
+                                name="psd2" 
+                                [type]="(hidePsd)?'password':'text'" 
+                                pattern ="{{psd1}}"  
+                                matInput placeholder="" 
+                                [(ngModel)]="psd2"  
+                                #mdp2="ngModel"
+                                (keydown.enter)="f.valid?addUser():''">
+                        <mat-hint *ngIf="mdp2.touched&&!mdp2.valid" class="hintPsd" ><mat-icon>error</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Ces mots de passe ne correspondent pas. Veuillez réessayer.</mat-hint>
                     </mat-form-field>
                 </div>
             </div>
@@ -146,12 +189,14 @@
                     <mat-spinner *ngIf="loadingBtn" style="margin:auto" diameter="30"></mat-spinner>
                 </button>
             </div>
+            <button mat-icon-button type="button" class="closeBtn" (click)="closeAU(f)" >
+                <mat-icon>close</mat-icon>
+            </button>
         </form>
         <!--  LENA TZID EL DIV ELE FIH EL TASWIRA MTA3 EL AJOUTER  -->
         <div *ngIf="afficherAUsrImg" class="boxImage shadow col">
             <img src="../../../../assets/image/Add User.png" alt="" class="addUserImage img-fluid">
         </div>
     </div>
-
 
 </div>

@@ -46,6 +46,10 @@ export class ComptesComponent implements OnInit {
   afficherAUsrImg = false;
   afficherMUsrImg = false;
 
+  log(x:any){
+    console.log("ngModel:"+x);
+    console.dir("ngModel:"+x);
+  }
   //******** form input values **********
   id: String = ""
   userName: String = "";
@@ -123,13 +127,15 @@ export class ComptesComponent implements OnInit {
     }
     return true;
   }
-  closeAU()
+  closeAU(f:any)
   {
-  //this.afficherAUsrImg = false;
-  //this.afficherMUsrImg = false;
+    console.log("******"+f.value);
+    this.afficherAUsrImg = false;
+    this.afficherMUsrImg = false;
+    this.afficherAMUsr = false;
   }
   addUser() {
-    console.log(this.userName);
+
     let body: any =
     {
       "userName": this.userName,
