@@ -24,6 +24,7 @@ import { ComptesComponent } from './components/sidebarcpnts/comptes/comptes.comp
 import {MatDialogModule} from '@angular/material/dialog';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +49,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatRadioModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

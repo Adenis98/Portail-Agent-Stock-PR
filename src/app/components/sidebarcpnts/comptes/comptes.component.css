@@ -213,6 +213,7 @@ div.composant
   min-width: fit-content;
   margin-right: 25px;
   margin-left: 25px;
+  position: relative;
 }
 
 @media(max-width:1133px)
@@ -235,4 +236,15 @@ div.composant
   top: -3px;
   min-width: 100%;
   padding: 0px !important;
+}
+.hintPsd{
+  color: #586b6b;
+  font-size: 8px;
+}
+.closeBtn
+{
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  z-index: 10;
 }
