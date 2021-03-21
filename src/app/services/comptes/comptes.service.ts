@@ -30,9 +30,9 @@ export class GetcomptesService {
     let url = "http://localhost:8080/compte/maj/"+id;
     return this.http.put(url,body,{ headers:this.headers_object })
   }
-  updateImg(body:any,id:any)
+  updateImg(body:any,userName:any)
   {
-    let url = "http://localhost:8080/compte/majPhoto/"+id;
+    let url = "http://localhost:8080/compte/majPhoto/"+userName;
     return this.http.post(url,body,{ headers:this.headers_object })
   }
   getImg(id:any)

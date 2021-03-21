@@ -116,19 +116,16 @@ export class SidebarComponent implements OnInit {
   inputFunctionValue(event: any) {
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(localStorage.jwt);
-    const id = decodedToken["sub"];
+    const userName = decodedToken["sub"];
     const file = event.target.files[0];
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
       console.log(reader.result)
       if (file.size < 5242880) {//5MO
-        const body={
-          "img":reader.result
-        }
+        //lezmek tab3eth String mouch JSON w zid 7Ewel badel el type mta3 el reader.result rodha String khaterha mich string 
         this.checkImg = false;
-        console.log(reader.result);
-        this.compte.updateImg(body,id).subscribe(response => {
+        this.compte.updateImg(reader.result?.slice(15),userName).subscribe(response => {
           this.avatar = reader.result
         },(error)=>{
           this.setImg();
