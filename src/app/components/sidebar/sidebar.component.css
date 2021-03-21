@@ -100,7 +100,7 @@ div.user-logo
 {
     color: #fff;
     font-size: 19px; 
-    padding-top: 30px;
+    padding-top: 10px;
     margin-bottom: 3px;
     font-weight: 400;
     transition: 0.3s;;
@@ -191,6 +191,19 @@ div.user-logo
 .botButtonRadius{
     border-top-right-radius: 30px;
 }
+.hintImg{
+    color: #d93025;
+    font-size: 10px;
+    position: relative ; 
+    line-height: 1.2;
+    font-style: italic;
+  }
+  .hintImg mat-icon{
+    text-align: center ;
+    font-size: 15px;
+    position: absolute;
+    top : -1px;
+  }
 
 @media(max-width:450px)
 {

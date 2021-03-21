@@ -13,8 +13,8 @@
             <div class="img">
                 <button class="mat-focus-indicator mat-mini-fab mat-button-base mat-warn imagButton"
                     (click)="inputFunction()">
-                    <input type="file" accept="image/*" hidden="hidden" id="shoseImage"
-                        (change)="inputFunctionValue($event.target)">
+                    <input type="file" accept="image/*" hidden="hidden" id="shoseImage" 
+                        (change)="inputFunctionValue($event)">
                     <span class="mat-button-wrapper">
                         <mat-icon role="img" class="mat-icon notranslate material-icons mat-icon-no-color"
                             aria-hidden="true" data-mat-icon-type="font">
@@ -24,8 +24,9 @@
                     <span matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></span>
                     <span class="mat-button-focus-overlay"></span>
                 </button>
-                <img [src]="avatar" alt="erreur">
+                <img [src]="avatar" alt="">
             </div>
+            <mat-hint *ngIf="checkImg" class="hintImg" ><mat-icon>error &nbsp;</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;taille trés grande&nbsp;,&nbsp;max :5 MO.</mat-hint>
             <h3 [class.smallerTextSize]="hideSideBar">{{userNameDash}}</h3>
         </div>
 
