@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AppComponent } from "../../app.component";
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-sidebar',
@@ -42,7 +43,8 @@ export class SidebarComponent implements OnInit {
     private router: Router,
     private auth: AuthService,
     private compte: GetcomptesService,
-    private appCmp: AppComponent) {
+    private appCmp: AppComponent,
+    private _snackBar:MatSnackBar) {
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd)
         this.dash(val.url.substring(1));
@@ -121,13 +123,25 @@ export class SidebarComponent implements OnInit {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-      console.log(reader.result)
       if (file.size < 5242880) {//5MO
-        //lezmek tab3eth String mouch JSON w zid 7Ewel badel el type mta3 el reader.result rodha String khaterha mich string 
+        //lezmek taamel slice bech tna7i akil klem melloul 
         this.checkImg = false;
-        this.compte.updateImg(reader.result?.slice(15),userName).subscribe(response => {
-          this.avatar = reader.result
+        this.compte.updateImg(reader.result?.slice(22),userName).subscribe(response => {
+          this._snackBar.open(
+            "votre photo a été mis a jour", "", {
+            verticalPosition: 'top',
+            panelClass: 'green-snackbar',
+            duration: 2000,
+          });
+          this.avatar = reader.result;
+          
         },(error)=>{
+          this._snackBar.open(
+            error.message, "", {
+            verticalPosition: 'top',
+            panelClass: 'red-snackbar',
+            duration : 3000
+          });
           this.setImg();
         }
         )

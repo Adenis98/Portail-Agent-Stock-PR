@@ -133,8 +133,8 @@
 
                     <mat-radio-group required class="inputField" aria-label="Select an option" [(ngModel)]="permis"
                         name="permis">
-                        <mat-radio-button class="radioBtn1" value="1" selected=1>Responsable</mat-radio-button>
-                        <mat-radio-button class="radioBtn2" value="2" selected=2>Agent</mat-radio-button>
+                        <mat-radio-button required class="radioBtn1" value="1" >Responsable</mat-radio-button>
+                        <mat-radio-button required class="radioBtn2" value="2" >Agent</mat-radio-button>
                     </mat-radio-group>
                 </div>
                 <div class="col">
@@ -189,7 +189,7 @@
                     <mat-spinner *ngIf="loadingBtn" style="margin:auto" diameter="30"></mat-spinner>
                 </button>
             </div>
-            <button mat-icon-button type="button" class="closeBtn" (click)="closeAU(f)" >
+            <button mat-icon-button type="button" class="closeBtn" (click)="closeAU()" >
                 <mat-icon>close</mat-icon>
             </button>
         </form>

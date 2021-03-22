@@ -56,6 +56,8 @@ export class ComptesComponent implements OnInit {
   psd1: String = "";
   psd2: String = "";
   permis: String = "";
+  rdBtn1=false ; 
+  rdBtn2=false ; 
   dNumber: String = "";
 
   usrUpdate: any;
@@ -96,7 +98,7 @@ export class ComptesComponent implements OnInit {
     this.id = user.code;
     this.userName = user.userName;
     this.dNumber = user.dealer_Number;
-    this.permis = user.permis;
+    this.permis = user.permis.toString();
     this.psd1 = user.password;
 
     this.us = user;
@@ -114,22 +116,9 @@ export class ComptesComponent implements OnInit {
     this.psd1 = "";
     this.psd2 = "";
   }
-  verifPassword() {
-   
-    if (this.psd2 != this.psd1) {
-      this._snackBar.open(
-        "verifier le mot de passe s'il vous plait", "", {
-        verticalPosition: 'top',
-        panelClass: 'red-snackbar',
-        duration: 2000,
-      });
-      return false
-    }
-    return true;
-  }
-  closeAU(f:any)
+  
+  closeAU()
   {
-    console.log("******"+f.value);
     this.afficherAUsrImg = false;
     this.afficherMUsrImg = false;
     this.afficherAMUsr = false;
@@ -139,33 +128,31 @@ export class ComptesComponent implements OnInit {
     let body: any =
     {
       "userName": this.userName,
-      "dealer_Number": parseInt(this.dNumber.replace(/\D/g, ""), 10),
-      "permis": parseInt(this.permis.replace(/\D/g, ""), 10),//hathi tna7i 7rouf w les espaces mel numero (replace.......)
+      "dealer_Number": parseInt(this.dNumber.replace(/\D/g, "")),
+      "permis": parseInt(this.permis.replace(/\D/g, "")),//hathi tna7i 7rouf w les espaces mel numero (replace.......)
       "password": this.psd1
     };
-    ;
-    if (this.verifPassword()) {
-      this.Compte.addCompte(body).subscribe(Response => {
+
+    this.Compte.addCompte(body).subscribe(Response => {
+      this._snackBar.open(
+        "L'utilisateur «" + this.userName + "» a été ajouter avec succès ✓", "", {
+        verticalPosition: 'top',
+        panelClass: 'green-snackbar',
+        duration: 5000,
+      });
+      this.afficherAMUsr = false;
+      console.log("response : " + Response);
+      this.listcompte.push(Response);
+    }, (error) => {
+        this.loading = false;
+        console.log("error : " + error);
         this._snackBar.open(
-          "L'utilisateur «" + this.userName + "» a été ajouter avec succès ✓", "", {
+          "echec d'ajout de l'utilisateur «" + this.userName + "»", "", {
           verticalPosition: 'top',
-          panelClass: 'green-snackbar',
-          duration: 5000,
+          panelClass: 'red-snackbar'
         });
-        this.afficherAMUsr = false;
-        console.log("response : " + Response);
-        this.listcompte.push(Response);
-      }
-        , (error) => {
-          this.loading = false;
-          console.log("error : " + error);
-          this._snackBar.open(
-            "echec d'ajout de l'utilisateur «" + this.userName + "»", "", {
-            verticalPosition: 'top',
-            panelClass: 'red-snackbar'
-          });
-        })
-    }
+      })
+    
   }
 
   //**************************** delete the user ****************************
@@ -213,39 +200,42 @@ export class ComptesComponent implements OnInit {
   //**************************** Update user ****************************
 
   updateUser() {
-    console.log(this.userName);
+    this.loadingBtn =true;
     let body: any =
     {
       "userName": this.userName,
-      "dealer_Number": parseInt(this.dNumber.replace(/\D/g, ""), 10),
-      "permis": parseInt(this.permis.replace(/\D/g, ""), 10),//hathi tna7i 7rouf w les espaces mel numero (replace.......)
+      "dealer_Number": parseInt(this.dNumber.replace(/\D/g, "")),
+      "permis": parseInt(this.permis.replace(/\D/g, "")),//hathi tna7i 7rouf w les espaces mel numero (replace.......)
       "password": this.psd1
     }
     if (this.psd1 == this.psd2) {
       this.Compte.updateCompte(this.id, body).subscribe(Response => {
-        this.listcompte.push(Response);
-
-
+        this.loadingBtn = false;
         let index = this.listcompte.indexOf(this.usrUpdate);
         this.listcompte.splice(index, 1);
 
+        setTimeout(() => {
+          this.listcompte.push(Response);
+        }, 920);
+        
         this._snackBar.open(
           "L'utilisateur «" + this.userName + "» a été modifier avec succès ✓", "", {
           verticalPosition: 'top',
           panelClass: 'green-snackbar',
           duration: 5000,
         });
-        this.afficherAMUsr = false;
       }
         , (error) => {
-          this.loading = false;
-          console.log("error : " + error.message + " id " + this.id);
+          this.loadingBtn = false;
+          console.log("error message : " + error.message );
           this._snackBar.open(
-            "echec de modification de l'utilisateur «" + this.userName + "»" + error, "", {
+            "echec de modification de l'utilisateur «" + this.userName + "» error message:" + error.message, "", {
             verticalPosition: 'top',
             panelClass: 'red-snackbar'
           });
         })
+    }else{
+      this.loadingBtn = false;
     }
   }
 

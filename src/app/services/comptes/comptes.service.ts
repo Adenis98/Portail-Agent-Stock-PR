@@ -30,14 +30,15 @@ export class GetcomptesService {
     let url = "http://localhost:8080/compte/maj/"+id;
     return this.http.put(url,body,{ headers:this.headers_object })
   }
-  updateImg(body:any,userName:any)
+  updateImg(body:any,userName:String)
   {
+  
     let url = "http://localhost:8080/compte/majPhoto/"+userName;
-    return this.http.post(url,body,{ headers:this.headers_object })
+    return this.http.post(url,body,{ headers:this.headers_object , responseType: 'text'})
   }
-  getImg(id:any)
+  getImg(userName:any)
   {
-    let url = "http://localhost:8080/compte/getPhoto/"+id;
-    return this.http.get(url,{ headers:this.headers_object });
+    let url = "http://localhost:8080/compte/getPhoto/"+userName;
+    return this.http.get(url,{ headers:this.headers_object , responseType: 'text'});
   }
 }
