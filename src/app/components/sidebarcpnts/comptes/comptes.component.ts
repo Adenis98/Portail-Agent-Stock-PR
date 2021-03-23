@@ -216,7 +216,8 @@ export class ComptesComponent implements OnInit {
         this.listcompte.splice(index, 1);
 
         setTimeout(() => {
-          this.listcompte.push(Response);
+          body["code"]=this.id;
+          this.listcompte.push(body);
         }, 920);
         
         this._snackBar.open(
