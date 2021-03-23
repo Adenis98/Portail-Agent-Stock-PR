@@ -59,7 +59,6 @@ export class LoginComponent implements OnInit {
     }, (error) => {
 
       this.loading = false;
-      console.log(error);
       this._snackBar.open(
         (error.status==0)?"connexion au serveur impossible !!":error.error.message, "", {
         verticalPosition: 'top',

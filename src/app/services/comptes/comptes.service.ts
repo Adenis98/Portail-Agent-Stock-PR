@@ -25,14 +25,13 @@ export class GetcomptesService {
     let url = "http://localhost:8080/compte/ajout";
     return this.http.post(url,body,{ headers:this.headers_object })
   }
-  updateCompte(id:String,body:any)
+  updateCompte(code:String,body:any)
   {
-    let url = "http://localhost:8080/compte/maj/"+id;
+    let url = "http://localhost:8080/compte/maj/"+code;
     return this.http.put(url,body,{ headers:this.headers_object })
   }
   updateImg(body:any,userName:String)
   {
-  
     let url = "http://localhost:8080/compte/majPhoto/"+userName;
     return this.http.post(url,body,{ headers:this.headers_object , responseType: 'text'})
   }

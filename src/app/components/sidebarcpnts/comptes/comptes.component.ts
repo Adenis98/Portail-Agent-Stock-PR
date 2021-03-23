@@ -145,11 +145,11 @@ export class ComptesComponent implements OnInit {
       this.listcompte.push(Response);
     }, (error) => {
         this.loading = false;
-        console.log("error : " + error);
         this._snackBar.open(
-          "echec d'ajout de l'utilisateur «" + this.userName + "»", "", {
+          "echec d'ajout de l'utilisateur , message d'erreur :"+error.error.message, "", {
           verticalPosition: 'top',
-          panelClass: 'red-snackbar'
+          panelClass: 'red-snackbar',
+          duration: 5000,
         });
       })
     
@@ -169,9 +169,10 @@ export class ComptesComponent implements OnInit {
     }, (error) => {
       console.log("error : " + error);
       this._snackBar.open(
-        "echec de suppression de l'utilisateur «" + compt.userName + "»", "", {
+        "echec de suppression de l'utilisateur , message d'erreur "+error.error.message, "", {
         verticalPosition: 'top',
-        panelClass: 'red-snackbar'
+        panelClass: 'red-snackbar',
+        duration: 5000,
       });
     })
 
@@ -227,11 +228,12 @@ export class ComptesComponent implements OnInit {
       }
         , (error) => {
           this.loadingBtn = false;
-          console.log("error message : " + error.message );
+          console.log("error message : " + error.error.message );
           this._snackBar.open(
-            "echec de modification de l'utilisateur «" + this.userName + "» error message:" + error.message, "", {
+            "echec de modification de l'utilisateur , message d'erreur :" + error.error.message , "", {
             verticalPosition: 'top',
-            panelClass: 'red-snackbar'
+            panelClass: 'red-snackbar',
+            duration: 5000,
           });
         })
     }else{
