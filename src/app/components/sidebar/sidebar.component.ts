@@ -35,8 +35,8 @@ export class SidebarComponent implements OnInit {
   public page5 = false;
   public comptes = false;
   public avatar: any = "";
-  public checkImg = false
-
+  public checkImg = false;
+  public imgExist = false ; 
   private s: Subscription = new Subscription;//buttons border radius onPageLoad 
 
   constructor(@Inject(DOCUMENT) private document: Document,
@@ -134,8 +134,9 @@ export class SidebarComponent implements OnInit {
             duration: 2000,
           });
           this.avatar = reader.result;
-          
+          this.imgExist=true ; 
         },(error)=>{
+          this.imgExist=false ; 
           this._snackBar.open(
             error.message, "", {
             verticalPosition: 'top',
@@ -161,12 +162,13 @@ export class SidebarComponent implements OnInit {
     const decodedToken = helper.decodeToken(localStorage.jwt);
     const id = decodedToken["sub"];
     this.compte.getImg(id).subscribe(Response => {
+      
+      
+      this.imgExist=true ; 
       this.avatar = "data:image/jpg;base64,"+Response
     },(error)=>
     {
-      //console.log(error.error.text)
-      this.avatar="data:image/png;base64,"+error.error.text
-      //console.log(this.avatar)
+      this.imgExist=false ; 
     }
     )
 

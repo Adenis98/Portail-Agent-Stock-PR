@@ -24,7 +24,7 @@
                     <span matripple="" class="mat-ripple mat-button-ripple mat-button-ripple-round"></span>
                     <span class="mat-button-focus-overlay"></span>
                 </button>
-                <img [src]="avatar" alt="">
+                <img [src]="imgExist?avatar:'../../../assets/image/homme.png'" alt="">
             </div>
             <mat-hint *ngIf="checkImg" class="hintImg" ><mat-icon>error &nbsp;</mat-icon>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;taille trés grande&nbsp;,&nbsp;max :5 MO.</mat-hint>
             <h3 [class.smallerTextSize]="hideSideBar">{{userNameDash}}</h3>
