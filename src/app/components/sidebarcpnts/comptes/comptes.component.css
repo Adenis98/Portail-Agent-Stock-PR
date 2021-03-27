@@ -73,6 +73,7 @@ div.tableHeader
   min-width: 600px;
   padding: 13px;
   margin:auto;
+  user-select: none;
 }
 .boxAdd
 {
@@ -108,7 +109,7 @@ div.composant
   margin-top: 10px;
   padding-top: 16px;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 13px;
   position: relative;
 }
 .editBtn

@@ -1,1 +1,85 @@
-<p>page3 works!</p>
+<div class=" container containerPadding">
+    <div class="inputData shadow">
+        <form #f="ngForm" ngForm class="formStyle" (keydown.enter)="$event.preventDefault()">
+              <div class="row">
+                <mat-form-field class="inputFieldRef col">
+                    <mat-label>Réf</mat-label>
+                    <input  required 
+                            minlength="10" 
+                            maxlength="30" 
+                            matInput 
+                            placeholder="Ex. 5F10991298"  
+                            name="userName">
+                    <mat-hint class="hint" >
+                        <mat-icon>error</mat-icon>
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez la réference de la pièce 
+                    </mat-hint>
+                </mat-form-field>
+                <mat-form-field class="textArea col">
+                    <mat-label>libellé</mat-label>
+                    <textarea  
+                            rows="1"
+                            minlength="10" 
+                            maxlength="30" 
+                            matInput   
+                            name="userName"></textarea>
+                </mat-form-field>
+              </div>
+              <button  type="submit" class="chercherBtn" mat-raised-button [disabled]="!f.valid">
+                <span>Chercher</span>
+            </button>
+        </form>
+    </div>
+    <div class="resultats">
+        resultats (0)
+    </div>
+    <div class="row tableHeader shadow">
+        <div class="col">
+            Dispo
+        </div>
+        <div class="col">
+            Q.Cmd.Ach
+        </div>
+        <div class="col">
+            Réf Art
+        </div>
+        <div class="col-4">
+            Libellé
+        </div>
+        <div class="col">
+            PU
+        </div>
+        <div class="col">
+            Qté
+        </div>
+        <div class="col btn1">
+        </div>
+        
+
+    </div>
+    <div   class="row tableHeader composant shadow">
+        <div class="col"><span>Example</span></div>
+        <div class="col"><span>Example</span></div>
+        <div class="col"><span>Example</span></div>
+        <div class="col-4"><span>Example</span></div>
+        <div class="col"><span>Example</span></div>
+        <div class="col">
+            <div class="qteSpiner shadow-sm">
+                <button mat-flat-button class="addBtn" (click)="addQte()">
+                   <span>+</span>
+                </button>
+                <input type="number" name="qte" class="inputQte" [(ngModel)]="qte" >
+                <button mat-flat-button class="removeBtn" (click)="removeQte()">
+                    <span>-</span>
+                </button>
+            </div>
+        </div>
+        <div class="col btn1">
+            <button mat-mini-fab class="addPanier " color="primary" >
+                <mat-icon class="addPanierIcon">add_shopping_cart</mat-icon>
+            </button>
+        </div>
+    </div>
+
+</div>
+
