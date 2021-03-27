@@ -11,6 +11,7 @@ import { Page5Component } from './components/sidebarcpnts/page5/page5.component'
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoginGuardService } from './services/loginGuard/login-guard.service';
 import { ComptesComponent } from './components/sidebarcpnts/comptes/comptes.component';
+import { Page6Component } from './components/sidebarcpnts/page6/page6.component';
 
 const routes: Routes = [
   { 
@@ -45,6 +46,11 @@ const routes: Routes = [
   {
     path: "page5",
     component: Page5Component,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: "page6",
+    component: Page6Component,
     canActivate: [AuthGuardService]
   },
   {

@@ -23,6 +23,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ComptesComponent, DialogDelete } from './components/sidebarcpnts/comptes/comptes.component';
 import {MatDialogModule} from '@angular/material/dialog';
 import {DialogCommandeFerme}  from './components/sidebarcpnts/page3/page3.component';
+import { Page6Component } from './components/sidebarcpnts/page6/page6.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +38,7 @@ import {DialogCommandeFerme}  from './components/sidebarcpnts/page3/page3.compon
     ComptesComponent,
     DialogCommandeFerme,
     DialogDelete,
+    Page6Component,
     ],
   imports: [
     BrowserModule,
