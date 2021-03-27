@@ -182,7 +182,7 @@ export class ComptesComponent implements OnInit {
 
   //**************************** Delete Dialog ****************************
   openDialog(compt: any): void {
-    const dialogRef = this.dialog.open(DialogOverviewExampleDialog, {
+    const dialogRef = this.dialog.open(DialogDelete, {
       width: '500px',
       height: '200px',
       data: compt
@@ -249,10 +249,10 @@ export class ComptesComponent implements OnInit {
   templateUrl: 'dialog-overview-example-dialog.html',
   styleUrls: ['dialog-overview-example-dialog.css']
 })
-export class DialogOverviewExampleDialog {
+export class DialogDelete {
 
   constructor(
-    public dialogRef: MatDialogRef<DialogOverviewExampleDialog>,
+    public dialogRef: MatDialogRef<DialogDelete>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {

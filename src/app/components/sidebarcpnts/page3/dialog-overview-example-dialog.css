@@ -1,0 +1,56 @@
+.msg{
+    font-size: large;
+}
+button{
+    border : 0px; 
+    width : 100px; 
+    height: 40px;
+    border-radius : 20px;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 2px;
+    position: absolute ;
+    bottom : 10px;
+    transition : 0.3s all ease-in-out
+}
+.supprimerBtn{
+    background-color: #415959;
+    color : white ; 
+    right : 15px
+}
+
+.okBtn{
+    background-color: #d6a217;
+    color :#263636  ;
+    right : 125px
+}
+
+.hint{
+    color: #d93025;
+    font-size: 13px;
+    position: relative ; 
+    line-height: 1.2;
+    font-style: italic;
+    user-select: none;
+}
+.hint mat-icon{
+    text-align: center ;
+    font-size: 15px;
+    position: absolute;
+    top : -1px;
+}
+.inputFieldVin
+{
+
+    margin-right: 20px;
+    height: max-content;
+    overflow-y: hidden;
+    width: 170px;
+    margin-top: 10px;
+    height: 70px;
+}
+h1
+{
+    color: #415959;
+    user-select: none;
+}

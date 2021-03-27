@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,15 +16,13 @@ import { Page3Component } from './components/sidebarcpnts/page3/page3.component'
 import { Page4Component } from './components/sidebarcpnts/page4/page4.component';
 import { Page5Component } from './components/sidebarcpnts/page5/page5.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormControl, FormsModule, NgForm, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { ComptesComponent } from './components/sidebarcpnts/comptes/comptes.component';
+import { ComptesComponent, DialogDelete } from './components/sidebarcpnts/comptes/comptes.component';
 import {MatDialogModule} from '@angular/material/dialog';
-
-
-
+import {DialogCommandeFerme}  from './components/sidebarcpnts/page3/page3.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +35,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     Page5Component,
     NotFoundComponent,
     ComptesComponent,
-  ],
+    DialogCommandeFerme,
+    DialogDelete,
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -50,9 +50,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatProgressSpinnerModule,
     MatRadioModule,
     MatDialogModule,
-    
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

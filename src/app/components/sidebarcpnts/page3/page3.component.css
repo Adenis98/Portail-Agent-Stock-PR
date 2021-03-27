@@ -178,3 +178,25 @@ input::-webkit-outer-spin-button {
     padding: 0px !important;
     background-color: transparent !important;
 }
+.stockDispoIcon
+{
+  color:#2ecc71 ;
+  position: absolute;
+  top: -3px;
+  left: 50px;
+}
+.stockLimitIcon
+{
+  color:#e67e22 ;
+  position: absolute;
+  top: -3px;
+  left: 50px;
+}
+.stockNonDispotIcon
+{
+  color: #c0392b;
+  font-size: 30px;
+  position: absolute;
+  top: -5px;
+  left: 43px;
+}

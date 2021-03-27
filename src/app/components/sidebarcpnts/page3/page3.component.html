@@ -58,7 +58,12 @@
 
     </div>
     <div   class="row tableHeader composant shadow">
-        <div class="col"><span>Example</span></div>
+        <div class="col">
+            <mat-icon class="stockDispoIcon">assignment_turned_in</mat-icon>
+            <!--<mat-icon class="stockLimitIcon">assignment_late</mat-icon>
+            <mat-icon class="stockNonDispotIcon">cancel</mat-icon>-->
+
+        </div>
         <div class="col"><span>Example</span></div>
         <div class="col"><span>Example</span></div>
         <div class="col-4"><span>Example</span></div>
@@ -68,14 +73,14 @@
                 <button mat-flat-button class="addBtn" (click)="addQte()">
                    <span>+</span>
                 </button>
-                <input type="number" name="qte" class="inputQte" [(ngModel)]="qte" >
+                <input type="number" name="qte" class="inputQte" [(ngModel)]="qte">
                 <button mat-flat-button class="removeBtn" (click)="removeQte()">
                     <span>-</span>
                 </button>
             </div>
         </div>
         <div class="col btn1">
-            <button mat-mini-fab class="addPanier " color="primary" >
+            <button mat-mini-fab class="addPanier " color="primary"  (click)="cmdFermeDialog()">
                 <mat-icon class="addPanierIcon">add_shopping_cart</mat-icon>
             </button>
         </div>

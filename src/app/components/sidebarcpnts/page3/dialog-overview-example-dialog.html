@@ -1,0 +1,44 @@
+<h1 mat-dialog-title>Remplissez les champs suivants</h1>
+<div mat-dialog-content>
+  <mat-form-field class="inputFieldVin">
+    <mat-label>VIN</mat-label>
+    <input  required 
+            minlength="17" 
+            maxlength="17" 
+            matInput 
+            placeholder="Ex.1HGBH41JXMN109186"  
+            name="VIN">
+    <mat-hint class="hint" >
+        <mat-icon>error</mat-icon>
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez le "VIN" 
+    </mat-hint>
+</mat-form-field>
+<mat-form-field class="inputFieldVin">
+  <mat-label>N°OR</mat-label>
+  <input  required 
+          minlength="17" 
+          maxlength="17" 
+          matInput 
+          placeholder="Ex.1HGBH41JXMN109186"  
+          name="N°OR">
+  <mat-hint class="hint" >
+      <mat-icon>error</mat-icon>
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez le "N°OR" 
+  </mat-hint>
+</mat-form-field>
+<mat-form-field class="inputFieldVin">
+  <mat-label>Nom Client</mat-label>
+  <input  required 
+          minlength="17" 
+          maxlength="17" 
+          matInput 
+          placeholder="Ex.1HGBH41JXMN109186"  
+          name="VIN">
+  <mat-hint class="hint" >
+      <mat-icon>error</mat-icon>
+       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez le Nom Client 
+  </mat-hint>
+</mat-form-field>
+</div>
+<button mat-raised-button class="okBtn shadow" (click)="onNoClick()">Annuler</button>
+<button mat-raised-button class="supprimerBtn shadow"   mat-Dialog-Close cdkFocusInitial>Ajouter</button>
