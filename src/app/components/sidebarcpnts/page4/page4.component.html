@@ -79,14 +79,14 @@
             </div>
         </div>
     </div>
-    <div class="inputData shadow" @lignePanierAnim>
+    <div class="inputData shadow">
         <form #f="ngForm" ngForm class="formStyle" (keydown.enter)="$event.preventDefault()">
               <div class="row">
                 <mat-form-field class="col-4">
                     <mat-label >Type de Commande</mat-label>
                     <mat-select >
-                      <mat-option value="Commande ferme">Commande Ferme</mat-option>
-                      <mat-option value="Commande Normal">Command Normale</mat-option>
+                      <mat-option value="1">Commande Ferme</mat-option>
+                      <mat-option value="0">Command Normale</mat-option>
                     </mat-select>
                   </mat-form-field>
                 <mat-form-field class="col-4">
@@ -106,12 +106,12 @@
                     <span>total Panier : </span>
                 </div>
               </div>
-              <div class="row" style="margin-top: 20px;">
+              <div class="row secondRow">
                 <mat-form-field class="col-4">
                     <mat-label >Mode de Paiement</mat-label>
                     <mat-select >
-                      <mat-option value="Commande ferme">Par check</mat-option>
-                      <mat-option value="Commande Normal">Espece</mat-option>
+                      <mat-option value="1">Checque</mat-option>
+                      <mat-option value="0">Especes</mat-option>
                     </mat-select>
                   </mat-form-field>
                   <mat-form-field  class="col-4">
@@ -120,10 +120,13 @@
                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                   </mat-form-field>
+                  <span class="col totalPrix">1759.560 <br><br>DT</span>
               </div>
-              <button  type="submit" class="commanderBtn" mat-raised-button [disabled]="!f.valid">
-                <span>Commander</span>
-            </button>
+            <div class="row">
+                <button  type="submit" class="commanderBtn" mat-raised-button [disabled]="!f.valid">
+                    <span>Commander</span>
+                </button>
+            </div>
         </form>
     </div>
 </div>
