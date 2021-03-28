@@ -1,4 +1,4 @@
-<div class=" container containerPadding">
+<div class=" container containerPadding" >
     <div class="inputData shadow">
         <form #f="ngForm" ngForm class="formStyle" (keydown.enter)="$event.preventDefault()">
               <div class="row">
@@ -57,7 +57,7 @@
         
 
     </div>
-    <div   class="row tableHeader composant shadow">
+    <div   class="row tableHeader composant shadow" @consulterStockAnim>
         <div class="col">
             <mat-icon class="stockDispoIcon">assignment_turned_in</mat-icon>
             <!--<mat-icon class="stockLimitIcon">assignment_late</mat-icon>

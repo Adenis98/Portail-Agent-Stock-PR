@@ -1,10 +1,24 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-page3',
   templateUrl: './page3.component.html',
-  styleUrls: ['./page3.component.css']
+  styleUrls: ['./page3.component.css'],
+  animations: [
+    trigger('consulterStockAnim', [
+      transition('* => void', animate('0.7s 0.2s ease-in',
+        style([{ transform: 'translateX(200%)' }])
+      )
+      ),
+      transition('void => *',
+        [style([{ transform: 'translateX(-200%)' }])
+          , animate('0.5s 0.2s ease-out'
+          )]
+      )
+    ]),
+  ]
 })
 export class Page3Component implements OnInit {
   qte:string="";

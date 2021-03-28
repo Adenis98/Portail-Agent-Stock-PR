@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
-import {MatRadioModule} from '@angular/material/radio';
+import { MatRadioModule } from '@angular/material/radio';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -21,9 +21,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { ComptesComponent, DialogDelete } from './components/sidebarcpnts/comptes/comptes.component';
-import {MatDialogModule} from '@angular/material/dialog';
-import {DialogCommandeFerme}  from './components/sidebarcpnts/page3/page3.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogCommandeFerme } from './components/sidebarcpnts/page3/page3.component';
 import { Page6Component } from './components/sidebarcpnts/page6/page6.component';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,19 +43,23 @@ import { Page6Component } from './components/sidebarcpnts/page6/page6.component'
     DialogCommandeFerme,
     DialogDelete,
     Page6Component,
-    ],
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatInputModule,
-    MatButtonModule,MatIconModule,
+    MatButtonModule, MatIconModule,
     HttpClientModule,
     FormsModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
     MatRadioModule,
     MatDialogModule,
+    MatDividerModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

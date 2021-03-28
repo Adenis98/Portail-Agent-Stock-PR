@@ -1,1 +1,129 @@
-<p>page4 works!</p>
+<div class=" container containerPadding">
+
+    <div class="resultats">
+        Panier (0)
+    </div>
+    <div class="row tableHeader shadow">
+        <div class="col">
+            Q.Cmd.Ach
+        </div>
+        <div class="col">
+            Réf Art
+        </div>
+        <div class="col-3">
+            Libellé
+        </div>
+        <div class="col">
+            PU
+        </div>
+        <div class="col">
+            Qté
+        </div>
+        <div class="col">
+            Total HT
+        </div>
+        <div class="col">
+            Type Cmd
+        </div>
+        <div class="btn2"></div>
+        <div class="col btn1">
+        </div>
+
+
+    </div>
+    <div class="row shadow tableHeader composant" [class]="(this.moreDetail)?'moreDetail':''" @lignePanierAnim>
+        <div class="col">
+            <div class="row ">
+                <div class="col"><span>Example</span></div>
+                <div class="col"><span>Example</span></div>
+                <div class="col-3"><span>Example</span></div>
+                <div class="col"><span>Example</span></div>
+                <div class="col">
+                    <div class="qteSpiner shadow-sm">
+                        <button mat-flat-button class="addBtn" (click)="addQte()">
+                            <span>+</span>
+                        </button>
+                        <input type="number" name="qte" class="inputQte" [(ngModel)]="qte">
+                        <button mat-flat-button class="removeBtn" (click)="removeQte()">
+                            <span>-</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="col"><span>Example</span></div>
+                <div class="col"><span>Example</span></div>
+                <div class="btn2">
+                    <button mat-icon-button (click)="openDetail()">
+                        <mat-icon>{{(!moreDetail)?'keyboard_arrow_down':'keyboard_arrow_up'}}</mat-icon>
+                    </button>
+                </div>
+                <div class="col btn1">
+                    <button mat-mini-fab class="addPanier " color="primary">
+                        <mat-icon class="addPanierIcon">delete</mat-icon>
+                    </button>
+                </div>
+            </div>
+            <div class="row moreDetailContainer" [class]="(!detailValue)?'moreDetailContainerHide':''"> 
+                <div></div>
+                <div class="col">
+                    <span class="moreDetailLabel">VIN : </span>
+                    <span>455s4ds5d4sd5s4d5s</span>
+                </div>
+                <div class="col">
+                    <span class="moreDetailLabel">N°OR : </span>
+                    <span>555555555</span>
+                </div>
+                <div class="col">
+                    <span class="moreDetailLabel">Nom Client : </span>
+                    <span>youssef jobrane</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="inputData shadow" @lignePanierAnim>
+        <form #f="ngForm" ngForm class="formStyle" (keydown.enter)="$event.preventDefault()">
+              <div class="row">
+                <mat-form-field class="col-4">
+                    <mat-label >Type de Commande</mat-label>
+                    <mat-select >
+                      <mat-option value="Commande ferme">Commande Ferme</mat-option>
+                      <mat-option value="Commande Normal">Command Normale</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                <mat-form-field class="col-4">
+                    <mat-label>Réf Commande</mat-label>
+                    <input  required 
+                            minlength="10" 
+                            maxlength="30" 
+                            matInput 
+                            placeholder="Ex. 5F10991298"  
+                            name="userName">
+                    <mat-hint class="hint" >
+                        <mat-icon>error</mat-icon>
+                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez la réference de la pièce 
+                    </mat-hint>
+                </mat-form-field>
+                <div class="col" class="totalPanierContainer">
+                    <span>total Panier : </span>
+                </div>
+              </div>
+              <div class="row" style="margin-top: 20px;">
+                <mat-form-field class="col-4">
+                    <mat-label >Mode de Paiement</mat-label>
+                    <mat-select >
+                      <mat-option value="Commande ferme">Par check</mat-option>
+                      <mat-option value="Commande Normal">Espece</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  <mat-form-field  class="col-4">
+                    <mat-label>Choose a date</mat-label>
+                    <input matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+              </div>
+              <button  type="submit" class="commanderBtn" mat-raised-button [disabled]="!f.valid">
+                <span>Commander</span>
+            </button>
+        </form>
+    </div>
+</div>
