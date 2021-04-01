@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-page4',
   templateUrl: './page4.component.html',
@@ -23,11 +24,18 @@ export class Page4Component implements OnInit {
   qte:string=""
   moreDetail=false;
   detailValue=false;
-  startDate="10/06/2012"
+  minDate=new Date(Date.now());
+ 
+  /***********forminput*************/
+  refCommande="";
+  modePaiment="";
+  typeCommande="";
+  dateDeCommande=new Date();
   constructor() { }
 
   ngOnInit(): void {
     this.qte="1";
+    //this.minDate=this.DatePipe.transform(this.minDate,'yyyy-MM-dd')
   }
 
   addQte()
@@ -49,6 +57,9 @@ export class Page4Component implements OnInit {
     if(this.detailValue)
       this.detailValue=!this.detailValue;
   }
-  
+ commander()
+ {
+  console.log(this.modePaiment+this.typeCommande+this.refCommande+"********"+this.dateDeCommande.toLocaleString())
+ }
 
 }
