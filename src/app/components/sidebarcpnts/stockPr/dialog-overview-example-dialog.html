@@ -4,13 +4,15 @@
   <mat-form-field class="inputFieldVin">
     <mat-label>VIN</mat-label>
     <input  required 
+            pattern="[a-zA-Z0-9]{9}[a-zA-Z0-9-]{2}[0-9]{6}"
             minlength="17" 
             maxlength="17" 
             matInput 
             placeholder="Ex.1HGBH41JXMN109186"  
             name="VIN"
             [(ngModel)]="vin" 
-            #VIN="ngModel">
+            #VIN="ngModel"
+            oninput="this.value = this.value.toUpperCase()">
     <mat-hint *ngIf="VIN.touched&&!VIN.valid" class="hint" >
         <mat-icon>error</mat-icon>
          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez le "VIN" 
@@ -37,7 +39,7 @@
           minlength="3" 
           maxlength="20" 
           matInput 
-          placeholder="Ex.1HGBH41JXMN109186"  
+          placeholder="Ex.Youssef"  
           name="nom"
           [(ngModel)]="nomClient" 
           #nom="ngModel">
@@ -48,5 +50,5 @@
 </mat-form-field>
 </div>
 <button mat-raised-button class="okBtn shadow" (click)="onNoClick()">Annuler</button>
-<button mat-raised-button class="supprimerBtn shadow"   mat-Dialog-Close cdkFocusInitial [disabled]="!f.valid">Ajouter</button>
+<button mat-raised-button class="supprimerBtn shadow"   mat-Dialog-Close [disabled]="!f.valid">Ajouter</button>
 </form>

@@ -4,7 +4,7 @@
               <div class="row">
                 <mat-form-field class="inputFieldRef col">
                     <mat-label>Réf</mat-label>
-                    <input  required 
+                    <input  [required]="!libelleExiste" 
                             minlength="8" 
                             maxlength="30" 
                             matInput 
@@ -22,10 +22,13 @@
                     <mat-label>libellé</mat-label>
                     <textarea  
                             rows="1"
-                            minlength="10" 
-                            maxlength="30" 
                             matInput   
-                            name="userName"></textarea>
+                            name="libelle"
+                            [(ngModel)]="libellePr"  
+                            #libelle="ngModel"
+                            (input)="verifLibelle()"
+                            (click)="verifLibelle()"></textarea>
+                            
                 </mat-form-field>
               </div>
               <button  type="submit" class="chercherBtn" mat-raised-button [disabled]="!f.valid" (click)="getStock()">
@@ -34,7 +37,7 @@
         </form>
     </div>
     <div class="resultats">
-        resultats (0)
+        resultats ({{this.listOfPr.length}})
     </div>
     <div class="row tableHeader shadow">
         <div class="col">
@@ -82,7 +85,7 @@
             </div>
         </div>
         <div class="col btn1">
-            <button *ngIf="!pr.stock" mat-mini-fab class="addPanier " color="primary"  (click)="cmdFermeDialog(pr)">
+            <button mat-mini-fab class="addPanier " color="primary"   (click)="(!pr.stock)?cmdFermeDialog(pr):''">
                 <mat-icon class="addPanierIcon">add_shopping_cart</mat-icon>
             </button>
         </div>
