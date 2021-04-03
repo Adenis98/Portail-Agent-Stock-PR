@@ -63,7 +63,7 @@
         
 
     </div>
-    <div *ngFor="let pr of listOfPr"  class="row tableHeader composant shadow" @consulterStockAnim>
+    <div *ngFor="let pr of listOfPr"  class="row tableHeader composant shadow"  @consulterStockAnim>
         <div class="col">
             <mat-icon *ngIf="pr.stock >5" class="stockDispoIcon">assignment_turned_in</mat-icon>
             <mat-icon *ngIf="(pr.stock > 0)&&(pr.stcok)<=5"class="stockLimitIcon">assignment_late</mat-icon>
@@ -90,7 +90,7 @@
             </button>
         </div>
     </div>
-    <div *ngIf="loading" class="row tableHeader composant shadow">
+    <div *ngIf="loading" class="row tableHeader lodingSpiner composant shadow">
         <mat-spinner  style="margin:auto" diameter="30"></mat-spinner>
     </div>
 

@@ -84,6 +84,14 @@ export class Page3Component implements OnInit {
             duration: 5000,
           });
         }
+    }, (error) => {
+      this.loading = false;
+      this._snackBar.open(
+        ""+error.error.message, "", {
+        verticalPosition: 'top',
+        panelClass: 'red-snackbar',
+        duration: 5000,
+      });
     }); }
   /**Cammande Ferme Dialog***/
   cmdFermeDialog(pr:any): void {

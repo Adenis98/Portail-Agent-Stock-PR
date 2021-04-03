@@ -22,8 +22,12 @@ export class AuthService {
 /*  const decodedToken = helper.decodeToken(localStorage.jwt);
     const expirationDate = helper.getTokenExpirationDate(localStorage.jwt);*/
     const isExpired = helper.isTokenExpired(localStorage.jwt);
-    if (isExpired)
-      localStorage.clear()
+    if (isExpired && localStorage.length)
+      {
+        localStorage.clear()
+        window.location.reload();
+        
+      }
     return !isExpired;
     
   }

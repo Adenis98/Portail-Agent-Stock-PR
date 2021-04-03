@@ -200,3 +200,7 @@ input::-webkit-outer-spin-button {
   top: -5px;
   left: 43px;
 }
+.lodingSpiner
+{
+  padding: 0px !important;
+}
