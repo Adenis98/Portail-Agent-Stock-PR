@@ -93,12 +93,63 @@ export class Page3Component implements OnInit {
         duration: 5000,
       });
     }); }
+    addLine(pr:any,result:any)
+    {
+      let vin="";
+      let numOr="";
+      let nomClient="";
+      let typeCmd=0
+      if(pr.stock<0)
+       typeCmd=1;
+
+      if(result)
+       { vin=result.vin;
+        numOr=result.numOR;
+        nomClient=result.nomClient;}
+      let body=
+      {
+        "editMode":0,
+        "numLigne":0,
+        "dealerNumber":pr.codeSte,
+        "codeArt":pr.codeArt,
+        "libelle":pr.libelle,
+        "qte":this.qte,
+        "pu":parseInt(pr.pu),
+        "type_Cmd":typeCmd,
+        "vin":vin,
+        "numInterv":numOr,
+        "nomClient":nomClient
+      }
+    this.stock.addLineCmd(body).subscribe((response: any)=>{
+        this._snackBar.open(
+          response.retMsg, "", {
+          verticalPosition: 'top',
+          panelClass: 'green-snackbar',
+          duration: 5000,
+        })
+    },(error) => {
+      this.loading = false;
+      this._snackBar.open(
+        ""+error.error.message, "", {
+        verticalPosition: 'top',
+        panelClass: 'red-snackbar',
+        duration: 5000,
+      });
+    })
+    }
   /**Cammande Ferme Dialog***/
   cmdFermeDialog(pr:any): void {
     const dialogRef = this.dialog.open(DialogCommandeFerme, {
       width: '640px',
       height: '250px',
+      data:pr
     });
+    dialogRef.afterClosed().subscribe((result: String)=>{
+      if(result)
+      {
+        this.addLine(pr,result)
+      }
+    })
   }
 
 }
@@ -109,9 +160,9 @@ export class Page3Component implements OnInit {
 })
 export class DialogCommandeFerme {
    /*****************Command Ferme Inpuet **********/
-   vin="";
-   numOr="";
-   nomClient="";
+    vin="";
+    numOr="";
+    nomClient="";
 
   constructor(
     public dialogRef: MatDialogRef<DialogCommandeFerme>,
@@ -119,11 +170,17 @@ export class DialogCommandeFerme {
     ) { }
 
   onNoClick(): void {
-    this.dialogRef.close("false");
+    this.dialogRef.close(null);
   }
-  delete(): void {
-    this.dialogRef.close("true");
+  add(): void {
+    let json={
+      "vin":this.vin,
+      "numOr":this.numOr,
+      "nomClient":this.nomClient
+    }
+    this.dialogRef.close(json);
   }
+  
 
 }
 

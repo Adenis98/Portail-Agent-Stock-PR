@@ -11,7 +11,8 @@
                             placeholder="Ex. 5F10991298"  
                             name="ref"
                             [(ngModel)]="refPr"  
-                            #ref="ngModel">
+                            #ref="ngModel"
+                            (keydown.enter)="(ref.valid)?getStock():''">
 
                     <mat-hint *ngIf="ref.touched&&!ref.valid" class="hint" >
                         <mat-icon>error</mat-icon>
@@ -27,7 +28,8 @@
                             [(ngModel)]="libellePr"  
                             #libelle="ngModel"
                             (input)="verifLibelle()"
-                            (click)="verifLibelle()"></textarea>
+                            (click)="verifLibelle()"
+                            (keydown.enter)="(libelleExiste)?getStock():''"></textarea>
                             
                 </mat-form-field>
               </div>
@@ -85,7 +87,7 @@
             </div>
         </div>
         <div class="col btn1">
-            <button mat-mini-fab class="addPanier " color="primary"   (click)="(!pr.stock)?cmdFermeDialog(pr):''">
+            <button mat-mini-fab class="addPanier " color="primary"   (click)="(!pr.stock)?cmdFermeDialog(pr):addLine(pr,null)">
                 <mat-icon class="addPanierIcon">add_shopping_cart</mat-icon>
             </button>
         </div>

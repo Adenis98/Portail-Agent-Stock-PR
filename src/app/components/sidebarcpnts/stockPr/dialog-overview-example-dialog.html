@@ -50,5 +50,5 @@
 </mat-form-field>
 </div>
 <button mat-raised-button class="okBtn shadow" (click)="onNoClick()">Annuler</button>
-<button mat-raised-button class="supprimerBtn shadow"   mat-Dialog-Close [disabled]="!f.valid">Ajouter</button>
+<button mat-raised-button class="supprimerBtn shadow"   mat-Dialog-Close [disabled]="!f.valid" (click)="add()" >Ajouter</button>
 </form>

@@ -18,5 +18,11 @@ export class StockPrService {
      let url = "http://localhost:8080/ListeStockAgent";
     return this.http.post(url,body,{headers:this.headers_object });
    }
-   
+   addLineCmd(body:any)
+   {
+    {
+      let url = "http://localhost:8080/panier/LignePanier";
+     return this.http.post(url,body,{headers:this.headers_object });
+    }
+   }
 }
