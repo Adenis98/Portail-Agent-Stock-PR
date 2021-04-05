@@ -73,7 +73,6 @@ export class Page3Component implements OnInit {
     this.stock.getStockPr(body).subscribe(response=>{
       this.loading=false;
       this.listOfPr=response;
-  
      if(this.listOfPr.length==0)
         {
           this.loading = false;
@@ -105,7 +104,9 @@ export class Page3Component implements OnInit {
       if(result)
        { vin=result.vin;
         numOr=result.numOR;
-        nomClient=result.nomClient;}
+        nomClient=result.nomClient;
+        typeCmd=1
+      }
       let body=
       {
         "editMode":0,
@@ -121,6 +122,7 @@ export class Page3Component implements OnInit {
         "nomClient":nomClient
       }
     this.stock.addLineCmd(body).subscribe((response: any)=>{
+       /*  this.listOfPr.splice(index, 1) */
         this._snackBar.open(
           response.retMsg, "", {
           verticalPosition: 'top',

@@ -25,4 +25,12 @@ export class StockPrService {
      return this.http.post(url,body,{headers:this.headers_object });
     }
    }
+   getPanierItem(dealerNumber:string)
+   {
+    let headers = new HttpHeaders({'DealerNumber':'95'}).append("Authorization","Bearer "+localStorage.getItem("jwt"))
+    headers?.set('Content-Type', 'application/json');
+
+     let url = "http://localhost:8080/panier/GetPanierWS";
+    return this.http.get(url,{headers:headers});
+   }
 }

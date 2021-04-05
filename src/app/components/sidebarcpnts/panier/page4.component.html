@@ -1,16 +1,14 @@
 <div class=" container containerPadding">
 
     <div class="resultats">
-        Panier (0)
+        Panier ({{this.listePanier.length}})
     </div>
     <div class="row tableHeader shadow">
-        <div class="col">
-            Q.Cmd.Ach
-        </div>
+       
         <div class="col">
             Réf Art
         </div>
-        <div class="col-3">
+        <div class="col-2">
             Libellé
         </div>
         <div class="col">
@@ -22,7 +20,7 @@
         <div class="col">
             Total HT
         </div>
-        <div class="col">
+        <div class="col-2">
             Type Cmd
         </div>
         <div class="btn2"></div>
@@ -31,29 +29,28 @@
 
 
     </div>
-    <div class="row shadow tableHeader composant" [class]="(this.moreDetail)?'moreDetail':''" @lignePanierAnim>
+    <div *ngFor="let item of listePanier ;let index=index" class="row shadow tableHeader composant" [class]="(this.moreDetailtest[index])?'moreDetail':''" @lignePanierAnim>
         <div class="col">
-            <div class="row ">
-                <div class="col"><span>Example</span></div>
-                <div class="col"><span>Example</span></div>
-                <div class="col-3"><span>Example</span></div>
-                <div class="col"><span>Example</span></div>
+            <div class="row">
+                <div class="col"><span>{{listePanier[index].codeArt}}</span></div>
+                <div class="col-2"><span>{{listePanier[index].libelle}}</span></div>
+                <div class="col"><span>{{listePanier[index].pu}}</span></div>
                 <div class="col">
                     <div class="qteSpiner shadow-sm">
-                        <button mat-flat-button class="addBtn" (click)="addQte()">
-                            <span>+</span>
+                        <button mat-flat-button class="addBtn" (click)="addQte(index)">
+                           <span>+</span>
                         </button>
-                        <input type="number" name="qte" class="inputQte" [(ngModel)]="qte">
-                        <button mat-flat-button class="removeBtn" (click)="removeQte()">
+                        <input type="number" name="qte" class="inputQte" [(ngModel)]="qte[index]">
+                        <button mat-flat-button class="removeBtn" (click)="removeQte(index)">
                             <span>-</span>
                         </button>
                     </div>
                 </div>
-                <div class="col"><span>Example</span></div>
-                <div class="col"><span>Example</span></div>
-                <div class="btn2">
-                    <button mat-icon-button (click)="openDetail()">
-                        <mat-icon>{{(!moreDetail)?'keyboard_arrow_down':'keyboard_arrow_up'}}</mat-icon>
+                <div class="col"><span>{{listePanier[index].totLigneHt}}</span></div>
+                <div class="col-2"><span>{{(listePanier[index].typeCmd==0)?'commande normale':'commande ferme'}}</span></div>
+                <div *ngIf="listePanier[index].typeCmd==1" class="btn2">
+                    <button mat-icon-button (click)="openDetail(index)">
+                        <mat-icon>{{(!moreDetailtest[index])?'keyboard_arrow_down':'keyboard_arrow_up'}}</mat-icon>
                     </button>
                 </div>
                 <div class="col btn1">
@@ -62,19 +59,19 @@
                     </button>
                 </div>
             </div>
-            <div class="row moreDetailContainer" [class]="(!detailValue)?'moreDetailContainerHide':''"> 
+            <div class="row moreDetailContainer" [class]="(!detailValue[index])?'moreDetailContainerHide':''"> 
                 <div></div>
                 <div class="col">
                     <span class="moreDetailLabel">VIN : </span>
-                    <span>455s4ds5d4sd5s4d5s</span>
+                    <span>{{listePanier[index].vin}}</span>
                 </div>
                 <div class="col">
                     <span class="moreDetailLabel">N°OR : </span>
-                    <span>555555555</span>
+                    <span>{{listePanier[index].numInterv}}</span>
                 </div>
                 <div class="col">
                     <span class="moreDetailLabel">Nom Client : </span>
-                    <span>youssef jobrane</span>
+                    <span>{{listePanier[index].nomClient}}</span>
                 </div>
             </div>
         </div>
@@ -122,7 +119,7 @@
                     <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                   </mat-form-field>
-                  <span class="col totalPrix">1759.560 <br><br>DT</span>
+                  <span class="col totalPrix">{{this.totHT}} DT</span>
               </div>
             <div class="row">
                 <button  type="submit" class="commanderBtn" mat-raised-button [disabled]="!f.valid" (click)="commander()">

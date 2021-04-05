@@ -1,3 +1,4 @@
+import { StockPrService } from 'src/app/services/stockPr/stock-pr.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 
@@ -21,45 +22,62 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class Page4Component implements OnInit {
-  qte:string=""
-  moreDetail=false;
-  detailValue=false;
+  qte:string[]=new Array()
   minDate=new Date(Date.now());
+  listePanier:any=[];
+  moreDetailtest:boolean[] = new Array();
+  detailValue:boolean[] = new Array();
+  totHT:any;
  
   /***********forminput*************/
   refCommande="";
   modePaiment="";
   typeCommande="";
   dateDeCommande=new Date();
-  constructor() { }
+  constructor(private panier:StockPrService) { }
 
   ngOnInit(): void {
-    this.qte="1";
+    this.getPanier() 
     //this.minDate=this.DatePipe.transform(this.minDate,'yyyy-MM-dd')
   }
 
-  addQte()
+  addQte(index:any)
   {
-    this.qte=(parseInt(this.qte)+1).toString();
+    this.qte[index]=(parseInt(this.qte[index])+1).toString();
   }
-  removeQte()
+  removeQte(index:any)
   {
-    if(parseInt(this.qte)>1)
-    this.qte=(parseInt(this.qte)-1).toString();
+    if(parseInt(this.qte[index])>1)
+    this.qte[index]=(parseInt(this.qte[index])-1).toString();
   }
-  openDetail()
+  openDetail(index:any)
   {
-    this.moreDetail=!this.moreDetail
-    if(!this.detailValue)
+    this.moreDetailtest[index]=!this.moreDetailtest[index]
+    if(!this.detailValue[index])
     setTimeout(() => {
-      this.detailValue=true;
+      this.detailValue[index]=true;
     }, 400);
-    if(this.detailValue)
-      this.detailValue=!this.detailValue;
+    if(this.detailValue[index])
+      this.detailValue[index]=!this.detailValue[index];
   }
  commander()
  {
   console.log(this.modePaiment+this.typeCommande+this.refCommande+"********"+this.dateDeCommande.toLocaleString())
+ }
+ getPanier()
+ {
+   this.panier.getPanierItem("95").subscribe((data:any)=>{
+    this.listePanier=data.lignesPanier
+    this.totHT=data.totHt
+    for(let i=0;i<this.listePanier.length;i++)
+      {
+        this.moreDetailtest.push(false)
+        this.detailValue.push(false)
+        this.qte.push(this.listePanier[i].qte)
+      }
+      console.log(this.moreDetailtest)
+ /*    console.log(this.listePanier[0].qte)  */
+   })
  }
 
 }
