@@ -12,6 +12,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoginGuardService } from './services/loginGuard/login-guard.service';
 import { ComptesComponent } from './components/sidebarcpnts/comptes/comptes.component';
 import { Page6Component } from './components/sidebarcpnts/stockLocal/page6.component';
+import { CompteGardService } from './services/compteGard/compte-gard.service';
 
 const routes: Routes = [
   { 
@@ -56,7 +57,7 @@ const routes: Routes = [
   {
     path: "comptes",
     component: ComptesComponent,
-    canActivate: [AuthGuardService]
+    canActivate: [AuthGuardService,CompteGardService]
   },
   { 
     path: "**",
