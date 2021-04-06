@@ -93,7 +93,7 @@
                         Stock Local
                     </a>
                 </li>
-                <li class="item ">
+                <li *ngIf="permis==1" class="item ">
                     <a mat-flat-button routerLink="/comptes" routerLinkActive="active" class="linkBtn"
                         [class]="(this.page6)?'botButtonRadius':''" (click)="dash('comptes')">
                         <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar" class="iconButton">

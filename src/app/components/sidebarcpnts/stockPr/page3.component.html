@@ -71,10 +71,10 @@
             <mat-icon *ngIf="(pr.stock > 0)&&(pr.stcok)<=5"class="stockLimitIcon">assignment_late</mat-icon>
             <mat-icon *ngIf="!pr.stock" class="stockNonDispotIcon">cancel</mat-icon>
         </div>
-        <div class="col"><span>{{pr.qteAchat}}</span></div>
+        <div class="col"><span *ngIf="!pr.stock">{{pr.qteAchat}}</span></div>
         <div class="col"><span>{{pr.codeArt}}</span></div>
         <div class="col-4"><span>{{pr.libelle}}</span></div>
-        <div class="col"><span>{{pr.pu}}</span></div>
+        <div class="col"><span>{{this.formatMoney(pr.pu)}}</span></div>
         <div class="col">
             <div class="qteSpiner shadow-sm">
                 <button mat-flat-button class="addBtn" (click)="addQte()">

@@ -2,35 +2,27 @@
     font-size: large;
 }
 button{
-    border : 0px; 
-    width : 100px; 
+
+    border : 0px;  
     height: 40px;
-    border-radius : 5px;
-    font-weight: 500;
+    border-radius : 20px;
+    font-weight: 400;
+    font-size: 15px;
+    letter-spacing: 2px;
     position: absolute ;
     bottom : 10px;
-    transition : 0.3s all ease-in-out
 }
 .supprimerBtn{
     background-color: #eb4d4b;
     color : white ; 
-    right : 15px
-}
-.supprimerBtn:hover{
-    background-color: #aa3836;
-}
-.supprimerBtn:active{
-    background-color: #d84846;
+    right : 15px;
+    width: 116px;
+    text-align: center;
 }
 .okBtn{
     background-color: #d6a217;
     color :#263636  ;
-    right : 125px
-}
-.okBtn:hover{
-    background-color: #be9115;
-}
-.okBtn:active{
-    background-color: #f0c141;
+    right : 140px;
+    width: 94px;
 }
 

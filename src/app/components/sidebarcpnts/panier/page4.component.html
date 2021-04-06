@@ -34,19 +34,9 @@
             <div class="row">
                 <div class="col"><span>{{listePanier[index].codeArt}}</span></div>
                 <div class="col-2"><span>{{listePanier[index].libelle}}</span></div>
-                <div class="col"><span>{{listePanier[index].pu}}</span></div>
-                <div class="col">
-                    <div class="qteSpiner shadow-sm">
-                        <button mat-flat-button class="addBtn" (click)="addQte(index)">
-                           <span>+</span>
-                        </button>
-                        <input type="number" name="qte" class="inputQte" [(ngModel)]="qte[index]">
-                        <button mat-flat-button class="removeBtn" (click)="removeQte(index)">
-                            <span>-</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="col"><span>{{listePanier[index].totLigneHt}}</span></div>
+                <div class="col"><span>{{this.formatMoney(listePanier[index].pu)}}</span></div>
+                <div class="col"><span>{{listePanier[index].qte}}</span></div>
+                <div class="col"><span>{{this.formatMoney(listePanier[index].totLigneHt)}}</span></div>
                 <div class="col-2"><span>{{(listePanier[index].typeCmd==0)?'commande normale':'commande ferme'}}</span></div>
                 <div *ngIf="listePanier[index].typeCmd==1" class="btn2">
                     <button mat-icon-button (click)="openDetail(index)">
@@ -54,8 +44,8 @@
                     </button>
                 </div>
                 <div class="col btn1">
-                    <button mat-mini-fab class="addPanier " color="primary">
-                        <mat-icon class="addPanierIcon">delete</mat-icon>
+                    <button mat-mini-fab class="addPanier deleteBtn" color="primary">
+                        <mat-icon class="addPanierIcon deleteBtn">delete</mat-icon>
                     </button>
                 </div>
             </div>
@@ -119,7 +109,7 @@
                     <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                   </mat-form-field>
-                  <span class="col totalPrix">{{this.totHT}} DT</span>
+                  <span class="col totalPrix">{{this.totHT}}</span>
               </div>
             <div class="row">
                 <button  type="submit" class="commanderBtn" mat-raised-button [disabled]="!f.valid" (click)="commander()">

@@ -54,3 +54,24 @@ h1
     color: #415959;
     user-select: none;
 }
+.inputField{
+   /*  width:250px;
+    max-width:200px; */
+    width: max-content;
+    margin-left: 20px;
+    display: block  !important;
+  }
+.radioBtn1
+{
+    margin-right: 50px;
+}
+
+ 
+.radioBtn2
+{
+  margin-top:15px;
+}
+.inputFieldText
+{
+    margin:auto;
+}

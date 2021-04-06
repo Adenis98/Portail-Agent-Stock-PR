@@ -1,7 +1,14 @@
 <form form #f="ngForm" ngForm class="formStyle" >
   <h1 mat-dialog-title>Remplissez les champs suivants</h1>
 <div mat-dialog-content>
-  <mat-form-field class="inputFieldVin">
+  <div class="row" style="height: 50px;">
+    <mat-radio-group required class="inputField" [(ngModel)]="selectedOption" aria-label="Select an option" name="selectedOption">
+    <mat-radio-button  class="radioBtn1" value="0" (change)="hideInputV=false"> &nbsp;Commande normal</mat-radio-button>
+    <mat-radio-button  class="radioBtn2" value="1"  (change)="hideInputV=true">&nbsp; Commande ferme</mat-radio-button>
+</mat-radio-group>
+  </div>
+  <div *ngIf="hideInputV" class="row inputFieldText">
+    <mat-form-field class="inputFieldVin">
     <mat-label>VIN</mat-label>
     <input  required 
             pattern="[a-zA-Z0-9]{9}[a-zA-Z0-9-]{2}[0-9]{6}"
@@ -15,12 +22,12 @@
             oninput="this.value = this.value.toUpperCase()">
     <mat-hint *ngIf="VIN.touched&&!VIN.valid" class="hint" >
         <mat-icon>error</mat-icon>
-         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez le "VIN" 
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez le "VIN" 
     </mat-hint>
-</mat-form-field>
-<mat-form-field class="inputFieldVin">
-  <mat-label>N°OR</mat-label>
-  <input  required 
+    </mat-form-field>
+    <mat-form-field class="inputFieldVin">
+    <mat-label>N°OR</mat-label>
+    <input  required 
           minlength="3" 
           maxlength="17" 
           matInput 
@@ -28,14 +35,14 @@
           name="NOR"
           [(ngModel)]="numOr" 
           #NOR="ngModel">
-  <mat-hint *ngIf="NOR.touched&&!NOR.valid" class="hint" >
+    <mat-hint *ngIf="NOR.touched&&!NOR.valid" class="hint" >
       <mat-icon>error</mat-icon>
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez le "N°OR" 
-  </mat-hint>
-</mat-form-field>
-<mat-form-field class="inputFieldVin">
-  <mat-label>Nom Client</mat-label>
-  <input  required 
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez le "N°OR" 
+    </mat-hint>
+    </mat-form-field>
+    <mat-form-field class="inputFieldVin">
+    <mat-label>Nom Client</mat-label>
+    <input  required 
           minlength="3" 
           maxlength="20" 
           matInput 
@@ -43,11 +50,12 @@
           name="nom"
           [(ngModel)]="nomClient" 
           #nom="ngModel">
-  <mat-hint *ngIf="nom.touched&&!nom.valid" class="hint" >
+    <mat-hint *ngIf="nom.touched&&!nom.valid" class="hint" >
       <mat-icon>error</mat-icon>
-       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez le Nom Client 
-  </mat-hint>
-</mat-form-field>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez le Nom Client 
+    </mat-hint>
+    </mat-form-field>
+  </div>
 </div>
 <button mat-raised-button class="okBtn shadow" (click)="onNoClick()">Annuler</button>
 <button mat-raised-button class="supprimerBtn shadow"   mat-Dialog-Close [disabled]="!f.valid" (click)="add()" >Ajouter</button>

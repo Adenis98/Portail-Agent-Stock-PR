@@ -3,6 +3,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { concat } from 'rxjs';
 import { StockPrService } from 'src/app/services/stockPr/stock-pr.service';
 
 @Component({
@@ -98,14 +99,11 @@ export class Page3Component implements OnInit {
       let numOr="";
       let nomClient="";
       let typeCmd=0
-      if(pr.stock<0)
-       typeCmd=1;
-
       if(result)
        { vin=result.vin;
         numOr=result.numOR;
         nomClient=result.nomClient;
-        typeCmd=1
+        typeCmd=result.type_Cmd;
       }
       let body=
       {
@@ -122,8 +120,7 @@ export class Page3Component implements OnInit {
         "nomClient":nomClient
       }
     this.stock.addLineCmd(body).subscribe((response: any)=>{
-       /*  this.listOfPr.splice(index, 1) */
-        this._snackBar.open(
+          this._snackBar.open(
           response.retMsg, "", {
           verticalPosition: 'top',
           panelClass: 'green-snackbar',
@@ -144,7 +141,7 @@ export class Page3Component implements OnInit {
     const dialogRef = this.dialog.open(DialogCommandeFerme, {
       width: '640px',
       height: '250px',
-      data:pr
+      data:pr,
     });
     dialogRef.afterClosed().subscribe((result: String)=>{
       if(result)
@@ -152,6 +149,15 @@ export class Page3Component implements OnInit {
         this.addLine(pr,result)
       }
     })
+  }
+  formatMoney(x:any)
+  {
+   const euro = new Intl.NumberFormat('fr-FR', {
+     style: 'currency',
+     currency: 'TND',
+     minimumFractionDigits: 3
+   })
+   return(euro.format(x));
   }
 
 }
@@ -165,7 +171,8 @@ export class DialogCommandeFerme {
     vin="";
     numOr="";
     nomClient="";
-
+    selectedOption:String="";
+    hideInputV=false;
   constructor(
     public dialogRef: MatDialogRef<DialogCommandeFerme>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -178,11 +185,11 @@ export class DialogCommandeFerme {
     let json={
       "vin":this.vin,
       "numOr":this.numOr,
-      "nomClient":this.nomClient
+      "nomClient":this.nomClient,
+      "type_Cmd":this.selectedOption
     }
     this.dialogRef.close(json);
   }
-  
-
 }
+
 

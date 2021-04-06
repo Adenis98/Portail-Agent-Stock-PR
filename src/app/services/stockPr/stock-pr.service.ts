@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders, JsonpClientBackend } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -27,10 +28,12 @@ export class StockPrService {
    }
    getPanierItem(dealerNumber:string)
    {
-    let headers = new HttpHeaders({'DealerNumber':'95'}).append("Authorization","Bearer "+localStorage.getItem("jwt"))
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(localStorage.jwt);
+    let dNbr=decodedToken["dealerNbr"]; 
+    let headers = new HttpHeaders({'DealerNumber':dNbr.toString()}).append("Authorization","Bearer "+localStorage.getItem("jwt"))
     headers?.set('Content-Type', 'application/json');
-
-     let url = "http://localhost:8080/panier/GetPanierWS";
+    let url = "http://localhost:8080/panier/GetPanierWS";
     return this.http.get(url,{headers:headers});
    }
 }

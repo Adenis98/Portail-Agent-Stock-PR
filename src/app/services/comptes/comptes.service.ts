@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,  HttpHeaders } from '@angular/common/http';
+import { JwtHelperService } from '@auth0/angular-jwt';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,7 +13,11 @@ export class GetcomptesService {
    }
 
   getCompte() {
-    let url = "http://localhost:8080/compte/avoirTout";
+    
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(localStorage.jwt);
+    let dNbr=decodedToken["dealerNbr"]; 
+    let url = "http://localhost:8080/compte/avoirTout/"+dNbr;
     return this.http.get(url, { headers:this.headers_object });
   }
   deletCompte(compt:any)

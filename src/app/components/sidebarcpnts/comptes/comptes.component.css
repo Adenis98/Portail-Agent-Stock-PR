@@ -163,7 +163,7 @@ div.composant
 
 .addBtn
 {
-  background-color: #e9b423 !important;
+  background-color: #d6a217 ;
   display: block !important;
   margin:auto;
   margin-top:30px;
@@ -173,6 +173,7 @@ div.composant
   font-size: 15px;
   font-weight: 500;
   color:#415959 ;
+  border-radius: 30px
 }
 .inputField{
   margin:auto;

@@ -3,6 +3,7 @@ import { Component, Inject, NgZone, OnInit } from '@angular/core';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 
 
@@ -59,8 +60,10 @@ export class ComptesComponent implements OnInit {
   rdBtn1=false ; 
   rdBtn2=false ; 
   dNumber: String = "";
-
   usrUpdate: any;
+  currentUserName="";
+  currentDealerNumber:any;
+
   //*************************************
   ;
 
@@ -70,15 +73,16 @@ export class ComptesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUser();
-  }
-
-  spliceAllButOne() {
-
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(localStorage.jwt);
+    this.currentUserName = decodedToken["sub"];
+    this.currentDealerNumber=decodedToken["dealerNbr"];
   }
   getUser() {
     this.Compte.getCompte().subscribe(data => {
       this.loading = false;
       this.listcompte = data;
+      
     }, erreur => {
       this.loading = false;
       console.log("erreur : " + erreur.message);
@@ -128,7 +132,7 @@ export class ComptesComponent implements OnInit {
     let body: any =
     {
       "userName": this.userName,
-      "dealer_Number": parseInt(this.dNumber.replace(/\D/g, "")),
+      "dealer_Number":this.currentDealerNumber,
       "permis": parseInt(this.permis.replace(/\D/g, "")),//hathi tna7i 7rouf w les espaces mel numero (replace.......)
       "password": this.psd1
     };
@@ -205,7 +209,7 @@ export class ComptesComponent implements OnInit {
     let body: any =
     {
       "userName": this.userName,
-      "dealer_Number": parseInt(this.dNumber.replace(/\D/g, "")),
+      "dealer_Number": this.currentDealerNumber,
       "permis": parseInt(this.permis.replace(/\D/g, "")),//hathi tna7i 7rouf w les espaces mel numero (replace.......)
       "password": this.psd1
     }

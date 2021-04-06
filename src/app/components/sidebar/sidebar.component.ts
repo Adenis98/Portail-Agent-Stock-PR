@@ -38,6 +38,7 @@ export class SidebarComponent implements OnInit {
   public avatar: any = "";
   public checkImg = false;
   public imgExist = false ; 
+  permis:any
   private s: Subscription = new Subscription;//buttons border radius onPageLoad 
 
   constructor(@Inject(DOCUMENT) private document: Document,
@@ -66,6 +67,10 @@ export class SidebarComponent implements OnInit {
 
     if (this.router.url == "/dashboard")
       this.dsh = true;
+
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(localStorage.jwt);
+    this.permis = decodedToken["permis"];
   }
 
   sideBarToggeleClicked() {

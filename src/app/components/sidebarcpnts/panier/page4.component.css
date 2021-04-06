@@ -69,6 +69,7 @@ div.composant
 {
     background-color: #d6a217;
     margin: auto;
+    margin-top:20px;
     border-radius: 20px;
     height: 45px;
     width: 150px;
@@ -233,3 +234,6 @@ textarea
     text-align: center;
     font-size: 25px;
 }
+.deleteBtn:hover{
+    color: #eb4d4b;
+  }

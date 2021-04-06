@@ -36,13 +36,10 @@
 <div class=" container containerPadding">
     <div class="row tableHeader shadow">
         <div class="col">
-            <mat-icon class="thCard">fingerprint</mat-icon>
-        </div>
-        <div class="col">
             <mat-icon class="thCard">assignment_ind</mat-icon>
         </div>
         <div class="col">
-            <mat-icon class="thCard">perm_phone_msg</mat-icon>
+            <mat-icon class="thCard">fingerprint</mat-icon>
         </div>
         <div class="col">
             <mat-icon class="thCard">verified_user</mat-icon>
@@ -55,19 +52,18 @@
 
     </div>
     <div *ngFor="let cmpt of listcompte" @ajouterSupprimerCompteAnim class="row tableHeader composant shadow">
-        <div class="col"><span>{{cmpt.code}}</span></div>
         <div class="col"><span>{{cmpt.userName}}</span></div>
         <div class="col"><span>{{cmpt.dealer_Number}}</span></div>
         <div class="col"><span>{{cmpt.permis}}</span></div>
         <div class="col"><span>{{cmpt.password}}</span></div>
         <div class="col btn2">
-            <button mat-mini-fab class="editBtn" color="primary" (click)="editUser(cmpt)">
-                <mat-icon class="editIcon">edit</mat-icon>
+            <button *ngIf=" cmpt.userName!=currentUserName"  mat-mini-fab class="deleteBtn " color="primary" (click)="openDialog(cmpt)">
+                <mat-icon class="deleteIcon">delete</mat-icon>
             </button>
         </div>
         <div class="col btn1">
-            <button mat-mini-fab class="deleteBtn " color="primary" (click)="openDialog(cmpt)">
-                <mat-icon class="deleteIcon">delete</mat-icon>
+            <button mat-mini-fab class="editBtn" color="primary" (click)="editUser(cmpt)">
+                <mat-icon class="editIcon">edit</mat-icon>
             </button>
         </div>
     </div>
@@ -113,30 +109,14 @@
                         </mat-hint>
                     </mat-form-field>
 
-                    <mat-form-field class="inputField">
-                        <mat-label>Téléphone</mat-label>
-                        <span matPrefix>+216 &nbsp;</span>
-                        <input  required 
-                                type="tel" 
-                                minlength="8" 
-                                maxlength="8" 
-                                pattern="^\d*(\.\d{0,2})?$" 
-                                matInput placeholder="555-555-1234" 
-                                [(ngModel)]="dNumber"
-                                #tel="ngModel" 
-                                name="dNumber">
-                            <mat-hint *ngIf="tel.touched&&!tel.valid" class="hintPsd" >
-                                <mat-icon>error</mat-icon>
-                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez un numéro de téléphone valide 
-                            </mat-hint>
-                    </mat-form-field>
-
-                    <mat-radio-group required class="inputField" aria-label="Select an option" [(ngModel)]="permis"
+                        <mat-radio-group required class="inputField" aria-label="Select an option" [(ngModel)]="permis"
                         name="permis">
                         <mat-radio-button required class="radioBtn1" value="1" >Responsable</mat-radio-button>
                         <mat-radio-button required class="radioBtn2" value="2" >Agent</mat-radio-button>
                     </mat-radio-group>
                 </div>
+
+             
                 <div class="col">
                     <mat-form-field class="inputField">
                         <mat-label>Mot de passe</mat-label>

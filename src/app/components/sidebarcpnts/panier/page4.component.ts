@@ -38,6 +38,7 @@ export class Page4Component implements OnInit {
 
   ngOnInit(): void {
     this.getPanier() 
+    
     //this.minDate=this.DatePipe.transform(this.minDate,'yyyy-MM-dd')
   }
 
@@ -64,18 +65,27 @@ export class Page4Component implements OnInit {
  {
   console.log(this.modePaiment+this.typeCommande+this.refCommande+"********"+this.dateDeCommande.toLocaleString())
  }
+ formatMoney(x:any)
+ {
+  const euro = new Intl.NumberFormat('fr-FR', {
+    style: 'currency',
+    currency: 'TND',
+    minimumFractionDigits: 3
+  })
+  return(euro.format(x));
+ }
  getPanier()
  {
    this.panier.getPanierItem("95").subscribe((data:any)=>{
     this.listePanier=data.lignesPanier
-    this.totHT=data.totHt
+    this.totHT=this.formatMoney(data.totHt)
+   
     for(let i=0;i<this.listePanier.length;i++)
       {
         this.moreDetailtest.push(false)
         this.detailValue.push(false)
         this.qte.push(this.listePanier[i].qte)
       }
-      console.log(this.moreDetailtest)
  /*    console.log(this.listePanier[0].qte)  */
    })
  }
