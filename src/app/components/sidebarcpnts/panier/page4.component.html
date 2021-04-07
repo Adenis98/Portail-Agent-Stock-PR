@@ -4,7 +4,7 @@
         Panier ({{this.listePanier.length}})
     </div>
     <div class="row tableHeader shadow">
-       
+
         <div class="col">
             Réf Art
         </div>
@@ -29,7 +29,8 @@
 
 
     </div>
-    <div *ngFor="let item of listePanier ;let index=index" class="row shadow tableHeader composant" [class]="(this.moreDetailtest[index])?'moreDetail':''" @lignePanierAnim>
+    <div *ngFor="let item of listePanier ;let index=index" class="row shadow tableHeader composant"
+        [class]="(this.moreDetailtest[index])?'moreDetail':''" @lignePanierAnim>
         <div class="col">
             <div class="row">
                 <div class="col"><span>{{listePanier[index].codeArt}}</span></div>
@@ -37,19 +38,21 @@
                 <div class="col"><span>{{this.formatMoney(listePanier[index].pu)}}</span></div>
                 <div class="col"><span>{{listePanier[index].qte}}</span></div>
                 <div class="col"><span>{{this.formatMoney(listePanier[index].totLigneHt)}}</span></div>
-                <div class="col-2"><span>{{(listePanier[index].typeCmd==0)?'commande normale':'commande ferme'}}</span></div>
+                <div class="col-2"><span>{{(listePanier[index].typeCmd==0)?'commande normale':'commande ferme'}}</span>
+                </div>
                 <div *ngIf="listePanier[index].typeCmd==1" class="btn2">
                     <button mat-icon-button (click)="openDetail(index)">
                         <mat-icon>{{(!moreDetailtest[index])?'keyboard_arrow_down':'keyboard_arrow_up'}}</mat-icon>
                     </button>
                 </div>
                 <div class="col btn1">
-                    <button mat-mini-fab class="addPanier deleteBtn" color="primary">
+                    <button mat-mini-fab class="addPanier deleteBtn" color="primary"
+                        (click)="deletLigne(listePanier[index].numLigne,index)">
                         <mat-icon class="addPanierIcon deleteBtn">delete</mat-icon>
                     </button>
                 </div>
             </div>
-            <div class="row moreDetailContainer" [class]="(!detailValue[index])?'moreDetailContainerHide':''"> 
+            <div class="row moreDetailContainer" [class]="(!detailValue[index])?'moreDetailContainerHide':''">
                 <div></div>
                 <div class="col">
                     <span class="moreDetailLabel">VIN : </span>
@@ -68,51 +71,47 @@
     </div>
     <div class="inputData shadow">
         <form #f="ngForm" ngForm class="formStyle" (keydown.enter)="$event.preventDefault()">
-              <div class="row">
+            <div class="row">
                 <mat-form-field class="col-4">
-                    <mat-label >Type de Commande</mat-label>
-                    <mat-select name="typeCommande"[(ngModel)]="typeCommande" required >
-                      <mat-option value="1">Commande Ferme</mat-option>
-                      <mat-option value="0">Command Normale</mat-option>
+                    <mat-label>Type de Commande</mat-label>
+                    <mat-select name="typeCommande" [(ngModel)]="typeCommande" required>
+                        <mat-option value="1">Commande Ferme</mat-option>
+                        <mat-option value="0">Command Normale</mat-option>
                     </mat-select>
-                  </mat-form-field>
+                </mat-form-field>
                 <mat-form-field class="col-4">
                     <mat-label>Réf Commande</mat-label>
-                    <input  required 
-                            minlength="11" 
-                            maxlength="30" 
-                            matInput 
-                            placeholder="Ex. 5F10991298"  
-                            name="refCmd"
-                            [(ngModel)]="refCommande"  
-                            #refCmd="ngModel">
-                    <mat-hint *ngIf="refCmd.touched&&!refCmd.valid" class="hint" >
+                    <input required minlength="11" maxlength="30" matInput placeholder="Ex. 5F10991298" name="refCmd"
+                        [(ngModel)]="refCommande" #refCmd="ngModel">
+                    <mat-hint *ngIf="refCmd.touched&&!refCmd.valid" class="hint">
                         <mat-icon>error</mat-icon>
-                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez la réference de la commande 
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez la réference de la commande
                     </mat-hint>
                 </mat-form-field>
                 <div class="col" class="totalPanierContainer">
                     <span>total Panier : </span>
                 </div>
-              </div>
-              <div class="row secondRow">
+            </div>
+            <div class="row secondRow">
                 <mat-form-field class="col-4">
-                    <mat-label >Mode de Paiement</mat-label>
-                    <mat-select name="modePaiment"[(ngModel)]="modePaiment" required>
+                    <mat-label>Mode de Paiement</mat-label>
+                    <mat-select name="modePaiment" [(ngModel)]="modePaiment" required>
                         <mat-option value="0">Especes</mat-option>
                         <mat-option value="1">Cheque</mat-option>
                     </mat-select>
-                  </mat-form-field>
-                  <mat-form-field  class="col-4">
+                </mat-form-field>
+                <mat-form-field class="col-4">
                     <mat-label>choisir une date</mat-label>
-                    <input matInput [matDatepicker]="picker" name="dateDeCommande"[(ngModel)]="dateDeCommande" required [min]="minDate">
-                    <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                    <input matInput [matDatepicker]="picker" name="dateDeCommande" [(ngModel)]="dateDeCommande" required
+                        [min]="minDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
-                  </mat-form-field>
-                  <span class="col totalPrix">{{this.totHT}}</span>
-              </div>
+                </mat-form-field>
+                <span class="col totalPrix">{{this.totHT}}</span>
+            </div>
             <div class="row">
-                <button  type="submit" class="commanderBtn" mat-raised-button [disabled]="!f.valid" (click)="commander()">
+                <button type="submit" class="commanderBtn" mat-raised-button [disabled]="!f.valid"
+                    (click)="commander()">
                     <span>Commander</span>
                 </button>
             </div>
