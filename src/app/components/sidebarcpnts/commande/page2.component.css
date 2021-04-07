@@ -1,0 +1,152 @@
+div.containerPadding
+{
+    padding-top: 70px;
+    margin: auto;
+    padding-bottom: 50px;
+    width: 95%;
+    height: 100%;
+    transition: 0.9s;
+}
+.inputData{
+    padding: 30px;
+    width:95%;
+    min-width: 950px;
+    margin: auto;
+    border-radius: 20px;
+    height:240px;
+    background-color: aliceblue;
+    position: relative;
+}
+.hint{
+    color: #d93025;
+    font-size: 13px;
+    position: relative ; 
+    line-height: 1.2;
+    font-style: italic;
+  }
+.hint mat-icon{
+  text-align: center ;
+  font-size: 15px;
+  position: absolute;
+  top : -1px;
+}
+.TypeCommand
+{
+    margin-right: 40px;
+    margin-left: 40px;
+    min-width: 250px;
+    max-width: 250px;
+}
+.commanderBtn
+{
+    background-color: #d6a217;
+    margin: auto;
+    margin-top:20px;
+    border-radius: 20px;
+    height: 45px;
+    width: 150px;
+    color: #415959;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+.secondRow
+{
+    margin-top: 10px;
+}
+.checkBoxAnnule
+{
+    margin-top: 20px;
+    padding-left: 20px;
+    color: #415959;
+    font-size: 17px
+}
+/* table  */
+div.tableHeader
+{
+  background-color: aliceblue;
+  border-radius: 20px;
+  height: 50px;
+  text-align: center;
+  width:95%;
+  min-width: 950px;
+  padding: 13px;
+  margin:auto;
+  margin-top: 20px;
+  color: #d6a217;
+  font-weight: 500;
+  font-size: 15px;
+  padding-top: 16px;
+  user-select: none;
+  transition: ease-in-out 0.3s
+}
+.btn1
+{
+    max-width: 50px;
+    margin-right: 10px;
+}
+.btn2
+{
+    position:absolute;
+    right: 45px;
+    top: -10px;
+}
+div.composant
+{
+  margin-top: 10px;
+  color: #415959;
+  position: relative;
+  font-size: 13px;
+}
+.addPanier
+{
+  position: absolute;
+  top: -12px;
+  z-index: 10;
+  transition : 0.3s;
+}
+.addPanier:hover{
+  color:#d6a217;
+}
+.btn1{
+  max-width: 50px;
+  margin-right: 10px;
+}
+.moreDetail
+{
+    height: 150px !important;
+    transition: ease-in-out 0.3s;
+}
+.moreDetailContainer
+{
+    margin-top:17px;
+    border-top: rgb(177, 177, 177) 1px solid;
+    padding-top: 15px;
+}
+.moreDetailLabel
+{
+    color: #d6a217;
+    font-size:14px;
+}
+.moreDetailContainerHide
+{
+    display: none;
+    transition: ease-in-out 10s
+}
+.seconRowMoreDetail
+{
+    margin-top: 15px;
+    border-top: rgb(177, 177, 177) 1px solid;
+    padding-top: 15px;
+}
+.resultats
+{
+    padding-top: 25px;
+    padding-left: 10px;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #415959;
+    width: 95%;
+    margin: auto;
+    font-weight: 500;
+}

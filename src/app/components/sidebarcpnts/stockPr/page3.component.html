@@ -33,7 +33,7 @@
                             
                 </mat-form-field>
               </div>
-              <button  type="submit" class="chercherBtn" mat-raised-button [disabled]="!f.valid" (click)="getStock()">
+              <button  type="submit" class="chercherBtn" mat-raised-button [disabled]="!f.valid" (click)="getStock();this.refPr='';this.libellePr=''">
                 <span>Chercher</span>
             </button>
         </form>
@@ -67,8 +67,8 @@
     </div>
     <div *ngFor="let pr of listOfPr"  class="row tableHeader composant shadow"  @consulterStockAnim>
         <div class="col">
-            <mat-icon *ngIf="pr.stock >5" class="stockDispoIcon">assignment_turned_in</mat-icon>
-            <mat-icon *ngIf="(pr.stock > 0)&&(pr.stcok)<=5"class="stockLimitIcon">assignment_late</mat-icon>
+            <mat-icon *ngIf="pr.stock > 5" class="stockDispoIcon">assignment_turned_in</mat-icon>
+            <mat-icon *ngIf="pr.stock > 0 && pr.stock < 5"class="stockLimitIcon">assignment_late</mat-icon>
             <mat-icon *ngIf="!pr.stock" class="stockNonDispotIcon">cancel</mat-icon>
         </div>
         <div class="col"><span *ngIf="!pr.stock">{{pr.qteAchat}}</span></div>
@@ -87,7 +87,7 @@
             </div>
         </div>
         <div class="col btn1">
-            <button mat-mini-fab class="addPanier " color="primary"   (click)="(!pr.stock)?cmdFermeDialog(pr):addLine(pr,null)">
+            <button mat-mini-fab class="addPanier " color="primary"   (click)="(!pr.stock || pr.stock < 5)?cmdFermeDialog(pr):addLine(pr,null)">
                 <mat-icon class="addPanierIcon">add_shopping_cart</mat-icon>
             </button>
         </div>

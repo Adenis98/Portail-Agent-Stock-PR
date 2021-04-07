@@ -73,17 +73,10 @@ export class Page3Component implements OnInit {
     
     this.stock.getStockPr(body).subscribe(response=>{
       this.loading=false;
-      this.listOfPr=response;
-     if(this.listOfPr.length==0)
-        {
-          this.loading = false;
-          this._snackBar.open(
-            "Référence ou libelle incorrecte !", "", {
-            verticalPosition: 'top',
-            panelClass: 'red-snackbar',
-            duration: 5000,
-          });
-        }
+      this.listOfPr=[];
+      setTimeout(() => {
+        this.listOfPr=response;//bech nsala7 bug
+      }, 450);
     }, (error) => {
       this.loading = false;
       this._snackBar.open(
@@ -92,7 +85,8 @@ export class Page3Component implements OnInit {
         panelClass: 'red-snackbar',
         duration: 5000,
       });
-    }); }
+    }); 
+  }
     addLine(pr:any,result:any)
     {
       let vin="";

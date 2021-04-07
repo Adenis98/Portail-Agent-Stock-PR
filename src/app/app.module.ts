@@ -28,6 +28,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
@@ -61,7 +62,7 @@ import { DatePipe } from '@angular/common';
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    
+    MatCheckboxModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

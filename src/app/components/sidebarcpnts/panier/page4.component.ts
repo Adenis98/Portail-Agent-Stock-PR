@@ -1,3 +1,4 @@
+import { PanierService } from './../../../services/Panier/panier.service';
 import { StockPrService } from 'src/app/services/stockPr/stock-pr.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
@@ -34,7 +35,7 @@ export class Page4Component implements OnInit {
   modePaiment="";
   typeCommande="";
   dateDeCommande=new Date();
-  constructor(private panier:StockPrService) { }
+  constructor(private panier:PanierService) { }
 
   ngOnInit(): void {
     this.getPanier() 
@@ -76,7 +77,7 @@ export class Page4Component implements OnInit {
  }
  getPanier()
  {
-   this.panier.getPanierItem("95").subscribe((data:any)=>{
+   this.panier.getPanierItem().subscribe((data:any)=>{
     this.listePanier=data.lignesPanier
     this.totHT=this.formatMoney(data.totHt)
    
