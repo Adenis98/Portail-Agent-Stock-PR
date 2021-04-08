@@ -234,4 +234,7 @@ textarea
 }
 .deleteBtn:hover{
     color: #eb4d4b;
-  }
+}
+button{
+    z-index: 2;
+}

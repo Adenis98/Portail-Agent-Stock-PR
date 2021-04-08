@@ -14,7 +14,7 @@ div.containerPadding
     margin: auto;
     border-radius: 20px;
     height:240px;
-    background-color: white;
+    background-color: aliceblue;
     position: relative;
 }
 .hint{
@@ -133,7 +133,8 @@ div.composant
     font-size: 13px;
     padding-top: 16px;
     user-select: none;
-    transition: ease-in-out 0.3s
+    transition: ease-in-out 0.3s;
+    position: relative;
 }
 .resultats
 {
@@ -167,4 +168,7 @@ div.composant
 {
     display: none;
     transition: ease-in-out 0.7s
+}
+button{
+    z-index: 2;
 }

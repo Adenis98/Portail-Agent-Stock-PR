@@ -15,22 +15,22 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   animations: [
     trigger('ajouterModifierAnim', [
       transition('* => void', animate('0.7s 0.2s ease-in',
-        style([{ transform: 'translateX(200%)' }])
+        style([{ transform: 'translateX(200%)' , opacity: 0}])
       )
       ),
       transition('void => *',
-        [style([{ transform: 'translateX(-200%)' }])
+        [style([{ transform: 'translateX(-200%)', opacity: 0 }])
           , animate('0.5s 0.2s ease-out'
           )]
       )
     ]),
     trigger('ajouterSupprimerCompteAnim', [
       transition('* => void', animate('0.7s 0.2s ease-in',
-        style([{ transform: 'translateX(200%)' }, { backgroundColor: 'red' }])
+        style([{ transform: 'translateX(200%)', opacity: 0 }, { backgroundColor: 'red' }])
       )
       ),
       transition('void => *',
-        [style([{ transform: 'translateX(-200%)' }, { backgroundColor: 'green' }])
+        [style([{ transform: 'translateX(-200%)', opacity: 0 }, { backgroundColor: 'green' }])
           , animate('0.5s 0.2s ease-out'
           )]
       )
@@ -97,7 +97,7 @@ export class ComptesComponent implements OnInit {
     setTimeout(() => {
       this.afficherMUsrImg = true;
       this.afficherAUsrImg = false; //bech nsala7 bug
-    }, 450);
+    }, 510);
 
     this.id = user.code;
     this.userName = user.userName;
@@ -113,7 +113,7 @@ export class ComptesComponent implements OnInit {
     setTimeout(() => {
       this.afficherAUsrImg = true;
       this.afficherMUsrImg = false; //bech nsala7 bug
-    }, 450);
+    }, 510);
     this.userName = "";
     this.dNumber = "";
     this.permis = "";

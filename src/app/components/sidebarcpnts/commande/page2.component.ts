@@ -12,42 +12,48 @@ import { Component, OnInit } from '@angular/core';
       )
       ),
       transition('void => *',
-        [style([{ transform: 'translateX(-200%)' ,opacity:'0'}])
+        [style([{ transform: 'translateX(-200%)', opacity: '0' }])
           , animate('0.5s 0.2s ease-out'
           )]
       )
     ]),
     trigger('morDetailAnim', [
-      transition('* => void', animate('0.7s 0.3s ease-in',
-        style([{ transform: 'translateY(-110%)' }, {opacity:0 }])
-      )
+      transition(
+        '* => void', 
+        animate(
+          '0.4s 0.0s ease-in',
+          style([{ transform: 'translateY(-110%)' }, { opacity: 0 }])
+          )
       ),
       transition('void => *',
-        [style([{ transform: 'translateY(-110%)' ,opacity:0}])
-          , animate('0.5s 0.3s ease-out'
-          )]
+        [
+          style([{ transform: 'translateY(-110%)', opacity: 0 }]),
+          animate('0.4s 0.0s ease-out')
+        ]
       )
     ])
   ]
 })
 export class Page2Component implements OnInit {
-  moreDetailtest:any=[true]
-  detailValue:any=[true]
-  constructor() { 
+  moreDetailtest: any = [true]
+  detailValue: any = [true]
+  constructor() {
 
   }
 
   ngOnInit(): void {
   }
-  openDetail(index:any)
-  {
-    this.moreDetailtest[index]=!this.moreDetailtest[index]
-    if(!this.detailValue[index])
-    setTimeout(() => {
-      this.detailValue[index]=true;
-    }, 400);
-    if(this.detailValue[index])
-      this.detailValue[index]=!this.detailValue[index];
+  openDetail(index: any) {
+    if (!this.detailValue[index])
+      setTimeout(() => {
+        this.moreDetailtest[index] = !this.moreDetailtest[index]
+        this.detailValue[index] = true;
+      }, 25 );
+    else
+    {
+      this.detailValue[index] = false ;
+      this.moreDetailtest[index] = !this.moreDetailtest[index]
+    }
   }
 
 }

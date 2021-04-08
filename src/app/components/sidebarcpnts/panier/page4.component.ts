@@ -12,11 +12,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   animations: [
     trigger('lignePanierAnim', [
       transition('* => void', animate('0.7s 0.2s ease-in',
-        style([{ transform: 'translateX(200%)' }])
+        style([{ transform: 'translateX(200%)', opacity: 0 }])
       )
       ),
       transition('void => *',
-        [style([{ transform: 'translateX(-200%)' }])
+        [style([{ transform: 'translateX(-200%)', opacity: 0 }])
           , animate('0.5s 0.2s ease-out'
           )]
       )
