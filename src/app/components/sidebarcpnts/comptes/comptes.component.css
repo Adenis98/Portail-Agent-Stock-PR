@@ -65,7 +65,7 @@ h1
 
 div.tableHeader
 {
-  background-color: aliceblue;
+  background-color:#364547;
   border-radius: 20px;
   height: 50px;
   text-align: center;
@@ -106,6 +106,7 @@ div.containerPadding
 }
 div.composant
 {
+  background-color: white;
   margin-top: 10px;
   padding-top: 16px;
   font-weight: 500;
@@ -217,7 +218,7 @@ div.composant
 
 .formStyle
 {
-  background-color: aliceblue;
+  background-color: white;
   border-radius: 25px;
   width: 685px !important;
   min-width: fit-content;
