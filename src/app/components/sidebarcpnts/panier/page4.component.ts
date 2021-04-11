@@ -1,5 +1,4 @@
 import { PanierService } from './../../../services/Panier/panier.service';
-import { StockPrService } from 'src/app/services/stockPr/stock-pr.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -82,7 +81,10 @@ export class Page4Component implements OnInit {
   /* ****************delet ligne Panier****************** */
   deletLigne(ref: any, index: any) {
     this.panier.deletLignePanier(ref).subscribe(response => {
-      /*  console.log(response) */
+     this.panier.getPanierItem().subscribe((data:any)=>{
+      this.totHT = this.formatMoney(data.totHt)
+     })      
+     /*  this.totHT=this.totHT-((this.listePanier[index].pu)*this.listePanier[index].qte) */
       this.listePanier.splice(index, 1)
       this._snackBar.open(
         response + "✓", "", {

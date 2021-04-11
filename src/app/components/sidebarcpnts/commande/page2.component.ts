@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 
@@ -19,11 +20,11 @@ import { Component, OnInit } from '@angular/core';
     ]),
     trigger('morDetailAnim', [
       transition(
-        '* => void', 
+        '* => void',
         animate(
           '0.4s 0.0s ease-in',
           style([{ transform: 'translateY(-110%)' }, { opacity: 0 }])
-          )
+        )
       ),
       transition('void => *',
         [
@@ -37,7 +38,7 @@ import { Component, OnInit } from '@angular/core';
 export class Page2Component implements OnInit {
   moreDetailtest: any = [true]
   detailValue: any = [true]
-  constructor() {
+  constructor(private router:Router) {
 
   }
 
@@ -48,12 +49,14 @@ export class Page2Component implements OnInit {
       setTimeout(() => {
         this.moreDetailtest[index] = !this.moreDetailtest[index]
         this.detailValue[index] = true;
-      }, 25 );
-    else
-    {
-      this.detailValue[index] = false ;
+      }, 25);
+    else {
+      this.detailValue[index] = false;
       this.moreDetailtest[index] = !this.moreDetailtest[index]
     }
+  }
+  openListePr() {
+    this.router.navigate(['/page2',55])
   }
 
 }

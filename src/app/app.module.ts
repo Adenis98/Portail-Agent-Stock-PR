@@ -30,6 +30,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { DatePipe } from '@angular/common';
+import { DetailPageComponent } from './components/sidebarcpnts/commande/cmdDetail/detail-page/detail-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,6 +46,7 @@ import { DatePipe } from '@angular/common';
     DialogCommandeFerme,
     DialogDelete,
     Page6Component,
+    DetailPageComponent,
   ],
   imports: [
     BrowserModule,

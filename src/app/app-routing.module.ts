@@ -13,6 +13,7 @@ import { LoginGuardService } from './services/loginGuard/login-guard.service';
 import { ComptesComponent } from './components/sidebarcpnts/comptes/comptes.component';
 import { Page6Component } from './components/sidebarcpnts/stockLocal/page6.component';
 import { CompteGardService } from './services/compteGard/compte-gard.service';
+import { DetailPageComponent } from './components/sidebarcpnts/commande/cmdDetail/detail-page/detail-page.component';
 
 const routes: Routes = [
   { 
@@ -34,6 +35,7 @@ const routes: Routes = [
     component: Page2Component,
     canActivate: [AuthGuardService]
   },
+  
   {
     path: "page3",
     component: Page3Component,
@@ -59,10 +61,16 @@ const routes: Routes = [
     component: ComptesComponent,
     canActivate: [AuthGuardService,CompteGardService]
   },
+  {
+    path: 'page2/:ref',
+    component: DetailPageComponent,
+    canActivate: [AuthGuardService]
+  },
   { 
-    path: "**",
+    path: '**/',
     component: NotFoundComponent
   }
+ 
 ];
 
 @NgModule({

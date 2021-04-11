@@ -54,7 +54,7 @@
     <div *ngFor="let cmpt of listcompte" @ajouterSupprimerCompteAnim class="row tableHeader composant shadow">
         <div class="col"><span>{{cmpt.userName}}</span></div>
         <div class="col"><span>{{cmpt.dealer_Number}}</span></div>
-        <div class="col"><span>{{cmpt.permis}}</span></div>
+        <div class="col"><span>{{(cmpt.permis==1)?'Responsable':'Agent'}}</span></div>
         <div class="col"><span>{{cmpt.password}}</span></div>
         <div class="col btn2">
             <button *ngIf=" cmpt.userName!=currentUserName"  mat-mini-fab class="deleteBtn " color="primary" (click)="openDialog(cmpt)">

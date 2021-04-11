@@ -1,0 +1,67 @@
+<div class=" container containerPadding">
+
+    <div class="resultats">
+        Panier ({{this.listePanier.length}})
+    </div>
+    <div class="row tableHeader shadow">
+
+        <div class="col">
+            Réf Art
+        </div>
+        <div class="col-2">
+            Libellé
+        </div>
+        <div class="col">
+            PU
+        </div>
+        <div class="col">
+            Qté
+        </div>
+        <div class="col">
+            Total HT
+        </div>
+        <div class="col-2">
+            Type Cmd
+        </div>
+        <div class="btn2"></div>
+        <div class="col btn1">
+        </div>
+
+
+    </div>
+    <div class="row shadow tableHeader composant" [class]="(this.moreDetailtest[0])?'moreDetail':''" @lignePanierAnim>
+        <div class="col">
+            <div class="row">
+                <div class="col"><span>exemple</span></div>
+                <div class="col-2"><span>exemple</span></div>
+                <div class="col"><span>exemple</span></div>
+                <div class="col"><span>exemple</span></div>
+                <div class="col"><span>exemple</span></div>
+                <div class="col-2"><span>exemple</span>
+                </div>
+                <div class="btn2">
+                    <button mat-icon-button (click)="openDetail(0)">
+                        <mat-icon>{{(!moreDetailtest[0])?'keyboard_arrow_down':'keyboard_arrow_up'}}</mat-icon>
+                    </button>
+                </div>
+                <div class="col btn1">
+                </div>
+            </div>
+            <div class="row moreDetailContainer" [class]="(!detailValue[0])?'moreDetailContainerHide':''">
+                <div></div>
+                <div class="col">
+                    <span class="moreDetailLabel">VIN : </span>
+                    <span>exemple</span>
+                </div>
+                <div class="col">
+                    <span class="moreDetailLabel">N°OR : </span>
+                    <span>exemple</span>
+                </div>
+                <div class="col">
+                    <span class="moreDetailLabel">Nom Client : </span>
+                    <span>exemple</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

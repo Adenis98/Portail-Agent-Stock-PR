@@ -1,0 +1,174 @@
+div.tableHeader
+{
+  background-color: #364547;
+  border-radius: 20px;
+  height: 50px;
+  text-align: center;
+  width:95%;
+  min-width: 950px;
+  padding: 13px;
+  margin:auto;
+  color: #d6a217;
+  font-weight: 500;
+  font-size: 15px;
+  padding-top: 16px;
+  user-select: none;
+  transition: ease-in-out 0.3s
+}
+
+div.containerPadding
+{
+    padding-top: 50px;
+    margin: auto;
+    padding-bottom: 50px;
+    width: 95%;
+    height: 100%;
+    transition: 0.9s;
+}
+
+div.composant
+{
+  background-color: white;
+  margin-top: 10px;
+  color: #415959;
+  position: relative;
+  font-size: 13px;
+}
+.addPanier
+{
+  position: absolute;
+  top: -12px;
+  z-index: 10;
+  transition : 0.3s;
+}
+.btn1{
+  max-width: 50px;
+  margin-right: 10px;
+}
+
+.cploading{
+  margin-top: 10px  !important;
+  padding: 10px !important;
+  position: relative;
+}
+.resultats
+{
+    padding-top: 25px;
+    padding-bottom: 25px;
+    padding-left: 10px;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #415959;
+    width: 95%;
+    margin: auto;
+    font-weight: 500;
+}
+.commanderBtn
+{
+    background-color: #d6a217;
+    margin: auto;
+    margin-top:20px;
+    border-radius: 20px;
+    height: 45px;
+    width: 150px;
+    color: #415959;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+.inputQte
+{
+    color: #415959;
+    max-width: 50px;
+    background-color: transparent;
+    border: 0px transparent;
+    text-align: center;
+    outline: none;
+    padding: 0px;
+    height: 20px;
+    height: 40px;
+
+}
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    margin:0;
+}
+.qteSpiner
+{
+    background-color: #E3F2F1;
+    border-radius: 20px;
+    position: absolute;
+    height: 40px;
+    width: 100px;
+    top: -11px;
+    left: 25px;
+}
+.addBtn
+{
+    color: #d6a217;
+    position: absolute;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    font-size: 20px;
+    right: 0px;
+    height: 40px;
+    width: 30px !important;
+    min-width: unset !important;
+    padding: 0px !important;
+    background-color: transparent !important;
+}
+.removeBtn
+{
+    color: #d6a217;
+    position: absolute;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
+    border-bottom-right-radius: 0px;
+    border-top-right-radius: 0px;
+    font-size: 30px;
+    font-weight: 400;
+    left: 0px;
+    height: 40px;
+    width: 30px !important;
+    min-width: unset !important;
+    padding: 0px !important;
+    background-color: transparent !important;
+}
+
+.btn2
+{
+    position:absolute;
+    right: 45px;
+    top: -10px;
+}
+.moreDetail
+{
+    height: 100px !important;
+    transition: ease-in-out 0.3s;
+}
+.moreDetailContainer
+{
+    margin-top:17px;
+    border-top: rgb(177, 177, 177) 1px solid;
+    padding-top: 15px;
+}
+.moreDetailLabel
+{
+    color: #d6a217;
+    font-size:14px;
+}
+.moreDetailContainerHide
+{
+    display: none;
+    transition: ease-in-out 10s
+}
+
+.deleteBtn:hover{
+    color: #eb4d4b;
+}
+button{
+    z-index: 2;
+}
