@@ -98,7 +98,11 @@ div.composant
   color: #415959;
   position: relative;
   font-size: 13px;
-  cursor: pointer
+  
+}
+.clickRow
+{
+    cursor: pointer;
 }
 .addPanier
 {

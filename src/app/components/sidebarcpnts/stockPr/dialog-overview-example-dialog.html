@@ -1,8 +1,8 @@
 <form form #f="ngForm" ngForm class="formStyle" >
   <h1 mat-dialog-title>Remplissez les champs suivants</h1>
 <div mat-dialog-content>
-  <div class="row" style="height: 50px;">
-    <mat-radio-group required class="inputField" [(ngModel)]="selectedOption" aria-label="Select an option" name="selectedOption">
+  <div class="row" style="height: 50px;" >
+    <mat-radio-group required class="inputField" [(ngModel)]="selectedOption" aria-label="Select an option" name="selectedOption" [disabled]="disableInpute">
     <mat-radio-button  class="radioBtn1" value="0" (change)="hideInputV=false"> &nbsp;Commande normal</mat-radio-button>
     <mat-radio-button  class="radioBtn2" value="1"  (change)="hideInputV=true">&nbsp; Commande ferme</mat-radio-button>
 </mat-radio-group>

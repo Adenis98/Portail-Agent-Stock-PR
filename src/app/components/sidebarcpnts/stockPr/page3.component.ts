@@ -171,17 +171,28 @@ export class DialogCommandeFerme {
   vin = "";
   numOr = "";
   nomClient = "";
-  selectedOption: String = "";
+  selectedOption: String = ""; 
   hideInputV = false;
+  disableInpute=false;
   constructor(
     public dialogRef: MatDialogRef<DialogCommandeFerme>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-  ) { }
+  ) { 
+    if(data.stock==-1)
+    {
+     this.selectedOption ="1"
+      this.hideInputV=true;    
+      this.disableInpute=true;
+    }
+ 
+  }
 
   onNoClick(): void {
     this.dialogRef.close(null);
   }
+ 
   add(): void {
+   
     let json = {
       "vin": this.vin,
       "numOr": this.numOr,

@@ -102,16 +102,20 @@
         <div class="col btn1">
         </div>
     </div>
-    <div >
-        <div class="row shadow tableHeader composant" (click)="openListePr()" >
+    <div>
+        <div class="row shadow tableHeader composant" >
             <div class="col">
                 <div class="row">
-                    <div class="col-2"><span>Exemple</span></div>
-                    <div class="col"><span>Exemple</span></div>
-                    <div class="col"><span>Exemple</span></div>
-                    <div class="col-2"><span>Exemple</span></div>
-                    <div class="col"><span>Exemple</span></div>
-                    <div class="col-2"><span>Exemple</span></div>
+                    <div class="col" (click)="openListePr()">
+                        <div class="row clickRow">
+                            <div class="col-2"><span>Exemple</span></div>
+                            <div class="col"><span>Exemple</span></div>
+                            <div class="col"><span>Exemple</span></div>
+                            <div class="col-2"><span>Exemple</span></div>
+                            <div class="col"><span>Exemple</span></div>
+                            <div class="col-2"><span>Exemple</span></div>
+                        </div>
+                    </div>
                     <div class="btn2">
                         <button mat-icon-button (click)="openDetail(0)">
                             <mat-icon>{{(!moreDetailtest[0])?'keyboard_arrow_up':'keyboard_arrow_down'}}</mat-icon>
@@ -126,7 +130,7 @@
             </div>
         </div>
         <div *ngIf="!detailValue[0]" class="row moreDetailContainer shadow" @morDetailAnim>
-            <div class="container"  >
+            <div class="container">
                 <div class="row moreDetailHeader">
                     <div class="col">
                         Enregistrée
@@ -181,12 +185,12 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 </div>
 
 
-    <!-- <table cellspacing="0" cellpadding="0" class="table table-striped shadow">
+<!-- <table cellspacing="0" cellpadding="0" class="table table-striped shadow">
     <tr>
         <th class="align-middle">N°Cmd</th>
         <th class="align-middle">Date Cmd</th>
