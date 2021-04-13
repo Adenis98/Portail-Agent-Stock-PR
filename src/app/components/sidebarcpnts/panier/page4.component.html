@@ -48,7 +48,7 @@
                 </div>
                 <div class="col btn1">
                     <button mat-mini-fab class="addPanier deleteBtn" color="primary"
-                        (click)="deletLigne(listePanier[index].numLigne,index)">
+                        (click)="deletLigne(listePanier[index].numLigne,index);verifPanierVide()">
                         <mat-icon class="addPanierIcon deleteBtn">delete</mat-icon>
                     </button>
                 </div>
@@ -70,10 +70,10 @@
             </div>
         </div>
     </div>
-    <div class="inputData shadow">
+    <div  class="inputData shadow" >
         <form #f="ngForm" ngForm class="formStyle" (keydown.enter)="$event.preventDefault()">
             <div class="row">
-                <mat-form-field class="col-4">
+                <mat-form-field class="col-4" >
                     <mat-label>Type de Commande</mat-label>
                     <mat-select name="typeCommande" [(ngModel)]="typeCommande" required>
                         <mat-option value="1">Commande Ferme</mat-option>
@@ -111,8 +111,8 @@
                 <span class="col totalPrix">{{this.totHT}}</span>
             </div>
             <div class="row">
-                <button type="submit" class="commanderBtn" mat-raised-button [disabled]="!f.valid"
-                    (click)="commander()">
+                <button type="submit" class="commanderBtn" mat-raised-button [disabled]="!(f.valid && this.disableBlock)"
+                    (click)="commander();verifPanierVide()">
                     <span>Commander</span>
                 </button>
             </div>
