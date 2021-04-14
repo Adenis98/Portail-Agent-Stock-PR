@@ -14,7 +14,7 @@ div.containerPadding
     margin: auto;
     border-radius: 20px;
     height:240px;
-    background-color: aliceblue;
+    background-color: white;
     position: relative;
 }
 .hint{
@@ -100,10 +100,6 @@ div.composant
   font-size: 12px;
   
 }
-.clickRow
-{
-    cursor: pointer;
-}
 .addPanier
 {
   position: absolute;
@@ -125,7 +121,7 @@ div.composant
 }
 .moreDetailContainer
 {
-    background-color: white;
+    background-color: #415d63;
     border-radius: 20px;
     height: 90px;
     text-align: center;
@@ -140,6 +136,7 @@ div.composant
     user-select: none;
     transition: ease-in-out 0.3s;
     position: relative;
+    
 }
 .resultats
 {
@@ -154,7 +151,7 @@ div.composant
 }
 .moreDetailHeader
 {
-    color: #d6a217;
+    color: #ecdaa5;
     height: 30px;
     border-bottom: rgb(177, 177, 177) 1px solid;
 }
@@ -162,6 +159,7 @@ div.composant
 {
     font-size: 12px;
     background-color: transparent !important;
+    color: white !important;
 }
 .moreDetailContainerHide
 {
@@ -192,4 +190,8 @@ button{
     border-radius: 20px !important;
     width:100%;
     min-width: 950px;
+}
+.DetailHeader{
+    color: white !important;
+    background-color:#415d63 !important;
 }

@@ -1,8 +1,9 @@
 import { CommandeService } from './../../../services/commande/commande.service';
 import { Router } from '@angular/router';
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-page2',
@@ -57,7 +58,11 @@ export class Page2Component implements OnInit {
   /***commande variable***********/
   listeCmd: any = []
 
-  constructor(private router: Router, private commande: CommandeService, public datepipe: DatePipe) {
+
+  constructor(private router: Router,
+     private commande: CommandeService,
+     public datepipe: DatePipe,
+     public dialog: MatDialog,) {
 
   }
 
@@ -89,6 +94,7 @@ export class Page2Component implements OnInit {
   openListePr(ref:any) {
     this.router.navigate(['/page2',ref])
   }
+  /***************************get liste commande *********************************/
   getListeCmd() {
     if(this.listeCmd.length==0)
       this.loading=false;
@@ -100,6 +106,48 @@ export class Page2Component implements OnInit {
         this.detailValue.push(true);
       }
     })
+  }
+  /***********************cancel commande***************************/
+  openDialog(ref: any): void {
+    const dialogRef = this.dialog.open(DialogDelete, {
+      width: '500px',
+      height: '200px',
+      data: ref
+    });
+
+    dialogRef.afterClosed().subscribe((result: String) => {
+      if (result == "true") {
+        this.cancelCmd(ref);
+      } else if (result == "false") {
+
+      }
+    });
+  }
+
+  cancelCmd(ref:any){
+   this.commande.cancelCmd(ref).subscribe(response=>{
+    console.log(response)
+   })
+
+  }
+
+}
+@Component({
+  selector: 'dialog-overview-example-dialog',
+  templateUrl: 'dialog-overview-example-dialog.html',
+  styleUrls: ['dialog-overview-example-dialog.css']
+})
+export class DialogDelete {
+  
+  constructor(
+    public dialogRef: MatDialogRef<DialogDelete>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close("false");
+  }
+  cancel(): void {
+    this.dialogRef.close("true");
   }
 
 }
