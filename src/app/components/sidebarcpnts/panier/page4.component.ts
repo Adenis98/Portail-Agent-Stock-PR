@@ -96,7 +96,7 @@ export class Page4Component implements OnInit {
         this.qte.push(this.listePanier[i].qte)
       }
       this.verifPanierVide();
-      /*    console.log(this.listePanier[0].qte)  */
+      console.log(this.listePanier)
     })
   }
   /* ****************delet ligne Panier****************** */

@@ -1,42 +1,72 @@
+import { logging } from 'protractor';
+import { CommandeService } from './../../../../../services/commande/commande.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs/operators'
 @Component({
   selector: 'app-detail-page',
   templateUrl: './detail-page.component.html',
   styleUrls: ['./detail-page.component.css'],
   animations: [
-    trigger('lignePanierAnim', [
-      transition('* => void', animate('0.7s 0.2s ease-in',
-        style([{ transform: 'translateX(200%)', opacity: 0 }])
-      )
-      ),
-      transition('void => *',
-        [style([{ transform: 'translateX(-200%)', opacity: 0 }])
-          , animate('0.5s 0.2s ease-out'
-          )]
-      )
-    ]),
+    trigger(
+      'enterAnimation', [
+        transition(':enter', [
+          style({transform: 'translateX(100%)', opacity: 0}),
+          animate('200ms', style({transform: 'translateX(0)', opacity: 1, 'overflow-x': 'hidden'}))
+        ]),
+        transition(':leave', [
+          style({transform: 'translateX(0)', opacity: 1}),
+          animate('200ms', style({transform: 'translateX(100%)', opacity: 0}))
+        ])
+      ]
+    ),
   ]
 })
 export class DetailPageComponent implements OnInit {
 
-  moreDetailtest: boolean[] = new Array();
-  detailValue: boolean[] = new Array();
   listePanier: any = [];
-  constructor(private routerinfo:ActivatedRoute,) { }
+  refCmd:any
+  loading=false;
+  totalQte:Number=0;
+  totalQteL:Number=0;
+  totalQteF:Number=0;
+  totalHT:Number=0;
+  
+  constructor(private routerinfo:ActivatedRoute,private cmd:CommandeService,private router:Router) { 
+ 
+  }
 
   ngOnInit(): void {
     let ref = this.routerinfo.snapshot.paramMap.get('ref')
+    this.refCmd=ref
+    this.getLigneCmd()
   }
-  openDetail(index: any) {
-    this.moreDetailtest[index] = !this.moreDetailtest[index]
-    if (!this.detailValue[index])
-      setTimeout(() => {
-        this.detailValue[index] = true;
-      }, 400);
-    if (this.detailValue[index])
-      this.detailValue[index] = !this.detailValue[index];
+  precedent()
+  {
+    this.router.navigate(['/page2'])
+  }
+  formatMoney(x: any) {
+    const euro = new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: 'TND',
+      minimumFractionDigits: 3
+    })
+    return (euro.format(x));
+  }
+  getLigneCmd()
+  {
+    this.cmd.getCmdLine(this.refCmd).subscribe(response=>{
+      this.loading=false;
+      this.listePanier=response;
+      
+      for (let i = 0; i < this.listePanier.length; i++) {
+        this.totalQte=this.totalQte+ this.listePanier[i].qte;
+        this.totalQteL=this.totalQteL+this.listePanier[i].qteLivree;
+        this.totalQteF=this.totalQteF+this.listePanier[i].qteFacturee;
+        this.totalHT=this.totalHT+this.listePanier[i].totLigneHt;
+      }
+    })
+
   }
 }

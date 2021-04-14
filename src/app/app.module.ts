@@ -64,7 +64,7 @@ import { DetailPageComponent } from './components/sidebarcpnts/commande/cmdDetai
     MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatCheckboxModule
+    MatCheckboxModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

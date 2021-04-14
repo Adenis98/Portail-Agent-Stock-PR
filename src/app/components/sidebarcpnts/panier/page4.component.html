@@ -82,7 +82,7 @@
                 </mat-form-field>
                 <mat-form-field class="col-4">
                     <mat-label>Réf Commande</mat-label>
-                    <input required minlength="11" maxlength="30" matInput placeholder="Ex. 5F10991298" name="refCmd"
+                    <input required minlength="10" maxlength="10" matInput placeholder="Ex. 5F10991298" name="refCmd"
                         [(ngModel)]="refCommande" #refCmd="ngModel">
                     <mat-hint *ngIf="refCmd.touched&&!refCmd.valid" class="hint">
                         <mat-icon>error</mat-icon>

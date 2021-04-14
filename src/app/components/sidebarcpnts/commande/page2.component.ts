@@ -1,6 +1,8 @@
+import { CommandeService } from './../../../services/commande/commande.service';
 import { Router } from '@angular/router';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-page2',
@@ -38,11 +40,28 @@ import { Component, OnInit } from '@angular/core';
 export class Page2Component implements OnInit {
   moreDetailtest: any = [true]
   detailValue: any = [true]
-  constructor(private router:Router) {
+  loading=true;
+
+  /***commande variable***********/
+  listeCmd: any = []
+
+  constructor(private router: Router, private commande: CommandeService, public datepipe: DatePipe) {
 
   }
 
   ngOnInit(): void {
+    this.getListeCmd()
+  }
+  formatMoney(x: any) {
+    const euro = new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: 'TND',
+      minimumFractionDigits: 3
+    })
+    return (euro.format(x));
+  }
+  formatDate(date: any) {
+    return this.datepipe.transform(date, 'yyyy-MM-dd')
   }
   openDetail(index: any) {
     if (!this.detailValue[index])
@@ -55,8 +74,20 @@ export class Page2Component implements OnInit {
       this.moreDetailtest[index] = !this.moreDetailtest[index]
     }
   }
-  openListePr() {
-    this.router.navigate(['/page2',55])
+  openListePr(ref:any) {
+    this.router.navigate(['/page2',ref])
+  }
+  getListeCmd() {
+    if(this.listeCmd.length==0)
+      this.loading=false;
+    this.commande.getCmd().subscribe(response => {
+      this.listeCmd = response;
+      this.loading=false;
+      for (let i = 0; i < this.listeCmd.length; i++) {
+        this.moreDetailtest.push(true);
+        this.detailValue.push(true);
+      }
+    })
   }
 
 }
