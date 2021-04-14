@@ -95,8 +95,8 @@
             <td class="data " style="border-top-right-radius: 20px !important;
             border-bottom-right-radius: 20px !important;">{{this.formatMoney(listePanier[index].totLigneHt)}}</td>
         </tr>
-        <tr *ngIf="!loading" class="tableFooter" @enterAnimation>
-            <td colspan="6" class="footerLeft">Totale</td>
+        <tr *ngIf="!loading" class="tableFooter" >
+            <td colspan="6" class="footerLeft text-left">Totale</td>
             <td>{{this.totalQte}}</td>
             <td>{{this.totalQteL}}</td>
             <td>{{this.totalQteF}}</td>

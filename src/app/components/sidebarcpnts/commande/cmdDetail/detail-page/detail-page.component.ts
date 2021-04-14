@@ -12,12 +12,12 @@ import { filter } from 'rxjs/operators'
     trigger(
       'enterAnimation', [
         transition(':enter', [
-          style({transform: 'translateX(100%)', opacity: 0}),
-          animate('200ms', style({transform: 'translateX(0)', opacity: 1, 'overflow-x': 'hidden'}))
+          style({transform: 'translateX(20%)', opacity: 0}),
+          animate('350ms', style({transform: 'translateX(0)', opacity: 1, 'overflow-x': 'hidden'}))
         ]),
         transition(':leave', [
           style({transform: 'translateX(0)', opacity: 1}),
-          animate('200ms', style({transform: 'translateX(100%)', opacity: 0}))
+          animate('500ms', style({transform: 'translateX(-100%)', opacity: 0}))
         ])
       ]
     ),
