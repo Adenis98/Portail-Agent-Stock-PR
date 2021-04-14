@@ -112,7 +112,7 @@ div.composant
   transition : 0.3s;
 }
 .addPanier:hover{
-  color:#d6a217;
+  color:#eb4d4b;
 }
 .btn1{
   max-width: 50px;
@@ -176,4 +176,20 @@ div.composant
 }
 button{
     z-index: 2;
+}
+.BtnInvisible
+{
+    position: absolute;
+    height: 50px;
+    text-align: center;
+    left: 2px;
+    top: -16px;
+    right: 2px;
+    z-index: 1;
+}
+.BtnIN
+{
+    border-radius: 20px !important;
+    width:100%;
+    min-width: 950px;
 }

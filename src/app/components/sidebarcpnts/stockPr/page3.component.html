@@ -6,7 +6,8 @@
                     <mat-label>Réf</mat-label>
                     <input [required]="!libelleExiste" minlength="8" maxlength="30" matInput
                         placeholder="Ex. 5F10991298" name="ref" [(ngModel)]="refPr" #ref="ngModel"
-                        (keydown.enter)="(ref.valid)?getStock():''">
+                        (keydown.enter)="(ref.valid)?getStock():''"
+                        oninput="this.value = this.value.toUpperCase()">
 
                     <mat-hint *ngIf="ref.touched&&!ref.valid" class="hint">
                         <mat-icon>error</mat-icon>
@@ -17,13 +18,17 @@
                     <mat-label>libellé</mat-label>
                     <textarea rows="1" matInput name="libelle" [(ngModel)]="libellePr" #libelle="ngModel"
                         (input)="verifLibelle()" (click)="verifLibelle()"
-                        (keydown.enter)="(libelleExiste)?getStock():''"></textarea>
+                        (keydown.enter)="(libelleExiste)?getStock():''"
+                        oninput="this.value = this.value.toUpperCase()"></textarea>
 
                 </mat-form-field>
             </div>
             <button type="submit" class="chercherBtn" mat-raised-button [disabled]="!f.valid"
                 (click)="getStock();this.refPr='';this.libellePr=''">
-                <span>Chercher</span>
+                <mat-icon aria-hidden="false"><span >
+                    manage_search
+                </span></mat-icon>
+                <span> Chercher</span>                
             </button>
         </form>
     </div>

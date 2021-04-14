@@ -91,10 +91,15 @@
         </div>
     </div>
     <div *ngFor="let item of listeCmd ;let index=index">
-        <div class="row shadow tableHeader composant">
+       
+        <div class="row shadow tableHeader composant" @enterAnimation>
+            
             <div class="col">
+                <div class="row BtnInvisible" (click)="openListePr(listeCmd[index].numCde)">
+                    <button class="BtnIN col-12" mat-button>ㅤ</button>
+                </div>
                 <div class="row">
-                    <div class="col" (click)="openListePr(listeCmd[index].numCde)">
+                    <div class="col">
                         <div class="row clickRow">
                             <div class="col-2"><span>{{listeCmd[index].numCde}}</span></div>
                             <div class="col"><span>{{formatDate(listeCmd[index].date_Cmd)}}</span></div>
@@ -112,7 +117,7 @@
                     </div>
                     <div class="col btn1">
                         <button mat-mini-fab class="addPanier deleteBtn" color="primary">
-                            <mat-icon class="addPanierIcon deleteBtn">delete</mat-icon>
+                            <mat-icon class="addPanierIcon deleteBtn">block</mat-icon>
                         </button>
                     </div>
                 </div>

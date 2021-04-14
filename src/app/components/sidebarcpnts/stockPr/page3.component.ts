@@ -13,14 +13,14 @@ import { StockPrService } from 'src/app/services/stockPr/stock-pr.service';
   styleUrls: ['./page3.component.css'],
   animations: [
     trigger('consulterStockAnim', [
-      transition('* => void', animate('0.7s 0.2s ease-in',
-        style([{ transform: 'translateX(200%)' }])
+      transition('* => void', animate('0.2s 0.2s ease-in',
+        style([{ transform: 'translateX(200%)', opacity: 0 }])
       )
       ),
       transition('void => *',
-        [style([{ transform: 'translateX(-200%)' }])
-          , animate('0.5s 0.2s ease-out'
-          )]
+      [style([{ transform: 'translateX(-200%)', opacity: 0 }])
+      , animate('0.3s 0.2s ease-out'
+      )]
       )
     ]),
   ]
@@ -103,10 +103,11 @@ export class Page3Component implements OnInit {
     let dNbr = decodedToken["dealerNbr"];
     if (result) {
       vin = result.vin;
-      numOr = result.numOR;
+      numOr = result.numOr;
       nomClient = result.nomClient;
       typeCmd = result.type_Cmd;
     }
+    let pu:number=+pr.pu
     let body =
     {
       "editMode": 0,
@@ -115,7 +116,7 @@ export class Page3Component implements OnInit {
       "codeArt": pr.codeArt,
       "libelle": pr.libelle,
       "qte": this.qte,
-      "pu": parseInt(pr.pu),
+      "pu": pu,
       "type_Cmd": typeCmd,
       "vin": vin,
       "numInterv": numOr,

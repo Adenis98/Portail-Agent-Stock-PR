@@ -13,13 +13,13 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./page4.component.css'],
   animations: [
     trigger('lignePanierAnim', [
-      transition('* => void', animate('0.7s 0.2s ease-in',
-        style([{ transform: 'translateX(200%)', opacity: 0 }])
+      transition('* => void', animate('0.3s 0.2s ease-in',
+        style([{ transform: 'translateX(20%)', opacity: 0 }])
       )
       ),
       transition('void => *',
         [style([{ transform: 'translateX(-200%)', opacity: 0 }])
-          , animate('0.5s 0.2s ease-out'
+          , animate('0.8s 0.2s ease-in'
           )]
       )
     ]),

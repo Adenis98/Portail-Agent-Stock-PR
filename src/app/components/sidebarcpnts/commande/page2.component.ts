@@ -20,6 +20,18 @@ import { DatePipe } from '@angular/common';
           )]
       )
     ]),
+    trigger(
+      'enterAnimation', [
+        transition(':enter', [
+          style({transform: 'translateX(-20%)', opacity: 0}),
+          animate('400ms', style({transform: 'translateX(0)', opacity: 1, 'overflow-x': 'hidden'}))
+        ]),
+        transition(':leave', [
+          style({transform: 'translateX(0)', opacity: 1}),
+          animate('500ms', style({transform: 'translateX(-100%)', opacity: 0}))
+        ])
+      ]
+    ),
     trigger('morDetailAnim', [
       transition(
         '* => void',

@@ -161,11 +161,21 @@
 
             <div class="row btnAddContainer inputField">
                 <button *ngIf="afficherAUsrImg" type="submit" class="addBtn" mat-raised-button [disabled]="!f.valid" (click)="addUser()">
-                    <span *ngIf="!loadingBtn">Ajouter</span>
+                    <mat-icon aria-hidden="false">
+                        <span *ngIf="!loadingBtn" class="material-icons-round">
+                            person_add
+                            </span>
+                    </mat-icon>
+                    <span *ngIf="!loadingBtn"> &nbsp;&nbsp;Ajouter</span>
                     <mat-spinner *ngIf="loadingBtn" style="margin:auto" diameter="30"></mat-spinner>
                 </button>
                 <button *ngIf="afficherMUsrImg" type="submit" class="addBtn" mat-raised-button [disabled]="!f.valid" (click)="updateUser()">
-                    <span *ngIf="!loadingBtn">Modifier</span>
+                    <mat-icon aria-hidden="false">
+                        <span *ngIf="!loadingBtn" class="material-icons-round">
+                            manage_accounts
+                            </span>
+                    </mat-icon>
+                    <span *ngIf="!loadingBtn"> &nbsp;&nbsp;Modifier</span>
                     <mat-spinner *ngIf="loadingBtn" style="margin:auto" diameter="30"></mat-spinner>
                 </button>
             </div>

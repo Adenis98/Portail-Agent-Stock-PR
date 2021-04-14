@@ -83,7 +83,7 @@
                 <mat-form-field class="col-4">
                     <mat-label>Réf Commande</mat-label>
                     <input required minlength="10" maxlength="10" matInput placeholder="Ex. 5F10991298" name="refCmd"
-                        [(ngModel)]="refCommande" #refCmd="ngModel">
+                        [(ngModel)]="refCommande" #refCmd="ngModel" oninput="this.value = this.value.toUpperCase()">
                     <mat-hint *ngIf="refCmd.touched&&!refCmd.valid" class="hint">
                         <mat-icon>error</mat-icon>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez la réference de la commande
@@ -113,7 +113,12 @@
             <div class="row">
                 <button type="submit" class="commanderBtn" mat-raised-button [disabled]="!(f.valid && this.disableBlock)"
                     (click)="commander();verifPanierVide()">
-                    <span>Commander</span>
+                    <mat-icon aria-hidden="false">
+                        <span class="material-icons-round">
+                            playlist_add
+                            </span>
+                    </mat-icon>
+                    <span> Commander</span>
                 </button>
             </div>
         </form>
