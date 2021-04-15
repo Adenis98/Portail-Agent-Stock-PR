@@ -75,9 +75,6 @@ export class Page2Component implements OnInit {
     })
     return (euro.format(x));
   }
-  formatDate(date: any) {
-    return this.datepipe.transform(date, 'yyyy-MM-dd')
-  }
   openDetail(index: any) {
 
     for (let i = 0; i < this.listeCmd.length; i++) {

@@ -102,10 +102,9 @@
                     <div class="col">
                         <div class="row">
                             <div class="col-2"><span>{{listeCmd[index].numCde}}</span></div>
-                            <div class="col"><span>{{formatDate(listeCmd[index].date_Cmd)}}</span></div>
+                            <div class="col"><span>{{listeCmd[index].date_Cmd| date :'dd/MM/yyyy'}}</span></div>
                             <div class="col"><span>{{listeCmd[index].heure_Cmd}}</span></div>
-                            <div class="col-2"><span>{{(listeCmd[index].type_Cmd==0)?'commande normale':'commande
-                                    ferme'}}</span></div>
+                            <div class="col-2"><span>{{(listeCmd[index].type_Cmd==0)?'commande normale':'commande ferme'}}</span></div>
                             <div class="col"><span>{{listeCmd[index].ref_Cmd}}</span></div>
                             <div class="col-2"><span>{{this.formatMoney(listeCmd[index].totHt)}}</span></div>
                         </div>
@@ -153,25 +152,25 @@
                 </div>
                 <div class="row composant composantMore">
                     <div class="col">
-                        <span>{{listeCmd[index].enregistree}}</span>
+                        <mat-icon>{{(listeCmd[index].enregistree==1)?'task_alt':'highlight_off'}}</mat-icon>
                     </div>
                     <div class="col-2">
                         <span>{{listeCmd[index].ref_Enregistrement}}</span>
                     </div>
                     <div class="col-2">
-                        <span>{{formatDate(listeCmd[index].date_Enregistrement)}}</span>
+                        <span>{{listeCmd[index].date_Enregistrement| date :'dd/MM/yyyy'}}</span>
                     </div>
                     <div class="col">
                         <span>{{(listeCmd[index].livree)?'Part.Liv':'Non.Liv'}}</span>
                     </div>
                     <div class="col">
-                        <span>{{formatDate(listeCmd[index].date_Liv_S)}}</span>
+                        <span>{{ listeCmd[index].date_Liv_S | date :'dd/MM/yyyy'}}</span>
                     </div>
                     <div class="col">
                         <span>{{(listeCmd[index].facturee)?'Part.Fact':'Non.Fact'}}</span>
                     </div>
                     <div class="col">
-                        <span>{{formatDate(listeCmd[index].date_Facture)}}</span>
+                        <span>{{ listeCmd[index].date_Facture| date :'dd/MM/yyyy'}}</span>
                     </div>
                     <div class="col">
                         <span>{{ this.formatMoney(listeCmd[index].montant_Facture)}}</span>

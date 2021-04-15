@@ -7,7 +7,7 @@
             <span class="labelInfo">{{(this.listCmd.enregistree==0)?'Commande Normal':'Commande Ferme'}} </span>
         </div>
         <div class="col">
-            <span class="labelInfo"> {{formatDate(this.listCmd.date_Creation)}} </span>
+            <span class="labelInfo">{{this.listCmd.date_Creation| date :'dd/MM/yyyy'}} </span>
         </div>
     </div>
     <div class="row m-auto" style="width:90%">
@@ -17,8 +17,9 @@
             </div>
             <span class="boxData">{{(this.listCmd.enregistree==1)?'Enregistrée':'Non Enregistrée'}}</span>
             <div class="row boxFooter">
-                <span class="col">Réf:{{this.listCmd.ref_Enregistrement}}</span>
-                <span class="col">{{formatDate(this.listCmd.date_Enregistrement)}}</span>
+                <div *ngIf="this.listCmd.enregistree==0" >ㅤ</div>
+                <span *ngIf="this.listCmd.enregistree==1" class="col">Réf:{{this.listCmd.ref_Enregistrement}}</span>
+                <span *ngIf="this.listCmd.enregistree==1" class="col">{{this.listCmd.date_Enregistrement| date :'dd/MM/yyyy'}}</span>
             </div>
         </div>
         <div class="col secondBox shadow">
@@ -27,8 +28,9 @@
             </div>
             <span class="boxData">{{(this.listCmd.livree==1)?'Livrée':'Non Livrée'}}</span>
             <div class="row boxFooter">
-                <span class="col">255ADLF5</span>
-                <span class="col">{{formatDate(this.listCmd.date_Liv)}}</span>
+                <div *ngIf="this.listCmd.livree==0" >ㅤ</div>
+                <span *ngIf="this.listCmd.livree==1" class="col">{{this.listCmd.date_Liv_S| date :'dd/MM/yyyy'}}</span>
+                <span *ngIf="this.listCmd.livree==1"  class="col">{{this.listCmd.date_Liv| date :'dd/MM/yyyy'}}</span>
             </div>
         </div>
         <div class="col thirdBox shadow">
@@ -36,9 +38,11 @@
                 <mat-icon class="icon">assignment_turned_in</mat-icon>
             </div>
             <span class="boxData">{{(this.listCmd.facturee==1)?'Facturée':'Non Facturée'}}</span>
+            <div *ngIf="this.listCmd.facturee==1">{{this.formatMoney(this.listCmd.montant_Facture)}}</div>
             <div class="row boxFooter">
-                <span class="col">N°{{this.listCmd.n_Facture}}</span>
-                <span class="col">{{formatDate(this.listCmd.date_Facture)}}</span>
+                <div *ngIf="this.listCmd.facturee==0" >ㅤ</div>
+                <span *ngIf="this.listCmd.facturee==1" class="col">N°{{this.listCmd.n_Facture}}</span>
+                <span *ngIf="this.listCmd.facturee==1"  class="col">{{this.listCmd.date_Facture| date :'dd/MM/yyyy'}}</span>
             </div>
         </div>
     </div>
@@ -78,7 +82,7 @@
                 <td>{{this.totalQteL}}</td>
                 <td>{{this.totalQteF}}</td>
                 <td></td>
-                <td class="footerRigth">{{this.formatMoney(totalHT)}}</td>
+                <td class="footerRigth">{{this.formatMoney(listCmd.totHt)}}</td>
             </tr>
             <tr *ngIf="loading" @enterAnimation>
                 <td colspan="11">

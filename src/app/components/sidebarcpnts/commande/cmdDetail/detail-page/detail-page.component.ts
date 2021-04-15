@@ -28,7 +28,6 @@ export class DetailPageComponent implements OnInit {
   totalQte: Number = 0;
   totalQteL: Number = 0;
   totalQteF: Number = 0;
-  totalHT: Number = 0;
   listCmd: any = [];
   constructor(private routerinfo: ActivatedRoute,
      private cmd: CommandeService,
@@ -66,7 +65,6 @@ export class DetailPageComponent implements OnInit {
         this.totalQte = this.totalQte + this.listePanier[i].qte;
         this.totalQteL = this.totalQteL + this.listePanier[i].qteLivree;
         this.totalQteF = this.totalQteF + this.listePanier[i].qteFacturee;
-        this.totalHT = this.totalHT + this.listePanier[i].totLigneHt;
       }
     })
   }
