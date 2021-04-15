@@ -1,94 +1,93 @@
 <div class="pageContainer">
-    <div class="divInfo shadow">
-        <div class="row">
-            <div class="col">
-                <span class="lableInfo">AK59DIA55 </span>
-            </div>
-            <div class="col">
-                <span class="lableInfo">Commande Normal </span>
-            </div>
-            <div class="col">
-                <span class="lableInfo"> 06/07/1998 </span>
-            </div>
-
-
+    <div class="row divInfo shadow">
+        <div class="col">
+            <span class="labelInfo">AK59DIA55 </span>
         </div>
-        <div class="row">
-            <div class="col firstBox shadow">
-                <div>
-                    <mat-icon class="icon1">save</mat-icon>
-                </div>
-                <span class="boxData">Non Enregistrée</span>
-                <div class="row boxFooter">
-                    <span class="col">255ADLF5</span>
-                    <span class="col">22/02/2021</span>
-                </div>
+        <div class="col">
+            <span class="labelInfo">Commande Normal </span>
+        </div>
+        <div class="col">
+            <span class="labelInfo"> 06/07/1998 </span>
+        </div>
+    </div>
+    <div class="row m-auto" style="width:90%">
+        <div class="col firstBox shadow">
+            <div>
+                <mat-icon class="icon icon1">save</mat-icon>
             </div>
-            <div class="col secondBox shadow">
-                <div>
-                    <mat-icon class="icon1">save</mat-icon>
-                </div>
-                <span class="boxData">Non Enregistrée</span>
-                <div class="row boxFooter">
-                    <span class="col">255ADLF5</span>
-                    <span class="col">22/02/2021</span>
-                </div>
+            <span class="boxData">Enregistrée</span>
+            <div class="row boxFooter">
+                <span class="col">255ADLF5</span>
+                <span class="col">22/02/2021</span>
             </div>
-            <div class="col thirdBox shadow">
-                <div>
-                    <mat-icon class="icon1">save</mat-icon>
-                </div>
-                <span class="boxData">Non Enregistrée</span>
-                <div class="row boxFooter">
-                    <span class="col">255ADLF5</span>
-                    <span class="col">22/02/2021</span>
-                </div>
+        </div>
+        <div class="col secondBox shadow">
+            <div>
+                <mat-icon class="icon icon2"> local_shipping</mat-icon>
+            </div>
+            <span class="boxData">Livrée</span>
+            <div class="row boxFooter">
+                <span class="col">255ADLF5</span>
+                <span class="col">22/02/2021</span>
+            </div>
+        </div>
+        <div class="col thirdBox shadow">
+            <div>
+                <mat-icon class="icon icon3">assignment_turned_in</mat-icon>
+            </div>
+            <span class="boxData">Facturée</span>
+            <div class="row boxFooter">
+                <span class="col">255ADLF5</span>
+                <span class="col">22/02/2021</span>
             </div>
         </div>
     </div>
-    <table cellspacing="0" cellpadding="0" class="table table-striped shadow">
-        <tr>
-            <th class="tableHeaderleft">Ligne</th>
-            <th>Réf Art</th>
-            <th>libelle</th>
-            <th>VIN</th>
-            <th>N°Or</th>
-            <th>Nom Client</th>
-            <th>Qte</th>
-            <th>Qte livreé</th>
-            <th>Qte Fact</th>
-            <th>PU</th>
-            <th class="tableHeaderRighte">Total HT</th>
-        </tr>
-        <tr class="tableData" *ngFor="let item of listePanier ;let index=index" @enterAnimation>
-            <td style="border-top-left-radius: 20px !important;
-            border-bottom-left-radius: 20px !important;" class="data">{{index+1}}</td>
-            <td class="data">{{listePanier[index].codeArt}}</td>
-            <td class="data">{{listePanier[index].libelle}}</td>
-            <td class="data">{{listePanier[index].vin}}</td>
-            <td class="data">{{listePanier[index].numInterv}}</td>
-            <td class="data">{{listePanier[index].nomClient}}</td>
-            <td class="data">{{listePanier[index].qte}}</td>
-            <td class="data">{{listePanier[index].qteLivree}}</td>
-            <td class="data">{{listePanier[index].qteFacturee}}</td>
-            <td class="data">{{this.formatMoney(listePanier[index].pu)}}</td>
-            <td class="data " style="border-top-right-radius: 20px !important;
-            border-bottom-right-radius: 20px !important;">{{this.formatMoney(listePanier[index].totLigneHt)}}</td>
-        </tr>
-        <tr *ngIf="!loading" class="tableFooter">
-            <td colspan="6" class="footerLeft text-left">Totale</td>
-            <td>{{this.totalQte}}</td>
-            <td>{{this.totalQteL}}</td>
-            <td>{{this.totalQteF}}</td>
-            <td></td>
-            <td class="footerRigth">{{this.formatMoney(totalHT)}}</td>
-        </tr>
-        <tr *ngIf="loading" @enterAnimation>
-            <td colspan="11">
-                <mat-spinner style="margin:auto" diameter="30"></mat-spinner>
-            </td>
-        </tr>
-    </table>
+
+        <table cellspacing="0" cellpadding="0" class="table table-striped shadow">
+            <tr>
+                <th class="tableHeaderleft">Ligne</th>
+                <th>Réf Art</th>
+                <th>libelle</th>
+                <th>VIN</th>
+                <th>N°Or</th>
+                <th>Nom Client</th>
+                <th>Qte</th>
+                <th>Qte livreé</th>
+                <th>Qte Fact</th>
+                <th>PU</th>
+                <th class="tableHeaderRighte">Total HT</th>
+            </tr>
+            <tr class="tableData" *ngFor="let item of listePanier ;let index=index" @enterAnimation>
+                <td style="border-top-left-radius: 20px !important;
+                border-bottom-left-radius: 20px !important;" class="data">{{index+1}}</td>
+                <td class="data">{{listePanier[index].codeArt}}</td>
+                <td class="data">{{listePanier[index].libelle}}</td>
+                <td class="data">{{listePanier[index].vin}}</td>
+                <td class="data">{{listePanier[index].numInterv}}</td>
+                <td class="data">{{listePanier[index].nomClient}}</td>
+                <td class="data">{{listePanier[index].qte}}</td>
+                <td class="data">{{listePanier[index].qteLivree}}</td>
+                <td class="data">{{listePanier[index].qteFacturee}}</td>
+                <td class="data">{{this.formatMoney(listePanier[index].pu)}}</td>
+                <td class="data " style="border-top-right-radius: 20px !important;
+                border-bottom-right-radius: 20px !important;">{{this.formatMoney(listePanier[index].totLigneHt)}}</td>
+            </tr>
+            <tr *ngIf="!loading" class="tableFooter">
+                <td colspan="6" class="footerLeft text-left">Totale</td>
+                <td>{{this.totalQte}}</td>
+                <td>{{this.totalQteL}}</td>
+                <td>{{this.totalQteF}}</td>
+                <td></td>
+                <td class="footerRigth">{{this.formatMoney(totalHT)}}</td>
+            </tr>
+            <tr *ngIf="loading" @enterAnimation>
+                <td colspan="11">
+                    <mat-spinner style="margin:auto" diameter="30"></mat-spinner>
+                </td>
+            </tr>
+        </table>
+
+    
     <div>
         <button type="submit" class="backBtn" mat-raised-button (click)="precedent()">
             <span>Precedent</span>

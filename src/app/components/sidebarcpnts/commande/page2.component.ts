@@ -26,11 +26,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
       'enterAnimation', [
       transition(':enter', [
         style({ transform: 'translateX(-20%)', opacity: 0 }),
-        animate('400ms', style({ transform: 'translateX(0)', opacity: 1, 'overflow-x': 'hidden' }))
-      ]),
-      transition(':leave', [
-        style({ transform: 'translateX(0)', opacity: 1 }),
-        animate('500ms', style({ transform: 'translateX(-100%)', opacity: 0 }))
+        animate('0.3s', style({ transform: 'translateX(0)', opacity: 1, 'overflow-x': 'hidden' }))
       ])
     ]
     ),
@@ -38,14 +34,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
       transition(
         '* => void',
         animate(
-          '0.4s 0.0s ease-in',
+          '0.3s 0.0s ease-in',
           style([{ transform: 'translateY(-110%)' }, { opacity: 0 }])
         )
       ),
       transition('void => *',
         [
           style([{ transform: 'translateY(-110%)', opacity: 0 }]),
-          animate('0.4s 0.0s ease-out')
+          animate('0.3s 0.0s ease-out')
         ]
       )
     ])

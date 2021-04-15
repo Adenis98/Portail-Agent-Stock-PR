@@ -14,12 +14,12 @@ import { DatePipe } from '@angular/common';
   animations: [
     trigger('lignePanierAnim', [
       transition('* => void', animate('0.3s 0.2s ease-in',
-        style([{ transform: 'translateX(20%)', opacity: 0 }])
+        style([{ transform: 'translateX(50%)', opacity: 0 }])
       )
       ),
       transition('void => *',
-        [style([{ transform: 'translateX(-200%)', opacity: 0 }])
-          , animate('0.8s 0.2s ease-in'
+        [style([{ transform: 'translateX(-50%)', opacity: 0 }])
+          , animate('0.3s 0.2s ease-in'
           )]
       )
     ]),

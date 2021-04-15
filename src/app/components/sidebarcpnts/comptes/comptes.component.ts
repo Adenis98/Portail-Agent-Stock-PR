@@ -14,24 +14,24 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   styleUrls: ['./comptes.component.css'],
   animations: [
     trigger('ajouterModifierAnim', [
-      transition('* => void', animate('0.7s 0.2s ease-in',
-        style([{ transform: 'translateX(200%)' , opacity: 0}])
+      transition('* => void', animate('0.3s 0.2s ease-in',
+        style([{ transform: 'translateX(50%)' , opacity: 0}])
       )
       ),
       transition('void => *',
-        [style([{ transform: 'translateX(-200%)', opacity: 0 }])
-          , animate('0.5s 0.2s ease-out'
+        [style([{ transform: 'translateX(-30%)', opacity: 0 }])
+          , animate('0.3s 0.2s ease-out'
           )]
       )
     ]),
     trigger('ajouterSupprimerCompteAnim', [
-      transition('* => void', animate('0.7s 0.2s ease-in',
-        style([{ transform: 'translateX(200%)', opacity: 0 }, { backgroundColor: 'red' }])
+      transition('* => void', animate('0.3s 0.2s ease-in',
+        style([{ transform: 'translateX(50%)', opacity: 0 }, { backgroundColor: 'red' }])
       )
       ),
       transition('void => *',
-        [style([{ transform: 'translateX(-200%)', opacity: 0 }, { backgroundColor: 'green' }])
-          , animate('0.5s 0.2s ease-out'
+        [style([{ transform: 'translateX(-50%)', opacity: 0 }, { backgroundColor: 'green' }])
+          , animate('0.3s 0.2s ease-out'
           )]
       )
     ])

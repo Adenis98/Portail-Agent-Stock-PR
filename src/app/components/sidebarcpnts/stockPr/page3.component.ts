@@ -14,11 +14,11 @@ import { StockPrService } from 'src/app/services/stockPr/stock-pr.service';
   animations: [
     trigger('consulterStockAnim', [
       transition('* => void', animate('0.2s 0.2s ease-in',
-        style([{ transform: 'translateX(200%)', opacity: 0 }])
+        style([{ transform: 'translateX(50%)', opacity: 0 }])
       )
       ),
       transition('void => *',
-      [style([{ transform: 'translateX(-200%)', opacity: 0 }])
+      [style([{ transform: 'translateX(-30%)', opacity: 0 }])
       , animate('0.3s 0.2s ease-out'
       )]
       )
@@ -76,13 +76,12 @@ export class Page3Component implements OnInit {
       "codeArt": this.refPr,
       "libelle": this.libellePr
     }
-
     this.stock.getStockPr(body).subscribe(response => {
       this.loading = false;
       this.listOfPr = [];
       setTimeout(() => {
-        this.listOfPr = response;//bech nsala7 bug
-      }, 600);
+        this.listOfPr = response;
+      }, 200);
     }, (error) => {
       this.loading = false;
       this._snackBar.open(
