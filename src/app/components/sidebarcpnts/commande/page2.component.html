@@ -116,7 +116,7 @@
                         </button>
                     </div>
                     <div class="col btn1">
-                        <button mat-mini-fab class="addPanier deleteBtn" [color]="(!detailValue[index])?'':'primary'" (click)="openDialog(listeCmd[index].numCde)">
+                        <button *ngIf="listeCmd[index].annulee ==0" mat-mini-fab class="addPanier deleteBtn" [color]="(!detailValue[index])?'':'primary'" (click)="openDialog(listeCmd[index].numCde)">
                             <mat-icon class="addPanierIcon deleteBtn">block</mat-icon>
                         </button>
                     </div>

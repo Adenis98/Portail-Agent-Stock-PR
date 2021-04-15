@@ -31,8 +31,9 @@ export class CommandeService {
   }
   cancelCmd(ref:any)
   {
+    let body={}
     let url = "http://localhost:8080/commande/annuler/"+ref;
-    return this.http.get(url, { headers:this.headers_object })
+    return this.http.post(url, body,{ headers:this.headers_object})
   }
 }
 

@@ -38,14 +38,14 @@ export class DetailPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let ref = this.routerinfo.snapshot.paramMap.get('ref')
-    this.refCmd=ref
-    this.getLigneCmd()
+    let ref = this.routerinfo.snapshot.paramMap.get('ref');
+    this.refCmd=ref;
+    this.getLigneCmd();
   }
   precedent()
   {
-    this.router.navigate(['/page2'])
-  }
+    this.router.navigate(['/page2']);
+  };
   formatMoney(x: any) {
     const euro = new Intl.NumberFormat('fr-FR', {
       style: 'currency',

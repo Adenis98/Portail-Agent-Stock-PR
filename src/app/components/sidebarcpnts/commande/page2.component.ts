@@ -4,6 +4,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, Inject, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-page2',
@@ -23,15 +24,15 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
     ]),
     trigger(
       'enterAnimation', [
-        transition(':enter', [
-          style({transform: 'translateX(-20%)', opacity: 0}),
-          animate('400ms', style({transform: 'translateX(0)', opacity: 1, 'overflow-x': 'hidden'}))
-        ]),
-        transition(':leave', [
-          style({transform: 'translateX(0)', opacity: 1}),
-          animate('500ms', style({transform: 'translateX(-100%)', opacity: 0}))
-        ])
-      ]
+      transition(':enter', [
+        style({ transform: 'translateX(-20%)', opacity: 0 }),
+        animate('400ms', style({ transform: 'translateX(0)', opacity: 1, 'overflow-x': 'hidden' }))
+      ]),
+      transition(':leave', [
+        style({ transform: 'translateX(0)', opacity: 1 }),
+        animate('500ms', style({ transform: 'translateX(-100%)', opacity: 0 }))
+      ])
+    ]
     ),
     trigger('morDetailAnim', [
       transition(
@@ -53,16 +54,17 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 export class Page2Component implements OnInit {
   moreDetailtest: any = [true]
   detailValue: any = [true]
-  loading=true;
+  loading = true;
 
   /***commande variable***********/
   listeCmd: any = []
 
 
   constructor(private router: Router,
-     private commande: CommandeService,
-     public datepipe: DatePipe,
-     public dialog: MatDialog,) {
+    private commande: CommandeService,
+    public datepipe: DatePipe,
+    public dialog: MatDialog,
+    private _snackBar: MatSnackBar,) {
 
   }
 
@@ -81,26 +83,35 @@ export class Page2Component implements OnInit {
     return this.datepipe.transform(date, 'yyyy-MM-dd')
   }
   openDetail(index: any) {
-    if (!this.detailValue[index])
+
+    for (let i = 0; i < this.listeCmd.length; i++) {
+      if (i != index) {
+        this.moreDetailtest[i] = true;
+        this.detailValue[i] = true;
+      }
+    }
+    if (!this.detailValue[index]) {
       setTimeout(() => {
         this.moreDetailtest[index] = !this.moreDetailtest[index]
         this.detailValue[index] = true;
       }, 25);
+
+    }
     else {
       this.detailValue[index] = false;
-      this.moreDetailtest[index] = !this.moreDetailtest[index]
+      this.moreDetailtest[index] = !this.moreDetailtest[index];
     }
   }
-  openListePr(ref:any) {
-    this.router.navigate(['/page2',ref])
+  openListePr(ref: any) {
+    this.router.navigate(['/page2', ref])
   }
   /***************************get liste commande *********************************/
   getListeCmd() {
-    if(this.listeCmd.length==0)
-      this.loading=false;
+    if (this.listeCmd.length == 0)
+      this.loading = false;
     this.commande.getCmd().subscribe(response => {
       this.listeCmd = response;
-      this.loading=false;
+      this.loading = false;
       for (let i = 0; i < this.listeCmd.length; i++) {
         this.moreDetailtest.push(true);
         this.detailValue.push(true);
@@ -124,10 +135,18 @@ export class Page2Component implements OnInit {
     });
   }
 
-  cancelCmd(ref:any){
-   this.commande.cancelCmd(ref).subscribe(response=>{
-    console.log(response)
-   })
+  cancelCmd(ref: any) {
+    this.commande.cancelCmd(ref).subscribe(response => {
+      if (response == 1) {
+        this._snackBar.open(
+          "La commande «" + ref + "» a été annule avec succès ✓", "", {
+          verticalPosition: 'top',
+          panelClass: 'green-snackbar',
+          duration: 5000,
+        })
+        this.getListeCmd()
+      }
+    })
 
   }
 
@@ -138,7 +157,7 @@ export class Page2Component implements OnInit {
   styleUrls: ['dialog-overview-example-dialog.css']
 })
 export class DialogDelete {
-  
+
   constructor(
     public dialogRef: MatDialogRef<DialogDelete>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
@@ -149,5 +168,4 @@ export class DialogDelete {
   cancel(): void {
     this.dialogRef.close("true");
   }
-
 }
