@@ -75,10 +75,7 @@ h1
   font-size: 16px;
   letter-spacing: 2px;
 }
-.tableData
-{
-  transition: transform .2s
-}
+
 .tableData:hover
 {
   background-color: aliceblue;
@@ -95,7 +92,7 @@ h1
   height: 60px;
   border-radius: 20px;
   padding: 12px;
-  padding-top: 20px;
+  padding-top: 20px;  
 }
 .labelInfo
 {
@@ -114,6 +111,9 @@ h1
   margin-right: 7px ;
   margin-left: 7px;
   text-align: center;
+  color: white !important;
+  border: none !important;
+  cursor: pointer;
 }
 .secondBox
 {
@@ -125,6 +125,9 @@ h1
   margin-right: 7px ;
   margin-left: 7px;
   text-align: center;
+  color: white !important;
+  border: none !important;
+  cursor: pointer;
 }
 .thirdBox
 {
@@ -136,10 +139,12 @@ h1
   margin-left: 7px;
   text-align: center;
   background-color: #d49d23;
+  color: white !important;
+  border: none !important;
+  cursor: pointer;
 }
 .boxData{
   margin: auto;
-  color: white;
   font-size: 20px;
   text-align: center;
   letter-spacing: 3px;
@@ -147,18 +152,7 @@ h1
 .icon{
   margin-bottom: 18px;
 }
-.icon1
-{
-  color: #eaa916;
-}
-.icon2
-{
-  color: #435c5a;
-}
-.icon3
-{
-  color: #2b729c;
-}
+
 .boxFooter
 {
   position: absolute;
@@ -171,3 +165,54 @@ h1
   right: 20px;
   left: 20px;
 }
+/********hover animation*/
+.firstBox:hover
+{
+  background-color: aliceblue;
+  color: #364547 !important;
+  border: none !important;
+  transition: 0.3s ;
+  transform: scale(1.2);  
+  z-index: 10;
+}
+.firstBox:hover .boxFooter ,.firstBox
+{
+  color: #364547;
+  border-top:  #364547 solid 1px;
+  transition: 0.3s ;
+}
+
+
+.secondBox:hover
+{
+  background-color: aliceblue;
+  color: #364547 !important;
+  border: none !important;
+  transition: 0.3s ;
+  transform: scale(1.2);  
+  z-index: 10;
+}
+.secondBox:hover .boxFooter ,.secondBox
+{
+  color: #364547;
+  border-top:  #364547 solid 1px;
+  transition: 0.3s ;
+}
+
+.thirdBox:hover
+{
+  background-color: aliceblue;
+  color: #364547 !important;
+  border: none !important;
+  transition: 0.3s ;
+  transform: scale(1.2);  
+  z-index: 10;
+}
+.thirdBox:hover .boxFooter ,.thirdBox
+{
+  color: #364547;
+  border-top:  #364547 solid 1px;
+  transition: 0.3s ;
+}
+
+/******/

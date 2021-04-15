@@ -1,44 +1,44 @@
 <div class="pageContainer">
     <div class="row divInfo shadow">
         <div class="col">
-            <span class="labelInfo">AK59DIA55 </span>
+            <span class="labelInfo">{{this.listCmd.ref_Cmd}} </span>
         </div>
         <div class="col">
-            <span class="labelInfo">Commande Normal </span>
+            <span class="labelInfo">{{(this.listCmd.enregistree==0)?'Commande Normal':'Commande Ferme'}} </span>
         </div>
         <div class="col">
-            <span class="labelInfo"> 06/07/1998 </span>
+            <span class="labelInfo"> {{formatDate(this.listCmd.date_Creation)}} </span>
         </div>
     </div>
     <div class="row m-auto" style="width:90%">
         <div class="col firstBox shadow">
             <div>
-                <mat-icon class="icon icon1">save</mat-icon>
+                <mat-icon class="icon">save</mat-icon>
             </div>
-            <span class="boxData">Enregistrée</span>
+            <span class="boxData">{{(this.listCmd.enregistree==1)?'Enregistrée':'Non Enregistrée'}}</span>
             <div class="row boxFooter">
-                <span class="col">255ADLF5</span>
-                <span class="col">22/02/2021</span>
+                <span class="col">Réf:{{this.listCmd.ref_Enregistrement}}</span>
+                <span class="col">{{formatDate(this.listCmd.date_Enregistrement)}}</span>
             </div>
         </div>
         <div class="col secondBox shadow">
             <div>
-                <mat-icon class="icon icon2"> local_shipping</mat-icon>
+                <mat-icon class="icon"> local_shipping</mat-icon>
             </div>
-            <span class="boxData">Livrée</span>
+            <span class="boxData">{{(this.listCmd.livree==1)?'Livrée':'Non Livrée'}}</span>
             <div class="row boxFooter">
                 <span class="col">255ADLF5</span>
-                <span class="col">22/02/2021</span>
+                <span class="col">{{formatDate(this.listCmd.date_Liv)}}</span>
             </div>
         </div>
         <div class="col thirdBox shadow">
             <div>
-                <mat-icon class="icon icon3">assignment_turned_in</mat-icon>
+                <mat-icon class="icon">assignment_turned_in</mat-icon>
             </div>
-            <span class="boxData">Facturée</span>
+            <span class="boxData">{{(this.listCmd.facturee==1)?'Facturée':'Non Facturée'}}</span>
             <div class="row boxFooter">
-                <span class="col">255ADLF5</span>
-                <span class="col">22/02/2021</span>
+                <span class="col">N°{{this.listCmd.n_Facture}}</span>
+                <span class="col">{{formatDate(this.listCmd.date_Facture)}}</span>
             </div>
         </div>
     </div>

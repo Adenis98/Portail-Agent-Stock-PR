@@ -35,5 +35,10 @@ export class CommandeService {
     let url = "http://localhost:8080/commande/annuler/"+ref;
     return this.http.post(url, body,{ headers:this.headers_object})
   }
+  getCmdDetail(ref:any)
+  {
+    let url = "http://localhost:8080/commande/afficheCmdr/"+ref;
+    return this.http.get(url, { headers:this.headers_object })
+  }
 }
 
