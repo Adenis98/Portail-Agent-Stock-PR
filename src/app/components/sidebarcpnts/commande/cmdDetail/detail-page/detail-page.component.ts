@@ -10,11 +10,28 @@ import { DatePipe } from '@angular/common';
   templateUrl: './detail-page.component.html',
   styleUrls: ['./detail-page.component.css'],
   animations: [
+    
     trigger(
-      'enterAnimation', [
+      'enterAnimationEnrgBox', [
       transition(':enter', [
-        style({ transform: 'translateX(20%)', opacity: 0 }),
+        style({ transform: 'translateX(-40%)', opacity: 0 }),
         animate('0.3s', style({ transform: 'translateX(0)', opacity: 1, 'overflow-x': 'hidden' }))
+      ])
+    ]
+    ),
+    trigger(
+      'enterAnimationFactBox', [
+      transition(':enter', [
+        style({ transform: 'translateX(40%)', opacity: 0 }),
+        animate('0.3s', style({ transform: 'translateX(0)', opacity: 1, 'overflow-x': 'hidden' }))
+      ])
+    ]
+    ),
+    trigger(
+      'enterAnimationLivrBox', [
+      transition(':enter', [
+        style({ transform: 'translateY(-40%)', opacity: 0 }),
+        animate('0.3s', style({ transform: 'translateY(0)', opacity: 1, 'overflow-x': 'hidden' }))
       ])
     ]
     ),
@@ -40,7 +57,7 @@ export class DetailPageComponent implements OnInit {
     let ref = this.routerinfo.snapshot.paramMap.get('ref');
     this.refCmd = ref;
     this.getLigneCmd();
-    this.getCmd()
+    this.getCmd();
   }
   precedent() {
     this.router.navigate(['/page2']);
@@ -61,9 +78,7 @@ export class DetailPageComponent implements OnInit {
       this.loading = false;
       this.listePanier = response;
       if(this.listePanier.lenght==0)
-      {
         this.router.navigate(['/page2']);
-      }
       for (let i = 0; i < this.listePanier.length; i++) {
         this.totalQte = this.totalQte + this.listePanier[i].qte;
         this.totalQteL = this.totalQteL + this.listePanier[i].qteLivree;

@@ -78,6 +78,7 @@ h1
 
 .tableData:hover
 {
+  transition :all 0.3s;
   background-color: aliceblue;
   transform: scale(1.1);
   border-radius: 20px;

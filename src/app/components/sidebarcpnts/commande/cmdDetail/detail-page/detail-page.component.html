@@ -1,17 +1,17 @@
 <div class="pageContainer">
-    <div class="row divInfo shadow">
+    <div class="row divInfo shadow" @enterAnimationLivrBox>
         <div class="col">
             <span class="labelInfo">{{this.listCmd.ref_Cmd}} </span>
         </div>
         <div class="col">
-            <span class="labelInfo">{{(this.listCmd.enregistree==0)?'Commande Normal':'Commande Ferme'}} </span>
+            <span class="labelInfo">{{(this.listCmd.type_Cmd==0)?'Commande Normale':'Commande Ferme'}} </span>
         </div>
         <div class="col">
             <span class="labelInfo">{{this.listCmd.date_Creation| date :'dd/MM/yyyy'}} </span>
         </div>
     </div>
     <div class="row m-auto" style="width:90%">
-        <div class="col firstBox shadow">
+        <div class="col firstBox shadow" @enterAnimationEnrgBox>
             <div>
                 <mat-icon class="icon">save</mat-icon>
             </div>
@@ -22,7 +22,7 @@
                 <span *ngIf="this.listCmd.enregistree==1" class="col">{{this.listCmd.date_Enregistrement| date :'dd/MM/yyyy'}}</span>
             </div>
         </div>
-        <div class="col secondBox shadow">
+        <div class="col secondBox shadow" @enterAnimationLivrBox>
             <div>
                 <mat-icon class="icon"> local_shipping</mat-icon>
             </div>
@@ -33,7 +33,7 @@
                 <span *ngIf="this.listCmd.livree==1"  class="col">{{this.listCmd.date_Liv| date :'dd/MM/yyyy'}}</span>
             </div>
         </div>
-        <div class="col thirdBox shadow">
+        <div class="col thirdBox shadow" @enterAnimationFactBox>
             <div>
                 <mat-icon class="icon">assignment_turned_in</mat-icon>
             </div>
@@ -61,7 +61,7 @@
                 <th>PU</th>
                 <th class="tableHeaderRighte">Total HT</th>
             </tr>
-            <tr class="tableData" *ngFor="let item of listePanier ;let index=index" @enterAnimation>
+            <tr class="tableData" *ngFor="let item of listePanier ;let index=index" >
                 <td style="border-top-left-radius: 20px !important;
                 border-bottom-left-radius: 20px !important;" class="data">{{index+1}}</td>
                 <td class="data">{{listePanier[index].codeArt}}</td>
@@ -84,7 +84,7 @@
                 <td></td>
                 <td class="footerRigth">{{this.formatMoney(listCmd.totHt)}}</td>
             </tr>
-            <tr *ngIf="loading" @enterAnimation>
+            <tr *ngIf="loading" >
                 <td colspan="11">
                     <mat-spinner style="margin:auto" diameter="30"></mat-spinner>
                 </td>

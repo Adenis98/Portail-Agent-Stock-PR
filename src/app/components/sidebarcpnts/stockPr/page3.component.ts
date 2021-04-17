@@ -13,13 +13,20 @@ import { StockPrService } from 'src/app/services/stockPr/stock-pr.service';
   styleUrls: ['./page3.component.css'],
   animations: [
     trigger('consulterStockAnim', [
-      transition('* => void', animate('0.2s 0.2s ease-in',
-        style([{ transform: 'translateX(50%)', opacity: 0 }])
+      transition('* => void', animate('0.3s 0.2s ease-in',
+        style([{ transform: 'translateX(10%)', opacity: 0 }])
       )
       ),
       transition('void => *',
       [style([{ transform: 'translateX(-30%)', opacity: 0 }])
-      , animate('0.3s 0.2s ease-out'
+      , animate('0.4s 0.4s ease-out'
+      )]
+      )
+    ]),
+    trigger('chariotStock', [
+      transition('void => *',
+      [style([{ transform: 'translateX(-1500%)', opacity: 0 }])
+      , animate('3s 0.4s ease-out'
       )]
       )
     ]),
@@ -32,9 +39,6 @@ export class Page3Component implements OnInit {
   libellePr = "";
   listOfPr: any = [];
   libelleExiste = false;
-
-
-
 
   constructor(
     public dialog: MatDialog,

@@ -13,6 +13,7 @@ div.tableHeader
   font-size: 15px;
   padding-top: 16px;
   user-select: none;
+  position: relative ;
 }
 
 div.containerPadding
@@ -213,4 +214,11 @@ input::-webkit-outer-spin-button {
     left: 30px;
   }
 
+}
+
+.panierBgImage
+{
+  position: absolute;
+  top: -56px;
+  right: 20px;
 }
