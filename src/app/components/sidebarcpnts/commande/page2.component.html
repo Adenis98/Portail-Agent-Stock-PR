@@ -1,32 +1,32 @@
 <div class="container containerPadding">
     <div class="inputData shadow">
-        <form #f="ngForm" ngForm class="formStyle" (keydown.enter)="$event.preventDefault()">
+        <form #f="ngForm" ngForm class="formStyle">
             <div class="row">
                 <mat-form-field class="col-3">
                     <mat-label>Type de Commande</mat-label>
                     <mat-select name="typeCmd" [(ngModel)]="typeCmd">
-                        <mat-option ></mat-option>
+                        <mat-option value="2">Tous Les Commandes</mat-option>
                         <mat-option value="1">Commande Ferme</mat-option>
                         <mat-option value="0">Commande Normale</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field class="col-3">
+                <mat-form-field class="col-3" (keydown.enter)="filtre()">
                     <mat-label>N°Commande</mat-label>
-                    <input name="numCmd" [(ngModel)]="numCmd" maxlength="30" matInput placeholder="Ex. 5F10991298" name="refCmd">
+                    <input name="numCmd" [(ngModel)]="numCmd" maxlength="30" matInput placeholder="Ex. 5F10991298"
+                        name="refCmd">
                 </mat-form-field>
                 <mat-form-field class="col-3">
                     <mat-label>Réf Art</mat-label>
                     <input matInput placeholder="Ex. 5F10991298" name="refArt" [(ngModel)]="refArt">
                 </mat-form-field>
-                <section class="checkBoxAnnule col-3">
-                    <mat-checkbox> &nbsp; &nbsp;Annuleés</mat-checkbox>
-                </section>
 
+                <mat-checkbox class="checkBoxAnnule col-3" [(ngModel)]="isAnnuler" name="isAnnuler" value="1"> &nbsp;
+                    &nbsp;Annuleés</mat-checkbox>
             </div>
             <div class="row secondRow">
                 <mat-form-field class="col-3">
                     <mat-label>Statut Commande</mat-label>
-                    <mat-select name="statutCmd" [(ngModel)]="statutCmd" >
+                    <mat-select name="statutCmd" [(ngModel)]="statutCmd">
                         <mat-option value="0">commande Enregistrée</mat-option>
                         <mat-option value="1">commande Livrée</mat-option>
                         <mat-option value="1">commande Facturée</mat-option>
@@ -35,9 +35,9 @@
 
                 <mat-form-field class="datePicker col-3">
                     <mat-label>Choisir l'intervale</mat-label>
-                    <mat-date-range-input  [rangePicker]="rangePicker">
-                        <input  name="startDate" matStartDate placeholder="Date debit">
-                        <input  nam="endDate" matEndDate placeholder="Date Fin">
+                    <mat-date-range-input [rangePicker]="rangePicker">
+                        <input name="startDate" matStartDate placeholder="Date debit">
+                        <input nam="endDate" matEndDate placeholder="Date Fin">
                     </mat-date-range-input>
                     <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
                     <mat-date-range-picker #rangePicker>
@@ -50,16 +50,15 @@
 
                 <mat-form-field class="col-3">
                     <mat-label>VIN</mat-label>
-                    <input name="VIN" [(ngModel)]="VIN" minlength="17" maxlength="17"
-                        matInput placeholder="Ex.1HGBH41JXMN109186" 
-                        oninput="this.value = this.value.toUpperCase()">
+                    <input name="VIN" [(ngModel)]="VIN" minlength="17" maxlength="17" matInput
+                        placeholder="Ex.1HGBH41JXMN109186" oninput="this.value = this.value.toUpperCase()">
                 </mat-form-field>
                 <section class="checkBoxAnnule col-3">
                     <mat-checkbox> &nbsp; &nbsp;Selection</mat-checkbox>
                 </section>
             </div>
             <div class="row">
-                <button type="submit" class="commanderBtn" mat-raised-button (click)="filtre()"  >
+                <button type="submit" class="commanderBtn" mat-raised-button (click)="filtre()">
                     <span>Rechercher</span>
                 </button>
             </div>
@@ -93,9 +92,9 @@
         </div>
     </div>
     <div *ngFor="let item of listeCmd ;let index=index">
-       
-        <div class="row shadow tableHeader composant"  [class]="(!detailValue[index])?'DetailHeader':''" @enterAnimation>
-            
+
+        <div class="row shadow tableHeader composant" [class]="(!detailValue[index])?'DetailHeader':''" @enterAnimation>
+
             <div class="col">
                 <div class="row BtnInvisible" (click)="openListePr(listeCmd[index].numCde)">
                     <button class="BtnIN col-12" mat-button>ㅤ</button>
@@ -105,8 +104,9 @@
                         <div class="row">
                             <div class="col-2"><span>{{listeCmd[index].numCde}}</span></div>
                             <div class="col"><span>{{listeCmd[index].date_Cmd| date :'dd/MM/yyyy'}}</span></div>
-                            <div class="col"><span>{{listeCmd[index].heure_Cmd}}</span></div>
-                            <div class="col-2"><span>{{(listeCmd[index].type_Cmd==0)?'commande normale':'commande ferme'}}</span></div>
+                            <div class="col"><span>{{listeCmd[index].heure_Cmd| date :'hh:mm:ss'}}</span></div>
+                            <div class="col-2"><span>{{(listeCmd[index].type_Cmd==0)?'commande normale':'commande
+                                    ferme'}}</span></div>
                             <div class="col"><span>{{listeCmd[index].ref_Cmd}}</span></div>
                             <div class="col-2"><span>{{this.formatMoney(listeCmd[index].totHt)}}</span></div>
                         </div>
@@ -117,7 +117,8 @@
                         </button>
                     </div>
                     <div class="col btn1">
-                        <button *ngIf="listeCmd[index].annulee ==0" mat-mini-fab class="addPanier deleteBtn" [color]="(!detailValue[index])?'':'primary'" (click)="openDialog(listeCmd[index].numCde)">
+                        <button *ngIf="listeCmd[index].annulee ==0" mat-mini-fab class="addPanier deleteBtn"
+                            [color]="(!detailValue[index])?'':'primary'" (click)="openDialog(listeCmd[index].numCde)">
                             <mat-icon class="addPanierIcon deleteBtn">block</mat-icon>
                         </button>
                     </div>

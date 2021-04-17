@@ -107,6 +107,7 @@ export class Page2Component implements OnInit {
       this.loading = false;
     this.commande.getCmd().subscribe(response => {
       this.listeCmd = response;
+      this.listeCmd.reverse();
       this.loading = false;
       this.sauvgardListe = this.listeCmd;
       for (let i = 0; i < this.listeCmd.length; i++) {
@@ -153,35 +154,46 @@ export class Page2Component implements OnInit {
   statutCmd = "";
   refArt = "";
   VIN = "";
-  dateRnageCmd = ";"
+  dateRnageCmd = ""
+  isAnnuler:boolean=false;
+  
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
 
   filtre() {
     let listeCmdAux: any = [];
     this.listeCmd = this.sauvgardListe;
-    if (this.typeCmd.length || this.statutCmd.length || this.numCmd) {
+    if (this.typeCmd.length || this.statutCmd.length || this.numCmd || this.isAnnuler == true) {
+      if(this.typeCmd == '2')
+      { 
+        listeCmdAux = this.sauvgardListe;
+      }
       if (this.typeCmd == '0') {
         for (let i = 0; i < this.listeCmd.length; i++) {
           if (this.listeCmd[i].type_Cmd == 0) {
-            listeCmdAux.push(this.listeCmd[i])
-          }
-        }
-      }
+            listeCmdAux.push(this.listeCmd[i]);
+          };
+        };
+      };
       if (this.typeCmd == '1') {
         for (let i = 0; i < this.listeCmd.length; i++) {
           if (this.listeCmd[i].type_Cmd == 1) {
             listeCmdAux.push(this.listeCmd[i]);
-          }
-        }
-      }
-
+          };
+        };
+      };
+      
       if(this.numCmd.length)
-      {
+      { 
         if (listeCmdAux.length == 0) {
           for (let i = 0; i < this.listeCmd.length; i++) {
-            if (this.listeCmd[i].numCde == this.numCmd) {
+            let numCmd:string=""+this.listeCmd[i].numCde;
+            if (numCmd.includes(this.numCmd)) {
               listeCmdAux.push(this.listeCmd[i]);
             };
-          }
+          };
         }
         else {
           let aux:any = listeCmdAux;
@@ -190,12 +202,33 @@ export class Page2Component implements OnInit {
             let numCmd:string=""+aux[i].numCde;
             if (numCmd.includes(this.numCmd)) {
               listeCmdAux.push(aux[i]);
-            }
-          }
+            };
+          };
         };
-    
       }
-
+      if(this.isAnnuler==true)
+        {
+            if(listeCmdAux.length == 0)
+            {
+              this.listeCmd = this.sauvgardListe;
+              for (let i = 0; i < this.listeCmd.length; i++) {
+                let ann=this.listeCmd[i].annulee;
+                if (ann==1) {
+                  listeCmdAux.push(this.listeCmd[i]);
+                };
+              };
+            }
+            else
+            {
+              for (let i = 0; i < listeCmdAux.length; i++) {
+                let ann=listeCmdAux[i].annulee;
+                if (ann==0) {
+                  listeCmdAux.splice(i, 1);
+                };
+              };
+            }
+        }
+      console.log(this.dateRnageCmd)
      this.listeCmd = listeCmdAux;
     }
     
