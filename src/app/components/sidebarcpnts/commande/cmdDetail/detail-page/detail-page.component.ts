@@ -60,7 +60,10 @@ export class DetailPageComponent implements OnInit {
     this.cmd.getCmdLine(this.refCmd).subscribe(response => {
       this.loading = false;
       this.listePanier = response;
-
+      if(this.listePanier.lenght==0)
+      {
+        this.router.navigate(['/page2']);
+      }
       for (let i = 0; i < this.listePanier.length; i++) {
         this.totalQte = this.totalQte + this.listePanier[i].qte;
         this.totalQteL = this.totalQteL + this.listePanier[i].qteLivree;
