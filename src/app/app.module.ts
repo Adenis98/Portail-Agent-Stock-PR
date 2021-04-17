@@ -11,7 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DashboardComponent } from './components/sidebarcpnts/dashboard/dashboard.component';
-import { Page2Component } from './components/sidebarcpnts/commande/page2.component';
+import { DialogAnnuler, Page2Component } from './components/sidebarcpnts/commande/page2.component';
 import { Page3Component } from './components/sidebarcpnts/stockPr/page3.component';
 import { Page4Component } from './components/sidebarcpnts/panier/page4.component';
 import { Page5Component } from './components/sidebarcpnts/InterAgent/page5.component';
@@ -47,6 +47,7 @@ import { DetailPageComponent } from './components/sidebarcpnts/commande/cmdDetai
     DialogDelete,
     Page6Component,
     DetailPageComponent,
+    DialogAnnuler,
   ],
   imports: [
     BrowserModule,

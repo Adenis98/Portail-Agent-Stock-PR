@@ -118,7 +118,7 @@ export class Page2Component implements OnInit {
   }
   /***********************cancel commande***************************/
   openDialog(ref: any): void {
-    const dialogRef = this.dialog.open(DialogDelete, {
+    const dialogRef = this.dialog.open(DialogAnnuler, {
       width: '500px',
       height: '200px',
       data: ref
@@ -240,10 +240,10 @@ export class Page2Component implements OnInit {
   templateUrl: 'dialog-overview-example-dialog.html',
   styleUrls: ['dialog-overview-example-dialog.css']
 })
-export class DialogDelete {
+export class DialogAnnuler {
 
   constructor(
-    public dialogRef: MatDialogRef<DialogDelete>,
+    public dialogRef: MatDialogRef<DialogAnnuler>,
     @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
