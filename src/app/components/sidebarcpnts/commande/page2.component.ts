@@ -5,6 +5,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-page2',
@@ -12,7 +14,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./page2.component.css'],
   animations: [
     trigger('ligneCommandAnim', [
-      transition('* => void', animate('0.7s 0.2s ease-in',
+      transition('* => void', animate('0.5s 0.2s ease-in',
         style([{ transform: 'translateX(200%)' }])
       )
       ),
@@ -54,7 +56,7 @@ export class Page2Component implements OnInit {
 
   /***commande variable***********/
   listeCmd: any = []
-
+  sauvgardListe: any = []
 
   constructor(private router: Router,
     private commande: CommandeService,
@@ -66,6 +68,7 @@ export class Page2Component implements OnInit {
 
   ngOnInit(): void {
     this.getListeCmd()
+
   }
   formatMoney(x: any) {
     const euro = new Intl.NumberFormat('fr-FR', {
@@ -105,6 +108,7 @@ export class Page2Component implements OnInit {
     this.commande.getCmd().subscribe(response => {
       this.listeCmd = response;
       this.loading = false;
+      this.sauvgardListe = this.listeCmd;
       for (let i = 0; i < this.listeCmd.length; i++) {
         this.moreDetailtest.push(true);
         this.detailValue.push(true);
@@ -140,7 +144,61 @@ export class Page2Component implements OnInit {
         this.getListeCmd()
       }
     })
+  }
+  /****************filte methode*****************/
+  startDate = "";
+  endDate = "";
+  typeCmd = "";
+  numCmd = "";
+  statutCmd = "";
+  refArt = "";
+  VIN = "";
+  dateRnageCmd = ";"
 
+  filtre() {
+    let listeCmdAux: any = [];
+    this.listeCmd = this.sauvgardListe;
+    if (this.typeCmd.length || this.statutCmd.length || this.numCmd) {
+      if (this.typeCmd == '0') {
+        for (let i = 0; i < this.listeCmd.length; i++) {
+          if (this.listeCmd[i].type_Cmd == 0) {
+            listeCmdAux.push(this.listeCmd[i])
+          }
+        }
+      }
+      if (this.typeCmd == '1') {
+        for (let i = 0; i < this.listeCmd.length; i++) {
+          if (this.listeCmd[i].type_Cmd == 1) {
+            listeCmdAux.push(this.listeCmd[i]);
+          }
+        }
+      }
+
+      if(this.numCmd.length)
+      {
+        if (listeCmdAux.length == 0) {
+          for (let i = 0; i < this.listeCmd.length; i++) {
+            if (this.listeCmd[i].numCde == this.numCmd) {
+              listeCmdAux.push(this.listeCmd[i]);
+            };
+          }
+        }
+        else {
+          let aux:any = listeCmdAux;
+          listeCmdAux = [];
+          for (let i = 0; i < aux.length; i++) {
+            let numCmd:string=""+aux[i].numCde;
+            if (numCmd.includes(this.numCmd)) {
+              listeCmdAux.push(aux[i]);
+            }
+          }
+        };
+    
+      }
+
+     this.listeCmd = listeCmdAux;
+    }
+    
   }
 
 }
