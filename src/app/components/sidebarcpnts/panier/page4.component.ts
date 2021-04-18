@@ -32,6 +32,8 @@ export class Page4Component implements OnInit {
   moreDetailtest: boolean[] = new Array();
   detailValue: boolean[] = new Array();
   totHT: any;
+  loadingBtn=false;
+  loadingListe=false;
 
   /***********forminput*************/
   disableBlock = false;
@@ -86,7 +88,9 @@ export class Page4Component implements OnInit {
   }
   /* ************get panier item*************** */
   getPanier() {
+    this.loadingListe=true;
     this.panier.getPanierItem().subscribe((data: any) => {
+      this.loadingListe=false;
       this.listePanier = data.lignesPanier
       this.totHT = this.formatMoney(data.totHt)
 
@@ -96,7 +100,15 @@ export class Page4Component implements OnInit {
         this.qte.push(this.listePanier[i].qte)
       }
       this.verifPanierVide();
-      console.log(this.listePanier)
+      
+    },(error)=>{
+      this.loadingListe = false;
+      this._snackBar.open(
+        "" + error.error.message, "", {
+        verticalPosition: 'top',
+        panelClass: 'red-snackbar',
+        duration: 5000,
+      });
     })
   }
   /* ****************delet ligne Panier****************** */
@@ -125,6 +137,7 @@ export class Page4Component implements OnInit {
   };
   /************************passer une commande**********************/
   commander() {
+    this.loadingBtn=true
     let dateS = this.datepipe.transform(this.dateDeCommande, 'yyyy-MM-dd');
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(localStorage.jwt);
@@ -137,6 +150,7 @@ export class Page4Component implements OnInit {
       "dealerNumber": dNbr
     }
     this.commande.passerCmd(body).subscribe((response: any) => {
+      this.loadingBtn=false
       if (response == 1) {
         this._snackBar.open(
           "commande passer avec succès  ✓", "", {

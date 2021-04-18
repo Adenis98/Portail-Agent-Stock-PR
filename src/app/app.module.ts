@@ -16,7 +16,7 @@ import { Page3Component } from './components/sidebarcpnts/stockPr/page3.componen
 import { Page4Component } from './components/sidebarcpnts/panier/page4.component';
 import { Page5Component } from './components/sidebarcpnts/InterAgent/page5.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { NotFoundComponent } from './components/not-found/not-found.component';
@@ -31,6 +31,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { DatePipe } from '@angular/common';
 import { DetailPageComponent } from './components/sidebarcpnts/commande/cmdDetail/detail-page/detail-page.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,6 +67,7 @@ import { DetailPageComponent } from './components/sidebarcpnts/commande/cmdDetai
     MatDatepickerModule,
     MatNativeDateModule,
     MatCheckboxModule,
+    ReactiveFormsModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

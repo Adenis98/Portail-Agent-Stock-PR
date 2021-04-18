@@ -7,6 +7,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormControl, FormGroup } from '@angular/forms';
+import { range } from 'rxjs';
 
 @Component({
   selector: 'app-page2',
@@ -53,10 +54,12 @@ export class Page2Component implements OnInit {
   moreDetailtest: any = [true]
   detailValue: any = [true]
   loading = true;
-
+  loadingRecherchBtn=false;
+  
   /***commande variable***********/
   listeCmd: any = []
   sauvgardListe: any = []
+
 
   constructor(private router: Router,
     private commande: CommandeService,
@@ -103,8 +106,7 @@ export class Page2Component implements OnInit {
   }
   /***************************get liste commande *********************************/
   getListeCmd() {
-    if (this.listeCmd.length == 0)
-      this.loading = false;
+    this.loading=true;
     this.commande.getCmd().subscribe(response => {
       this.listeCmd = response;
       this.listeCmd.reverse();
@@ -114,13 +116,21 @@ export class Page2Component implements OnInit {
         this.moreDetailtest.push(true);
         this.detailValue.push(true);
       }
+    }, (error)=>{
+      this.loading = false;
+      this._snackBar.open(
+        "" + error.error.message, "", {
+        verticalPosition: 'top',
+        panelClass: 'red-snackbar',
+        duration: 5000,
+      });
     })
   }
   /***********************cancel commande***************************/
   openDialog(ref: any): void {
     const dialogRef = this.dialog.open(DialogAnnuler, {
       width: '500px',
-      height: '200px',
+      height: '190px',
       data: ref
     });
 
@@ -147,29 +157,90 @@ export class Page2Component implements OnInit {
     })
   }
   /****************filte methode*****************/
-  startDate = "";
-  endDate = "";
   typeCmd = "";
   numCmd = "";
   statutCmd = "";
   refArt = "";
   VIN = "";
-  dateRnageCmd = ""
-  isAnnuler:boolean=false;
-  
+  isAnnuler: boolean = false;
   range = new FormGroup({
     start: new FormControl(),
     end: new FormControl()
   });
+  cherchVin(vin:String,list:any)
+  {
+    this.loadingRecherchBtn=true;
+    let auxList:any=[]
+    this.commande.getVinCmd(vin).subscribe((response:any)=>{  
+      this.loading=false;
+      for(let i=0;i<response.length;i++)
+      {
+        for(let j=0;j<list.length;j++)
+        {
+          if(response[i]==list[j].numCmd)
+          {
+            auxList.push(list[i]);
+          }
+        }
+      }
+    })
+    return auxList;
+  }
+  cherchRefArt(refArt:String,list:any)
+  {
+    this.loadingRecherchBtn=true;
+    let auxList:any=[]
+    this.commande.getRefArtCmd(refArt).subscribe((response:any)=>{ 
+      this.loading=false; 
+      for(let i=0;i<response.length;i++)
+      {
+        for(let j=0;j<list.length;j++)
+        {
+          if(response[i]==list[j].numCmd)
+          {
+            auxList.push(list[i]);
+          }
+        }
+      }
+    })
+    return auxList;
+  }
+  verifDate(date: any) {
+    date = "" + this.datepipe.transform(date, 'yyyy-MM-dd');
+    let dateStart: any = "" + this.datepipe.transform(this.range.value.start, 'yyyy-MM-dd');
+    let dateEnd: any = "" + this.datepipe.transform(this.range.value.end, 'yyyy-MM-dd');
 
+    if (date.length && dateStart.length && dateEnd.length) {
+      let ddS = parseInt(dateStart.substr(8, 2));
+      let mmS = parseInt(dateStart.substr(5, 2));
+      let yyS = parseInt(dateStart.substr(0, 4));
+
+      let ddE = parseInt(dateEnd.substr(8, 2));
+      let mmE = parseInt(dateEnd.substr(5, 2));
+      let yyE = parseInt(dateEnd.substr(0, 4));
+
+      let dd = parseInt(date.substr(8, 2));
+      let mm = parseInt(date.substr(5, 2));
+      let yy = parseInt(date.substr(0, 4));
+
+      if ((ddS <= dd && mmS <= mm && yyS <= yy) && (ddE >= dd && mmE >= mm && yyE >= yy)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  /* datetest=new Date(2021, 3, 17) */
   filtre() {
     let listeCmdAux: any = [];
     this.listeCmd = this.sauvgardListe;
-    if (this.typeCmd.length || this.statutCmd.length || this.numCmd || this.isAnnuler == true) {
-      if(this.typeCmd == '2')
-      { 
+    if (this.typeCmd.length || this.statutCmd.length || this.numCmd || this.isAnnuler || (this.range.value.start&&this.range.value.end)) {
+
+      if (this.typeCmd == '2') {
+        this.getListeCmd
         listeCmdAux = this.sauvgardListe;
       }
+
       if (this.typeCmd == '0') {
         for (let i = 0; i < this.listeCmd.length; i++) {
           if (this.listeCmd[i].type_Cmd == 0) {
@@ -184,55 +255,79 @@ export class Page2Component implements OnInit {
           };
         };
       };
-      
-      if(this.numCmd.length)
-      { 
+
+      if (this.numCmd.length) {
         if (listeCmdAux.length == 0) {
           for (let i = 0; i < this.listeCmd.length; i++) {
-            let numCmd:string=""+this.listeCmd[i].numCde;
+            let numCmd: string = "" + this.listeCmd[i].numCde;
             if (numCmd.includes(this.numCmd)) {
               listeCmdAux.push(this.listeCmd[i]);
             };
           };
         }
         else {
-          let aux:any = listeCmdAux;
+          let aux: any = listeCmdAux;
           listeCmdAux = [];
           for (let i = 0; i < aux.length; i++) {
-            let numCmd:string=""+aux[i].numCde;
+            let numCmd: string = "" + aux[i].numCde;
             if (numCmd.includes(this.numCmd)) {
               listeCmdAux.push(aux[i]);
             };
           };
         };
       }
-      if(this.isAnnuler==true)
-        {
-            if(listeCmdAux.length == 0)
-            {
-              this.listeCmd = this.sauvgardListe;
-              for (let i = 0; i < this.listeCmd.length; i++) {
-                let ann=this.listeCmd[i].annulee;
-                if (ann==1) {
-                  listeCmdAux.push(this.listeCmd[i]);
-                };
-              };
-            }
-            else
-            {
-              for (let i = 0; i < listeCmdAux.length; i++) {
-                let ann=listeCmdAux[i].annulee;
-                if (ann==0) {
-                  listeCmdAux.splice(i, 1);
-                };
-              };
-            }
+
+      if (this.isAnnuler == true) {
+        if (listeCmdAux.length == 0) {
+          this.listeCmd = this.sauvgardListe;
+          for (let i = 0; i < this.listeCmd.length; i++) {
+            let ann = this.listeCmd[i].annulee;
+            if (ann == 1) {
+              listeCmdAux.push(this.listeCmd[i]);
+            };
+          };
         }
-      console.log(this.dateRnageCmd)
-     this.listeCmd = listeCmdAux;
+        else {
+          let aux = listeCmdAux
+          listeCmdAux = []
+          for (let i = 0; i < aux.length; i++) {
+            let ann = aux[i].annulee;
+            if (ann == 1) {
+              listeCmdAux.push(aux[i]);
+            };
+          };
+        }
+      }
+
+      if(this.range.value.start&&this.range.value.end)
+      {
+        if (listeCmdAux.length == 0) {
+          this.listeCmd = this.sauvgardListe
+          for (let i = 0; i < this.listeCmd.length; i++) {
+            let dc: any = new Date();
+            dc = this.listeCmd[i].date_Cmd;
+            if (this.verifDate(dc) == true) {
+              listeCmdAux.push(this.listeCmd[i]);
+            }
+          }
+        }
+        else {
+          let aux = listeCmdAux
+          listeCmdAux = [];
+          for (let i = 0; i < aux.length; i++) {
+            let dc: any = new Date();
+            dc = aux[i].date_Cmd;
+            if (this.verifDate(dc) == true) {
+              listeCmdAux.push(aux[i]);
+            }
+          }
+        }
+      }
     }
-    
+    this.listeCmd = listeCmdAux;
   }
+
+
 
 }
 @Component({

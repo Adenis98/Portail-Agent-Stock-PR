@@ -35,9 +35,9 @@
 
                 <mat-form-field class="datePicker col-3">
                     <mat-label>Choisir l'intervale</mat-label>
-                    <mat-date-range-input [rangePicker]="rangePicker">
-                        <input name="startDate" matStartDate placeholder="Date debit">
-                        <input nam="endDate" matEndDate placeholder="Date Fin">
+                    <mat-date-range-input [rangePicker]="rangePicker" [formGroup]="range">
+                        <input name="startDate" formControlName="start" matStartDate placeholder="Date debit">
+                        <input nam="endDate" formControlName="end"matEndDate placeholder="Date Fin">
                     </mat-date-range-input>
                     <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
                     <mat-date-range-picker #rangePicker>
@@ -59,7 +59,8 @@
             </div>
             <div class="row">
                 <button type="submit" class="commanderBtn" mat-raised-button (click)="filtre()">
-                    <span>Rechercher</span>
+                    <mat-spinner *ngIf="loadingRecherchBtn" style="margin:auto" diameter="30"></mat-spinner>
+                    <span *ngIf="!loadingRecherchBtn">Rechercher</span>
                 </button>
             </div>
         </form>

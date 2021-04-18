@@ -33,6 +33,7 @@ import { StockPrService } from 'src/app/services/stockPr/stock-pr.service';
   ]
 })
 export class Page3Component implements OnInit {
+  loadingListe=false;
   loading = false;
   qte = "1";
   refPr: String = "";
@@ -75,18 +76,21 @@ export class Page3Component implements OnInit {
   getStock() {
     this.qte = "1";
     this.loading = true;
+    this.loadingListe=true;
     let body =
     {
       "codeArt": this.refPr,
       "libelle": this.libellePr
     }
     this.stock.getStockPr(body).subscribe(response => {
+      this.loadingListe=false;
       this.loading = false;
       this.listOfPr = [];
       setTimeout(() => {
         this.listOfPr = response;
       }, 200);
     }, (error) => {
+      this.loadingListe=false;
       this.loading = false;
       this._snackBar.open(
         "" + error.error.message, "", {

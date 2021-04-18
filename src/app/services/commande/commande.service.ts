@@ -40,5 +40,15 @@ export class CommandeService {
     let url = "http://localhost:8080/commande/afficheCmdr/"+ref;
     return this.http.get(url, { headers:this.headers_object })
   }
+  getVinCmd(vin:any)
+  {
+    let url = "http://localhost:8080/commande/filtreVin/"+vin;
+    return this.http.get(url, { headers:this.headers_object })
+  }
+  getRefArtCmd(refArt:any)
+  {
+    let url = "http://localhost:8080/commande/filtreRefArt/"+refArt;
+    return this.http.get(url, { headers:this.headers_object })
+  }
 }
 

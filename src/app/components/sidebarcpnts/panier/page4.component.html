@@ -30,9 +30,12 @@
 
 
     </div>
-    <div *ngFor="let item of listePanier ;let index=index" class="row shadow tableHeader composant"
+    <div *ngIf="loadingListe" class="row shadow tableHeader composant"style="padding: 0px" >
+        <mat-spinner  style="margin:auto;" diameter="30"></mat-spinner>
+    </div>
+    <div  *ngFor="let item of listePanier ;let index=index"  class="row shadow tableHeader composant"
         [class]="(this.moreDetailtest[index])?'moreDetail':''" @lignePanierAnim>
-        <div class="col">
+        <div class="col" *ngIf="!loadingListe">
             <div class="row">
                 <div class="col"><span>{{listePanier[index].codeArt}}</span></div>
                 <div class="col-2"><span>{{listePanier[index].libelle}}</span></div>
@@ -113,12 +116,13 @@
             <div class="row">
                 <button type="submit" class="commanderBtn" mat-raised-button [disabled]="!(f.valid && this.disableBlock)"
                     (click)="commander();verifPanierVide()">
-                    <mat-icon aria-hidden="false">
+                    <mat-spinner *ngIf="loadingBtn" style="margin:auto" diameter="30"></mat-spinner>
+                    <mat-icon *ngIf="!loadingBtn" aria-hidden="false">
                         <span class="material-icons-round">
                             playlist_add
                             </span>
                     </mat-icon>
-                    <span> Commander</span>
+                    <span *ngIf="!loadingBtn"> Commander</span>
                 </button>
             </div>
         </form>
