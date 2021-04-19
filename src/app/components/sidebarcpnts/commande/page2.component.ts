@@ -54,8 +54,8 @@ export class Page2Component implements OnInit {
   moreDetailtest: any = [true]
   detailValue: any = [true]
   loading = true;
-  loadingRecherchBtn=false;
-  
+  loadingRecherchBtn = false;
+  valide: boolean = false;
   /***commande variable***********/
   listeCmd: any = []
   sauvgardListe: any = []
@@ -106,7 +106,7 @@ export class Page2Component implements OnInit {
   }
   /***************************get liste commande *********************************/
   getListeCmd() {
-    this.loading=true;
+    this.loading = true;
     this.commande.getCmd().subscribe(response => {
       this.listeCmd = response;
       this.listeCmd.reverse();
@@ -116,7 +116,7 @@ export class Page2Component implements OnInit {
         this.moreDetailtest.push(true);
         this.detailValue.push(true);
       }
-    }, (error)=>{
+    }, (error) => {
       this.loading = false;
       this._snackBar.open(
         "" + error.error.message, "", {
@@ -157,6 +157,7 @@ export class Page2Component implements OnInit {
     })
   }
   /****************filte methode*****************/
+
   typeCmd = "";
   numCmd = "";
   statutCmd = "";
@@ -167,18 +168,14 @@ export class Page2Component implements OnInit {
     start: new FormControl(),
     end: new FormControl()
   });
-  cherchVin(vin:String,list:any)
-  {
-    this.loadingRecherchBtn=true;
-    let auxList:any=[]
-    this.commande.getVinCmd(vin).subscribe((response:any)=>{  
-      this.loading=false;
-      for(let i=0;i<response.length;i++)
-      {
-        for(let j=0;j<list.length;j++)
-        {
-          if(response[i]==list[j].numCmd)
-          {
+  cherchVin(vin: String, list: any) {
+    this.loadingRecherchBtn = true;
+    let auxList: any = []
+    this.commande.getVinCmd(vin).subscribe((response: any) => {
+      this.loadingRecherchBtn = false;
+      for (let i = 0; i < response.length; i++) {
+        for (let j = 0; j < list.length; j++) {
+          if (response[i] == list[j].numCde) {
             auxList.push(list[i]);
           }
         }
@@ -186,19 +183,16 @@ export class Page2Component implements OnInit {
     })
     return auxList;
   }
-  cherchRefArt(refArt:String,list:any)
-  {
-    this.loadingRecherchBtn=true;
-    let auxList:any=[]
-    this.commande.getRefArtCmd(refArt).subscribe((response:any)=>{ 
-      this.loading=false; 
-      for(let i=0;i<response.length;i++)
-      {
-        for(let j=0;j<list.length;j++)
-        {
-          if(response[i]==list[j].numCmd)
-          {
-            auxList.push(list[i]);
+  cherchRefArt(refArt: String, list: any) {
+
+    this.loadingRecherchBtn = true;
+    let auxList: any = []
+    this.commande.getRefArtCmd(refArt).subscribe((response: any) => {
+      this.loadingRecherchBtn = false;
+      for (let i = 0; i < response.length; i++) {
+        for (let j = 0; j < list.length; j++) {
+          if (response[i] == list[j].numCde) {
+            auxList.push(list[j]);
           }
         }
       }
@@ -229,15 +223,12 @@ export class Page2Component implements OnInit {
     }
     return false;
   }
-
   /* datetest=new Date(2021, 3, 17) */
   filtre() {
     let listeCmdAux: any = [];
     this.listeCmd = this.sauvgardListe;
-    if (this.typeCmd.length || this.statutCmd.length || this.numCmd || this.isAnnuler || (this.range.value.start&&this.range.value.end)) {
-
-      if (this.typeCmd == '2') {
-        this.getListeCmd
+    if (this.typeCmd.length || this.statutCmd.length ||this.statutCmd.length|| this.numCmd || this.isAnnuler != false || (this.range.value.start && this.range.value.end)||this.refArt.length||this.VIN.length) {
+      if (this.typeCmd == '2' || this.statutCmd=='0') {
         listeCmdAux = this.sauvgardListe;
       }
 
@@ -255,14 +246,70 @@ export class Page2Component implements OnInit {
           };
         };
       };
+      if (this.statutCmd.length!=0) {
+        if (listeCmdAux.length == 0) {
+          if (this.statutCmd == "1") {
+            for (let i = 0; i < this.listeCmd.length; i++) {
+              if (this.listeCmd[i].enregistree == 1) {
+                listeCmdAux.push(this.listeCmd[i]);
+              };
+            };
+          }
+          if (this.statutCmd == "2") {
+            for (let i = 0; i < this.listeCmd.length; i++) {
+              if (this.listeCmd[i].livree == 1) {
+                listeCmdAux.push(this.listeCmd[i]);
+              };
+            };
+          }
+          if (this.statutCmd == "3") {
+            for (let i = 0; i < this.listeCmd.length; i++) {
+              if (this.listeCmd[i].facturee == 1) {
+                listeCmdAux.push(this.listeCmd[i]);
+              };
+            };
+          }
+        }
+        if(listeCmdAux.length!=0&&this.statutCmd!="0"){
+          let aux:any=listeCmdAux;
+          listeCmdAux=[]
+          if (this.statutCmd == "1") {
+            for (let i = 0; i < aux.length; i++) {
+              if (aux[i].enregistree == 1) {
+                listeCmdAux.push(aux[i]);
+              };
+            };
+          }if (this.statutCmd == "2") {
+            for (let i = 0; i < aux.length; i++) {
+              if (aux[i].livree == 1) {
+                listeCmdAux.push(aux[i]);
+              };
+            };
+          }
+          if (this.statutCmd == "3") {
+            for (let i = 0; i < aux.length; i++) {
+              if (aux[i].facturee == 1) {
+                listeCmdAux.push(aux[i]);
+              };
+            };
+          }
+        }
+      }
 
-      if (this.numCmd.length) {
+      if (this.numCmd.length != 0) {
         if (listeCmdAux.length == 0) {
           for (let i = 0; i < this.listeCmd.length; i++) {
             let numCmd: string = "" + this.listeCmd[i].numCde;
-            if (numCmd.includes(this.numCmd)) {
-              listeCmdAux.push(this.listeCmd[i]);
-            };
+            if (this.numCmd.length == 10) {
+              if (numCmd === this.numCmd) {
+                listeCmdAux.push(this.listeCmd[i]);
+              };
+            }
+            else {
+              if (numCmd.includes(this.numCmd)) {
+                listeCmdAux.push(this.listeCmd[i]);
+              };
+            }
           };
         }
         else {
@@ -298,9 +345,7 @@ export class Page2Component implements OnInit {
           };
         }
       }
-
-      if(this.range.value.start&&this.range.value.end)
-      {
+      if (this.range.value.start && this.range.value.end) {
         if (listeCmdAux.length == 0) {
           this.listeCmd = this.sauvgardListe
           for (let i = 0; i < this.listeCmd.length; i++) {
@@ -323,6 +368,31 @@ export class Page2Component implements OnInit {
           }
         }
       }
+      if(this.refArt.length)
+      {
+        if(listeCmdAux.length==0)
+         {
+          listeCmdAux= this.cherchRefArt(this.refArt,this.listeCmd);
+         }
+         else
+         {
+          listeCmdAux=this.cherchRefArt(this.refArt,listeCmdAux);
+         }
+      }
+      if(this.VIN.length)
+      {
+        if(listeCmdAux.length==0)
+         {
+          listeCmdAux= this.cherchVin(this.VIN,this.listeCmd);
+         }
+         else
+         {
+          listeCmdAux=this.cherchVin(this.VIN,listeCmdAux);
+         }
+      }
+    }
+    else {
+      listeCmdAux = this.sauvgardListe
     }
     this.listeCmd = listeCmdAux;
   }

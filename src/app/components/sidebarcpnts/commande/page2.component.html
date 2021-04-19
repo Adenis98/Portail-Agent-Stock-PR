@@ -2,22 +2,22 @@
     <div class="inputData shadow">
         <form #f="ngForm" ngForm class="formStyle">
             <div class="row">
-                <mat-form-field class="col-3">
+                <mat-form-field class="col-3" >
                     <mat-label>Type de Commande</mat-label>
-                    <mat-select name="typeCmd" [(ngModel)]="typeCmd">
+                    <mat-select name="typeCmd" [(ngModel)]="typeCmd" >
                         <mat-option value="2">Tous Les Commandes</mat-option>
                         <mat-option value="1">Commande Ferme</mat-option>
                         <mat-option value="0">Commande Normale</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field class="col-3" (keydown.enter)="filtre()">
+                <mat-form-field class="col-3" (keydown.enter)="filtre()" >
                     <mat-label>N°Commande</mat-label>
-                    <input name="numCmd" [(ngModel)]="numCmd" maxlength="30" matInput placeholder="Ex. 5F10991298"
+                    <input  name="numCmd" [(ngModel)]="numCmd" maxlength="10" matInput placeholder="Ex. 5F10991298"
                         name="refCmd">
                 </mat-form-field>
                 <mat-form-field class="col-3">
                     <mat-label>Réf Art</mat-label>
-                    <input matInput placeholder="Ex. 5F10991298" name="refArt" [(ngModel)]="refArt">
+                    <input  matInput placeholder="Ex. 5F10991298" name="refArt" [(ngModel)]="refArt">
                 </mat-form-field>
 
                 <mat-checkbox class="checkBoxAnnule col-3" [(ngModel)]="isAnnuler" name="isAnnuler" value="1"> &nbsp;
@@ -27,15 +27,16 @@
                 <mat-form-field class="col-3">
                     <mat-label>Statut Commande</mat-label>
                     <mat-select name="statutCmd" [(ngModel)]="statutCmd">
-                        <mat-option value="0">commande Enregistrée</mat-option>
+                        <mat-option value="0">Tous Les Commandes</mat-option>
+                        <mat-option value="1">commande Enregistrée</mat-option>
                         <mat-option value="1">commande Livrée</mat-option>
-                        <mat-option value="1">commande Facturée</mat-option>
+                        <mat-option value="3">commande Facturée</mat-option>
                     </mat-select>
                 </mat-form-field>
 
                 <mat-form-field class="datePicker col-3">
                     <mat-label>Choisir l'intervale</mat-label>
-                    <mat-date-range-input [rangePicker]="rangePicker" [formGroup]="range">
+                    <mat-date-range-input [rangePicker]="rangePicker" [formGroup]="range" >
                         <input name="startDate" formControlName="start" matStartDate placeholder="Date debit">
                         <input nam="endDate" formControlName="end"matEndDate placeholder="Date Fin">
                     </mat-date-range-input>
@@ -58,8 +59,11 @@
                 </section>
             </div>
             <div class="row">
-                <button type="submit" class="commanderBtn" mat-raised-button (click)="filtre()">
+                <button type="submit" class="commanderBtn" mat-raised-button (click)="filtre()" [disabled]="this.valide">
                     <mat-spinner *ngIf="loadingRecherchBtn" style="margin:auto" diameter="30"></mat-spinner>
+                    <mat-icon *ngIf="!loadingRecherchBtn" aria-hidden="false"><span>
+                        manage_search</span>
+                    </mat-icon>
                     <span *ngIf="!loadingRecherchBtn">Rechercher</span>
                 </button>
             </div>
@@ -105,7 +109,7 @@
                         <div class="row">
                             <div class="col-2"><span>{{listeCmd[index].numCde}}</span></div>
                             <div class="col"><span>{{listeCmd[index].date_Cmd| date :'dd/MM/yyyy'}}</span></div>
-                            <div class="col"><span>{{listeCmd[index].heure_Cmd| date :'hh:mm:ss'}}</span></div>
+                            <div class="col"><span>{{listeCmd[index].heure_Cmd| date :'HH:mm:ss'}}</span></div>
                             <div class="col-2"><span>{{(listeCmd[index].type_Cmd==0)?'commande normale':'commande
                                     ferme'}}</span></div>
                             <div class="col"><span>{{listeCmd[index].ref_Cmd}}</span></div>
@@ -165,13 +169,13 @@
                         <span>{{listeCmd[index].date_Enregistrement| date :'dd/MM/yyyy'}}</span>
                     </div>
                     <div class="col">
-                        <span>{{(listeCmd[index].livree)?'Part.Liv':'Non.Liv'}}</span>
+                        <mat-icon>{{(listeCmd[index].livree==1)?'task_alt':'highlight_off'}}</mat-icon>
                     </div>
                     <div class="col">
                         <span>{{ listeCmd[index].date_Liv | date :'dd/MM/yyyy'}}</span>
                     </div>
                     <div class="col">
-                        <span>{{(listeCmd[index].facturee)?'Part.Fact':'Non.Fact'}}</span>
+                        <mat-icon>{{(listeCmd[index].facturee==1)?'task_alt':'highlight_off'}}</mat-icon>
                     </div>
                     <div class="col">
                         <span>{{ listeCmd[index].date_Facture| date :'dd/MM/yyyy'}}</span>
