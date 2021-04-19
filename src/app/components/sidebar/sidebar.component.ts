@@ -8,6 +8,7 @@ import { animate, style, transition, trigger } from '@angular/animations';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AppComponent } from "../../app.component";
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PanierService } from 'src/app/services/Panier/panier.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -38,15 +39,19 @@ export class SidebarComponent implements OnInit {
   public avatar: any = "";
   public checkImg = false;
   public imgExist = false ; 
-  permis:any
-  private s: Subscription = new Subscription;//buttons border radius onPageLoad 
+  permis:any;
+
+  public currentPanierSize = 0 ; 
+
+  private s: Subscription = new Subscription();//buttons border radius onPageLoad 
 
   constructor(@Inject(DOCUMENT) private document: Document,
     private router: Router,
     private auth: AuthService,
     private compte: GetcomptesService,
     private appCmp: AppComponent,
-    private _snackBar:MatSnackBar) {
+    private _snackBar:MatSnackBar,
+    private panier : PanierService) {
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd)
         this.dash(val.url.substring(1));
@@ -71,6 +76,13 @@ export class SidebarComponent implements OnInit {
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(localStorage.jwt);
     this.permis = decodedToken["permis"];
+
+    //**************************** */
+    //**************************** */
+    //**************************** */
+    this.panier.panierNbrLigne.subscribe(response => this.currentPanierSize = response);  
+
+    this.getPanierSize() ;
   }
 
   sideBarToggeleClicked() {
@@ -204,7 +216,16 @@ export class SidebarComponent implements OnInit {
     this.document.body.classList.remove('removePaddingBody');
     //hide the sideNav 
     this.appCmp.showNavSide = false;
+  }
 
-
+  getPanierSize()
+  { 
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(localStorage.jwt);
+    let dNbr = decodedToken["dealerNbr"];
+    this.panier.getPanierSize(dNbr).subscribe((data:any)=>{
+      this.panier.setPanierSizeAttr(data);
+      console.log('DATA ******* '+data);
+    });
   }
 }

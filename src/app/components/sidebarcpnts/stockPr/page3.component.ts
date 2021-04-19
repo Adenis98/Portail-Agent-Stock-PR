@@ -5,6 +5,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { concat } from 'rxjs';
+import { PanierService } from 'src/app/services/Panier/panier.service';
 import { StockPrService } from 'src/app/services/stockPr/stock-pr.service';
 
 @Component({
@@ -44,7 +45,8 @@ export class Page3Component implements OnInit {
   constructor(
     public dialog: MatDialog,
     private stock: StockPrService,
-    private _snackBar: MatSnackBar
+    private _snackBar: MatSnackBar , 
+    private panier : PanierService
   ) { }
 
   ngOnInit(): void {
@@ -135,7 +137,8 @@ export class Page3Component implements OnInit {
         verticalPosition: 'top',
         panelClass: 'green-snackbar',
         duration: 5000,
-      })
+      });
+      this.getPanierSize();
     }, (error) => {
       this.loading = false;
       this._snackBar.open(
@@ -154,9 +157,8 @@ export class Page3Component implements OnInit {
       data: pr,
     });
     dialogRef.afterClosed().subscribe((result: String) => {
-      if (result) {
-        this.addLine(pr, result)
-      }
+      if (result)
+        this.addLine(pr, result);
     })
   }
   formatMoney(x: any) {
@@ -168,7 +170,20 @@ export class Page3Component implements OnInit {
     return (euro.format(x));
   }
 
+  getPanierSize()
+  { 
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(localStorage.jwt);
+    let dNbr = decodedToken["dealerNbr"];
+    this.panier.getPanierSize(dNbr).subscribe((data:any)=>{
+      this.panier.setPanierSizeAttr(data);
+      console.log('DATA ******* '+data);
+    });
+  }
+
 }
+
+
 @Component({
   selector: 'dialog-overview-example-dialog',
   templateUrl: 'dialog-overview-example-dialog.html',
@@ -184,7 +199,7 @@ export class DialogCommandeFerme {
   disableInpute=false;
   constructor(
     public dialogRef: MatDialogRef<DialogCommandeFerme>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { 
     if(data.stock==-1)
     {

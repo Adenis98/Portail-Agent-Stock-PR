@@ -125,6 +125,7 @@ export class Page4Component implements OnInit {
         panelClass: 'green-snackbar',
         duration: 5000,
       });
+      this.getPanierSize();
     }, (error) => {
       this._snackBar.open(
         "" + error.error.message, "", {
@@ -170,6 +171,16 @@ export class Page4Component implements OnInit {
 
       }
     })
-  };
+  }
+  getPanierSize()
+  { 
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(localStorage.jwt);
+    let dNbr = decodedToken["dealerNbr"];
+    this.panier.getPanierSize(dNbr).subscribe((data:any)=>{
+      this.panier.setPanierSizeAttr(data);
+      console.log('DATA ******* '+data);
+    });
+  }
 
 }

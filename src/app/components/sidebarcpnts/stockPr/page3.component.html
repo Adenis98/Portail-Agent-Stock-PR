@@ -87,7 +87,7 @@
         </div>
         <div class="col btn1">
             <button mat-mini-fab class="addPanier " color="primary"
-                (click)="(this.qte>pr.stock&&pr.stock>0)? afficherSnackBar():((!pr.stock || pr.stock < 5)?cmdFermeDialog(pr):addLine(pr,null))">
+                (click)="(this.qte>pr.stock&&pr.stock>0)? afficherSnackBar():((!pr.stock || pr.stock < 5)?cmdFermeDialog(pr):addLine(pr,null));getPanierSize()">
                 <mat-icon class="addPanierIcon">add_shopping_cart</mat-icon>
             </button>
         </div>

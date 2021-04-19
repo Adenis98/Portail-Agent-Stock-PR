@@ -67,7 +67,8 @@
                     <a mat-flat-button routerLink="/page4" routerLinkActive="active" class="linkBtn"
                         [class]="(this.page3)?'botButtonRadius':((this.page5)?'topButtonRadius':'')"
                         (click)="dash('page4')">
-                        <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar" class="iconButton">
+                        <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar" class="iconButton"
+                        [matBadge]="this.currentPanierSize" matBadgeSize="small" matBadgeColor="warn">
                             shopping_cart
                         </mat-icon>
                         panier

@@ -28,9 +28,10 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatCheckboxModule} from '@angular/material/checkbox';
 import { DatePipe } from '@angular/common';
 import { DetailPageComponent } from './components/sidebarcpnts/commande/cmdDetail/detail-page/detail-page.component';
+import { MatBadgeModule} from '@angular/material/badge';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { DetailPageComponent } from './components/sidebarcpnts/commande/cmdDetai
     MatNativeDateModule,
     MatCheckboxModule,
     ReactiveFormsModule,
+    MatBadgeModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
