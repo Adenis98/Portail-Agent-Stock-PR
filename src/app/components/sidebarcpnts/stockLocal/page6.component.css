@@ -1,0 +1,47 @@
+.containerPage
+{
+  padding-top: 70px;
+  margin: auto;
+  width: 95%;
+}
+ table {
+    width: 100%;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  td, th {
+    width: 25%;
+    text-align: center !important;
+  }
+
+tr.mat-header-row
+{
+  background-color: #5a8a86 !important;
+  
+}
+.mat-elevation-z8{    
+  border-radius: 20px;
+  overflow:hidden !important;
+  text-align: center !important;
+}
+::ng-deep .mat-sort-header-container {
+  display:flex;
+  justify-content:center;
+  padding-left: 18px;
+  color: white !important;  
+}
+.inputContainer
+{
+  padding: 20px;
+  background-color: white;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+::ng-deep .mat-sort-header-arrow
+{
+  color: #d6a217 !important;
+}

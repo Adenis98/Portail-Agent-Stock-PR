@@ -33,6 +33,8 @@ import { DatePipe } from '@angular/common';
 import { DetailPageComponent } from './components/sidebarcpnts/commande/cmdDetail/detail-page/detail-page.component';
 import { MatBadgeModule} from '@angular/material/badge';
 import {MatTableModule} from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -71,7 +73,9 @@ import {MatTableModule} from '@angular/material/table';
     MatCheckboxModule,
     ReactiveFormsModule,
     MatBadgeModule,
-    MatTableModule
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
