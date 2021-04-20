@@ -16,7 +16,7 @@ div.containerPadding
     margin: auto;
     border-radius: 20px;
     height: 120px;
-    background-color: aliceblue;
+    background-color: white;
     position: relative;
 }
 
@@ -110,7 +110,9 @@ tr.example-element-row:not(.example-expanded-row):active {
 }
   
 .example-element-description {
-    padding: 16px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    width: 99%;
     margin:auto ; 
 }
   
@@ -129,8 +131,8 @@ tr.example-element-row:not(.example-expanded-row):active {
     text-align: center;
     margin : auto ; 
     margin-top:15px;
-    min-width: 850px;
     padding :16px ; 
+    width:95%;
     background-color: #E3F2F1 ;
     border-radius: 30px;
     border : 1.5px solid #d6a217 ; 
@@ -138,7 +140,7 @@ tr.example-element-row:not(.example-expanded-row):active {
     font-weight: 400;
 }
 
-::ng-deep .mat-header-row{
+.mat-header-row{
     display : none ; 
 }
 .mat-elevation-z8{
@@ -147,6 +149,7 @@ tr.example-element-row:not(.example-expanded-row):active {
     overflow: hidden !important;
 }
 .mat-cell{
-    font-size: 18px !important;
-    font-weight: 300;
+    font-size: 17px !important;
+    font-weight: 400;
+    color :#3D5654
 }
