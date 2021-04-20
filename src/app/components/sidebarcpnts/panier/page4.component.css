@@ -178,6 +178,10 @@ input::-webkit-outer-spin-button {
     position: relative;
     margin-top: 50px;
 }
+.inputDataAgent
+{
+    height: 180px !important;
+}
 .hint{
     color: #d93025;
     font-size: 13px;

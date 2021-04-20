@@ -73,17 +73,17 @@
             </div>
         </div>
     </div>
-    <div  class="inputData shadow" >
+    <div  class="inputData shadow" [class]="(this.permis == 2)?'inputDataAgent':''" >
         <form #f="ngForm" ngForm class="formStyle" (keydown.enter)="$event.preventDefault()">
             <div class="row">
-                <mat-form-field class="col-4" >
+                <mat-form-field *ngIf="this.permis == 1" class="col-4" >
                     <mat-label>Type de Commande</mat-label>
                     <mat-select name="typeCommande" [(ngModel)]="typeCommande" required>
                         <mat-option value="1">Commande Ferme</mat-option>
                         <mat-option value="0">Command Normale</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field class="col-4">
+                <mat-form-field class="col-4" *ngIf="this.permis == 1">
                     <mat-label>Réf Commande</mat-label>
                     <input required minlength="10" maxlength="10" matInput placeholder="Ex. 5F10991298" name="refCmd"
                         [(ngModel)]="refCommande" #refCmd="ngModel" oninput="this.value = this.value.toUpperCase()">
@@ -92,19 +92,19 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez la réference de la commande
                     </mat-hint>
                 </mat-form-field>
-                <div class="col" class="totalPanierContainer">
+                <div class="col" class="totalPanierContainer" >
                     <span>total Panier : </span>
                 </div>
             </div>
             <div class="row secondRow">
-                <mat-form-field class="col-4">
+                <mat-form-field class="col-4" *ngIf="this.permis == 1">
                     <mat-label>Mode de Paiement</mat-label>
                     <mat-select name="modePaiment" [(ngModel)]="modePaiment" required>
                         <mat-option value="0">Especes</mat-option>
                         <mat-option value="1">Cheque</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <mat-form-field class="col-4">
+                <mat-form-field class="col-4" *ngIf="this.permis == 1">
                     <mat-label>choisir une date</mat-label>
                     <input matInput [matDatepicker]="picker" name="dateDeCommande" [(ngModel)]="dateDeCommande" required
                         [min]="minDate">
@@ -113,7 +113,7 @@
                 </mat-form-field>
                 <span class="col totalPrix">{{this.totHT}}</span>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="this.permis == 1">
                 <button type="submit" class="commanderBtn" mat-raised-button [disabled]="!(f.valid && this.disableBlock)"
                     (click)="commander();verifPanierVide()">
                     <mat-spinner *ngIf="loadingBtn" style="margin:auto" diameter="30"></mat-spinner>

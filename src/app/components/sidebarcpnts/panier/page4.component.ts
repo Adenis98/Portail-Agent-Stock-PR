@@ -41,6 +41,8 @@ export class Page4Component implements OnInit {
   modePaiment = "";
   typeCommande = "";
   dateDeCommande = new Date();
+  permis: any;
+
   constructor(
     private commande: CommandeService,
     public datepipe: DatePipe,
@@ -51,6 +53,9 @@ export class Page4Component implements OnInit {
 
 
   ngOnInit(): void {
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(localStorage.jwt);
+    this.permis=decodedToken["permis"];
     this.getPanier()
     setTimeout(() => {
       this.verifPanierVide()
@@ -179,7 +184,6 @@ export class Page4Component implements OnInit {
     let dNbr = decodedToken["dealerNbr"];
     this.panier.getPanierSize(dNbr).subscribe((data:any)=>{
       this.panier.setPanierSizeAttr(data);
-      console.log('DATA ******* '+data);
     });
   }
 

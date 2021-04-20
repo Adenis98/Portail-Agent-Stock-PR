@@ -225,7 +225,6 @@ export class SidebarComponent implements OnInit {
     let dNbr = decodedToken["dealerNbr"];
     this.panier.getPanierSize(dNbr).subscribe((data:any)=>{
       this.panier.setPanierSizeAttr(data);
-      console.log('DATA ******* '+data);
     });
   }
 }
