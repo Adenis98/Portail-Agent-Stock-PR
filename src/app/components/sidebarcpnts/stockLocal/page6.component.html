@@ -1,10 +1,4 @@
 <div class="container containerPage">
-    <div class="inputContainer shadow">
-        <mat-form-field>
-            <mat-label>Rechercher</mat-label>
-            <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
-          </mat-form-field>
-    </div> 
       <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" matSort>
       
@@ -40,7 +34,10 @@
             <td class="mat-cell" colspan="4">aucun résultat trouvé  "{{input.value}}"</td>
           </tr>
         </table>
-      
-        <mat-paginator  [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+        <mat-form-field class="inputeText">
+            <mat-label >Rechercher</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="Ex.5F1955426,BALAIESSUI... " #input>
+          </mat-form-field>
+        <mat-paginator style="padding-top: 10px;"  [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
       </div>
 </div>
