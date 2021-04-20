@@ -5,6 +5,8 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './components/login/login.component';
 import { MatRadioModule } from '@angular/material/radio';
+import {MatTableModule} from '@angular/material/table';
+
 
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
@@ -32,6 +34,8 @@ import { MatCheckboxModule} from '@angular/material/checkbox';
 import { DatePipe } from '@angular/common';
 import { DetailPageComponent } from './components/sidebarcpnts/commande/cmdDetail/detail-page/detail-page.component';
 import { MatBadgeModule} from '@angular/material/badge';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -69,7 +73,11 @@ import { MatBadgeModule} from '@angular/material/badge';
     MatNativeDateModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],
