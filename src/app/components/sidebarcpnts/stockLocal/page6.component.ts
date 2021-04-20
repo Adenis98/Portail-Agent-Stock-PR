@@ -52,11 +52,20 @@ export class Page6Component implements OnInit {
 }
 
 /** Builds and returns a new User. */
+function formatMoney(x: any) {
+  const euro = new Intl.NumberFormat('fr-FR', {
+    style: 'currency',
+    currency: 'TND',
+    minimumFractionDigits: 3
+  })
+  return (euro.format(x));
+};
 function createNewUser(id: number): UserData {
+  
   return {
     refArt: id.toString(),
     libelle: 'name',
-    pu: "525",
+    pu: formatMoney(525),
     qte: "1"
   };
 
