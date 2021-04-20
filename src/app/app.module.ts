@@ -32,6 +32,7 @@ import { MatCheckboxModule} from '@angular/material/checkbox';
 import { DatePipe } from '@angular/common';
 import { DetailPageComponent } from './components/sidebarcpnts/commande/cmdDetail/detail-page/detail-page.component';
 import { MatBadgeModule} from '@angular/material/badge';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { MatBadgeModule} from '@angular/material/badge';
     MatNativeDateModule,
     MatCheckboxModule,
     ReactiveFormsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatTableModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

@@ -1,1 +1,94 @@
-<p>page5 works!</p>
+<div class="containerPadding">
+    <div class="inputData shadow">
+        <form #f="ngForm" ngForm class="formStyle">
+            <div class="row">
+                <mat-form-field class="inputFieldRef col">
+                    <mat-label>Réf</mat-label>
+                    <input required="true" minlength="8" maxlength="30" matInput placeholder="Ex. 5F10991298" name="ref"
+                        [(ngModel)]="refPr" #ref="ngModel" oninput="this.value = this.value.toUpperCase()">
+
+                    <mat-hint *ngIf="ref.touched&&!ref.valid" class="hint">
+                        <mat-icon>error</mat-icon>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez la réference de la pièce
+                    </mat-hint>
+                </mat-form-field>
+
+                <mat-form-field class="textArea col">
+                    <mat-label>nom d'agence</mat-label>
+                    <textarea rows="1" matInput name="libelle" [(ngModel)]="dealerName" #libelle="ngModel"
+                        oninput="this.value = this.value.toUpperCase()"></textarea>
+
+                </mat-form-field>
+            </div>
+
+            <button type="submit" class="chercherBtn" mat-raised-button>
+                <mat-icon aria-hidden="false"><span>
+                        manage_search</span>
+                </mat-icon>
+                <span> Chercher</span>
+            </button>
+        </form>
+    </div>
+
+    <div class="dealerBoxList">
+        <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+            <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+                <th mat-header-cell  *matHeaderCellDef> {{column}} </th>
+                <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+            </ng-container>
+
+            <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+            <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+                    <div class="example-element-detail"
+                        [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+                        <div class="example-element-description">
+                            <div class="row articleStock articleStocHeader" *ngIf="element.dealerStockList.length>0">
+                                <div class="col">
+                                    UG
+                                </div>
+                                <div class="col">
+                                    Stock
+                                </div>
+                                <div class="col">
+                                    Quantité achat
+                                </div>
+                                <div class="col">
+                                    Code article
+                                </div>
+                                <div class="col">
+                                    Libelle
+                                </div>
+                            </div>
+                            <div class="row articleStock" *ngFor="let stockPr of element.dealerStockList " >
+                                <div class="col">
+                                    {{stockPr.ug}} 
+                                </div>
+                                <div class="col">
+                                    {{stockPr.stock}}
+                                </div>
+                                <div class="col">
+                                    {{stockPr.qteAch}}
+                                </div>
+                                <div class="col">
+                                    {{stockPr.codArt}}
+                                </div>
+                                <div class="col">
+                                    {{stockPr.libelle}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
+                [class.example-expanded-row]="expandedElement === element"
+                (click)="expandedElement = expandedElement === element ? null : element">
+            </tr>
+            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+        </table>
+    </div>
+
+</div>

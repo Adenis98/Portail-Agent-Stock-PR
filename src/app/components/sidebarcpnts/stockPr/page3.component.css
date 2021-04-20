@@ -18,14 +18,14 @@ div.tableHeader
 
 div.containerPadding
 {
-    padding-top: 20px;
-    margin: auto;
-    padding-top: 70px;
-    padding-bottom: 50px;
-    min-width: 900px !important;
-    width: 95%;
-    height: 100%;
-    transition: 0.9s;
+  padding-top: 20px;
+  margin: auto;
+  padding-top: 70px;
+  padding-bottom: 50px;
+  min-width: 900px !important;
+  width: 95%;
+  height: 100%;
+  transition: 0.9s;
 }
 
 div.composant
@@ -58,22 +58,22 @@ div.composant
 }
 /*********input data**************/
 .inputData{
-    padding: 20px;
-    width:95%;
-    min-width: 600px;
-    margin: auto;
-    border-radius: 20px;
-    height: 120px;
-    background-color: aliceblue;
-    position: relative;
+  padding: 20px;
+  width:95%;
+  min-width: 600px;
+  margin: auto;
+  border-radius: 20px;
+  height: 120px;
+  background-color: aliceblue;
+  position: relative;
 }
 .hint{
-    color: #d93025;
-    font-size: 13px;
-    position: relative ; 
-    line-height: 1.2;
-    font-style: italic;
-  }
+  color: #d93025;
+  font-size: 13px;
+  position: relative ; 
+  line-height: 1.2;
+  font-style: italic;
+}
 .hint mat-icon{
   text-align: center ;
   font-size: 15px;
@@ -82,105 +82,104 @@ div.composant
 }
 .inputFieldRef
 {
-    min-width: 250px;
-    max-width: 250px;
+  min-width: 250px;
+  max-width: 250px;
 }
 .textArea
 {
-    min-width: 250px;
-    max-width: 250px;
+  min-width: 250px;
+  max-width: 250px;
 }
 textarea
 {
-    max-height: 60px;
+  max-height: 60px;
 }
 .resultats
 {
-    padding-top: 25px;
-    padding-bottom: 25px;
-    padding-left: 10px;
-    font-size: 18px;
-    text-transform: uppercase;
-    color: #415959;
-    width: 95%;
-    margin: auto;
-    font-weight: 500;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 10px;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #415959;
+  width: 95%;
+  margin: auto;
+  font-weight: 500;
 }
 .chercherBtn
 {
-    position: absolute;
-    background-color: #d6a217;
-    right: 30px;
-    bottom: 37px;
-    border-radius: 20px;
-    height: 45px;
-    width: 150px;
-    color: #415959;
-    font-weight: 400;
-    font-size: 16px;
-    letter-spacing: 2px;
+  position: absolute;
+  background-color: #d6a217;
+  right: 30px;
+  bottom: 37px;
+  border-radius: 20px;
+  height: 45px;
+  width: 150px;
+  color: #415959;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 2px;
 }
 .inputQte
 {
-    color: #415959;
-    max-width: 50px;
-    background-color: transparent;
-    border: 0px transparent;
-    text-align: center;
-    outline: none;
-    padding: 0px;
-    height: 20px;
-    height: 40px;
-
+  color: #415959;
+  max-width: 50px;
+  background-color: transparent;
+  border: 0px transparent;
+  text-align: center;
+  outline: none;
+  padding: 0px;
+  height: 20px;
+  height: 40px;
 }
 input::-webkit-inner-spin-button,
 input::-webkit-outer-spin-button { 
-    -webkit-appearance: none;
-    margin:0;
+  -webkit-appearance: none;
+  margin:0;
 }
 .qteSpiner
 {
-    background-color: #E3F2F1;
-    border-radius: 20px;
-    position: absolute;
-    height: 40px;
-    width: 100px;
-    top: -11px;
-    left: 10px;
+  background-color: #E3F2F1;
+  border-radius: 20px;
+  position: absolute;
+  height: 40px;
+  width: 100px;
+  top: -11px;
+  left: 10px;
 }
 .addBtn
 {
-    color: #d6a217;
-    position: absolute;
-    border-bottom-right-radius: 20px;
-    border-top-right-radius: 20px;
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
-    font-size: 20px;
-    right: 0px;
-    height: 40px;
-    width: 30px !important;
-    min-width: unset !important;
-    padding: 0px !important;
-    background-color: transparent !important;
-    z-index: 10;
+  color: #d6a217;
+  position: absolute;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  font-size: 20px;
+  right: 0px;
+  height: 40px;
+  width: 30px !important;
+  min-width: unset !important;
+  padding: 0px !important;
+  background-color: transparent !important;
+  z-index: 10;
 }
 .removeBtn
 {
-    color: #d6a217;
-    position: absolute;
-    border-bottom-left-radius: 20px;
-    border-top-left-radius: 20px;
-    border-bottom-right-radius: 0px;
-    border-top-right-radius: 0px;
-    font-size: 30px;
-    font-weight: 400;
-    left: 0px;
-    height: 40px;
-    width: 30px !important;
-    min-width: unset !important;
-    padding: 0px !important;
-    background-color: transparent !important;
+  color: #d6a217;
+  position: absolute;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+  font-size: 30px;
+  font-weight: 400;
+  left: 0px;
+  height: 40px;
+  width: 30px !important;
+  min-width: unset !important;
+  padding: 0px !important;
+  background-color: transparent !important;
 }
 .stockDispoIcon
 {

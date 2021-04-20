@@ -1,0 +1,152 @@
+div.containerPadding
+{
+    padding-top: 20px;
+    margin: auto;
+    padding-top: 70px;
+    padding-bottom: 50px;
+    min-width: 900px !important;
+    width: 95%;
+    height: 100%;
+    transition: 0.9s;
+}
+.inputData{
+    padding: 20px;
+    width:95%;
+    min-width: 600px;
+    margin: auto;
+    border-radius: 20px;
+    height: 120px;
+    background-color: aliceblue;
+    position: relative;
+}
+
+.chercherBtn
+{
+    position: absolute;
+    background-color: #d6a217;
+    right: 30px;
+    bottom: 37px;
+    border-radius: 20px;
+    height: 45px;
+    width: 150px;
+    color: #415959;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+.inputFieldRef
+{
+    min-width: 250px;
+    max-width: 250px;
+}
+.hint{
+    color: #d93025;
+    font-size: 13px;
+    position: relative ; 
+    line-height: 1.2;
+    font-style: italic;
+}
+.hint mat-icon{
+    text-align: center ;
+    font-size: 15px;
+    position: absolute;
+    top : -1px;
+}
+.textArea
+{
+  min-width: 250px;
+  max-width: 250px;
+}
+textarea
+{
+  max-height: 60px;
+}
+
+.dealerBoxList{
+    width:95%;
+    min-width: 600px;
+    margin: auto;
+    margin-top :40px;
+    border-radius: 20px;
+    min-height: 400px;
+    position: relative;
+}
+
+
+/**** ngTable ****/
+table {
+    width: 100%;
+    cursor : pointer ;
+    text-align: left;
+}
+  
+tr.example-detail-row {
+    height: 0;
+}
+  
+tr.example-element-row:not(.example-expanded-row):hover {
+    background: whitesmoke;
+}
+  
+tr.example-element-row:not(.example-expanded-row):active {
+    background: #efefef;
+}
+  
+.example-element-row td {
+    border-bottom-width: 0;
+}
+  
+.example-element-detail {
+    overflow: hidden;
+    display: flex;
+}
+  
+
+  
+.example-element-symbol {
+    font-weight: bold;
+    font-size: 40px;
+    line-height: normal;
+}
+  
+.example-element-description {
+    padding: 16px;
+    margin:auto ; 
+}
+  
+.example-element-description-attribution {
+    opacity: 0.5;
+}
+.articleStocHeader{
+    font-weight: 600;
+    font-size:15px; 
+    letter-spacing: 2px;
+    background-color: #5a8a86  !important;
+    border : 1.5px solid #5a8a86 !important ; 
+    color : white ; 
+}
+.articleStock{
+    text-align: center;
+    margin : auto ; 
+    margin-top:15px;
+    min-width: 850px;
+    padding :16px ; 
+    background-color: #E3F2F1 ;
+    border-radius: 30px;
+    border : 1.5px solid #d6a217 ; 
+    font-size: 15px ;
+    font-weight: 400;
+}
+
+::ng-deep .mat-header-row{
+    display : none ; 
+}
+.mat-elevation-z8{
+    border-radius: 20px;
+    border : 0px ; 
+    overflow: hidden !important;
+}
+.mat-cell{
+    font-size: 18px !important;
+    font-weight: 300;
+}
