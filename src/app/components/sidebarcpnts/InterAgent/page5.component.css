@@ -9,35 +9,48 @@ div.containerPadding
     height: 100%;
     transition: 0.9s;
 }
+.resultats
+{
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 10px;
+  font-size: 18px;
+  text-transform: uppercase;
+  color: #415959;
+  width: 95%;
+  margin: auto;
+  font-weight: 500;
+}
 .inputData{
     padding: 20px;
     width:95%;
     min-width: 600px;
     margin: auto;
     border-radius: 20px;
-    height: 120px;
     background-color: white;
     position: relative;
 }
 
 .chercherBtn
 {
-    position: absolute;
     background-color: #d6a217;
-    right: 30px;
-    bottom: 37px;
     border-radius: 20px;
     height: 45px;
-    width: 150px;
+    width: 150px !important;
     color: #415959;
     font-weight: 400;
     font-size: 16px;
     letter-spacing: 2px;
+    margin:auto;
+    display: block;
+    margin-top: 5px;
 }
 .inputFieldRef
 {
     min-width: 250px;
     max-width: 250px;
+    margin : auto ; 
+    display : block
 }
 .hint{
     color: #d93025;
@@ -56,6 +69,8 @@ div.containerPadding
 {
   min-width: 250px;
   max-width: 250px;
+  margin : auto ; 
+  display : block
 }
 textarea
 {
@@ -66,7 +81,6 @@ textarea
     width:95%;
     min-width: 600px;
     margin: auto;
-    margin-top :40px;
     border-radius: 20px;
     min-height: 400px;
     position: relative;
@@ -93,7 +107,10 @@ tr.example-element-row:not(.example-expanded-row):active {
 }
   
 .example-element-row td {
-    border-bottom-width: 0;
+    border-bottom-width: 0;    
+    padding-top: 15px;
+    padding-bottom: 15px;
+    position: relative;
 }
   
 .example-element-detail {
@@ -125,16 +142,16 @@ tr.example-element-row:not(.example-expanded-row):active {
     letter-spacing: 2px;
     background-color: #5a8a86  !important;
     border : 1.5px solid #5a8a86 !important ; 
-    color : white ; 
+    color : #fac022 ; 
 }
 .articleStock{
     text-align: center;
     margin : auto ; 
-    margin-top:15px;
-    padding :16px ; 
+    margin-top:10px;
+    padding :13px ; 
     width:95%;
     background-color: #E3F2F1 ;
-    border-radius: 30px;
+    border-radius: 20px;
     border : 1.5px solid #d6a217 ; 
     font-size: 15px ;
     font-weight: 400;
@@ -151,5 +168,13 @@ tr.example-element-row:not(.example-expanded-row):active {
 .mat-cell{
     font-size: 17px !important;
     font-weight: 400;
-    color :#3D5654
+    color :#3D5654;
+}
+
+
+.iconClass{
+    left: -7px;
+    top: 6px;
+    position: relative;
+    color : #d6a217
 }

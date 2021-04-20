@@ -15,7 +15,7 @@ export function CustomPaginator() {
         Math.min(startIndex + pageSize, length) :
         startIndex + pageSize;
 
-    return `${startIndex + 1} - ${endIndex} de ${length} total`
+    return `${startIndex + 1} - ${endIndex} / ${length} `
   }
 
 

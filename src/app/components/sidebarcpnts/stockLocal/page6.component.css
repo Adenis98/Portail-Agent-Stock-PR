@@ -56,3 +56,6 @@ tr.mat-header-row
   left: 30px;
   padding-top: 10px;
 }
+.mat-cell{
+  color :#3D5654;
+}

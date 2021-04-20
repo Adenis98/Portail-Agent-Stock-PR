@@ -21,8 +21,8 @@ export class Page5Component implements OnInit {
   dealerName:any; 
 
   //*** table variables ***
-
-  public dataSource :any;
+  tailleList : boolean =true ;
+  public dataSource :any;//list of agents
   columnsToDisplay = ['dealerName', 'dealerPhoneNumber'];
   expandedElement: PeriodicElement | null=null;
   // *********************
@@ -39,79 +39,35 @@ export class Page5Component implements OnInit {
     let dNbr = decodedToken["dealerNbr"];
     this.interAgent.addLineCmd(12).subscribe((data)=>{
       this.dataSource = data ; 
-      console.log(data);
     });
+  }
+
+  chercherAgents()
+  {
+    
+    let i ,j ,v :number ; 
+    for(i=0;i< this.dataSource.length ; i++)
+    {
+      v=0 ; 
+      for(j=0;j<this.dataSource[i]['dealerStockList'].length;j++)
+      {
+        if(this.dataSource[i]['dealerStockList'][j]['codArt']==this.refPr)
+        {
+          console.log(this.dataSource[i]['dealerStockList'][j]['codArt']+"****** "+this.refPr);
+          v=1 ;
+        }
+      }
+      if(v==0)
+      {
+        this.dataSource.splice(i, 1);
+        i--;
+      }
+    }
+    console.log(this.dataSource);
   }
 }
 
 export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-  description: string;
+  dealerName: string;
+  dealerPhoneNumber: String;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {
-    position: 1,
-    name: 'Hydrogen',
-    weight: 1.0079,
-    symbol: 'H',
-    description: `Hydrogen .`
-  }, {
-    position: 2,
-    name: 'Helium',
-    weight: 4.0026,
-    symbol: 'He',
-    description: `Helium `
-  }, {
-    position: 3,
-    name: 'Lithium',
-    weight: 6.941,
-    symbol: 'Li',
-    description: `Lithium `
-  }, {
-    position: 4,
-    name: 'Beryllium',
-    weight: 9.0122,
-    symbol: 'Be',
-    description: `Beryllium `
-  }, {
-    position: 5,
-    name: 'Boron',
-    weight: 10.811,
-    symbol: 'B',
-    description: `Boron is`
-  }, {
-    position: 6,
-    name: 'Carbon',
-    weight: 12.0107,
-    symbol: 'C',
-    description: `Carbon `
-  }, {
-    position: 7,
-    name: 'Nitrogen',
-    weight: 14.0067,
-    symbol: 'N',
-    description: `Nitrogen `
-  }, {
-    position: 8,
-    name: 'Oxygen',
-    weight: 15.9994,
-    symbol: 'O',
-    description: `Oxygen `
-  }, {
-    position: 9,
-    name: 'Fluorine',
-    weight: 18.9984,
-    symbol: 'F',
-    description: `Fluorine i`
-  }, {
-    position: 10,
-    name: 'Neon',
-    weight: 20.1797,
-    symbol: 'Ne',
-    description: `Neon i`
-  },
-];
