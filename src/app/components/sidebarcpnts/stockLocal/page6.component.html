@@ -5,7 +5,7 @@
           <!-- ID Column -->
           <ng-container matColumnDef="refArt">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Réf Art </th>
-            <td mat-cell *matCellDef="let row"> {{row.refArt}} </td>
+            <td mat-cell *matCellDef="let row"> {{row.codArt}} </td>
           </ng-container>
       
           <!-- Progress Column -->
@@ -17,13 +17,13 @@
           <!-- Name Column -->
           <ng-container matColumnDef="pu">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> PU </th>
-            <td mat-cell *matCellDef="let row"> {{row.pu}} </td>
+            <td mat-cell *matCellDef="let row"> {{formatMoney(row.puAgents)}} </td>
           </ng-container>
       
           <!-- Color Column -->
           <ng-container matColumnDef="qte">
             <th mat-header-cell *matHeaderCellDef mat-sort-header> Qté </th>
-            <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.qte}} </td>
+            <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.stock}} </td>
           </ng-container>
       
           <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

@@ -1,14 +1,18 @@
+import { StockLocalService } from './../../../services/stockLocal/stock-local.service';
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorIntl, } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CustomPaginator } from './CustomPaginatorConfiguration';
-export interface UserData {
-  refArt: string;
-  libelle: string;
-  pu: string;
-  qte: string;
+export interface StockLocak {
+  "ug": number,
+  "stock": number,
+  "qteAch": number,
+  "codArt": string,
+  "libelle": string,
+  "puAgents": number
 }
+
 
 @Component({
   selector: 'app-page6',
@@ -17,23 +21,23 @@ export interface UserData {
   providers: [{ provide: MatPaginatorIntl, useValue: CustomPaginator() }]
 })
 export class Page6Component implements OnInit {
-
+  data: any = []
   displayedColumns: string[] = ['refArt', 'libelle', 'pu', 'qte'];
-  dataSource: MatTableDataSource<UserData>;
+  dataSource: MatTableDataSource<StockLocak>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
 
-  constructor() {
-    // Create 100 users
-    const users = Array.from({ length: 100 }, (_, k) => createNewUser(k + 1));
-
-    // Assign the data to the data source for the table to render
-    this.dataSource = new MatTableDataSource(users);
+  constructor(private stockLocal: StockLocalService) {
+    this.dataSource = new MatTableDataSource(this.data)
   }
   ngOnInit(): void {
-    
+    this.stockLocal.getStockLocal().subscribe((respons: any) => {
+      this.data = respons;
+      this.dataSource = new MatTableDataSource(this.data);
+    })
+
   }
 
   ngAfterViewInit() {
@@ -49,24 +53,14 @@ export class Page6Component implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
-}
-
-/** Builds and returns a new User. */
-function formatMoney(x: any) {
-  const euro = new Intl.NumberFormat('fr-FR', {
-    style: 'currency',
-    currency: 'TND',
-    minimumFractionDigits: 3
-  })
-  return (euro.format(x));
-};
-function createNewUser(id: number): UserData {
-  
-  return {
-    refArt: id.toString(),
-    libelle: 'name',
-    pu: formatMoney(525),
-    qte: "1"
+  formatMoney(x: any) {
+    const euro = new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: 'TND',
+      minimumFractionDigits: 3
+    })
+    return (euro.format(x));
   };
-
 }
+
+
