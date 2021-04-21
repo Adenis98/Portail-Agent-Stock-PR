@@ -3,7 +3,7 @@
     <div class="inputData shadow">
         <form #f="ngForm" ngForm class="formStyle">
             <div class="row">
-                <div class="col-4">
+                <div class="col">
                     <mat-form-field class="inputFieldRef">
                         <mat-label>Réf</mat-label>
                         <input required="true" minlength="8" maxlength="30" matInput placeholder="Ex. 5F10991298" name="ref"
@@ -15,22 +15,21 @@
                         </mat-hint>
                     </mat-form-field>
                 </div> 
-                <div class="col-4">
-                    <mat-form-field class="textArea">
-                        <mat-label>nom d'agence</mat-label>
-                        <input rows="1" matInput name="libelle" [(ngModel)]="dealerName" #libelle="ngModel"
-                            oninput="this.value = this.value.toUpperCase()">
-    
-                    </mat-form-field>
+                <div class="col">
+                    <div class="row">
+                        <button type="submit" class="chercherBtn " mat-raised-button (click)="chercherAgents()">
+                            <mat-icon aria-hidden="false"><span>
+                                    manage_search</span>
+                            </mat-icon>
+                            <span> Chercher</span>
+                        </button>
+                        <button type="submit" class="afficherAgents " mat-raised-button (click)="getInterAgentsStock()">
+                            <mat-icon aria-hidden="false">refresh</mat-icon>
+                            <span> tous les agents</span>
+                        </button>
+                    </div>
                 </div>
-                <div class="col-4">
-                    <button type="submit" class="chercherBtn " mat-raised-button (click)="chercherAgents()">
-                        <mat-icon aria-hidden="false"><span>
-                                manage_search</span>
-                        </mat-icon>
-                        <span> Chercher</span>
-                    </button>
-                </div>
+               
                 
             </div>
 
@@ -38,10 +37,10 @@
         </form>
     </div>
     <div class="resultats">
-        agents ({{(this.dataSource)?this.dataSource.length:0}}) 
+        agents ({{tailleList}}) 
     </div>
     <div class="dealerBoxList">
-        <table mat-table [dataSource]="dataSource" multiTemplateDataRows *ngIf="this.tailleList" class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
             <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
                 <th mat-header-cell  *matHeaderCellDef> {{column}} </th>
                 <td mat-cell *matCellDef="let element">

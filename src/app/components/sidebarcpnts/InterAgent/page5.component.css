@@ -45,6 +45,20 @@ div.containerPadding
     display: block;
     margin-top: 5px;
 }
+.afficherAgents
+{
+    background-color: #3D5654;
+    border-radius: 20px;
+    height: 45px;
+    width: 200px !important;
+    color: #d6a217;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 2px;
+    margin:auto;
+    display: block;
+    margin-top: 5px;
+}
 .inputFieldRef
 {
     min-width: 250px;

@@ -2,6 +2,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component, OnInit } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { InterAgentsStockService } from 'src/app/services/interAgentsStock/inter-agents-stock.service';
+import {ViewChild} from '@angular/core';
+import { MatTable } from '@angular/material/table';
 
 @Component({
   selector: 'app-page5',
@@ -15,16 +17,18 @@ import { InterAgentsStockService } from 'src/app/services/interAgentsStock/inter
     ]),
   ],
 })
+
 export class Page5Component implements OnInit {
 
   refPr:any; 
   dealerName:any; 
 
   //*** table variables ***
-  tailleList : boolean =true ;
+  tailleList : number = 0  ;
   public dataSource :any;//list of agents
   columnsToDisplay = ['dealerName', 'dealerPhoneNumber'];
   expandedElement: PeriodicElement | null=null;
+  @ViewChild(MatTable) table: MatTable<any> | undefined;
   // *********************
   constructor(private interAgent : InterAgentsStockService) { }
 
@@ -32,29 +36,40 @@ export class Page5Component implements OnInit {
     this.getInterAgentsStock();
   }
 
-  private getInterAgentsStock()
+  public getInterAgentsStock()
   {
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(localStorage.jwt);
     let dNbr = decodedToken["dealerNbr"];
     this.interAgent.addLineCmd(12).subscribe((data)=>{
       this.dataSource = data ; 
+      this.tailleList = (this.dataSource)?this.dataSource.length:0 ; 
     });
   }
 
-  chercherAgents()
+  chercherAgents():boolean
   {
-    
+    if(this.refPr=="")// ref input field is empty => refresh table 
+    {
+      this.getInterAgentsStock();
+      return true ;  
+    }
     let i ,j ,v :number ; 
+    let newList :any= new Array();
+    this.dataSource.forEach((val: any,index:any) =>{
+      newList.push(Object.assign({}, val));
+    });
+    
     for(i=0;i< this.dataSource.length ; i++)
     {
       v=0 ; 
       for(j=0;j<this.dataSource[i]['dealerStockList'].length;j++)
       {
-        if(this.dataSource[i]['dealerStockList'][j]['codArt']==this.refPr)
-        {
-          console.log(this.dataSource[i]['dealerStockList'][j]['codArt']+"****** "+this.refPr);
+        if(this.dataSource[i]['dealerStockList'][j]['codArt']==this.refPr) 
           v=1 ;
+        else{
+          this.dataSource[i]['dealerStockList'].splice(j, 1);
+          j--;
         }
       }
       if(v==0)
@@ -63,8 +78,18 @@ export class Page5Component implements OnInit {
         i--;
       }
     }
+    
+    (this.table)?this.table.renderRows():'';
+    this.tailleList = this.dataSource.length ; 
+    this.dataSource.length = 0 ; 
+    newList.forEach(
+      (val: any) => this.dataSource.push(Object.assign({}, val))
+    );
     console.log(this.dataSource);
+    return true ; 
   }
+
+  
 }
 
 export interface PeriodicElement {
