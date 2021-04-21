@@ -156,7 +156,7 @@ export class Page2Component implements OnInit {
       }
     })
   }
-  /****************filte methode*****************/
+  /****************filtre methode*****************/
 
   typeCmd = "";
   numCmd = "";
@@ -176,7 +176,7 @@ export class Page2Component implements OnInit {
       for (let i = 0; i < response.length; i++) {
         for (let j = 0; j < list.length; j++) {
           if (response[i] == list[j].numCde) {
-            auxList.push(list[i]);
+             auxList.push(list[j]);
           }
         }
       }
@@ -379,7 +379,7 @@ export class Page2Component implements OnInit {
           listeCmdAux=this.cherchRefArt(this.refArt,listeCmdAux);
          }
       }
-      if(this.VIN.length)
+      if(this.VIN.length&&this.VIN.length==17)
       {
         if(listeCmdAux.length==0)
          {
