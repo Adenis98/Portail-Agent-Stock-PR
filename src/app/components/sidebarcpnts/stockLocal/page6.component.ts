@@ -36,13 +36,14 @@ export class Page6Component implements OnInit {
     this.stockLocal.getStockLocal().subscribe((respons: any) => {
       this.data = respons;
       this.dataSource = new MatTableDataSource(this.data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
     })
 
   }
 
   ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+   
   }
 
   applyFilter(event: Event) {

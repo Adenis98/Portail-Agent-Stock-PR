@@ -59,3 +59,10 @@ tr.mat-header-row
 .mat-cell{
   color :#3D5654;
 }
+h1
+{
+  color: #425c5a;
+  font-size: 27px;
+  font-weight: 450;
+  letter-spacing: 1px;
+}
