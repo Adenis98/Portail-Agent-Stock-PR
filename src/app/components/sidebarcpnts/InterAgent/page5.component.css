@@ -63,7 +63,7 @@ div.containerPadding
 {
     min-width: 250px;
     max-width: 250px;
-    margin : auto ; 
+    margin-left: 25px;
     display : block
 }
 .hint{
