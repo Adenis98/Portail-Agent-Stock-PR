@@ -66,3 +66,13 @@ h1
   font-weight: 450;
   letter-spacing: 1px;
 }
+.resultats
+{
+    padding-top: 25px;
+    padding-bottom: 25px;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #415959;
+    width: 95%;
+    font-weight: 500;
+}
