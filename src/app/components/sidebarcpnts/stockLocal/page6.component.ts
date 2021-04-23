@@ -24,7 +24,7 @@ export interface StockLocak {
 export class Page6Component implements OnInit {
   data: any = []
   displayedColumns: string[] = ['refArt', 'libelle', 'pu', 'qte'];
-  dataSource: MatTableDataSource<StockLocak>;
+  dataSource: MatTableDataSource<StockLocak> = new MatTableDataSource(this.data);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -33,15 +33,20 @@ export class Page6Component implements OnInit {
 
   constructor(private stockLocal: StockLocalService,
     private _snackBar: MatSnackBar) {
-    this.dataSource = new MatTableDataSource(this.data)
+    
   }
   ngOnInit(): void {
+    this.getMonStock(); 
+  }
+  
+  getMonStock(){
     this.stockLocal.getStockLocal().subscribe((respons: any) => {
       this.loading = false;
       this.data = respons;
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+      console.log(this.data);
     },(error) => {
       this.loading = false;
       this._snackBar.open(
@@ -51,7 +56,6 @@ export class Page6Component implements OnInit {
         duration: 5000,
       });
     })
-
   }
 
   ngAfterViewInit() {
@@ -73,7 +77,8 @@ export class Page6Component implements OnInit {
       minimumFractionDigits: 3
     })
     return (euro.format(x));
-  };
+  }
+
 }
 
 

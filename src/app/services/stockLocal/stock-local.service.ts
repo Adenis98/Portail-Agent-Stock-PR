@@ -10,15 +10,15 @@ export class StockLocalService {
   dNbr: any;
 
   constructor(private http: HttpClient) {
-    if (localStorage.getItem("jwt") != null) {
-      const helper = new JwtHelperService();
+    if(localStorage.getItem("jwt") != null) {
       this.headers_object = new HttpHeaders().append("Authorization", "Bearer " + localStorage.getItem("jwt"))
-      this.headers_object?.set('Content-Type', 'application/json');
-      const decodedToken = helper.decodeToken(localStorage.jwt);
-      this.dNbr = decodedToken["dealerNbr"];
     }
   }
   getStockLocal() {
+    const helper = new JwtHelperService();
+    this.headers_object?.set('Content-Type', 'application/json');
+    const decodedToken = helper.decodeToken(localStorage.jwt);
+    this.dNbr = decodedToken["dealerNbr"];
     let url = "http://localhost:8080/ListeStockAgent/monStock/" + this.dNbr;
     return this.http.get(url, { headers: this.headers_object });
   }

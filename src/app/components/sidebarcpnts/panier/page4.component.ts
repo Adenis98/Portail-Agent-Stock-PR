@@ -173,8 +173,8 @@ export class Page4Component implements OnInit {
           panelClass: 'red-snackbar',
           duration: 5000,
         });
-
       }
+      this.getPanierSize();
     })
   }
   getPanierSize()
