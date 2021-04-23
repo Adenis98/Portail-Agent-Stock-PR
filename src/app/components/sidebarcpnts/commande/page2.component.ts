@@ -5,9 +5,8 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FormControl, FormGroup } from '@angular/forms';
-import { range } from 'rxjs';
+
 
 @Component({
   selector: 'app-page2',
@@ -60,6 +59,17 @@ export class Page2Component implements OnInit {
   listeCmd: any = []
   sauvgardListe: any = []
 
+  typeCmd = "";
+  numCmd = "";
+  statutCmd = "";
+  refArt = "";
+  VIN = "";
+  isAnnuler: boolean = false;
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
+
 
   constructor(private router: Router,
     private commande: CommandeService,
@@ -70,8 +80,7 @@ export class Page2Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getListeCmd()
-
+    this.getListeCmd();
   }
   formatMoney(x: any) {
     const euro = new Intl.NumberFormat('fr-FR', {
@@ -80,6 +89,18 @@ export class Page2Component implements OnInit {
       minimumFractionDigits: 3
     })
     return (euro.format(x));
+  }
+  resetValue() {
+    const retrievedObject: any = localStorage.getItem('saveList')
+    let filterData = JSON.parse(retrievedObject)
+    this.typeCmd = filterData.typeCmd;
+    this.numCmd = filterData.numCmd;
+    this.statutCmd = filterData.statutCmd;
+    this.refArt = filterData.refArt;
+    this.VIN = filterData.VIN;
+    this.isAnnuler = filterData.isAnnuler;
+    this.range.controls['start'].setValue(filterData.dateS);
+    this.range.controls['end'].setValue(filterData.dateE);
   }
   openDetail(index: any) {
 
@@ -103,6 +124,19 @@ export class Page2Component implements OnInit {
   }
   openListePr(ref: any) {
     this.router.navigate(['/page2', ref])
+    let filterData: any = {
+      "typeCmd": this.typeCmd,
+      "numCmd": this.numCmd,
+      "statutCmd": this.statutCmd,
+      "refArt": this.refArt,
+      "VIN": this.VIN,
+      "isAnnuler": this.isAnnuler,
+      "dateS": this.range.value.start,
+      "dateE": this.range.value.end
+    }
+    if (this.typeCmd.length || this.statutCmd.length || this.statutCmd.length || this.numCmd || this.isAnnuler != false || (this.range.value.start && this.range.value.end) || this.refArt.length || this.VIN.length) {
+      localStorage.setItem('saveList', JSON.stringify(filterData))
+    }
   }
   /***************************get liste commande *********************************/
   getListeCmd() {
@@ -115,6 +149,11 @@ export class Page2Component implements OnInit {
       for (let i = 0; i < this.listeCmd.length; i++) {
         this.moreDetailtest.push(true);
         this.detailValue.push(true);
+      }
+      if (localStorage.saveList) {
+        this.resetValue()
+        this.filtre()
+        localStorage.removeItem('saveList');
       }
     }, (error) => {
       this.loading = false;
@@ -158,16 +197,7 @@ export class Page2Component implements OnInit {
   }
   /****************filtre methode*****************/
 
-  typeCmd = "";
-  numCmd = "";
-  statutCmd = "";
-  refArt = "";
-  VIN = "";
-  isAnnuler: boolean = false;
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
-  });
+
   cherchVin(vin: String, list: any) {
     this.loadingRecherchBtn = true;
     let auxList: any = []
@@ -176,7 +206,7 @@ export class Page2Component implements OnInit {
       for (let i = 0; i < response.length; i++) {
         for (let j = 0; j < list.length; j++) {
           if (response[i] == list[j].numCde) {
-             auxList.push(list[j]);
+            auxList.push(list[j]);
           }
         }
       }
@@ -227,8 +257,8 @@ export class Page2Component implements OnInit {
   filtre() {
     let listeCmdAux: any = [];
     this.listeCmd = this.sauvgardListe;
-    if (this.typeCmd.length || this.statutCmd.length ||this.statutCmd.length|| this.numCmd || this.isAnnuler != false || (this.range.value.start && this.range.value.end)||this.refArt.length||this.VIN.length) {
-      if (this.typeCmd == '2' || this.statutCmd=='0') {
+    if (this.typeCmd.length || this.statutCmd.length || this.statutCmd.length || this.numCmd || this.isAnnuler != false || (this.range.value.start && this.range.value.end) || this.refArt.length || this.VIN.length) {
+      if (this.typeCmd == '2' || this.statutCmd == '0') {
         listeCmdAux = this.sauvgardListe;
       }
 
@@ -246,7 +276,7 @@ export class Page2Component implements OnInit {
           };
         };
       };
-      if (this.statutCmd.length!=0) {
+      if (this.statutCmd.length != 0) {
         if (listeCmdAux.length == 0) {
           if (this.statutCmd == "1") {
             for (let i = 0; i < this.listeCmd.length; i++) {
@@ -270,16 +300,16 @@ export class Page2Component implements OnInit {
             };
           }
         }
-        if(listeCmdAux.length!=0&&this.statutCmd!="0"){
-          let aux:any=listeCmdAux;
-          listeCmdAux=[]
+        if (listeCmdAux.length != 0 && this.statutCmd != "0") {
+          let aux: any = listeCmdAux;
+          listeCmdAux = []
           if (this.statutCmd == "1") {
             for (let i = 0; i < aux.length; i++) {
               if (aux[i].enregistree == 1) {
                 listeCmdAux.push(aux[i]);
               };
             };
-          }if (this.statutCmd == "2") {
+          } if (this.statutCmd == "2") {
             for (let i = 0; i < aux.length; i++) {
               if (aux[i].livree == 1) {
                 listeCmdAux.push(aux[i]);
@@ -368,27 +398,21 @@ export class Page2Component implements OnInit {
           }
         }
       }
-      if(this.refArt.length)
-      {
-        if(listeCmdAux.length==0)
-         {
-          listeCmdAux= this.cherchRefArt(this.refArt,this.listeCmd);
-         }
-         else
-         {
-          listeCmdAux=this.cherchRefArt(this.refArt,listeCmdAux);
-         }
+      if (this.refArt.length) {
+        if (listeCmdAux.length == 0) {
+          listeCmdAux = this.cherchRefArt(this.refArt, this.listeCmd);
+        }
+        else {
+          listeCmdAux = this.cherchRefArt(this.refArt, listeCmdAux);
+        }
       }
-      if(this.VIN.length&&this.VIN.length==17)
-      {
-        if(listeCmdAux.length==0)
-         {
-          listeCmdAux= this.cherchVin(this.VIN,this.listeCmd);
-         }
-         else
-         {
-          listeCmdAux=this.cherchVin(this.VIN,listeCmdAux);
-         }
+      if (this.VIN.length && this.VIN.length == 17) {
+        if (listeCmdAux.length == 0) {
+          listeCmdAux = this.cherchVin(this.VIN, this.listeCmd);
+        }
+        else {
+          listeCmdAux = this.cherchVin(this.VIN, listeCmdAux);
+        }
       }
     }
     else {

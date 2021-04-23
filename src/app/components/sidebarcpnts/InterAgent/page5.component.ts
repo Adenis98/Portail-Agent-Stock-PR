@@ -41,7 +41,7 @@ export class Page5Component implements OnInit {
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(localStorage.jwt);
     let dNbr = decodedToken["dealerNbr"];
-    this.interAgent.addLineCmd(12).subscribe((data)=>{
+    this.interAgent.addLineCmd(dNbr).subscribe((data)=>{
       this.dataSource = data ; 
       this.tailleList = (this.dataSource)?this.dataSource.length:0 ; 
     });

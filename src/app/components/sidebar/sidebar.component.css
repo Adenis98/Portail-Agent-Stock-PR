@@ -216,7 +216,7 @@ div.user-logo
     }
 }
 
-@media(max-height:700px)
+@media(max-height:650px)
 {
     .sidebar{
        position :absolute  !important; 

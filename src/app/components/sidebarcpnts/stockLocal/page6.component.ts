@@ -4,6 +4,7 @@ import { MatPaginator, MatPaginatorIntl, } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CustomPaginator } from './CustomPaginatorConfiguration';
+import { MatSnackBar } from '@angular/material/snack-bar';
 export interface StockLocak {
   "ug": number,
   "stock": number,
@@ -27,17 +28,28 @@ export class Page6Component implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  loading: boolean=true;
 
 
-  constructor(private stockLocal: StockLocalService) {
+  constructor(private stockLocal: StockLocalService,
+    private _snackBar: MatSnackBar) {
     this.dataSource = new MatTableDataSource(this.data)
   }
   ngOnInit(): void {
     this.stockLocal.getStockLocal().subscribe((respons: any) => {
+      this.loading = false;
       this.data = respons;
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
+    },(error) => {
+      this.loading = false;
+      this._snackBar.open(
+        "" + error.error.message, "", {
+        verticalPosition: 'top',
+        panelClass: 'red-snackbar',
+        duration: 5000,
+      });
     })
 
   }
