@@ -1,13 +1,22 @@
 
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { concat } from 'rxjs';
 import { PanierService } from 'src/app/services/Panier/panier.service';
 import { StockPrService } from 'src/app/services/stockPr/stock-pr.service';
+import { FormControl, FormGroup } from '@angular/forms';
+import { MatPaginator, MatPaginatorIntl, } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 
+export interface StockLocak {
+  "qte": number,
+  "codArt": string,
+  "libelle": string,
+  "puAgents": number
+}
 @Component({
   selector: 'app-page3',
   templateUrl: './page3.component.html',
@@ -19,38 +28,52 @@ import { StockPrService } from 'src/app/services/stockPr/stock-pr.service';
       )
       ),
       transition('void => *',
-      [style([{ transform: 'translateX(-30%)', opacity: 0 }])
-      , animate('0.4s 0.4s ease-out'
-      )]
+        [style([{ transform: 'translateX(-30%)', opacity: 0 }])
+          , animate('0.4s 0.4s ease-out'
+          )]
       )
     ]),
     trigger('chariotStock', [
       transition('void => *',
-      [style([{ transform: 'translateX(-1500%)', opacity: 0 }])
-      , animate('3s 0.4s ease-out'
-      )]
+        [style([{ transform: 'translateX(-1500%)', opacity: 0 }])
+          , animate('3s 0.4s ease-out'
+          )]
       )
     ]),
   ]
 })
+
 export class Page3Component implements OnInit {
-  loadingListe=false;
+  data: any = []
+  displayedColumns: string[] = ['refArt', 'libelle', 'pu', 'qte'];
+  dataSource: MatTableDataSource<StockLocak> = new MatTableDataSource(this.data);
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  loadingListe = false;
   loading = false;
   qte = "1";
   refPr: String = "";
   libellePr = "";
   listOfPr: any = [];
   libelleExiste = false;
+  isDevis = false;
 
+  range = new FormGroup({
+    start: new FormControl(),
+    end: new FormControl()
+  });
+  addDevis: boolean=true;
   constructor(
     public dialog: MatDialog,
     private stock: StockPrService,
-    private _snackBar: MatSnackBar , 
-    private panier : PanierService
+    private _snackBar: MatSnackBar,
+    private panier: PanierService
   ) { }
 
   ngOnInit(): void {
-    this.qte="1"
+    this.qte = "1"
   }
   verifLibelle() {
     if (this.libellePr.length <= 0)
@@ -60,10 +83,10 @@ export class Page3Component implements OnInit {
     /* console.log(this.libelleExiste) */
   }
 
-  addQte(index: any) {
+  addQte() {
     this.qte = (parseInt(this.qte) + 1).toString();
   }
-  removeQte(index: any) {
+  removeQte() {
     if (parseInt(this.qte) > 1)
       this.qte = (parseInt(this.qte) - 1).toString();
   }
@@ -78,21 +101,21 @@ export class Page3Component implements OnInit {
   getStock() {
     this.qte = "1";
     this.loading = true;
-    this.loadingListe=true;
+    this.loadingListe = true;
     let body =
     {
       "codeArt": this.refPr,
       "libelle": this.libellePr
     }
     this.stock.getStockPr(body).subscribe(response => {
-      this.loadingListe=false;
+      this.loadingListe = false;
       this.loading = false;
       this.listOfPr = [];
       setTimeout(() => {
         this.listOfPr = response;
       }, 200);
     }, (error) => {
-      this.loadingListe=false;
+      this.loadingListe = false;
       this.loading = false;
       this._snackBar.open(
         "" + error.error.message, "", {
@@ -116,7 +139,7 @@ export class Page3Component implements OnInit {
       nomClient = result.nomClient;
       typeCmd = result.type_Cmd;
     }
-    let pu:number=+pr.pu
+    let pu: number = +pr.pu
     let body =
     {
       "editMode": 0,
@@ -170,17 +193,53 @@ export class Page3Component implements OnInit {
     return (euro.format(x));
   }
 
-  getPanierSize()
-  { 
+  getPanierSize() {
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(localStorage.jwt);
     let dNbr = decodedToken["dealerNbr"];
-    this.panier.getPanierSize(dNbr).subscribe((data:any)=>{
+    this.panier.getPanierSize(dNbr).subscribe((data: any) => {
       this.panier.setPanierSizeAttr(data);
-      console.log('DATA ******* '+data);
     });
   }
+  anableDevis() {
+    this.isDevis = !this.isDevis
+  }
+  addToDevis(pr: any) {
+    for(let i=0;i<this.data.length;i++)
+    {
+      if(this.data[i].codArt==pr.codArt)
+      {
+        this._snackBar.open(
+          "Article deja existe !" , "", {
+          verticalPosition: 'top',
+          panelClass: 'red-snackbar',
+          duration: 5000,
+        });
+        return false;
+      }
+    }
+    this.data.unshift({
+      "qte": this.qte,
+      "codArt": pr.codArt,
+      "libelle": pr.libelle,
+      "puAgents": pr.pu
+    });
+    console.log(this.data)
+    this.dataSource = new MatTableDataSource(this.data);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    return true
+  }
 
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
 }
 
 
@@ -194,28 +253,28 @@ export class DialogCommandeFerme {
   vin = "";
   numOr = "";
   nomClient = "";
-  selectedOption: String = ""; 
+  selectedOption: String = "";
   hideInputV = false;
-  disableInpute=false;
+  disableInpute = false;
+
   constructor(
     public dialogRef: MatDialogRef<DialogCommandeFerme>,
     @Inject(MAT_DIALOG_DATA) public data: any
-  ) { 
-    if(data.stock==-1)
-    {
-     this.selectedOption ="1"
-      this.hideInputV=true;    
-      this.disableInpute=true;
+  ) {
+    if (data.stock == -1) {
+      this.selectedOption = "1"
+      this.hideInputV = true;
+      this.disableInpute = true;
     }
- 
+
   }
 
   onNoClick(): void {
     this.dialogRef.close(null);
   }
- 
+
   add(): void {
-   
+
     let json = {
       "vin": this.vin,
       "numOr": this.numOr,

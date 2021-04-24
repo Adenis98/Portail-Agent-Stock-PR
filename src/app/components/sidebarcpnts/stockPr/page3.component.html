@@ -1,5 +1,8 @@
 <div class=" containerPadding">
+
     <div class="inputData shadow">
+        <span class="toggleDevis">Panier <mat-slide-toggle  (change)="anableDevis()">Devis</mat-slide-toggle></span>
+        
         <form #f="ngForm" ngForm class="" (keydown.enter)="$event.preventDefault()">
             <div class="row">
                 <mat-form-field class="inputFieldRef col">
@@ -22,12 +25,12 @@
 
                 </mat-form-field>
             </div>
-            <button type="submit" class="chercherBtn" mat-raised-button [disabled]="!f.valid"
+            <button type="submit" class=" chercherBtn" mat-raised-button [disabled]="!f.valid"
                 (click)="getStock();this.refPr='';this.libellePr=''">
                 <mat-spinner *ngIf="loading" style="margin:auto" diameter="30"></mat-spinner>
                 <mat-icon *ngIf="!loading" aria-hidden="false"><span>
                         manage_search</span>
-                    </mat-icon>
+                </mat-icon>
                 <span *ngIf="!loading"> Chercher</span>
 
             </button>
@@ -76,24 +79,142 @@
         <div class="col"><span>{{this.formatMoney(pr.pu)}}</span></div>
         <div class="col">
             <div class="qteSpiner shadow-sm">
-                <button mat-flat-button class="addBtn" (click)="addQte(index)">
+                <button mat-flat-button class="addBtn" (click)="addQte()">
                     <span>+</span>
                 </button>
                 <input type="number" name="qte" class="inputQte" [(ngModel)]="qte">
-                <button mat-flat-button class="removeBtn" (click)="removeQte(index)">
+                <button mat-flat-button class="removeBtn" (click)="removeQte()">
                     <span>-</span>
                 </button>
             </div>
         </div>
         <div class="col btn1">
-            <button mat-mini-fab class="addPanier " color="primary"
+            <button *ngIf="!this.isDevis" mat-mini-fab class="addPanier " color="primary"
                 (click)="(this.qte>pr.stock&&pr.stock>0)? afficherSnackBar():((!pr.stock || pr.stock < 5)?cmdFermeDialog(pr):addLine(pr,null));getPanierSize()">
                 <mat-icon class="addPanierIcon">add_shopping_cart</mat-icon>
+            </button>
+            <button *ngIf="this.isDevis" mat-mini-fab class="addDevis " (click)="this.addToDevis(pr)">
+                <span class="material-icons"> note_add </span>
             </button>
         </div>
     </div>
     <div *ngIf="loadingListe" class="row tableHeader lodingSpiner composant shadow">
         <mat-spinner style="margin:auto" diameter="30"></mat-spinner>
     </div>
+    <div *ngIf="this.isDevis" class="inputDataDevis shadow" @consulterStockAnim >
+        <form #f="ngForm" ngForm class="formStyle">
+            <div class="row">
+                <mat-form-field class="col-3" >
+                    <mat-label>Modele</mat-label>
+                    <mat-select name="Modele" >
+                        <mat-option value="2">Tous Les Commandes</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="col-3" >
+                    <mat-label>Promotion</mat-label>
+                    <input  name="promo"  maxlength="10" matInput placeholder="Ex. 5F10991298">
+                </mat-form-field>
+                <mat-form-field class="col-3">
+                    <mat-label>Nom Client</mat-label>
+                    <input  matInput placeholder="Ex. Youssef" name="nomClient" >
+                </mat-form-field>
 
+                <mat-form-field class="col-3">
+                    <mat-label>ID Fiscale</mat-label>
+                    <input maxlength="8" minlength="8"  matInput placeholder="Ex. 12549858" name="idFiscale" >
+                </mat-form-field>
+            </div>
+            <div class="row secondRow">
+                <mat-form-field class="datePicker col-3">
+                    <mat-label>Choisir l'intervale</mat-label>
+                    <mat-date-range-input [rangePicker]="rangePicker" [formGroup]="range" >
+                        <input required name="startDate" formControlName="start" matStartDate placeholder="Date debit">
+                        <input required nam="endDate" formControlName="end"matEndDate placeholder="Date Fin">
+                    </mat-date-range-input>
+                    <mat-datepicker-toggle matSuffix [for]="rangePicker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #rangePicker>
+                        <mat-date-range-picker-actions>
+                            <button mat-button matDateRangePickerCancel>Annuler</button>
+                            <button mat-raised-button color="primary" matDateRangePickerApply>Appliquer</button>
+                        </mat-date-range-picker-actions>
+                    </mat-date-range-picker>
+                </mat-form-field>
+                <mat-form-field class="col-3">
+                    <mat-label>Taux De Remise</mat-label>
+                    <span matPrefix style="color: grey;">% &nbsp;</span>
+                    <input matInput placeholder="Ex. 20" name="tauxRemis" >
+                </mat-form-field>
+                <mat-form-field class="col-3">
+                    <mat-label>Taux De Taxe</mat-label>
+                    <span matPrefix style="color: grey;">% &nbsp;</span>
+                    <input minlength="1"  matInput placeholder="Ex. 20" name="tauxTaxe" >
+                </mat-form-field>
+                <mat-form-field class="col-3">
+                    <mat-label>Timbre</mat-label>
+                    <input matInput placeholder="Ex. 20" name="timbre" >
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <div class="col-8"></div>
+                <button type="submit" class="printDevis col" mat-raised-button >
+                    <!-- <mat-spinner style="margin:auto" diameter="30"></mat-spinner> -->
+                    <mat-icon class="printIcon"  aria-hidden="false"><span>
+                       print</span>
+                    </mat-icon>
+                    <span > Imprimer</span>
+                </button>
+                <button type="submit" class="passerDevis col" mat-raised-button >
+                    <!-- <mat-spinner style="margin:auto" diameter="30"></mat-spinner> -->
+                    <mat-icon class="addDevisIcon" aria-hidden="false"><span>
+                       task</span>
+                    </mat-icon>
+                    <span > Passer</span>
+                </button>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="this.isDevis" class="mat-elevation-z8" @consulterStockAnim>
+        <table mat-table [dataSource]="dataSource" matSort>
+    
+          <!-- ID Column -->
+          <ng-container matColumnDef="refArt">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Réf Art </th>
+            <td mat-cell *matCellDef="let row"> {{row.codArt}} </td>
+          </ng-container>
+    
+          <!-- Progress Column -->
+          <ng-container matColumnDef="libelle">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Libellé </th>
+            <td mat-cell *matCellDef="let row"> {{row.libelle}}</td>
+          </ng-container>
+    
+          <!-- Name Column -->
+          <ng-container matColumnDef="pu">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> PU </th>
+            <td mat-cell *matCellDef="let row"> {{formatMoney(row.puAgents)}} </td>
+          </ng-container>
+    
+          <!-- Color Column -->
+          <ng-container matColumnDef="qte">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Qté </th>
+            <td mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.qte}} </td>
+          </ng-container>
+    
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *matNoDataRow>
+            <td *ngIf="this.data.length&&!loading" class="mat-cell" colspan="4">aucun résultat trouvé "{{input.value}}"</td>
+            <td *ngIf="this.data.length==0&&!loading" class="mat-cell stockVide" colspan="4">Devis vide !!</td>
+            <td *ngIf="loading" class="mat-cell stockVide" colspan="4"><mat-spinner style="margin:auto" diameter="30"></mat-spinner></td>
+            
+          </tr>
+        </table>
+        <mat-form-field class="inputeText">
+          <mat-label>Rechercher</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Ex.5F1955426,BALAIESSUI... " #input>
+        </mat-form-field>
+        <mat-paginator style="padding-top: 10px;" [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+      </div>
 </div>

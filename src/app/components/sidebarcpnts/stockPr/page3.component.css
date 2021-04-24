@@ -59,11 +59,12 @@ div.composant
 /*********input data**************/
 .inputData{
   padding: 20px;
+  padding-top: 12px;
   width:95%;
   min-width: 600px;
   margin: auto;
   border-radius: 20px;
-  height: 120px;
+  height: 150px;
   background-color: white;
   position: relative;
 }
@@ -111,7 +112,7 @@ textarea
   position: absolute;
   background-color: #d6a217;
   right: 30px;
-  bottom: 37px;
+  bottom: 54px;
   border-radius: 20px;
   height: 45px;
   width: 150px;
@@ -220,4 +221,177 @@ input::-webkit-outer-spin-button {
   position: absolute;
   top: -56px;
   right: 20px;
+}
+.toggleDevis
+{
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #415959;
+  font-weight: 500;
+  letter-spacing: 2px;
+
+}
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+  background-color: #d5a930a3;
+}
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+  background-color: #d6a217;
+}
+.addDevis
+{
+  position: absolute;
+  top: -12px;
+  z-index: 10;
+  transition : 0.3s;
+  background-color: #d6a217;
+  color: white;
+}
+.addDevis:hover{
+  background-color: #364547;
+  color:#d6a217;
+  transition : 0.3s;
+}
+/*************Devis*****************/
+.TypeCommand
+{
+    margin-right: 40px;
+    margin-left: 40px;
+    min-width: 250px;
+    max-width: 250px;
+}
+.passerDevis
+{
+    background-color: #d6a217;
+    margin: auto;
+    margin-top:20px;
+    border-radius: 20px;
+    height: 45px;
+    width: 135px;
+    color: #415959;
+    font-weight: 400;
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+.addDevisIcon
+{
+  color: #E3F2F1;
+}
+.printDevis
+{
+    background-color: #364547;
+    margin: auto;
+    margin-top:20px;
+    border-radius: 20px;
+    height: 45px;
+    width: 135px;
+    color: white;
+    font-weight: 300;
+    font-size: 18px;
+    letter-spacing: 2px;
+    margin-right: 12px;
+}
+.printIcon
+{
+  color: #d6a217;
+}
+.printDevis:hover .printIcon
+{
+  color: white;
+  transition: 0.3s;
+}
+.secondRow
+{
+    margin-top: 10px;
+}
+.checkBoxAnnule
+{
+    margin-top: 20px;
+    padding-left: 20px;
+    color: #415959;
+    font-size: 17px
+}
+.inputDataDevis{
+  padding: 30px;
+  width:95%;
+  min-width:600px;
+  margin: auto;
+  margin-top: 50px;
+  border-radius: 20px;
+  height:240px;
+  background-color: white;
+  position: relative;
+}
+table {
+  width: 100%;
+  
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
+
+td, th {
+  width: 25%;
+  text-align: center !important;
+}
+
+tr.mat-header-row
+{
+  background-color: #364547 !important;
+  
+}
+.mat-elevation-z8{    
+  border-radius: 20px;
+  overflow:hidden !important;
+  text-align: center !important;
+  position: relative;
+  width: 95%;
+  margin: auto;
+  margin-top: 20px;
+}
+::ng-deep .mat-sort-header-container {
+  display:flex;
+  justify-content:center;
+  padding-left: 18px;
+  font-size: 16px;
+  letter-spacing: 2px !important;
+  color: #d6a217 !important;  
+}
+
+::ng-deep .mat-sort-header-arrow
+{
+  color: #d6a217 !important;
+}
+.inputeText
+{
+  width: 300px;
+  position: absolute;
+  left: 30px;
+  padding-top: 10px;
+}
+.mat-cell{
+  color :#3D5654;
+}
+h1
+{
+  color: #425c5a;
+  font-size: 27px;
+  font-weight: 450;
+  letter-spacing: 1px;
+}
+.resultats
+{
+    padding-top: 25px;
+    padding-bottom: 25px;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #415959;
+    width: 95%;
+    font-weight: 500;
+}
+.stockVide
+{
+  color: #364547;
+  font-weight: 500;
 }

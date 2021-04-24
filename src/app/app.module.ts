@@ -35,6 +35,7 @@ import { MatBadgeModule} from '@angular/material/badge';
 import {MatTableModule} from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     Page6Component,
     DetailPageComponent,
     DialogAnnuler,
+   
   ],
   imports: [
     BrowserModule,
@@ -75,7 +77,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatBadgeModule,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatSlideToggleModule,
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

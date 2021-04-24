@@ -258,7 +258,7 @@ export class Page2Component implements OnInit {
     let listeCmdAux: any = [];
     this.listeCmd = this.sauvgardListe;
     if (this.typeCmd.length || this.statutCmd.length || this.statutCmd.length || this.numCmd || this.isAnnuler != false || (this.range.value.start && this.range.value.end) || this.refArt.length || this.VIN.length) {
-      if (this.typeCmd == '2' || this.statutCmd == '0') {
+      if (this.typeCmd == '2') {
         listeCmdAux = this.sauvgardListe;
       }
 
@@ -284,6 +284,9 @@ export class Page2Component implements OnInit {
                 listeCmdAux.push(this.listeCmd[i]);
               };
             };
+          }
+          if ( this.statutCmd == '0') {
+            listeCmdAux = this.sauvgardListe;
           }
           if (this.statutCmd == "2") {
             for (let i = 0; i < this.listeCmd.length; i++) {
