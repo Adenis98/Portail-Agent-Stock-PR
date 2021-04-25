@@ -66,6 +66,9 @@
 
 
     </div>
+    <div *ngIf="loadingListe" class="row tableHeader lodingSpiner composant shadow">
+        <mat-spinner style="margin:auto" diameter="30"></mat-spinner>
+    </div>
     <div *ngFor="let pr of listOfPr;let index=index" class="row tableHeader composant shadow" @consulterStockAnim>
         <div class="col">
             <mat-icon *ngIf="pr.stock > 5" class="stockDispoIcon">assignment_turned_in</mat-icon>
@@ -97,9 +100,6 @@
                 <span class="material-icons"> note_add </span>
             </button>
         </div>
-    </div>
-    <div *ngIf="loadingListe" class="row tableHeader lodingSpiner composant shadow">
-        <mat-spinner style="margin:auto" diameter="30"></mat-spinner>
     </div>
     <div *ngIf="this.isDevis" class="inputDataDevis shadow" @consulterStockAnim>
         <form #f="ngForm" ngForm class="formStyle">
