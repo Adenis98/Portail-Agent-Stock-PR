@@ -230,7 +230,7 @@ export class Page3Component implements OnInit, AfterViewInit {
       "libelle": pr.libelle,
       "puAgents": pr.pu
     });
-    localStorage.setItem('devis', JSON.stringify(this.data))
+    localStorage.setItem('devis', JSON.stringify(this.data));
     this.dataSource = new MatTableDataSource(this.data);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -238,6 +238,7 @@ export class Page3Component implements OnInit, AfterViewInit {
   }
   delete(index: number) {
     this.data.splice(index, 1);
+    localStorage.setItem('devis', JSON.stringify(this.data));
     this.dataSource = new MatTableDataSource(this.data);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

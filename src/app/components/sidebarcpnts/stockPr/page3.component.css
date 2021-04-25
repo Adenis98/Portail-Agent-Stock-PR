@@ -277,6 +277,11 @@ input::-webkit-outer-spin-button {
     position: absolute;
     right: 185px;
 }
+.passerDevis:hover .addDevisIcon
+{
+  color: #364547;
+  transition: 0.3s;
+}
 .addDevisIcon
 {
   color: #E3F2F1;
@@ -307,6 +312,7 @@ input::-webkit-outer-spin-button {
   color: white;
   transition: 0.3s;
 }
+
 .secondRow
 {
     margin-top: 10px;
