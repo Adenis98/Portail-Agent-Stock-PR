@@ -6,7 +6,7 @@ export function CustomPaginator() {
 
   customPaginatorIntl.itemsPerPageLabel = 'Pièce par page : ';
   customPaginatorIntl.getRangeLabel = (page: number, pageSize: number, length: number) => {
-    if (length == 0 || pageSize == 0) { return `0 of ${length}`; }
+    if (length == 0 || pageSize == 0) { return `0 / ${length}`; }
 
     length = Math.max(length, 0);
 

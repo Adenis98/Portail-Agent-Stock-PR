@@ -1,5 +1,5 @@
 import { StockLocalService } from './../../../services/stockLocal/stock-local.service';
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import {  Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatPaginatorIntl, } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -23,9 +23,9 @@ export interface StockLocak {
 })
 export class Page6Component implements OnInit {
   data: any = []
-  displayedColumns: string[] = ['refArt', 'libelle', 'pu', 'qte'];
-  dataSource: MatTableDataSource<StockLocak> = new MatTableDataSource(this.data);
-
+  displayedColumns: string[] = ['codArt', 'libelle', 'puAgents', 'stock'];
+  dataSource: MatTableDataSource<StockLocak> = new MatTableDataSource();
+  
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
   loading: boolean=true;
@@ -33,12 +33,12 @@ export class Page6Component implements OnInit {
 
   constructor(private stockLocal: StockLocalService,
     private _snackBar: MatSnackBar) {
-    
+      this.dataSource.sort = this.sort;
   }
   ngOnInit(): void {
     this.getMonStock(); 
   }
-  
+
   getMonStock(){
     this.stockLocal.getStockLocal().subscribe((respons: any) => {
       this.loading = false;
@@ -46,7 +46,6 @@ export class Page6Component implements OnInit {
       this.dataSource = new MatTableDataSource(this.data);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-      console.log(this.data);
     },(error) => {
       this.loading = false;
       this._snackBar.open(
@@ -57,11 +56,6 @@ export class Page6Component implements OnInit {
       });
     })
   }
-
-  ngAfterViewInit() {
-   
-  }
-
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();

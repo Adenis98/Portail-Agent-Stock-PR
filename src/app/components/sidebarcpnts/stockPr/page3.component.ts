@@ -1,6 +1,6 @@
 
 import { animate, style, transition, trigger } from '@angular/animations';
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -13,9 +13,10 @@ import { MatTableDataSource } from '@angular/material/table';
 
 export interface StockLocak {
   "qte": number,
-  "codArt": string,
+  "codeArt": string,
   "libelle": string,
-  "puAgents": number
+  "puAgents": number,
+  "action": null
 }
 @Component({
   selector: 'app-page3',
@@ -40,12 +41,12 @@ export interface StockLocak {
           )]
       )
     ]),
-  ]
+  ],
 })
 
-export class Page3Component implements OnInit {
+export class Page3Component implements OnInit, AfterViewInit {
   data: any = []
-  displayedColumns: string[] = ['refArt', 'libelle', 'pu', 'qte'];
+  displayedColumns: string[] = ['codeArt', 'libelle', 'puAgents', 'qte', 'action'];
   dataSource: MatTableDataSource<StockLocak> = new MatTableDataSource(this.data);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -64,23 +65,30 @@ export class Page3Component implements OnInit {
     start: new FormControl(),
     end: new FormControl()
   });
-  addDevis: boolean=true;
+  addDevis: boolean = true;
   constructor(
     public dialog: MatDialog,
     private stock: StockPrService,
     private _snackBar: MatSnackBar,
     private panier: PanierService
-  ) { }
+  ) {
+
+  }
 
   ngOnInit(): void {
-    this.qte = "1"
+    this.qte = "1";
+  }
+  ngAfterViewInit() {
+    if (localStorage.devis) {
+      this.resetDevis();
+    }
+
   }
   verifLibelle() {
     if (this.libellePr.length <= 0)
       this.libelleExiste = false
     else
       this.libelleExiste = true
-    /* console.log(this.libelleExiste) */
   }
 
   addQte() {
@@ -205,12 +213,10 @@ export class Page3Component implements OnInit {
     this.isDevis = !this.isDevis
   }
   addToDevis(pr: any) {
-    for(let i=0;i<this.data.length;i++)
-    {
-      if(this.data[i].codArt==pr.codArt)
-      {
+    for (let i = 0; i < this.data.length; i++) {
+      if (this.data[i].codeArt == pr.codeArt) {
         this._snackBar.open(
-          "Article deja existe !" , "", {
+          "Article deja existe !", "", {
           verticalPosition: 'top',
           panelClass: 'red-snackbar',
           duration: 5000,
@@ -220,28 +226,31 @@ export class Page3Component implements OnInit {
     }
     this.data.unshift({
       "qte": this.qte,
-      "codArt": pr.codArt,
+      "codeArt": pr.codeArt,
       "libelle": pr.libelle,
       "puAgents": pr.pu
     });
-    console.log(this.data)
+    localStorage.setItem('devis', JSON.stringify(this.data))
     this.dataSource = new MatTableDataSource(this.data);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     return true
   }
-
-
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  delete(index: number) {
+    this.data.splice(index, 1);
+    this.dataSource = new MatTableDataSource(this.data);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+  resetDevis() {
+    const retrievedObject: any = localStorage.getItem('devis')
+    this.data = JSON.parse(retrievedObject)
+    this.dataSource = new MatTableDataSource(this.data);
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    /* localStorage.removeItem('devis'); */
   }
 }
-
 
 @Component({
   selector: 'dialog-overview-example-dialog',
