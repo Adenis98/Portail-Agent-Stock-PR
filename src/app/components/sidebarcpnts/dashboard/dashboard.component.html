@@ -1,13 +1,17 @@
-<div>
-    <div>
-      <div style="display: block">
-        <canvas baseChart
-          [datasets]="barChartData"
-          [labels]="barChartLabels"
-          [options]="barChartOptions"
-          [legend]="barChartLegend"
-          [chartType]="barChartType">
-        </canvas>
-      </div>
+<div class="container containerPadding">
+    <div class="row">
+        <div class="col-8 top5Art">
+            <div style="display: block">
+                <canvas baseChart [colors]="chartColors" [datasets]="barChartData" [labels]="barChartLabels"
+                    [options]="barChartOptions" [plugins]="barChartPlugins" [legend]="barChartLegend"
+                    [chartType]="barChartType">
+                </canvas>
+            </div>
+        </div>
+        <div class="col">
+            <div class="row">
+
+            </div>
+        </div>
     </div>
-  </div>
+</div>

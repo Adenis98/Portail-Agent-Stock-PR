@@ -9,9 +9,21 @@ import { Label } from 'ng2-charts';
 })
 export class DashboardComponent implements OnInit {
   public barChartOptions: ChartOptions = {
-    
+    title: {
+      text: 'Top 5 Pièce Commnader',
+      display: true,
+    },
     responsive: true,
-    scales: { xAxes: [{}], yAxes: [{}] },
+    legend: {
+      position: 'top',
+    },
+    scales: {
+      xAxes: [{}], yAxes: [{
+        display: true, ticks: {
+          beginAtZero: true,
+        }
+      }]
+    },
     plugins: {
       datalabels: {
         anchor: 'end',
@@ -19,14 +31,57 @@ export class DashboardComponent implements OnInit {
       }
     }
   };
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+  public barChartLabels: Label[] = [];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [];
-
+  public chartColors: Array<any> = [
+    { // first color
+      backgroundColor: '#d6a217',
+      borderColor: 'rgba(225,10,24,0.2)',
+      pointBackgroundColor: 'rgba(225,10,24,0.2)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
+    },
+    { // second color
+      backgroundColor: '#364547',
+      borderColor: 'rgba(225,10,24,0.2)',
+      pointBackgroundColor: 'rgba(225,10,24,0.2)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
+    },
+    { // third color
+      backgroundColor: '#BE3144',
+      borderColor: 'rgba(225,10,24,0.2)',
+      pointBackgroundColor: 'rgba(225,10,24,0.2)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
+    },
+    { // 4 color
+      backgroundColor: '#547184',
+      borderColor: 'rgba(225,10,24,0.2)',
+      pointBackgroundColor: 'rgba(225,10,24,0.2)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
+    },
+    { // 5 color
+      backgroundColor: '#00A492',
+      borderColor: 'rgba(225,10,24,0.2)',
+      pointBackgroundColor: 'rgba(225,10,24,0.2)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
+    },];
   public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+    { data: [90], label: '5F1955426 ' },
+    { data: [80], label: '5F1955426 ' },
+    { data: [60], label: '5F1955426 ' },
+    { data: [40], label: '5F1955426 ' },
+    { data: [30], label: '5F1955426 ' },
   ];
 
   constructor() { }
