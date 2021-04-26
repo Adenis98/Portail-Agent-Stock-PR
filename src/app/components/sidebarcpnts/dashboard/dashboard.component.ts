@@ -13,7 +13,7 @@ import { Label, SingleDataSet } from 'ng2-charts';
       'enterLeftTop', [
       transition(':enter', [
         style({ transform: 'translateX(-10%) translateY(-10%)', opacity: 0 }),
-        animate('0.3s', style({ transform: 'translate(0,0)', opacity: 1, 'overflow-x': 'hidden' }))
+        animate('0.3s', style({ transform: 'translateX(0) translateY(0)', opacity: 1, 'overflow-x': 'hidden' }))
       ])
     ]
     ),
@@ -21,7 +21,7 @@ import { Label, SingleDataSet } from 'ng2-charts';
       'enterRightTop', [
       transition(':enter', [
         style({ transform: 'translateX(10%) translateY(-10%)', opacity: 0 }),
-        animate('0.3s', style({ transform: 'translateX(0,0)', opacity: 1, 'overflow-x': 'hidden' }))
+        animate('0.3s', style({ transform: 'translateX(0) translateY(0)', opacity: 1, 'overflow-x': 'hidden' }))
       ])
     ]
     ),
@@ -29,7 +29,7 @@ import { Label, SingleDataSet } from 'ng2-charts';
       'enterLeftBot', [
       transition(':enter', [
         style({ transform: 'translateX(-10%) translateY(10%)', opacity: 0 }),
-        animate('0.3s', style({ transform: 'translateY(0)', opacity: 1, 'overflow-x': 'hidden' }))
+        animate('0.3s', style({ transform: 'translateX(0) translateY(0)', opacity: 1, 'overflow-x': 'hidden' }))
       ]),
     ]
     ),
@@ -37,7 +37,7 @@ import { Label, SingleDataSet } from 'ng2-charts';
       'enterRightBot', [
       transition(':enter', [
         style({ transform: 'translateX(10%) translateY(10%)', opacity: 0 }),
-        animate('0.3s', style({ transform: 'translateY(0.0)', opacity: 1, 'overflow-x': 'hidden' }))
+        animate('0.3s', style({ transform: 'translateX(0) translateY(0)', opacity: 1, 'overflow-x': 'hidden' }))
       ])
     ]
     ),
@@ -152,7 +152,7 @@ export class DashboardComponent implements OnInit {
     },
   };
   public polarAreaChartLabels: Label[] = ['CommandeEnregistrée ', 'Commande Livrée', 'Commande Facturée'];
-  public polarAreaChartData: SingleDataSet = [300, 500, 100];
+  public polarAreaChartData: SingleDataSet = [300, 500, 200];
   public polarAreaLegend = true;
 
   public polarAreaChartType: ChartType = 'polarArea';
@@ -197,7 +197,7 @@ export class DashboardComponent implements OnInit {
 
   public barChartData2: ChartDataSets[] = [
     { data: [65, 59, 80, 81, 56, 55, 40, 80, 81, 56, 55, 40], label: 'Commande Ferme' },
-    { data: [28, 48, 40, 19, 86, 27, 90, 80, 81, 56, 55, 40], label: 'Comande Stock' }
+    { data: [28, 48, 40, 19, 86, 27, 200, 80, 81, 56, 55, 40], label: 'Comande Stock' }
   ];
   constructor() { }
 
