@@ -1,18 +1,18 @@
 <div class="container containerPadding">
     <div class="row StyleRow">
-        <div class="col-8" style="padding-right:12px">
+        <div class="col-8"  @enterLeftTop>
             <div class="top5Art ">
                 <div style="display: block">
-                    <canvas baseChart [colors]="chartColors" [datasets]="barChartData" [labels]="barChartLabels"
+                    <canvas  baseChart height="120%" [colors]="chartColors" [datasets]="barChartData" [labels]="barChartLabels"
                         [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType">
                     </canvas>
                 </div>
             </div>
         </div>
-        <div class="col-4" style="padding-left:5px">
+        <div class="col-4" @enterRightTop >
             <div class="cercleChart ">
                 <div class="chart">
-                    <canvas baseChart height="300%" [data]="pieChartData" [labels]="pieChartLabels"
+                    <canvas baseChart height="250%" [data]="pieChartData" [labels]="pieChartLabels"
                         [chartType]="pieChartType" [options]="pieChartOptions" [colors]="pieChartColors"
                         [legend]="pieChartLegend">
                     </canvas>
@@ -21,12 +21,21 @@
         </div>
     </div>
     <div class="row StyleRow">
-        <div class="col-4 ">
+        <div class="col-4 "@enterLeftBot>
             <div class="polar">
                 <div style="display: block">
-                    <canvas baseChart height="300%" [options]="polarAreaChartOption" [colors]="polarAreaChartColors"
+                    <canvas baseChart height="200%" [options]="polarAreaChartOption" [colors]="polarAreaChartColors"
                         [data]="polarAreaChartData" [labels]="polarAreaChartLabels" [legend]="polarAreaLegend"
                         [chartType]="polarAreaChartType">
+                    </canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col-8"@enterRightBot>
+            <div class="top5Art ">
+                <div style="display: block">
+                    <canvas  baseChart height="120%" [colors]="chartColors" [datasets]="barChartData2" [labels]="barChartLabels2"
+                        [options]="barChartOptions" [legend]="barChartLegend2" [chartType]="barChartType2">
                     </canvas>
                 </div>
             </div>
