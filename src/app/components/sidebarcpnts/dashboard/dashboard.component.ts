@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
-import { Label } from 'ng2-charts';
+import { Label, SingleDataSet } from 'ng2-charts';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -12,81 +12,123 @@ export class DashboardComponent implements OnInit {
     title: {
       text: 'Top 5 Pièce Commnader',
       display: true,
+      fontSize: 15,
     },
     responsive: true,
     legend: {
-      position: 'top',
+      position: 'bottom',
+      labels: {
+        fontSize: 10,
+        usePointStyle: true
+      }
     },
     scales: {
+      
       xAxes: [{}], yAxes: [{
         display: true, ticks: {
           beginAtZero: true,
         }
       }]
     },
+    
     plugins: {
-      datalabels: {
-        anchor: 'end',
-        align: 'end',
-      }
+      pluginDataLabels : {
+        display: false,
+      },
     }
   };
-  public barChartLabels: Label[] = [];
+  public barChartLabels: Label[] = [''];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
-  public barChartPlugins = [];
   public chartColors: Array<any> = [
     { // first color
       backgroundColor: '#d6a217',
-      borderColor: 'rgba(225,10,24,0.2)',
-      pointBackgroundColor: 'rgba(225,10,24,0.2)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
     },
     { // second color
       backgroundColor: '#364547',
-      borderColor: 'rgba(225,10,24,0.2)',
-      pointBackgroundColor: 'rgba(225,10,24,0.2)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
     },
     { // third color
       backgroundColor: '#BE3144',
-      borderColor: 'rgba(225,10,24,0.2)',
-      pointBackgroundColor: 'rgba(225,10,24,0.2)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
     },
     { // 4 color
       backgroundColor: '#547184',
-      borderColor: 'rgba(225,10,24,0.2)',
-      pointBackgroundColor: 'rgba(225,10,24,0.2)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
     },
     { // 5 color
       backgroundColor: '#00A492',
-      borderColor: 'rgba(225,10,24,0.2)',
-      pointBackgroundColor: 'rgba(225,10,24,0.2)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(225,10,24,0.2)'
     },];
   public barChartData: ChartDataSets[] = [
     { data: [90], label: '5F1955426 ' },
     { data: [80], label: '5F1955426 ' },
     { data: [60], label: '5F1955426 ' },
-    { data: [40], label: '5F1955426 ' },
+    { data: [45], label: '5F1955426 ' },
     { data: [30], label: '5F1955426 ' },
   ];
+  /***************************cercle******************** */
 
+  public pieChartOptions: ChartOptions = {
+    responsive: true,
+    legend: {
+      
+      position: 'bottom',
+      labels: {
+        fontSize: 10,
+        usePointStyle: true
+      }
+    },
+    maintainAspectRatio: true,
+    aspectRatio: 5,
+    tooltips: {
+      enabled: true
+    },
+  };
+  public pieChartLabels: Label[] = ['Command Stock ', 'Commande Ferme '];
+  public pieChartData: number[] = [300, 500];
+  public pieChartType: ChartType = 'doughnut';
+  public pieChartLegend = true;
+  public pieChartPlugins = [pluginDataLabels];
+  public pieChartColors = [
+    {
+      backgroundColor: ['#364547', '#BE3144'],
+    },
+  ];
+
+  /*******************polarChart************** */
+  public polarAreaChartOption: ChartOptions = {
+    scales: {
+      xAxes: [{
+        type: 'radial',
+        position: 'bottom',
+        display:false
+    }]
+    },
+    responsive: true,
+    legend: {
+      
+      position: 'bottom',
+      labels: {
+        fontSize: 10,
+        usePointStyle: true
+      }
+    },
+    maintainAspectRatio: false,
+    aspectRatio: 0,
+    tooltips: {
+      enabled: true
+    },
+  };
+  public polarAreaChartLabels: Label[] = ['CommandeEnregistrée ','Commande Livrée','Commande Facturée'];
+  public polarAreaChartData: SingleDataSet = [300, 500, 100];
+  public polarAreaLegend = true;
+
+  public polarAreaChartType: ChartType = 'polarArea';
+  public polarAreaChartColors = [
+    {
+      backgroundColor: ['#364547', '#d6a217','#00A492'],
+    },
+  ];
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  
 }
