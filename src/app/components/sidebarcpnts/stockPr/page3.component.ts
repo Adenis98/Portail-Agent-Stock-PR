@@ -1,3 +1,4 @@
+import { DevisService } from './../../../services/stockPr/devis.service';
 
 import { animate, style, transition, trigger } from '@angular/animations';
 import { AfterViewInit, Component, Inject, OnInit, ViewChild } from '@angular/core';
@@ -10,7 +11,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator, MatPaginatorIntl, } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-
+import { DatePipe } from '@angular/common';
 export interface StockLocak {
   "qte": number,
   "codeArt": string,
@@ -65,12 +66,22 @@ export class Page3Component implements OnInit, AfterViewInit {
     start: new FormControl(),
     end: new FormControl()
   });
+  tauxRemis: any;
   addDevis: boolean = true;
+  modele: any;
+  promotion: any;
+  nomClien: any;
+  idFiscale: any;
+  tauxTaxes: any;
+  timbre: any;
+  loadingListeDevis: boolean = false;
   constructor(
     public dialog: MatDialog,
     private stock: StockPrService,
     private _snackBar: MatSnackBar,
-    private panier: PanierService
+    private panier: PanierService,
+    private devis: DevisService,
+    public datepipe: DatePipe,
   ) {
 
   }
@@ -250,6 +261,68 @@ export class Page3Component implements OnInit, AfterViewInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     /* localStorage.removeItem('devis'); */
+  }
+  passerDevis() {
+    this.loadingListeDevis = true;
+    let save = this.data;
+    this.data = [];
+    this.dataSource = new MatTableDataSource(this.data);
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(localStorage.jwt);
+    let dNbr = decodedToken["dealerNbr"];
+    let list: any = [];
+    for (let i = 0; i < this.data.length; i++) {
+      list.unshift({ "codArt": "" + this.data[i].codeArt, "qte": this.data[i].qte })
+    }
+    let body = {
+      "dealerNbr": dNbr,
+      "modele": this.modele,
+      "promotion": this.promotion,
+      "debutPromo": this.datepipe.transform(this.range.value.start, 'yyyy-MM-dd'),
+      "finPromo": this.datepipe.transform(this.range.value.end, 'yyyy-MM-dd'),
+      "nomClient": this.nomClien,
+      "idFisc": this.idFiscale,
+      "toRemise": this.tauxRemis,
+      "toTaxes": this.tauxTaxes,
+      "timbre": this.timbre,
+      "listeArt": list,
+    }
+    this.devis.addDevis(body).subscribe((respons: any) => {
+      this.data = [];
+      if (respons == 1) {
+        this._snackBar.open(
+          "Devis Enregistreée ✔", "", {
+          verticalPosition: 'top',
+          panelClass: 'green-snackbar',
+          duration: 5000,
+        });
+        localStorage.removeItem('devis');
+      }
+      else {
+        this._snackBar.open(
+          "Echec ✘ ", "", {
+          verticalPosition: 'top',
+          panelClass: 'red-snackbar',
+          duration: 5000,
+        });
+        this.data = save;
+        this.dataSource = new MatTableDataSource(this.data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort
+      }
+    }, (error) => {
+      this.loadingListeDevis = false;
+      this._snackBar.open(
+        "" + error.error.message, "", {
+        verticalPosition: 'top',
+        panelClass: 'red-snackbar',
+        duration: 5000,
+      });
+      this.data = save;
+      this.dataSource = new MatTableDataSource(this.data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort
+    })
   }
 }
 
