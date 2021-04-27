@@ -109,7 +109,7 @@ export class Page4Component implements OnInit {
     },(error)=>{
       this.loadingListe = false;
       this._snackBar.open(
-        "" + error.error.message, "", {
+        (error.status==0)?"connexion au serveur impossible !!":error.error.message, "", {
         verticalPosition: 'top',
         panelClass: 'red-snackbar',
         duration: 5000,
@@ -133,7 +133,7 @@ export class Page4Component implements OnInit {
       this.getPanierSize();
     }, (error) => {
       this._snackBar.open(
-        "" + error.error.message, "", {
+        (error.status==0)?"connexion au serveur impossible !!":error.error.message, "", {
         verticalPosition: 'top',
         panelClass: 'red-snackbar',
         duration: 5000,

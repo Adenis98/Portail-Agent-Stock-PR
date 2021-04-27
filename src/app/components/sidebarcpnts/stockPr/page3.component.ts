@@ -7,8 +7,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { PanierService } from 'src/app/services/Panier/panier.service';
 import { StockPrService } from 'src/app/services/stockPr/stock-pr.service';
-import { FormControl, FormGroup } from '@angular/forms';
-import { MatPaginator, MatPaginatorIntl, } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { DatePipe } from '@angular/common';
@@ -17,7 +16,8 @@ export interface StockLocak {
   "codeArt": string,
   "libelle": string,
   "puAgents": number,
-  "action": null
+  "action": null,
+  "tauxRemis": number,
 }
 @Component({
   selector: 'app-page3',
@@ -47,7 +47,7 @@ export interface StockLocak {
 
 export class Page3Component implements OnInit, AfterViewInit {
   data: any = []
-  displayedColumns: string[] = ['codeArt', 'libelle', 'puAgents', 'qte', 'action'];
+  displayedColumns: string[] = ['codeArt', 'libelle', 'puAgents', 'qte', 'tauxRemis', 'action'];
   dataSource: MatTableDataSource<StockLocak> = new MatTableDataSource(this.data);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -62,14 +62,9 @@ export class Page3Component implements OnInit, AfterViewInit {
   libelleExiste = false;
   isDevis = false;
 
-  range = new FormGroup({
-    start: new FormControl(),
-    end: new FormControl()
-  });
-  tauxRemis: any;
+  tauxRemis = "0";
   addDevis: boolean = true;
-  modele: any;
-  promotion: any;
+
   nomClien: any;
   idFiscale: any;
   tauxTaxes: any;
@@ -119,6 +114,7 @@ export class Page3Component implements OnInit, AfterViewInit {
   }
   getStock() {
     this.qte = "1";
+    this.tauxRemis ="0";
     this.loading = true;
     this.loadingListe = true;
     let body =
@@ -137,7 +133,7 @@ export class Page3Component implements OnInit, AfterViewInit {
       this.loadingListe = false;
       this.loading = false;
       this._snackBar.open(
-        "" + error.error.message, "", {
+        (error.status == 0) ? "connexion au serveur impossible !!" : error.error.message, "", {
         verticalPosition: 'top',
         panelClass: 'red-snackbar',
         duration: 5000,
@@ -184,7 +180,7 @@ export class Page3Component implements OnInit, AfterViewInit {
     }, (error) => {
       this.loading = false;
       this._snackBar.open(
-        "" + error.error.message, "", {
+        (error.status == 0) ? "connexion au serveur impossible !!" : error.error.message, "", {
         verticalPosition: 'top',
         panelClass: 'red-snackbar',
         duration: 5000,
@@ -239,7 +235,8 @@ export class Page3Component implements OnInit, AfterViewInit {
       "qte": this.qte,
       "codeArt": pr.codeArt,
       "libelle": pr.libelle,
-      "puAgents": pr.pu
+      "puAgents": pr.pu,
+      "tauxRemis": parseInt(this.tauxRemis)
     });
     localStorage.setItem('devis', JSON.stringify(this.data));
     this.dataSource = new MatTableDataSource(this.data);
@@ -262,6 +259,14 @@ export class Page3Component implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
     /* localStorage.removeItem('devis'); */
   }
+  addTaux() {
+    if (parseInt(this.tauxRemis) <100)
+    this.tauxRemis =""+(parseInt(this.tauxRemis) + 1);
+  }
+  removeTaux() {
+    if (parseInt(this.tauxRemis) > 0)
+      this.tauxRemis = ""+(parseInt(this.tauxRemis) - 1);
+  }
   passerDevis() {
     this.loadingListeDevis = true;
     let save = this.data;
@@ -276,10 +281,6 @@ export class Page3Component implements OnInit, AfterViewInit {
     }
     let body = {
       "dealerNbr": dNbr,
-      "modele": this.modele,
-      "promotion": this.promotion,
-      "debutPromo": this.datepipe.transform(this.range.value.start, 'yyyy-MM-dd'),
-      "finPromo": this.datepipe.transform(this.range.value.end, 'yyyy-MM-dd'),
       "nomClient": this.nomClien,
       "idFisc": this.idFiscale,
       "toRemise": this.tauxRemis,
@@ -313,7 +314,7 @@ export class Page3Component implements OnInit, AfterViewInit {
     }, (error) => {
       this.loadingListeDevis = false;
       this._snackBar.open(
-        "" + error.error.message, "", {
+        (error.status == 0) ? "connexion au serveur impossible !!" : error.error.message, "", {
         verticalPosition: 'top',
         panelClass: 'red-snackbar',
         duration: 5000,
@@ -324,6 +325,7 @@ export class Page3Component implements OnInit, AfterViewInit {
       this.dataSource.sort = this.sort
     })
   }
+
 }
 
 @Component({

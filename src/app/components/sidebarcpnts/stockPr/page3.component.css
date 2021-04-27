@@ -151,6 +151,7 @@ input::-webkit-outer-spin-button {
   top: -11px;
   left: 10px;
 }
+
 .addBtn
 {
   color: #d6a217;
@@ -277,11 +278,6 @@ input::-webkit-outer-spin-button {
     position: absolute;
     right: 185px;
 }
-.passerDevis:hover .addDevisIcon
-{
-  color: #364547;
-  transition: 0.3s;
-}
 .addDevisIcon
 {
   color: #E3F2F1;
@@ -312,11 +308,6 @@ input::-webkit-outer-spin-button {
   color: white;
   transition: 0.3s;
 }
-
-.secondRow
-{
-    margin-top: 10px;
-}
 .checkBoxAnnule
 {
   margin-top: 20px;
@@ -331,7 +322,7 @@ input::-webkit-outer-spin-button {
   margin: auto;
   margin-top: 50px;
   border-radius: 20px;
-  height:240px;
+  height:180px;
   background-color: white;
   position: relative;
 }
@@ -436,4 +427,21 @@ h1
   font-weight: 500;
   letter-spacing: 1px;
   color: #364547;
+}
+.inputTaux
+{
+  position: absolute;
+  left: 50px;
+  top: -15px;
+  width: 50px;
+}
+.tauxSpiner
+{
+  background-color: #E3F2F1;
+  border-radius: 20px;
+  position: absolute;
+  height: 40px;
+  width: 100px;
+  top: -11px;
+  left: 35px;
 }

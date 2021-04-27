@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators'
 import { DatePipe } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-detail-page',
   templateUrl: './detail-page.component.html',
@@ -49,8 +50,8 @@ export class DetailPageComponent implements OnInit {
   constructor(private routerinfo: ActivatedRoute,
      private cmd: CommandeService,
      private router: Router,
-     public datepipe: DatePipe) {
-
+     public datepipe: DatePipe,
+     private _snackBar: MatSnackBar,) {
   }
 
   ngOnInit(): void {
@@ -84,6 +85,14 @@ export class DetailPageComponent implements OnInit {
         this.totalQteL = this.totalQteL + this.listePanier[i].qteLivree;
         this.totalQteF = this.totalQteF + this.listePanier[i].qteFacturee;
       }
+    },(error) => {
+      this.loading = false;
+      this._snackBar.open(
+        (error.status==0)?"connexion au serveur impossible !!":error.error.message, "", {
+        verticalPosition: 'top',
+        panelClass: 'red-snackbar',
+        duration: 5000,
+      });
     })
   }
   getCmd() {

@@ -158,7 +158,7 @@ export class Page2Component implements OnInit {
     }, (error) => {
       this.loading = false;
       this._snackBar.open(
-        "" + error.error.message, "", {
+        (error.status==0)?"connexion au serveur impossible !!":error.error.message, "", {
         verticalPosition: 'top',
         panelClass: 'red-snackbar',
         duration: 5000,
