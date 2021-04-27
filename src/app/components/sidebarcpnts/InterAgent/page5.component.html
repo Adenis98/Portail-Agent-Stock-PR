@@ -62,23 +62,13 @@
                                 <div class="col">
                                     Libelle
                                 </div>
+                              
                                 <div class="col">
-                                    UG
+                                    Disponibilité
                                 </div>
-                                <div class="col">
-                                    Stock
-                                </div>
-                                <div class="col">
-                                    Quantité achat
-                                </div>
+                           
                             </div>
-                            <div *ngIf="element.dealerStockList.length==0">
-                                <div class="row articleStock articleStocHeader">
-                                    <div class="col">
-                                        aucun article n'est disponible 
-                                    </div>
-                                </div>
-                            </div>
+                           
                             <div class="row articleStock" *ngFor="let stockPr of element.dealerStockList " >
                                 <div class="col">
                                     {{stockPr.codArt}}
@@ -86,15 +76,13 @@
                                 <div class="col">
                                     {{stockPr.libelle}}
                                 </div>
+                         
                                 <div class="col">
-                                    {{stockPr.ug}} 
+                                    <mat-icon class="tooltip" *ngIf="stockPr.stock > 5" class="stockDispoIcon">assignment_turned_in</mat-icon>
+                                    <mat-icon class="tooltip" *ngIf="stockPr.stock > 0 && stockPr.stock < 5" class="stockLimitIcon">assignment_late</mat-icon>
+                                    <mat-icon *ngIf="!stockPr.stock" class="stockNonDispotIcon">cancel</mat-icon>
                                 </div>
-                                <div class="col">
-                                    {{stockPr.stock}}
-                                </div>
-                                <div class="col">
-                                    {{stockPr.qteAch}}
-                                </div>
+                               
                             </div>
                         </div>
                     </div>
@@ -108,6 +96,9 @@
             </tr>
             <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
         </table>
+        <div class="shadow articleInt" *ngIf="articleIntrouvable">
+            Réferance Introuvable 
+        </div>
     </div>
 
 </div>
