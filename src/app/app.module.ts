@@ -37,6 +37,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ChartsModule } from 'ng2-charts';
+import { NgxPrintModule } from 'ngx-print';
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,7 +80,8 @@ import { ChartsModule } from 'ng2-charts';
     MatPaginatorModule,
     MatSortModule,
     MatSlideToggleModule,
-    ChartsModule
+    ChartsModule,
+    NgxPrintModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

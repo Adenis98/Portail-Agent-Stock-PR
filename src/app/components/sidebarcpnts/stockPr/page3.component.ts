@@ -16,8 +16,9 @@ export interface StockLocak {
   "codeArt": string,
   "libelle": string,
   "puAgents": number,
-  "action": null,
   "tauxRemis": number,
+  "totLigneHT": number,
+  "action": null,
 }
 @Component({
   selector: 'app-page3',
@@ -47,7 +48,7 @@ export interface StockLocak {
 
 export class Page3Component implements OnInit, AfterViewInit {
   data: any = []
-  displayedColumns: string[] = ['codeArt', 'libelle', 'puAgents', 'qte', 'tauxRemis', 'action'];
+  displayedColumns: string[] = ['codeArt', 'libelle', 'puAgents', 'qte', 'tauxRemis', 'totLigneHT', 'action'];
   dataSource: MatTableDataSource<StockLocak> = new MatTableDataSource(this.data);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -61,10 +62,11 @@ export class Page3Component implements OnInit, AfterViewInit {
   listOfPr: any = [];
   libelleExiste = false;
   isDevis = false;
-
+  totRemis = 0;totTaxes = 0;totalTtc=0;
+  TVA="10";
   tauxRemis = "0";
   addDevis: boolean = true;
-
+  totLiggneHT: number = 0;
   nomClien: any;
   idFiscale: any;
   tauxTaxes: any;
@@ -87,6 +89,7 @@ export class Page3Component implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     if (localStorage.devis) {
       this.resetDevis();
+      this.calucleDevis()
     }
 
   }
@@ -114,7 +117,7 @@ export class Page3Component implements OnInit, AfterViewInit {
   }
   getStock() {
     this.qte = "1";
-    this.tauxRemis ="0";
+    this.tauxRemis = "0";
     this.loading = true;
     this.loadingListe = true;
     let body =
@@ -220,6 +223,13 @@ export class Page3Component implements OnInit, AfterViewInit {
     this.isDevis = !this.isDevis
   }
   addToDevis(pr: any) {
+    let remis=0;
+    let taxe=0
+    let totTtc=0;
+    remis =(parseInt(this.qte) * pr.pu) * (parseInt(this.tauxRemis) / 100);
+    totTtc=(parseInt(this.qte) * pr.pu) * (1 - (parseInt(this.tauxRemis) / 100)*(1+parseInt(this.TVA)/100))
+    taxe=(parseInt(this.qte) * pr.pu) * (1 - (parseInt(this.tauxRemis) / 100)*(parseInt(this.TVA)/100));
+    this.totLiggneHT = (parseInt(this.qte) * pr.pu) * (1 - parseInt(this.tauxRemis) / 100);
     for (let i = 0; i < this.data.length; i++) {
       if (this.data[i].codeArt == pr.codeArt) {
         this._snackBar.open(
@@ -236,12 +246,17 @@ export class Page3Component implements OnInit, AfterViewInit {
       "codeArt": pr.codeArt,
       "libelle": pr.libelle,
       "puAgents": pr.pu,
-      "tauxRemis": parseInt(this.tauxRemis)
+      "tauxRemis": parseInt(this.tauxRemis),
+      "totLigneHT": this.totLiggneHT,
+      "remis":remis,
+      "totTtc":totTtc,
+      "taxe":taxe
     });
-    localStorage.setItem('devis', JSON.stringify(this.data));
+    localStorage.setItem('devis', JSON.stringify(this.data))
     this.dataSource = new MatTableDataSource(this.data);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.calucleDevis();
     return true
   }
   delete(index: number) {
@@ -250,6 +265,7 @@ export class Page3Component implements OnInit, AfterViewInit {
     this.dataSource = new MatTableDataSource(this.data);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
+    this.calucleDevis;
   }
   resetDevis() {
     const retrievedObject: any = localStorage.getItem('devis')
@@ -257,15 +273,28 @@ export class Page3Component implements OnInit, AfterViewInit {
     this.dataSource = new MatTableDataSource(this.data);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    /* localStorage.removeItem('devis'); */
   }
   addTaux() {
-    if (parseInt(this.tauxRemis) <100)
-    this.tauxRemis =""+(parseInt(this.tauxRemis) + 1);
+    if (parseInt(this.tauxRemis) < 100)
+      this.tauxRemis = "" + (parseInt(this.tauxRemis) + 1);
   }
   removeTaux() {
     if (parseInt(this.tauxRemis) > 0)
-      this.tauxRemis = ""+(parseInt(this.tauxRemis) - 1);
+      this.tauxRemis = "" + (parseInt(this.tauxRemis) - 1);
+  }
+  calucleDevis(){
+    let remis=0;
+    let taxe=0;
+    let totTtc=0;
+    for (let i = 0; i < this.data.length; i++) 
+    {
+      remis=remis+this.data[i].remis;
+      taxe=taxe+this.data[i].taxe;
+      totTtc=totTtc+this.data[i].totTtc;
+    }
+    this.totRemis=remis;
+    this.totTaxes=taxe;
+    this.totalTtc=totTtc;
   }
   passerDevis() {
     this.loadingListeDevis = true;
@@ -275,55 +304,61 @@ export class Page3Component implements OnInit, AfterViewInit {
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(localStorage.jwt);
     let dNbr = decodedToken["dealerNbr"];
+
     let list: any = [];
-    for (let i = 0; i < this.data.length; i++) {
-      list.unshift({ "codArt": "" + this.data[i].codeArt, "qte": this.data[i].qte })
+    let totRemis = 0;
+    let totTaxes = 0;
+    for (let i = 0; i < save.length; i++) {
+      list.unshift({ "codArt": "" + save[i].codeArt, "qte": save[i].qte })
+      totRemis = totRemis + (parseInt(save[i].qte) * save[i].puAgents * (save[i].tauxRemis / 100));
+      totTaxes = totTaxes + (parseInt(save[i].qte) * save[i].puAgents * (1 - save[i].tauxRemis / 100));
     }
+    console.log(totRemis)
     let body = {
       "dealerNbr": dNbr,
       "nomClient": this.nomClien,
       "idFisc": this.idFiscale,
-      "toRemise": this.tauxRemis,
+      "toRemise": totRemis,
       "toTaxes": this.tauxTaxes,
       "timbre": this.timbre,
       "listeArt": list,
     }
-    this.devis.addDevis(body).subscribe((respons: any) => {
-      this.data = [];
-      if (respons == 1) {
-        this._snackBar.open(
-          "Devis Enregistreée ✔", "", {
-          verticalPosition: 'top',
-          panelClass: 'green-snackbar',
-          duration: 5000,
-        });
-        localStorage.removeItem('devis');
-      }
-      else {
-        this._snackBar.open(
-          "Echec ✘ ", "", {
-          verticalPosition: 'top',
-          panelClass: 'red-snackbar',
-          duration: 5000,
-        });
-        this.data = save;
-        this.dataSource = new MatTableDataSource(this.data);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort
-      }
-    }, (error) => {
-      this.loadingListeDevis = false;
-      this._snackBar.open(
-        (error.status == 0) ? "connexion au serveur impossible !!" : error.error.message, "", {
-        verticalPosition: 'top',
-        panelClass: 'red-snackbar',
-        duration: 5000,
-      });
-      this.data = save;
-      this.dataSource = new MatTableDataSource(this.data);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort
-    })
+    /*  this.devis.addDevis(body).subscribe((respons: any) => {
+       this.data = [];
+       if (respons == 1) {
+         this._snackBar.open(
+           "Devis Enregistreée ✔", "", {
+           verticalPosition: 'top',
+           panelClass: 'green-snackbar',
+           duration: 5000,
+         });
+         localStorage.removeItem('devis');
+       }
+       else {
+         this._snackBar.open(
+           "Echec ✘ ", "", {
+           verticalPosition: 'top',
+           panelClass: 'red-snackbar',
+           duration: 5000,
+         });
+         this.data = save;
+         this.dataSource = new MatTableDataSource(this.data);
+         this.dataSource.paginator = this.paginator;
+         this.dataSource.sort = this.sort
+       }
+     }, (error) => {
+       this.loadingListeDevis = false;
+       this._snackBar.open(
+         (error.status == 0) ? "connexion au serveur impossible !!" : error.error.message, "", {
+         verticalPosition: 'top',
+         panelClass: 'red-snackbar',
+         duration: 5000,
+       });
+       this.data = save;
+       this.dataSource = new MatTableDataSource(this.data);
+       this.dataSource.paginator = this.paginator;
+       this.dataSource.sort = this.sort
+     }) */
   }
 
 }

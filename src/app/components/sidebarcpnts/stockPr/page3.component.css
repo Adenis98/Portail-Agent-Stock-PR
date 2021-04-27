@@ -337,7 +337,6 @@ table {
 }
 
 td, th {
-  width: 25%;
   text-align: center !important;
 }
 
@@ -421,6 +420,7 @@ h1
 }
 .devisFooter
 {
+  width: 100%;
   right: 30px;
   position: absolute;
   bottom: 12px;
@@ -445,3 +445,33 @@ h1
   top: -11px;
   left: 35px;
 }
+/************print style****************/
+.headerDevis
+{
+  height: 120px;
+  color: #364547;
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-size: 16px;
+}
+.printDevisSection
+{    
+  padding: 10px;
+  padding-top: 50px;
+  background-color: white;
+  height: 100%;
+  width: 150%;
+}
+.tableFooter
+{
+  background-color: #36454710;
+  height: 45px;
+  font-weight: 700;
+}
+.footerLeft{
+  border-bottom-left-radius: 20px !important;
+}
+.footerRigth{
+  border-bottom-right-radius: 20px !important;
+}
+/**************************************/
