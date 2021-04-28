@@ -73,6 +73,8 @@ export class SidebarComponent implements OnInit {
 
     if (this.router.url == "/dashboard")
       this.dsh = true;
+    if (this.router.url == "/comptes")
+    this.comptes = true;
 
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(localStorage.jwt);

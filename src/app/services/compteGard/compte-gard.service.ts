@@ -13,7 +13,7 @@ export class CompteGardService implements CanActivate {
     this.permis = decodedToken["permis"]; }
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean{
 
-    if(this.permis==1)
+    if(this.permis==3)
       return true;
     else
     {

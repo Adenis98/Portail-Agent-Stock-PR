@@ -34,7 +34,7 @@
             <ul class="list-unstyled ">
                 <div class="listUnstyledBgColor"></div>
                 <li class="item ">
-                    <a mat-flat-button routerLink="/dashboard" [class.active]="dsh" routerLinkActive="active"
+                    <a mat-flat-button routerLink="/dashboard" *ngIf="this.permis!=3" [class.active]="dsh" routerLinkActive="active"
                         class="linkBtn" [class]="(this.page2)?'topButtonRadius':''" (click)="dash('dashboard')">
 
                         <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar" class="iconButton">
@@ -44,7 +44,7 @@
                     </a>
                 </li>
                 <li class="item ">
-                    <a mat-flat-button routerLink="/page2" routerLinkActive="active" class="linkBtn"
+                    <a mat-flat-button routerLink="/page2" *ngIf="this.permis!=3"  routerLinkActive="active" class="linkBtn"
                         [class]="(this.page3)?'topButtonRadius':((this.dsh)?'botButtonRadius':'')"
                         (click)="dash('page2')">
                         <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar" class="iconButton">
@@ -54,7 +54,7 @@
                     </a>
                 </li>
                 <li class="item ">
-                    <a mat-flat-button routerLink="/page3" routerLinkActive="active" class="linkBtn"
+                    <a mat-flat-button routerLink="/page3" *ngIf="this.permis!=3"  routerLinkActive="active" class="linkBtn"
                         [class]="(this.page4)?'topButtonRadius':((this.page2)?'botButtonRadius':'')"
                         (click)="dash('page3')">
                         <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar" class="iconButton">
@@ -64,7 +64,7 @@
                     </a>
                 </li>
                 <li class="item ">
-                    <a mat-flat-button routerLink="/page4" routerLinkActive="active" class="linkBtn"
+                    <a mat-flat-button routerLink="/page4" *ngIf="this.permis!=3"  routerLinkActive="active" class="linkBtn"
                         [class]="(this.page3)?'botButtonRadius':((this.page5)?'topButtonRadius':'')"
                         (click)="dash('page4')">
                         <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar" class="iconButton">
@@ -74,7 +74,7 @@
                     </a>
                 </li>
                 <li class="item ">
-                    <a mat-flat-button routerLink="/page5" routerLinkActive="active" class="linkBtn"
+                    <a mat-flat-button routerLink="/page5" *ngIf="this.permis!=3"routerLinkActive="active" class="linkBtn"
                         [class]="(this.page4)?'botButtonRadius':((this.page6)?'topButtonRadius':'')"
                         (click)="dash('page5')">
                         <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar" class="iconButton"
@@ -86,7 +86,7 @@
                 </li>
                 
                 <li class="item ">
-                    <a mat-flat-button routerLink="/page6" routerLinkActive="active" class="linkBtn"
+                    <a mat-flat-button routerLink="/page6"*ngIf="this.permis!=3" routerLinkActive="active" class="linkBtn"
                         [class]="(this.page5)?'botButtonRadius':((this.page7)?'topButtonRadius':'')"
                          (click)="dash('page6')">
                         <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar" class="iconButton">
@@ -96,7 +96,7 @@
                     </a>
                 </li>
                 <li class="item ">
-                    <a mat-flat-button routerLink="/page7" routerLinkActive="active" class="linkBtn"
+                    <a mat-flat-button routerLink="/page7"*ngIf="this.permis!=3" routerLinkActive="active" class="linkBtn"
                         [class]="(this.page6)?'botButtonRadius':((this.comptes)?'topButtonRadius':'')"
                          (click)="dash('page7')">
                         <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar" class="iconButton">
@@ -105,13 +105,26 @@
                         Stock Local
                     </a>
                 </li>
+
+
+                <li class="item compteBott">
+                    <a mat-flat-button  class="linkBtn " style="background-color: #425C5A;;" disabled
+                        [class]="(this.comptes)?'topButtonRadius':''" >
+                    </a>
+                </li>
                 <li  class="item ">
-                    <a mat-flat-button routerLink="/comptes" routerLinkActive="active" class="linkBtn"
-                        [class]="(this.page7)?'botButtonRadius':''" (click)="dash('comptes')">
+                    <a mat-flat-button routerLink="/comptes" *ngIf="this.permis==3" routerLinkActive="active" class="linkBtn"
+                        [class]="(this.page7)?'botButtonRadius':''" 
+                        (click)="dash('comptes')">
                         <mat-icon aria-hidden="false" [class.iconButtonHided]="hideSideBar" class="iconButton">
                             manage_accounts
                         </mat-icon>
                         Comptes
+                    </a>
+                </li>
+                <li class="item compteBott">
+                    <a mat-flat-button  class="linkBtn " style="background-color: #425C5A;;" disabled
+                        [class]="(this.comptes)?'botButtonRadius':''" >
                     </a>
                 </li>
             </ul>

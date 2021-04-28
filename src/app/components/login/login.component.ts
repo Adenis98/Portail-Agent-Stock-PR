@@ -53,7 +53,13 @@ export class LoginComponent implements OnInit {
       this._snackBar.dismiss();
       this.app.showNavSide = true;
       setTimeout(() => {
-        this.router.navigate(['/dashboard']);
+        const helper = new JwtHelperService();
+        const decodedToken = helper.decodeToken(localStorage.jwt);
+        let permis = decodedToken["permis"];
+        if(permis==3)
+          this.router.navigate(['/comptes']);
+        else 
+          this.router.navigate(['/dashboard']);
       }, 1000);
 
     }, (error) => {
