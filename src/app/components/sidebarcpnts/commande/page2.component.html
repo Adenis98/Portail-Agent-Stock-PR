@@ -96,24 +96,24 @@
         <div class="col btn1">
         </div>
     </div>
-    <div *ngFor="let item of listeCmd ;let index=index">
+    <div *ngFor="let item of newList ;let index=index">
 
         <div class="row shadow tableHeader composant" [class]="(!detailValue[index])?'DetailHeader':''" @enterAnimation>
 
             <div class="col">
-                <div class="row BtnInvisible" (click)="openListePr(listeCmd[index].numCde)">
+                <div class="row BtnInvisible" (click)="openListePr(newList[index].numCde)">
                     <button class="BtnIN col-12" mat-button>ㅤ</button>
                 </div>
                 <div class="row">
                     <div class="col">
                         <div class="row">
-                            <div class="col-2"><span>{{listeCmd[index].numCde}}</span></div>
-                            <div class="col"><span>{{listeCmd[index].date_Cmd| date :'dd/MM/yyyy'}}</span></div>
-                            <div class="col"><span>{{listeCmd[index].heure_Cmd| date :'HH:mm:ss'}}</span></div>
-                            <div class="col-2"><span>{{(listeCmd[index].type_Cmd==0)?'commande normale':'commande
+                            <div class="col-2"><span>{{newList[index].numCde}}</span></div>
+                            <div class="col"><span>{{newList[index].date_Cmd| date :'dd/MM/yyyy'}}</span></div>
+                            <div class="col"><span>{{newList[index].heure_Cmd| date :'HH:mm:ss'}}</span></div>
+                            <div class="col-2"><span>{{(newList[index].type_Cmd==0)?'commande normale':'commande
                                     ferme'}}</span></div>
-                            <div class="col"><span>{{listeCmd[index].ref_Cmd}}</span></div>
-                            <div class="col-2"><span>{{this.formatMoney(listeCmd[index].totHt)}}</span></div>
+                            <div class="col"><span>{{newList[index].ref_Cmd}}</span></div>
+                            <div class="col-2"><span>{{this.formatMoney(newList[index].totHt)}}</span></div>
                         </div>
                     </div>
                     <div class="btn2">
@@ -122,8 +122,8 @@
                         </button>
                     </div>
                     <div class="col btn1">
-                        <button *ngIf="listeCmd[index].annulee ==0" mat-mini-fab class="addPanier deleteBtn"
-                            [color]="(!detailValue[index])?'':'primary'" (click)="openDialog(listeCmd[index].numCde)">
+                        <button *ngIf="newList[index].annulee ==0" mat-mini-fab class="addPanier deleteBtn"
+                            [color]="(!detailValue[index])?'':'primary'" (click)="openDialog(newList[index].numCde)">
                             <mat-icon class="addPanierIcon deleteBtn">block</mat-icon>
                         </button>
                     </div>
@@ -160,32 +160,50 @@
                 </div>
                 <div class="row composant composantMore">
                     <div class="col">
-                        <mat-icon>{{(listeCmd[index].enregistree==1)?'task_alt':'highlight_off'}}</mat-icon>
+                        <mat-icon>{{(newList[index].enregistree==1)?'task_alt':'highlight_off'}}</mat-icon>
                     </div>
                     <div class="col-2">
-                        <span>{{listeCmd[index].ref_Enregistrement}}</span>
+                        <span>{{newList[index].ref_Enregistrement}}</span>
                     </div>
                     <div class="col-2">
-                        <span>{{listeCmd[index].date_Enregistrement| date :'dd/MM/yyyy'}}</span>
+                        <span>{{newList[index].date_Enregistrement| date :'dd/MM/yyyy'}}</span>
                     </div>
                     <div class="col">
-                        <mat-icon>{{(listeCmd[index].livree==1)?'task_alt':'highlight_off'}}</mat-icon>
+                        <mat-icon>{{(newList[index].livree==1)?'task_alt':'highlight_off'}}</mat-icon>
                     </div>
                     <div class="col">
-                        <span>{{ listeCmd[index].date_Liv | date :'dd/MM/yyyy'}}</span>
+                        <span>{{ newList[index].date_Liv | date :'dd/MM/yyyy'}}</span>
                     </div>
                     <div class="col">
-                        <mat-icon>{{(listeCmd[index].facturee==1)?'task_alt':'highlight_off'}}</mat-icon>
+                        <mat-icon>{{(newList[index].facturee==1)?'task_alt':'highlight_off'}}</mat-icon>
                     </div>
                     <div class="col">
-                        <span>{{ listeCmd[index].date_Facture| date :'dd/MM/yyyy'}}</span>
+                        <span>{{ newList[index].date_Facture| date :'dd/MM/yyyy'}}</span>
                     </div>
                     <div class="col">
-                        <span>{{ this.formatMoney(listeCmd[index].montant_Facture)}}</span>
+                        <span>{{ this.formatMoney(newList[index].montant_Facture)}}</span>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row shadow tableHeader bottomButtons"  @enterAnimation>
+        <div class="col" style="text-align: left;">
+            <button mat-icon-button [disabled]="this.numPage==1" (click)="this.pagePrec()" >
+                <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+        </div>
+        
+        <div class="col" style="font-size: 17px;padding-top:9px">
+            P A G E &nbsp;&nbsp; {{this.numPage}}
+        </div>
+
+        <div class="col" style="text-align: right;" >
+            <button mat-icon-button [disabled]="(this.numPage*10)+1>this.listeCmd.length" (click)="this.pageSuiv()">
+                <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+        </div>
+        
     </div>
     <div *ngIf="loading" class="row tableHeader cploading shadow composant" style="padding-top: 10px;">
         <div class="col">
