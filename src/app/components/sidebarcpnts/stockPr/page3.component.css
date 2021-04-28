@@ -1,6 +1,7 @@
 *{
   user-select: none;
 }
+
 div.tableHeader
 {
   background-color: #364547;
@@ -328,7 +329,6 @@ input::-webkit-outer-spin-button {
 }
 table {
   width: 100%;
-  
 }
 
 .mat-form-field {
@@ -446,32 +446,68 @@ h1
   left: 35px;
 }
 /************print style****************/
+@media print {
+  /* print only styling */
+  }
 .headerDevis
 {
-  height: 120px;
+  height: 200px;
   color: #364547;
   font-weight: 500;
   letter-spacing: 1px;
   font-size: 16px;
+  margin: auto;
 }
 .printDevisSection
-{    
-  padding: 10px;
+{ 
+  padding: 50px;
   padding-top: 50px;
   background-color: white;
   height: 100%;
-  width: 150%;
+  width: 100%!important;
 }
-.tableFooter
+.tableHeaderDevis
 {
-  background-color: #36454710;
+  height:45px ;
+  border: 1px solid  rgba(128, 128, 128, 0.186);
+  border-bottom: 0px;
+  background-color: #425c5a0d;
+  padding: 12px;
+  color: #333333;
+  font-weight: 500;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  text-align: center;
+  font-size: 18px;
+}
+.remaqueText
+{
+  text-align: center;
+  font-size: 10px;
+  color:  gray;
+  margin-top: 30px;
+  padding: 0px;
+}
+.colunDevis
+{
+  border-top:rgba(128, 128, 128, 0.186) 1px solid;
   height: 45px;
-  font-weight: 700;
+  padding: 12px;
+  text-align: center;
+  color: #333333;
+  font-weight: 500;
 }
-.footerLeft{
-  border-bottom-left-radius: 20px !important;
-}
-.footerRigth{
-  border-bottom-right-radius: 20px !important;
-}
+.titlePrint
+{
+  font-weight: 500;
+  margin: auto;
+  width: 150px;
+  text-align: center;
+  height: 60px;
+  font-size: 25px;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 15px;
+  margin-bottom: 70px;
+}  
 /**************************************/

@@ -224,8 +224,9 @@
         <mat-paginator hidePageSize="true" class="tableFooter"></mat-paginator>
     </div>
 </div>
-<div  id="print-section">
+<div id="print-section" >
     <div class="container printDevisSection">
+        <div class="titlePrint">DEVIS</div>
         <div class="headerDevis">
             <div class="row">
                 <div class="col">
@@ -234,44 +235,43 @@
                 </div>
                 <div class="col">
                     <div class="row">
-                        <div class="col">N°Client :</div>
+                        <div class="col" style="text-align: right;">N°Client :</div>
                         <div class="col"> 2255322586</div>
                     </div>
                     <div class="row">
-                        <div class="col">N°Devis :</div>
+                        <div class="col" style="text-align: right;">N°Devis :</div>
                         <div class="col"> 6532646311</div>
                     </div>
                     <div class="row">
-                        <div class="col">Date Devis :</div>
+                        <div class="col" style="text-align: right;">Date Devis :</div>
                         <div class="col"> 06/07/1998</div>
                     </div>
                 </div>
             </div>
         </div>
-        <div>NB: Le prix est donné à titre indicatif, le prix définitif sera celui du jour de la facturation.</div>
-        <table cellspacing="0" cellpadding="0" class="table table-striped">
-            <tr>
-                <th class="tableHeaderleft">Ligne</th>
-                <th>Réf Art</th>
-                <th>libelle</th>
-                <th>Qte</th>
-                <th>PU</th>
-                <th class="tableHeaderRighte">Total HT</th>
-            </tr>
-            <tr class="tableData" *ngFor="let item of data ;let index=index" >
-                <td style="border-top-left-radius: 20px !important;
-                border-bottom-left-radius: 20px !important;" class="data">{{index+1}}</td>
-                <td class="data">{{data[index].codeArt}}</td>
-                <td class="data">{{data[index].libelle}}</td>
-                <td class="data">{{data[index].qte}}</td>
-                <td class="data">{{this.formatMoney(data[index].puAgents)}}</td>
-                <td class="data " style="border-top-right-radius: 20px !important;
-                border-bottom-right-radius: 20px !important;">{{this.formatMoney(data[index].totLigneHT)}}</td>
-            </tr>
-            <tr *ngIf="!loading" class="tableFooter">
-                <td colspan="5" class="footerLeft text-left">Totale TTC </td>
-                <td class="footerRigth"> {{this.formatMoney(this.totalTtc)}}</td>
-            </tr>
-        </table>
+        <div class="tableDevis">
+            <div class="tableHeaderDevis row">
+                <div class="col">Ligne</div>
+                <div class="col">Réf Art</div>
+                <div class="col">libelle</div>
+                <div class="col">Qte</div>
+                <div class="col">PU</div>
+                <div class="col">Total Ligne HT</div>
+            </div>
+            <div *ngFor="let item of data ;let index=index" class="row">
+                <div class="col colunDevis" style="border-left: rgba(128, 128, 128, 0.186) 1px solid;">{{index+1}}</div>
+                <div class="col colunDevis">{{data[index].codeArt}}</div>
+                <div class="col colunDevis">{{data[index].libelle}}</div>
+                <div class="col colunDevis">{{data[index].qte}}</div>
+                <div class="col colunDevis">{{this.formatMoney(data[index].puAgents)}}</div>
+                <div class="col colunDevis" style="border-right: rgba(128, 128, 128, 0.186) 1px solid;">{{this.formatMoney(data[index].totLigneHT)}}</div>
+            </div>
+            <div class="row" style="border: rgba(128, 128, 128, 0.186) 1px solid;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;height: 45px;padding: 12px;color: #313131;font-size: 18px;font-weight: 500; background-color: #425c5a0d;">
+                <div class="col-10" style="text-align: right;">Totale TTC :</div>
+                <div class="col-2" style="text-align: center;"> {{this.formatMoney(this.totalTtc)}}</div>
+            </div>
+        </div>
+        <div class="remaqueText">NB: Le prix est donné à titre indicatif, le prix définitif sera celui du jour de la
+            facturation.</div>
     </div>
 </div>
