@@ -194,3 +194,7 @@ button{
     color: white !important;
     background-color:#415d63 !important;
 }
+
+.bottomButtons{
+    padding : 5px;
+}

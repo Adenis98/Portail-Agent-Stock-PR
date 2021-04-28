@@ -13,17 +13,7 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './page2.component.html',
   styleUrls: ['./page2.component.css'],
   animations: [
-    trigger('ligneCommandAnim', [
-      transition('* => void', animate('0.5s 0.2s ease-in',
-        style([{ transform: 'translateX(200%)' }])
-      )
-      ),
-      transition('void => *',
-        [style([{ transform: 'translateX(-200%)', opacity: '0' }])
-          , animate('0.5s 0.2s ease-out'
-          )]
-      )
-    ]),
+   
     trigger(
       'enterAnimation', [
       transition(':enter', [
@@ -50,14 +40,16 @@ import { FormControl, FormGroup } from '@angular/forms';
   ]
 })
 export class Page2Component implements OnInit {
-  moreDetailtest: any = [true]
-  detailValue: any = [true]
+  moreDetailtest: any = [true];
+  detailValue: any = [true];
   loading = true;
   loadingRecherchBtn = false;
   valide: boolean = false;
   /***commande variable***********/
-  listeCmd: any = []
-  sauvgardListe: any = []
+  numPage :number =1; 
+  newList:any = [];
+  listeCmd: any = [];
+  sauvgardListe: any = [];
 
   typeCmd = "";
   numCmd = "";
@@ -155,6 +147,7 @@ export class Page2Component implements OnInit {
         this.filtre()
         localStorage.removeItem('saveList');
       }
+      this.initialiserNewList();
     }, (error) => {
       this.loading = false;
       this._snackBar.open(
@@ -253,7 +246,7 @@ export class Page2Component implements OnInit {
     }
     return false;
   }
-  /* datetest=new Date(2021, 3, 17) */
+  /******************************************* datetest=new Date(2021, 3, 17) ************************************************/
   filtre() {
     let listeCmdAux: any = [];
     this.listeCmd = this.sauvgardListe;
@@ -419,13 +412,49 @@ export class Page2Component implements OnInit {
       }
     }
     else {
-      listeCmdAux = this.sauvgardListe
+      listeCmdAux = this.sauvgardListe;
     }
     this.listeCmd = listeCmdAux;
+    this.initialiserNewList();
+  }
+  initialiserNewList()
+  {
+    this.newList= new Array();
+    let i : number ; 
+    for(i = 0 ; i<10&&i<this.listeCmd.length; i++)
+    {
+      let val = this.listeCmd[i] ; 
+
+      this.newList.push(Object.assign({}, val));
+    }
+    this.numPage = 1 ; 
+  }
+  pageSuiv()
+  {
+    let i : number ; 
+    this.newList= new Array();
+    for(i = (this.numPage*10) ; i< this.listeCmd.length && i<=(this.numPage*10)+10 ; i++)
+    {
+      let val = this.listeCmd[i] ; 
+      this.newList.push(Object.assign({}, val));
+    }
+    this.numPage++;
+    console.log(this.newList);
+    
   }
 
-
-
+  pagePrec()
+  {
+    let i : number ; 
+    this.newList= new Array();
+    for(i = (this.numPage*10)-20 ; i<(this.numPage*10)-10; i++)
+    {
+      let val = this.listeCmd[i] ; 
+      this.newList.push(Object.assign({}, val));
+    }
+    this.numPage--;
+    console.log(this.newList);
+  }
 }
 @Component({
   selector: 'dialog-overview-example-dialog',
