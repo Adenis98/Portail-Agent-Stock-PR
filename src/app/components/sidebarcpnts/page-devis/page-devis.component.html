@@ -1,0 +1,53 @@
+<div class="container containerPadding">
+    
+    <div class="resultats">
+        Devis (0)
+    </div>
+
+    <div class="row tableHeader shadow">
+        <div class="col-2">
+            N°Cmd
+        </div>
+        <div class="col">
+            Date Cmd
+        </div>
+        <div class="col">
+            Heure Cmd
+        </div>
+        <div class="col-2">
+            Type Cmd
+        </div>
+        <div class="col">
+            Réf Cmd
+        </div>
+        <div class="col-2">
+            Total HT
+        </div>
+        
+    </div>
+    
+    <div *ngIf="true" class="row tableHeader shadow composant" style="padding-top: 10px;">
+        <div class="col">
+            <mat-spinner style="margin:auto;top: 0px;" diameter="30"></mat-spinner>
+        </div>
+    </div>
+    <div class="row shadow tableHeader bottomButtons"  >
+        <div class="col" style="text-align: left;">
+            <button mat-icon-button [disabled]="false"  >
+                <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+        </div>
+        
+        <div class="col" style="font-size: 17px;padding-top:9px">
+            P A G E &nbsp;&nbsp; 1
+        </div>
+
+        <div class="col" style="text-align: right;" >
+            <button mat-icon-button [disabled]="false" >
+                <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+        </div>
+        
+    </div>
+</div>
+

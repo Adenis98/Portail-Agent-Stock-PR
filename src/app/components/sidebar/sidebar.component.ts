@@ -35,6 +35,7 @@ export class SidebarComponent implements OnInit {
   public page4 = false;
   public page5 = false;
   public page6 = false;
+  public page7 = false;
   public comptes = false;
   public avatar: any = "";
   public checkImg = false;
@@ -110,32 +111,37 @@ export class SidebarComponent implements OnInit {
 
     if (current == "dashboard") {
       this.dsh = true;
-      this.page2 = this.page3 = this.page4 = this.page5 = this.comptes = this.page6 = false;
+      this.page2 = this.page3 = this.page4 = this.page5 = this.comptes = this.page6 =this.page7  = false;
     }
     if (current == "page2" || this.checkIfItsDetailCmdPage(current)) {
       this.page2 = true;
-      this.dsh = this.page3 = this.page4 = this.page5 = this.comptes = this.page6 = false;
+      this.dsh = this.page3 = this.page4 = this.page5 = this.comptes = this.page6 =this.page7  = false;
     }
     if (current == "page3") {
       this.page3 = true;
-      this.dsh = this.page2 = this.page4 = this.page5 = this.comptes = this.page6 = false;
+      this.dsh = this.page2 = this.page4 = this.page5 = this.comptes = this.page6 =this.page7  = false;
     }
     if (current == "page4") {
       this.page4 = true;
-      this.dsh = this.page2 = this.page3 = this.page5 = this.comptes = this.page6 = false;
+      this.dsh = this.page2 = this.page3 = this.page5 = this.comptes = this.page6 =this.page7  = false;
     }
     if (current == "page5") {
       this.page5 = true;
-      this.dsh = this.page2 = this.page3 = this.page4 = this.comptes = this.page6 = false;
+      this.dsh = this.page2 = this.page3 = this.page4 = this.comptes = this.page6 = this.page7  =false;
     }
     if(current == "page6")
     {
       this.page6 = true ;
-      this.dsh = this.page2 = this.page3 = this.page4 = this.comptes= this.page5  = false;
+      this.dsh = this.page2 = this.page3 = this.page4 = this.comptes= this.page5  = this.page7  =false;
+    }
+    if(current == "page7")
+    {
+      this.page7 = true ;
+      this.dsh = this.page2 = this.page3 = this.page4 = this.comptes= this.page5  = this.page6 = false;
     }
     if (current == "comptes") {
       this.comptes = true;
-      this.dsh = this.page2 = this.page3 = this.page4 = this.page5 =this.page6 = false;
+      this.dsh = this.page2 = this.page3 = this.page4 = this.page5 =this.page6 = this.page7  = false;
     }
   }
 

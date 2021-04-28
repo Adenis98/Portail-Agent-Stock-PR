@@ -1,0 +1,49 @@
+div.containerPadding
+{
+    padding-top: 70px;
+    margin: auto;
+    padding-bottom: 50px;
+    width: 95%;
+    height: 100%;
+    transition: 0.9s;
+}
+.resultats
+{
+    padding-top: 25px;
+    padding-left: 10px;
+    font-size: 18px;
+    text-transform: uppercase;
+    color: #415959;
+    width: 95%;
+    margin: auto;
+    font-weight: 500;
+}
+.tableHeader
+{
+  background-color: #364547;
+  border-radius: 20px;
+  height: 50px;
+  text-align: center;
+  width:95%;
+  min-width: 950px;
+  padding: 13px;
+  margin:auto;
+  margin-top: 20px;
+  color: #d6a217;
+  font-weight: 500;
+  font-size: 15px;
+  padding-top: 16px;
+  user-select: none;
+  transition: ease-in-out 0.3s
+}
+div.composant
+{
+  background-color: white;
+  margin-top: 10px;
+  color: #415959;
+  position: relative;
+  font-size: 12px;
+}
+.bottomButtons{
+    padding : 5px;
+}
