@@ -14,6 +14,8 @@ import { ComptesComponent } from './components/sidebarcpnts/comptes/comptes.comp
 import { Page6Component } from './components/sidebarcpnts/stockLocal/page6.component';
 import { CompteGardService } from './services/compteGard/compte-gard.service';
 import { DetailPageComponent } from './components/sidebarcpnts/commande/cmdDetail/detail-page/detail-page.component';
+import { PageDevisComponent } from './components/sidebarcpnts/page-devis/page-devis.component';
+
 
 const routes: Routes = [
   { 
@@ -38,21 +40,26 @@ const routes: Routes = [
   
   {
     path: "page3",
-    component: Page3Component,
+    component: PageDevisComponent,
     canActivate: [AuthGuardService]
   },
   {
     path: "page4",
-    component: Page4Component,
+    component: Page3Component,
     canActivate: [AuthGuardService]
   },
   {
     path: "page5",
-    component: Page5Component,
+    component: Page4Component,
     canActivate: [AuthGuardService]
   },
   {
     path: "page6",
+    component: Page5Component,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: "page7",
     component: Page6Component,
     canActivate: [AuthGuardService]
   },

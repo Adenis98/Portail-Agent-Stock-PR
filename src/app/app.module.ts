@@ -38,6 +38,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ChartsModule } from 'ng2-charts';
 import { NgxPrintModule } from 'ngx-print';
+import { PageDevisComponent } from './components/sidebarcpnts/page-devis/page-devis.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,6 +56,7 @@ import { NgxPrintModule } from 'ngx-print';
     Page6Component,
     DetailPageComponent,
     DialogAnnuler,
+    PageDevisComponent,
    
   ],
   imports: [
