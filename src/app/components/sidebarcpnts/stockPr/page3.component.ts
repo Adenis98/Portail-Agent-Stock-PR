@@ -67,10 +67,10 @@ export class Page3Component implements OnInit, AfterViewInit {
   tauxRemis = "0";
   addDevis: boolean = true;
   totLiggneHT: number = 0;
-  nomClien: any;
+  nomClient: any;
   idFiscale: any;
   tauxTaxes: any;
-  timbre: any;
+  timbre =0.6;
   loadingListeDevis: boolean = false;
   constructor(
     public dialog: MatDialog,
@@ -316,14 +316,14 @@ export class Page3Component implements OnInit, AfterViewInit {
     console.log(totRemis)
     let body = {
       "dealerNbr": dNbr,
-      "nomClient": this.nomClien,
+      "nomClient": this.nomClient,
       "idFisc": this.idFiscale,
       "toRemise": totRemis,
       "toTaxes": this.tauxTaxes,
       "timbre": this.timbre,
       "listeArt": list,
     }
-    /*  this.devis.addDevis(body).subscribe((respons: any) => {
+     this.devis.addDevis(body).subscribe((respons: any) => {
        this.data = [];
        if (respons == 1) {
          this._snackBar.open(
@@ -358,7 +358,7 @@ export class Page3Component implements OnInit, AfterViewInit {
        this.dataSource = new MatTableDataSource(this.data);
        this.dataSource.paginator = this.paginator;
        this.dataSource.sort = this.sort
-     }) */
+     })
   }
 
 }

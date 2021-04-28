@@ -121,7 +121,7 @@
             <div class="row">
                 <mat-form-field class="col-3">
                     <mat-label>Nom Client</mat-label>
-                    <input required [(ngModel)]="nomClien" maxlength="8" matInput placeholder="Ex. Youssef"
+                    <input required [(ngModel)]="nomClient" maxlength="8" matInput placeholder="Ex. Youssef"
                         name="nomClient">
                 </mat-form-field>
 
@@ -224,24 +224,27 @@
         <mat-paginator hidePageSize="true" class="tableFooter"></mat-paginator>
     </div>
 </div>
-<div id="print-section" >
-    <div class="container printDevisSection">
+<div id="print-section" hidden >
+    <div class="printDevisSection">
         <div class="titlePrint">DEVIS</div>
         <div class="headerDevis">
             <div class="row">
-                <div class="col">
-                    <div class="col">Nom Client : youssef jobrane </div>
-                    <div class="col">ID Fiscal : 0000055466</div>
+                <div class="col-8">
+                    <div>Nom Client : {{this.nomClient}}</div>
+                    <br>
+                    <div>ID Fiscal &nbsp; &nbsp; : {{this.idFiscale}}</div>
                 </div>
                 <div class="col">
                     <div class="row">
                         <div class="col" style="text-align: right;">N°Client :</div>
                         <div class="col"> 2255322586</div>
                     </div>
+                    <br>
                     <div class="row">
                         <div class="col" style="text-align: right;">N°Devis :</div>
                         <div class="col"> 6532646311</div>
                     </div>
+                    <br>
                     <div class="row">
                         <div class="col" style="text-align: right;">Date Devis :</div>
                         <div class="col"> 06/07/1998</div>
