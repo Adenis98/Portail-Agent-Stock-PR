@@ -64,16 +64,16 @@ h1
 }
 .backBtn
 {
-  background-color: #415959;
-  margin: auto;
-  margin-top:20px;
+  background-color: #ca9b1b;
+  margin-top: 20px;
   border-radius: 20px;
   height: 45px;
   width: 150px;
-  color: #d6a217;
+  color: #364547;
   font-weight: 400;
   font-size: 16px;
   letter-spacing: 2px;
+  margin-left: 20px;
 }
 
 .tableData:hover
@@ -217,3 +217,96 @@ h1
 }
 
 /******/
+/************print style****************/
+.headerDevis
+{
+  height: 200px;
+  color: #364547;
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-size: 16px;
+  margin: auto;
+}
+.printDevisSection
+{ 
+  padding: 50px;
+  padding-top: 50px;
+  background-color: white;
+  height: 100%;
+  width: 100%!important;
+}
+.tableHeaderDevis
+{
+  height:45px ;
+  border: 1px solid  rgba(128, 128, 128, 0.186);
+  border-bottom: 0px;
+  background-color: #425c5a0d;
+  padding: 12px;
+  color: #333333;
+  font-weight: 500;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  text-align: center;
+  font-size: 18px;
+}
+.remaqueText
+{
+  text-align: center;
+  font-size: 10px;
+  color:  gray;
+  margin-top: 30px;
+  padding: 0px;
+}
+.colunDevis
+{
+  border-top:rgba(128, 128, 128, 0.186) 1px solid;
+  height: 45px;
+  padding: 12px;
+  text-align: center;
+  color: #333333;
+  font-weight: 500;
+}
+.titlePrint
+{
+  font-weight: 500;
+  margin: auto;
+  width: 400px;
+  text-align: center;
+  height: 60px;
+  font-size: 25px;
+  padding: 10px;
+  border: 2px solid black;
+  border-radius: 15px;
+  margin-bottom: 70px;
+}  
+.printDevis
+{
+  background-color: #364547;
+  margin: auto;
+  margin-top:20px;
+  border-radius: 20px;
+  height: 45px;
+  width: 150px;
+  min-width: 150px;
+  color: white;
+  font-weight: 300;
+  font-size: 18px;
+  letter-spacing: 2px;
+  margin-left: 12px;
+}
+.printIcon
+{
+  color: #d6a217;
+}
+.printDevis:hover .printIcon
+{
+  color: white;
+  transition: 0.3s;
+}
+.pageBtn
+{
+  position: absolute;
+  right: 50px;
+  min-width: max-content;
+}
+/**************************************/

@@ -59,6 +59,7 @@ export class DetailPageComponent implements OnInit {
     this.refCmd = ref;
     this.getLigneCmd();
     this.getCmd();
+   
   }
   precedent() {
     this.router.navigate(['/page2']);
@@ -98,6 +99,7 @@ export class DetailPageComponent implements OnInit {
   getCmd() {
     this.cmd.getCmdDetail(this.refCmd).subscribe(response => {
       this.listCmd = response;
+      console.log(response)
     })
   }
 }

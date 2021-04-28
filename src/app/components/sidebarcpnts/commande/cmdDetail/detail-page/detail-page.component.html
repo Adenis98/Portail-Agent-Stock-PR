@@ -17,9 +17,10 @@
             </div>
             <span class="boxData">{{(this.listCmd.enregistree==1)?'Enregistrée':'Non Enregistrée'}}</span>
             <div class="row boxFooter">
-                <div *ngIf="this.listCmd.enregistree==0" >ㅤ</div>
+                <div *ngIf="this.listCmd.enregistree==0">ㅤ</div>
                 <span *ngIf="this.listCmd.enregistree==1" class="col">Réf:{{this.listCmd.ref_Enregistrement}}</span>
-                <span *ngIf="this.listCmd.enregistree==1" class="col">{{this.listCmd.date_Enregistrement| date :'dd/MM/yyyy'}}</span>
+                <span *ngIf="this.listCmd.enregistree==1" class="col">{{this.listCmd.date_Enregistrement| date
+                    :'dd/MM/yyyy'}}</span>
             </div>
         </div>
         <div class="col secondBox shadow" @enterAnimationLivrBox>
@@ -28,9 +29,9 @@
             </div>
             <span class="boxData">{{(this.listCmd.livree==1)?'Livrée':'Non Livrée'}}</span>
             <div class="row boxFooter">
-                <div *ngIf="this.listCmd.livree==0" >ㅤ</div>
+                <div *ngIf="this.listCmd.livree==0">ㅤ</div>
                 <span *ngIf="this.listCmd.livree==1" class="col">{{this.listCmd.date_Liv_S| date :'dd/MM/yyyy'}}</span>
-                <span *ngIf="this.listCmd.livree==1"  class="col">{{this.listCmd.date_Liv| date :'dd/MM/yyyy'}}</span>
+                <span *ngIf="this.listCmd.livree==1" class="col">{{this.listCmd.date_Liv| date :'dd/MM/yyyy'}}</span>
             </div>
         </div>
         <div class="col thirdBox shadow" @enterAnimationFactBox>
@@ -40,61 +41,133 @@
             <span class="boxData">{{(this.listCmd.facturee==1)?'Facturée':'Non Facturée'}}</span>
             <div *ngIf="this.listCmd.facturee==1">{{this.formatMoney(this.listCmd.montant_Facture)}}</div>
             <div class="row boxFooter">
-                <div *ngIf="this.listCmd.facturee==0" >ㅤ</div>
+                <div *ngIf="this.listCmd.facturee==0">ㅤ</div>
                 <span *ngIf="this.listCmd.facturee==1" class="col">N°{{this.listCmd.n_Facture}}</span>
-                <span *ngIf="this.listCmd.facturee==1"  class="col">{{this.listCmd.date_Facture| date :'dd/MM/yyyy'}}</span>
+                <span *ngIf="this.listCmd.facturee==1" class="col">{{this.listCmd.date_Facture| date
+                    :'dd/MM/yyyy'}}</span>
             </div>
         </div>
     </div>
 
-        <table cellspacing="0" cellpadding="0" class="table table-striped shadow">
-            <tr>
-                <th class="tableHeaderleft">Ligne</th>
-                <th>Réf Art</th>
-                <th>libelle</th>
-                <th>VIN</th>
-                <th>N°Or</th>
-                <th>Nom Client</th>
-                <th>Qte</th>
-                <th>Qte livreé</th>
-                <th>Qte Fact</th>
-                <th>PU</th>
-                <th class="tableHeaderRighte">Total HT</th>
-            </tr>
-            <tr class="tableData" *ngFor="let item of listePanier ;let index=index" >
-                <td style="border-top-left-radius: 20px !important;
+    <table cellspacing="0" cellpadding="0" class="table table-striped shadow">
+        <tr>
+            <th class="tableHeaderleft">Ligne</th>
+            <th>Réf Art</th>
+            <th>libelle</th>
+            <th>VIN</th>
+            <th>N°Or</th>
+            <th>Nom Client</th>
+            <th>Qte</th>
+            <th>Qte livreé</th>
+            <th>Qte Fact</th>
+            <th>PU</th>
+            <th class="tableHeaderRighte">Total HT</th>
+        </tr>
+        <tr class="tableData" *ngFor="let item of listePanier ;let index=index">
+            <td style="border-top-left-radius: 20px !important;
                 border-bottom-left-radius: 20px !important;" class="data">{{index+1}}</td>
-                <td class="data">{{listePanier[index].codeArt}}</td>
-                <td class="data">{{listePanier[index].libelle}}</td>
-                <td class="data">{{listePanier[index].vin}}</td>
-                <td class="data">{{listePanier[index].numInterv}}</td>
-                <td class="data">{{listePanier[index].nomClient}}</td>
-                <td class="data">{{listePanier[index].qte}}</td>
-                <td class="data">{{listePanier[index].qteLivree}}</td>
-                <td class="data">{{listePanier[index].qteFacturee}}</td>
-                <td class="data">{{this.formatMoney(listePanier[index].pu)}}</td>
-                <td class="data " style="border-top-right-radius: 20px !important;
+            <td class="data">{{listePanier[index].codeArt}}</td>
+            <td class="data">{{listePanier[index].libelle}}</td>
+            <td class="data">{{listePanier[index].vin}}</td>
+            <td class="data">{{listePanier[index].numInterv}}</td>
+            <td class="data">{{listePanier[index].nomClient}}</td>
+            <td class="data">{{listePanier[index].qte}}</td>
+            <td class="data">{{listePanier[index].qteLivree}}</td>
+            <td class="data">{{listePanier[index].qteFacturee}}</td>
+            <td class="data">{{this.formatMoney(listePanier[index].pu)}}</td>
+            <td class="data " style="border-top-right-radius: 20px !important;
                 border-bottom-right-radius: 20px !important;">{{this.formatMoney(listePanier[index].totLigneHt)}}</td>
-            </tr>
-            <tr *ngIf="!loading" class="tableFooter">
-                <td colspan="6" class="footerLeft text-left">Totale</td>
-                <td>{{this.totalQte}}</td>
-                <td>{{this.totalQteL}}</td>
-                <td>{{this.totalQteF}}</td>
-                <td></td>
-                <td class="footerRigth">{{this.formatMoney(listCmd.totHt)}}</td>
-            </tr>
-            <tr *ngIf="loading" >
-                <td colspan="11">
-                    <mat-spinner style="margin:auto" diameter="30"></mat-spinner>
-                </td>
-            </tr>
-        </table>
-
-    
-    <div>
+        </tr>
+        <tr *ngIf="!loading" class="tableFooter">
+            <td colspan="6" class="footerLeft text-left">Totale</td>
+            <td>{{this.totalQte}}</td>
+            <td>{{this.totalQteL}}</td>
+            <td>{{this.totalQteF}}</td>
+            <td></td>
+            <td class="footerRigth">{{this.formatMoney(listCmd.totHt)}}</td>
+        </tr>
+        <tr *ngIf="loading">
+            <td colspan="11">
+                <mat-spinner style="margin:auto" diameter="30"></mat-spinner>
+            </td>
+        </tr>
+    </table>
+    <div class="pageBtn">
+        <button type="submit" class="printDevis" mat-raised-button printSectionId="print-section"
+            styleSheetFile="./detail-page.component.css" [useExistingCss]="true" ngxPrint>
+            <mat-icon class="printIcon" aria-hidden="false"><span>
+                    print</span>
+            </mat-icon>
+            <span> Imprimer</span>
+        </button>
         <button type="submit" class="backBtn" mat-raised-button (click)="precedent()">
+            <mat-icon aria-hidden="false"><span>
+                arrow_back</span>
+        </mat-icon>
             <span>Precedent</span>
         </button>
+    </div>
+</div>
+
+
+
+
+
+<div id="print-section" hidden>
+    <div class="printDevisSection">
+        <div class="titlePrint">Commande Achat Pièces</div>
+        <div class="headerDevis">
+            <div class="row">
+
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col" style="text-align: right;">N° Cde :</div>
+                        <div class="col-9"> {{this.listCmd.numCde}}</div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col" style="text-align: right;">Date Cmd :</div>
+                        <div class="col-9"> {{this.listCmd.date_Creation| date :'dd/MM/yyyy'}}</div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col" style="text-align: right;">Réf Enreg. :</div>
+                        <div class="col-9">{{(this.listCmd.enregistree==1)?'this.listCmd.ref_Enregistrement':'Non
+                            Enregistrée !'}}</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div>Client &nbsp;&nbsp;&nbsp; &nbsp;&nbsp; : CL000078</div>
+                    <br>
+                    <div>Nom Client : AGENCE CHARGUIA</div>
+                </div>
+            </div>
+        </div>
+        <div class="tableDevis">
+            <div class="tableHeaderDevis row">
+                <div class="col">Ligne</div>
+                <div class="col">Réf Art</div>
+                <div class="col">libelle</div>
+                <div class="col">Qte</div>
+                <div class="col">PU</div>
+                <div class="col">Total Ligne HT</div>
+            </div>
+            <div *ngFor="let item of listePanier ;let index=index" class="row">
+                <div class="col colunDevis" style="border-left: rgba(128, 128, 128, 0.186) 1px solid;">{{index+1}}</div>
+                <div class="col colunDevis">{{listePanier[index].codeArt}}</div>
+                <div class="col colunDevis">{{listePanier[index].libelle}}</div>
+                <div class="col colunDevis">{{listePanier[index].qte}}</div>
+                <div class="col colunDevis">{{this.formatMoney(listePanier[index].pu)}}</div>
+                <div class="col colunDevis" style="border-right: rgba(128, 128, 128, 0.186) 1px solid;">
+                    {{this.formatMoney(listePanier[index].totLigneHt)}}</div>
+            </div>
+            <div class="row"
+                style="border: rgba(128, 128, 128, 0.186) 1px solid;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;height: 45px;padding: 12px;color: #313131;font-size: 18px;font-weight: 500; background-color: #425c5a0d;">
+                <div class="col-10" style="text-align: right;">Totale :</div>
+                <div class="col-2" style="text-align: center;"> {{this.formatMoney(this.listCmd.totHt)}}</div>
+            </div>
+        </div>
+        <div class="remaqueText">NB: Le prix est donné à titre indicatif, le prix définitif sera celui du jour de la
+            facturation.</div>
     </div>
 </div>

@@ -446,9 +446,6 @@ h1
   left: 35px;
 }
 /************print style****************/
-@media print {
-  /* print only styling */
-  }
 .headerDevis
 {
   height: 200px;
