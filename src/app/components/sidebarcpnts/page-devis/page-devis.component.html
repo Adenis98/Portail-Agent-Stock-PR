@@ -6,31 +6,60 @@
 
     <div class="row tableHeader shadow">
         <div class="col-2">
-            N°Cmd
-        </div>
-        <div class="col">
-            Date Cmd
-        </div>
-        <div class="col">
-            Heure Cmd
+            N°Devis
         </div>
         <div class="col-2">
-            Type Cmd
+            Date Devis
         </div>
-        <div class="col">
-            Réf Cmd
+        <div class="col-2">
+            Nom Client
+        </div>
+        <div class="col-2">
+            Id Fiscal
         </div>
         <div class="col-2">
             Total HT
         </div>
-        
+        <div class="col-2">
+            Total TTC
+        </div>
+    </div>
+    <div *ngFor="let devis of listeDevis ;let index=index" class="row shadow tableHeader composant">
+        <div class="col">
+            <div class="row">
+                <div class="row BtnInvisible">
+                    <button class="BtnIN col-12" mat-button>ㅤ</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    {{devis.numDevis}}
+                </div>
+                <div class="col-2">
+                    {{devis.date_Devis| date :'dd/MM/yyyy'}} {{devis.heure_Devis| date :'HH:mm'}}
+                </div>
+                <div class="col-2">
+                    {{devis.nomClient}}
+                </div>
+                <div class="col-2">
+                    {{devis.idFisc}}
+                </div>
+                <div class="col-2">
+                    {{this.formatMoney(devis.totHt)}}
+                </div>
+                <div class="col-2">
+                    {{this.formatMoney(devis.totTtc)}}
+                </div>
+            </div>
+        </div>
     </div>
     
-    <div *ngIf="true" class="row tableHeader shadow composant" style="padding-top: 10px;">
+    <div *ngIf="loadingList" class="row tableHeader shadow composant" style="padding-top: 10px;">
         <div class="col">
             <mat-spinner style="margin:auto;top: 0px;" diameter="30"></mat-spinner>
         </div>
     </div>
+
     <div class="row shadow tableHeader bottomButtons"  >
         <div class="col" style="text-align: left;">
             <button mat-icon-button [disabled]="false"  >

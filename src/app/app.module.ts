@@ -39,6 +39,7 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ChartsModule } from 'ng2-charts';
 import { NgxPrintModule } from 'ngx-print';
 import { PageDevisComponent } from './components/sidebarcpnts/page-devis/page-devis.component';
+import { DevisDetailComponent } from './components/sidebarcpnts/page-devis/devis-detail/devis-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,6 +59,7 @@ import { PageDevisComponent } from './components/sidebarcpnts/page-devis/page-de
     DialogAnnuler,
     PageDevisComponent,
     DialogImpression,
+    DevisDetailComponent,
   ],
   imports: [
     BrowserModule,

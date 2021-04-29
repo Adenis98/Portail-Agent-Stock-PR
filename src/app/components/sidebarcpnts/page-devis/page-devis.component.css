@@ -47,3 +47,19 @@ div.composant
 .bottomButtons{
     padding : 5px;
 }
+.BtnInvisible
+{
+    position: absolute;
+    height: 50px;
+    text-align: center;
+    left: 2px;
+    top: -16px;
+    right: 2px;
+    z-index: 1;
+}
+.BtnIN
+{
+    border-radius: 20px !important;
+    width:100%;
+    min-width: 950px;
+}
