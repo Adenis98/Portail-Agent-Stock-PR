@@ -24,6 +24,7 @@ export interface StockLocak {
   selector: 'app-page3',
   templateUrl: './page3.component.html',
   styleUrls: ['./page3.component.css'],
+  providers: [DatePipe],
   animations: [
     trigger('consulterStockAnim', [
       transition('* => void', animate('0.3s 0.2s ease-in',
@@ -71,6 +72,7 @@ export class Page3Component implements OnInit {
   idFiscale: any;
   timbre = 0.6;
   loadingListeDevis: boolean = false;
+  totalHt: any;
   constructor(
     public dialog: MatDialog,
     private stock: StockPrService,
@@ -218,10 +220,18 @@ export class Page3Component implements OnInit {
       this.calucleDevis();
     }
   }
+
   addToDevis(pr: any) {
     let remis = 0;
     let taxe = 0
     let totTtc = 0;
+    let dateCreation: any;
+    if (this.data.length == 0) {
+      dateCreation = new Date(Date.now());
+    }
+    else{
+      dateCreation=this.data[0].dateCreation;
+    }
     remis = (parseInt(this.qte) * pr.pu) * (parseInt(this.tauxRemis) / 100);
     totTtc = (parseInt(this.qte) * pr.pu) * (1 - (parseInt(this.tauxRemis) / 100) * (1 + parseInt(this.TVA) / 100))
     taxe = (parseInt(this.qte) * pr.pu) * (1 - (parseInt(this.tauxRemis) / 100) * (parseInt(this.TVA) / 100));
@@ -238,6 +248,7 @@ export class Page3Component implements OnInit {
       }
     }
     this.data.unshift({
+      "dateCreation": this.datepipe.transform(dateCreation, 'yyyy-MM-dd HH:mm'),
       "qte": this.qte,
       "codeArt": pr.codeArt,
       "libelle": pr.libelle,
@@ -282,14 +293,18 @@ export class Page3Component implements OnInit {
     let remis = 0;
     let taxe = 0;
     let totTtc = 0;
+    let totHT = 0;
     for (let i = 0; i < this.data.length; i++) {
       remis = remis + this.data[i].remis;
       taxe = taxe + this.data[i].taxe;
       totTtc = totTtc + this.data[i].totTtc;
+      totHT = totHT + this.data[i].totLigneHT;
     }
     this.totRemis = remis;
     this.totTaxes = taxe;
     this.totalTtc = totTtc;
+    this.totalHt = totHT;
+
   }
   passerDevis() {
     this.loadingListeDevis = true;
@@ -310,21 +325,24 @@ export class Page3Component implements OnInit {
     };
 
     let body = {
+      "dateCreation":new Date(save[0].dateCreation),
       "dealerNbr": dNbr,
       "nomClient": this.nomClient,
       "idFisc": this.idFiscale,
       "toRemise": totRemis,
+      "totHt": this.totalHt,
       "toTaxes": this.totTaxes,
       "timbre": this.timbre,
       "listeArt": list,
+      "totTtc": this.totalTtc
     }
-    
-    
-     this.devis.addDevis(body).subscribe((respons: any) => {
-       this.loadingListeDevis = false
-       this.data = [];
-       if (!respons.insertionError) {
-        let dataImp={
+
+
+    this.devis.addDevis(body).subscribe((respons: any) => {
+      this.loadingListeDevis = false
+      this.data = [];
+      if (!respons.insertionError) {
+        let dataImp = {
           "dealerNbr": dNbr,
           "nomClient": this.nomClient,
           "idFisc": this.idFiscale,
@@ -332,44 +350,44 @@ export class Page3Component implements OnInit {
           "toTaxes": this.totTaxes,
           "timbre": this.timbre,
           "listeArt": save,
-          "totalTtc":this.totalTtc,
-          "numDevis":respons.numDevis,
-          "dateCreation":respons.dateCreation
+          "totalTtc": this.totalTtc,
+          "numDevis": respons.numDevis,
+          "dateCreation": respons.dateCreation
         };
         this.printDevis(dataImp);
-         this._snackBar.open(
-           "Devis Enregistreée ✔", "", {
-           verticalPosition: 'top',
-           panelClass: 'green-snackbar',
-           duration: 5000,
-         });
-         localStorage.removeItem('devis');
-       }
-       else {
-         this._snackBar.open(
-           "Echec ✘ ", "", {
-           verticalPosition: 'top',
-           panelClass: 'red-snackbar',
-           duration: 5000,
-         });
-         this.data = save;
-         this.dataSource = new MatTableDataSource(this.data);
-         this.dataSource.paginator = this.paginator;
-         this.dataSource.sort = this.sort
-       }
-     }, (error) => {
-       this.loadingListeDevis = false;
-       this._snackBar.open(
-         (error.status == 0) ? "connexion au serveur impossible !!" : error.error.message, "", {
-         verticalPosition: 'top',
-         panelClass: 'red-snackbar',
-         duration: 5000,
-       });
-       this.data = save;
-       this.dataSource = new MatTableDataSource(this.data);
-       this.dataSource.paginator = this.paginator;
-       this.dataSource.sort = this.sort
-     })
+        this._snackBar.open(
+          "Devis Enregistreée ✔", "", {
+          verticalPosition: 'top',
+          panelClass: 'green-snackbar',
+          duration: 5000,
+        });
+        localStorage.removeItem('devis');
+      }
+      else {
+        this._snackBar.open(
+          "Echec ✘ ", "", {
+          verticalPosition: 'top',
+          panelClass: 'red-snackbar',
+          duration: 5000,
+        });
+        this.data = save;
+        this.dataSource = new MatTableDataSource(this.data);
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort
+      }
+    }, (error) => {
+      this.loadingListeDevis = false;
+      this._snackBar.open(
+        (error.status == 0) ? "connexion au serveur impossible !!" : error.error.message, "", {
+        verticalPosition: 'top',
+        panelClass: 'red-snackbar',
+        duration: 5000,
+      });
+      this.data = save;
+      this.dataSource = new MatTableDataSource(this.data);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort
+    })
   }
   printDevis(devis: any): void {
     const dialogRef = this.dialog.open(DialogImpression, {
@@ -435,11 +453,11 @@ export class DialogCommandeFerme {
 export class DialogImpression {
   /*****************Devis print **********/
   listDevis: any = [];
-  nomClient:any;
-  timbre=0.6;
-  toRemise:any;
+  nomClient: any;
+  timbre = 0.6;
+  toRemise: any;
   toTaxes: any;
-  totalTtc:any;
+  totalTtc: any;
   idFiscal: any;
   numDevis: any;
   dateCreation: any;
@@ -448,13 +466,13 @@ export class DialogImpression {
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.listDevis = this.data.listeArt;
-    this.totalTtc=this.data.totalTtc;
-    this.nomClient=this.data.nomClient;
-    this.toRemise=this.data.toRemis;
-    this.toTaxes=this.data.toTaxes;
-    this.numDevis=this.data.numDevis
-    this.dateCreation=this.data.dateCreation;
-    this.idFiscal=this.data.idFisc;
+    this.totalTtc = this.data.totalTtc;
+    this.nomClient = this.data.nomClient;
+    this.toRemise = this.data.toRemis;
+    this.toTaxes = this.data.toTaxes;
+    this.numDevis = this.data.numDevis
+    this.dateCreation = this.data.dateCreation;
+    this.idFiscal = this.data.idFisc;
   }
   formatMoney(x: any) {
     const euro = new Intl.NumberFormat('fr-FR', {

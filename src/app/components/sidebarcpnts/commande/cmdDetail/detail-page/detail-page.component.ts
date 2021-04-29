@@ -1,9 +1,9 @@
-import { logging } from 'protractor';
+import { logging, element } from 'protractor';
 import { CommandeService } from './../../../../../services/commande/commande.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { filter } from 'rxjs/operators'
+import { filter, subscribeOn } from 'rxjs/operators'
 import { DatePipe } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
@@ -47,6 +47,8 @@ export class DetailPageComponent implements OnInit {
   totalQteL: Number = 0;
   totalQteF: Number = 0;
   listCmd: any = [];
+  salesMan="";
+  dealerName="";
   constructor(private routerinfo: ActivatedRoute,
      private cmd: CommandeService,
      private router: Router,
@@ -59,6 +61,7 @@ export class DetailPageComponent implements OnInit {
     this.refCmd = ref;
     this.getLigneCmd();
     this.getCmd();
+    this.getDealerInfo()
    
   }
   precedent() {
@@ -100,6 +103,13 @@ export class DetailPageComponent implements OnInit {
     this.cmd.getCmdDetail(this.refCmd).subscribe(response => {
       this.listCmd = response;
       console.log(response)
+    })
+  };
+  getDealerInfo()
+  {
+    this.cmd.getDealerInfo().subscribe((Response:any)=>{
+     this.salesMan=Response.salesMan;
+     this.dealerName=Response.dealerName;
     })
   }
 }

@@ -29,6 +29,14 @@ export class CommandeService {
     let url = "http://localhost:8080/commande/afficher/ligneCmd/"+ref;
     return this.http.get(url, { headers:this.headers_object })
   }
+  getDealerInfo()
+  {
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(localStorage.jwt);
+    let dNbr=decodedToken["dealerNbr"]; 
+    let url = "http://localhost:8080/ListeStockAgent/getDealerInfo/"+dNbr;
+    return this.http.get(url, { headers:this.headers_object })
+  }
   cancelCmd(ref:any)
   {
     let body={}
