@@ -132,8 +132,10 @@
                     <br>
                     <div class="row">
                         <div class="col" style="text-align: right;">Réf Enreg. :</div>
-                        <div class="col-9">{{(this.listCmd.enregistree==1)?'this.listCmd.ref_Enregistrement':'Non
-                            Enregistrée !'}}</div>
+                        <div class="col-9">
+                            <div *ngIf="this.listCmd.enregistree==1" >{{this.listCmd.ref_Enregistrement}}</div>
+                            <div *ngIf="this.listCmd.enregistree!=1" >Non Enregistrée !</div>
+                        </div>
                     </div>
                 </div>
                 <div class="col">

@@ -31,7 +31,11 @@ div.containerPadding
   height: 100%;
   transition: 0.9s;
 }
-
+.textCompo
+ {
+  padding-top: 15px;
+  padding-bottom: 15px;
+ }
 div.composant
 {
   background-color: white;
@@ -39,10 +43,11 @@ div.composant
   color: #415959;
   position: relative;
   font-size: 13px;
+  padding: 0px;
 }
 .addPanier
 {
-  position: absolute;
+  position: relative;
   top: -12px;
   z-index: 10;
   transition : 0.3s;
@@ -53,6 +58,8 @@ div.composant
 .btn1{
   max-width: 50px;
   margin-right: 10px;
+  padding: 17px;
+  padding-left: 10px;
 }
 
 .cploading{
@@ -146,11 +153,10 @@ input::-webkit-outer-spin-button {
 {
   background-color: #E3F2F1;
   border-radius: 20px;
-  position: absolute;
+  position: relative;
   height: 40px;
   width: 100px;
-  top: -11px;
-  left: 10px;
+  margin: auto;
 }
 
 .addBtn
@@ -190,24 +196,25 @@ input::-webkit-outer-spin-button {
 .stockDispoIcon
 {
   color:#2ecc71 ;
-  position: absolute;
-  top: -3px;
-  left: 50px;
+  font-size: 30px;
+  margin: auto;
 }
 .stockLimitIcon
 {
   color:#e67e22 ;
-  position: absolute;
-  top: -3px;
-  left: 50px;
+  font-size: 30px;
+  margin: auto;
 }
 .stockNonDispotIcon
 {
   color: #c0392b;
   font-size: 30px;
-  position: absolute;
-  top: -5px;
-  left: 43px;
+  margin: auto;
+}
+.dispo
+{
+  padding: 10px;
+  padding-left: 22px;
 }
 .lodingSpiner
 {
@@ -244,12 +251,11 @@ input::-webkit-outer-spin-button {
 }
 .addDevis
 {
-  position: absolute;
-  top: -12px;
   z-index: 10;
   transition : 0.3s;
   background-color: #d6a217;
   color: white;
+
 }
 .addDevis:hover{
   background-color: #364547;
@@ -277,7 +283,8 @@ input::-webkit-outer-spin-button {
     font-size: 18px;
     letter-spacing: 2px;
     position: absolute;
-    right: 185px;
+    right: 20px;
+    bottom: 20px;
 }
 .addDevisIcon
 {
@@ -439,72 +446,15 @@ h1
 {
   background-color: #E3F2F1;
   border-radius: 20px;
-  position: absolute;
+  position: relative;
   height: 40px;
   width: 100px;
-  top: -11px;
-  left: 35px;
-}
-/************print style****************/
-.headerDevis
-{
-  height: 200px;
-  color: #364547;
-  font-weight: 500;
-  letter-spacing: 1px;
-  font-size: 16px;
   margin: auto;
 }
-.printDevisSection
-{ 
-  padding: 50px;
-  padding-top: 50px;
-  background-color: white;
-  height: 100%;
-  width: 100%!important;
-}
-.tableHeaderDevis
+
+  
+.btnDevis
 {
-  height:45px ;
-  border: 1px solid  rgba(128, 128, 128, 0.186);
-  border-bottom: 0px;
-  background-color: #425c5a0d;
-  padding: 12px;
-  color: #333333;
-  font-weight: 500;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
-  text-align: center;
-  font-size: 18px;
+  padding: 4px;
+  padding-left: 10px;
 }
-.remaqueText
-{
-  text-align: center;
-  font-size: 10px;
-  color:  gray;
-  margin-top: 30px;
-  padding: 0px;
-}
-.colunDevis
-{
-  border-top:rgba(128, 128, 128, 0.186) 1px solid;
-  height: 45px;
-  padding: 12px;
-  text-align: center;
-  color: #333333;
-  font-weight: 500;
-}
-.titlePrint
-{
-  font-weight: 500;
-  margin: auto;
-  width: 150px;
-  text-align: center;
-  height: 60px;
-  font-size: 25px;
-  padding: 10px;
-  border: 2px solid black;
-  border-radius: 15px;
-  margin-bottom: 70px;
-}  
-/**************************************/

@@ -107,7 +107,7 @@
                 </li>
 
 
-                <li class="item compteBott">
+                <li  *ngIf="this.permis==3" class="item compteBott">
                     <a mat-flat-button  class="linkBtn " style="background-color: #425C5A;;" disabled
                         [class]="(this.comptes)?'topButtonRadius':''" >
                     </a>
@@ -122,7 +122,7 @@
                         Comptes
                     </a>
                 </li>
-                <li class="item compteBott">
+                <li  *ngIf="this.permis==3" class="item compteBott">
                     <a mat-flat-button  class="linkBtn " style="background-color: #425C5A;;" disabled
                         [class]="(this.comptes)?'botButtonRadius':''" >
                     </a>

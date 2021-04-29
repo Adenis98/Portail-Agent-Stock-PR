@@ -12,7 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { DashboardComponent } from './components/sidebarcpnts/dashboard/dashboard.component';
 import { DialogAnnuler, Page2Component } from './components/sidebarcpnts/commande/page2.component';
-import { Page3Component } from './components/sidebarcpnts/stockPr/page3.component';
+import { DialogImpression, Page3Component } from './components/sidebarcpnts/stockPr/page3.component';
 import { Page4Component } from './components/sidebarcpnts/panier/page4.component';
 import { Page5Component } from './components/sidebarcpnts/InterAgent/page5.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -57,7 +57,7 @@ import { PageDevisComponent } from './components/sidebarcpnts/page-devis/page-de
     DetailPageComponent,
     DialogAnnuler,
     PageDevisComponent,
-   
+    DialogImpression,
   ],
   imports: [
     BrowserModule,

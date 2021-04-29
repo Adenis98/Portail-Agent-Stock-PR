@@ -7,7 +7,7 @@
             <div class="row">
                 <mat-form-field class="inputFieldRef col">
                     <mat-label>Réf</mat-label>
-                    <input [required]="!libelleExiste" minlength="8" maxlength="30" matInput
+                    <input  [required]="!libelleExiste" minlength="8" maxlength="15" matInput
                         placeholder="Ex. 5F10991298" name="ref" [(ngModel)]="refPr" #ref="ngModel"
                         (keydown.enter)="(ref.valid)?getStock():''" oninput="this.value = this.value.toUpperCase()">
 
@@ -59,7 +59,7 @@
             PU
         </div>
         <div *ngIf="this.isDevis" class="col-2">
-            Taux De Remise %
+           Remise %
         </div>
         <div class="col">
             Qté
@@ -74,17 +74,17 @@
         <mat-spinner style="margin:auto" diameter="30"></mat-spinner>
     </div>
     <div *ngFor="let pr of listOfPr;let index=index" class="row tableHeader composant shadow" @consulterStockAnim>
-        <div class="col">
+        <div class="col dispo">
             <mat-icon *ngIf="pr.stock > 5" class="stockDispoIcon">assignment_turned_in</mat-icon>
             <mat-icon *ngIf="pr.stock > 0 && pr.stock < 5" class="stockLimitIcon">assignment_late</mat-icon>
             <mat-icon *ngIf="!pr.stock" class="stockNonDispotIcon">cancel</mat-icon>
             <mat-icon *ngIf="pr.stock == -1" class="stockNonDispotIcon">production_quantity_limits</mat-icon>
         </div>
-        <div *ngIf="!this.isDevis" class="col"><span *ngIf="!pr.stock">{{pr.qteAchat}}</span></div>
-        <div class="col"><span>{{pr.codeArt}}</span></div>
-        <div class="col-2"><span>{{pr.libelle}}</span></div>
-        <div class="col"><span>{{this.formatMoney(pr.pu)}}</span></div>
-        <div *ngIf="this.isDevis" class="col-2">
+        <div *ngIf="!this.isDevis" class="col textCompo"><span *ngIf="!pr.stock">{{pr.qteAchat}}</span></div>
+        <div class="col textCompo"><span>{{pr.codeArt}}</span></div>
+        <div class="col-2 textCompo"><span>{{pr.libelle}}</span></div>
+        <div class="col textCompo"><span>{{this.formatMoney(pr.pu)}}</span></div>
+        <div *ngIf="this.isDevis" class="col-2" style="padding-top: 5px;">
             <div class="tauxSpiner shadow-sm">
                 <button mat-flat-button class="addBtn" (click)="addTaux()">
                     <span>+</span>
@@ -95,7 +95,7 @@
                 </button>
             </div>
         </div>
-        <div class="col">
+        <div class="col"  style="padding-top: 5px;">
             <div class="qteSpiner shadow-sm">
                 <button mat-flat-button class="addBtn" (click)="addQte()">
                     <span>+</span>
@@ -106,12 +106,12 @@
                 </button>
             </div>
         </div>
-        <div class="col btn1">
+        <div class="col btn1" [ngClass]="{'btnDevis':this.isDevis}">
             <button *ngIf="!this.isDevis" mat-mini-fab class="addPanier " color="primary"
                 (click)="(this.qte>pr.stock&&pr.stock>0)? afficherSnackBar():((!pr.stock || pr.stock < 5)?cmdFermeDialog(pr):addLine(pr,null));getPanierSize()">
                 <mat-icon class="addPanierIcon">add_shopping_cart</mat-icon>
             </button>
-            <button *ngIf="this.isDevis" mat-mini-fab class="addDevis " (click)="this.addToDevis(pr)">
+            <button *ngIf="this.isDevis" [ngClass]="{'addDevis': pr.stock != -1}"  mat-mini-fab class="addDevis " (click)="this.addToDevis(pr)" [disabled]="pr.stock == -1">
                 <span class="material-icons"> note_add </span>
             </button>
         </div>
@@ -141,15 +141,7 @@
                 </mat-form-field>
             </div>
             <div class="row">
-                <button type="submit" class="printDevis" mat-raised-button printSectionId="print-section"
-                    styleSheetFile="./page3.component.css" [useExistingCss]="true" ngxPrint>
-                    <!-- <mat-spinner style="margin:auto" diameter="30"></mat-spinner> -->
-                    <mat-icon class="printIcon" aria-hidden="false"><span>
-                            print</span>
-                    </mat-icon>
-                    <span> Imprimer</span>
-                </button>
-                <button type="submit" class="passerDevis" mat-raised-button [disabled]="devisForm.valid"
+                <button type="submit" class="passerDevis" mat-raised-button [disabled]="!devisForm.valid"
                     (click)="passerDevis()">
                     <!-- <mat-spinner style="margin:auto" diameter="30"></mat-spinner> -->
                     <mat-icon class="addDevisIcon" aria-hidden="false"><span>
@@ -222,59 +214,5 @@
             <span class="col"> Total Devis TTC = {{this.formatMoney(this.totalTtc)}}</span>
         </div>
         <mat-paginator hidePageSize="true" class="tableFooter"></mat-paginator>
-    </div>
-</div>
-<div id="print-section" hidden >
-    <div class="printDevisSection">
-        <div class="titlePrint">DEVIS</div>
-        <div class="headerDevis">
-            <div class="row">
-                <div class="col-8">
-                    <div>Nom Client : {{this.nomClient}}</div>
-                    <br>
-                    <div>ID Fiscal &nbsp; &nbsp; : {{this.idFiscale}}</div>
-                </div>
-                <div class="col">
-                    <div class="row">
-                        <div class="col" style="text-align: right;">N°Client :</div>
-                        <div class="col"> 2255322586</div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col" style="text-align: right;">N°Devis :</div>
-                        <div class="col"> 6532646311</div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col" style="text-align: right;">Date Devis :</div>
-                        <div class="col"> 06/07/1998</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="tableDevis">
-            <div class="tableHeaderDevis row">
-                <div class="col">Ligne</div>
-                <div class="col">Réf Art</div>
-                <div class="col">libelle</div>
-                <div class="col">Qte</div>
-                <div class="col">PU</div>
-                <div class="col">Total Ligne HT</div>
-            </div>
-            <div *ngFor="let item of data ;let index=index" class="row">
-                <div class="col colunDevis" style="border-left: rgba(128, 128, 128, 0.186) 1px solid;">{{index+1}}</div>
-                <div class="col colunDevis">{{data[index].codeArt}}</div>
-                <div class="col colunDevis">{{data[index].libelle}}</div>
-                <div class="col colunDevis">{{data[index].qte}}</div>
-                <div class="col colunDevis">{{this.formatMoney(data[index].puAgents)}}</div>
-                <div class="col colunDevis" style="border-right: rgba(128, 128, 128, 0.186) 1px solid;">{{this.formatMoney(data[index].totLigneHT)}}</div>
-            </div>
-            <div class="row" style="border: rgba(128, 128, 128, 0.186) 1px solid;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;height: 45px;padding: 12px;color: #313131;font-size: 18px;font-weight: 500; background-color: #425c5a0d;">
-                <div class="col-10" style="text-align: right;">Totale TTC :</div>
-                <div class="col-2" style="text-align: center;"> {{this.formatMoney(this.totalTtc)}}</div>
-            </div>
-        </div>
-        <div class="remaqueText">NB: Le prix est donné à titre indicatif, le prix définitif sera celui du jour de la
-            facturation.</div>
     </div>
 </div>
