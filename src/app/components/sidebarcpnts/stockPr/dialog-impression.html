@@ -1,12 +1,11 @@
 <h1 mat-dialog-title>Imprimer</h1>
 <div mat-dialog-content>
     <h2>Voulez-vous imprimer ce devis ?</h2>
-<button mat-raised-button class="okBtn shadow" (click)="onNoClick()">Annuler</button>
-<button type="submit" class="printDevis" mat-raised-button
-(click)="goToImressionPage()">
-    <!-- <mat-spinner style="margin:auto" diameter="30"></mat-spinner> -->
-    <mat-icon class="printIcon" aria-hidden="false"><span>
-            print</span>
-    </mat-icon>
-    <span> Imprimer</span>
-</button >
+    <button mat-raised-button class="okBtn shadow" (click)="onNoClick()">Annuler</button>
+    <button type="submit" class="printDevis" mat-raised-button (click)="goToImressionPage()">
+        <!-- <mat-spinner style="margin:auto" diameter="30"></mat-spinner> -->
+        <mat-icon class="printIcon" aria-hidden="false"><span>
+                print</span>
+        </mat-icon>
+        <span> Imprimer</span>
+    </button>
