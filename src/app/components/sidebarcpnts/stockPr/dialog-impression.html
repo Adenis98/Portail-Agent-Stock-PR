@@ -1,70 +1,12 @@
 <h1 mat-dialog-title>Imprimer</h1>
 <div mat-dialog-content>
     <h2>Voulez-vous imprimer ce devis ?</h2>
-    <div id="print-section" hidden>
-        <div class="printDevisSection">
-            <div class="titlePrint">DEVIS</div>
-            <div class="headerDevis">
-                <div class="row">
-                    <div class="col-8">
-                        <div>Nom Client : {{this.nomClient}}</div>
-                        <br>
-                        <div>ID Fiscal &nbsp; &nbsp; : {{this.idFiscal}}</div>
-                    </div>
-                    <div class="col">
-                        <div class="row">
-                            <div class="col" style="text-align: right;">N°Client :</div>
-                            <div class="col"> {{this.nomClient}}</div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col" style="text-align: right;">N°Devis :</div>
-                            <div class="col"> {{this.numDevis}}</div>
-                        </div>
-                        <br>
-                        <div class="row">
-                            <div class="col" style="text-align: right;">Date Devis :</div>
-                            <div class="col"> {{this.dateCreation| date :'dd/MM/yyyy'}}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="tableDevis">
-                <div class="tableHeaderDevis row">
-                    <div class="col">Ligne</div>
-                    <div class="col">Réf Art</div>
-                    <div class="col">libelle</div>
-                    <div class="col">Qte</div>
-                    <div class="col">PU</div>
-                    <div class="col">Total Ligne HT</div>
-                </div>
-            <div *ngFor="let item of listDevis ;let index=index" class="row">
-                    <div class="col colunDevis" style="border-left: rgba(128, 128, 128, 0.186) 1px solid;">{{index+1}}
-                    </div>
-                    <div class="col colunDevis">{{listDevis[index].codeArt}}</div>
-                    <div class="col colunDevis">{{listDevis[index].libelle}}</div>
-                    <div class="col colunDevis">{{listDevis[index].qte}}</div>
-                    <div class="col colunDevis">{{this.formatMoney(listDevis[index].puAgents)}}</div>
-                    <div class="col colunDevis" style="border-right: rgba(128, 128, 128, 0.186) 1px solid;">
-                        {{this.formatMoney(listDevis[index].totLigneHT)}}</div>
-                </div>
-                <div class="row"
-                    style="border: rgba(128, 128, 128, 0.186) 1px solid;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;height: 45px;padding: 12px;color: #313131;font-size: 18px;font-weight: 500; background-color: #425c5a0d;">
-                    <div class="col-10" style="text-align: right;">Totale TTC :</div>
-                    <div class="col-2" style="text-align: center;"> {{this.formatMoney(this.totalTtc)}}</div>
-                </div>
-            </div>
-            <div class="remaqueText">NB: Le prix est donné à titre indicatif, le prix définitif sera celui du jour de la
-                facturation.</div>
-        </div>
-    </div>
-</div>
 <button mat-raised-button class="okBtn shadow" (click)="onNoClick()">Annuler</button>
-<button type="submit" class="printDevis" mat-raised-button printSectionId="print-section" (click)="add()"
-    styleSheetFile="./dialog-impression.css" [useExistingCss]="true" ngxPrint>
+<button type="submit" class="printDevis" mat-raised-button
+(click)="goToImressionPage()">
     <!-- <mat-spinner style="margin:auto" diameter="30"></mat-spinner> -->
     <mat-icon class="printIcon" aria-hidden="false"><span>
             print</span>
     </mat-icon>
     <span> Imprimer</span>
-</button>
+</button >

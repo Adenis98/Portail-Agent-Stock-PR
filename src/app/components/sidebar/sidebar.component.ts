@@ -106,6 +106,13 @@ export class SidebarComponent implements OnInit {
       return true ; 
     return false ; 
   }
+  private checkIfItsDetailDevis(current : String ):boolean
+  {
+    let i :number ; 
+    if(current.substr(0,5) == "page3")
+      return true ; 
+    return false ; 
+  }
   dash(current: any) {
     //if button is clicked and the JWT localstorage is null then redirect to sign in page
     if (localStorage.getItem("jwt") == null)
@@ -119,7 +126,7 @@ export class SidebarComponent implements OnInit {
       this.page2 = true;
       this.dsh = this.page3 = this.page4 = this.page5 = this.comptes = this.page6 =this.page7  = false;
     }
-    if (current == "page3") {
+    if (current == "page3" || this.checkIfItsDetailDevis(current) ) {
       this.page3 = true;
       this.dsh = this.page2 = this.page4 = this.page5 = this.comptes = this.page6 =this.page7  = false;
     }

@@ -20,12 +20,14 @@ export class DevisDetailComponent implements OnInit{
     let numDevis = this.routerinfo.snapshot.paramMap.get('numDevis');
     this.numDevis = numDevis;
     this. getDevisDetail()
+    
   }
   getDevisDetail()
   {
     this.devis.getOneDevis(this.numDevis).subscribe((respons:any)=>{
       this.devisInfo=respons.devis;
       this.listePrDevis=respons.listeLigneDevis
+      console.log(respons)
       });
   };
   formatMoney(x: any) {

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { DevisService } from './../../../services/stockPr/devis.service';
 
 import { animate, style, transition, trigger } from '@angular/animations';
@@ -80,6 +81,7 @@ export class Page3Component implements OnInit {
     private panier: PanierService,
     private devis: DevisService,
     public datepipe: DatePipe,
+   
   ) {
 
   }
@@ -232,10 +234,11 @@ export class Page3Component implements OnInit {
     else{
       dateCreation=this.data[0].dateCreation;
     }
-    remis = (parseInt(this.qte) * pr.pu) * (parseInt(this.tauxRemis) / 100);
-    totTtc = (parseInt(this.qte) * pr.pu) * (1 - (parseInt(this.tauxRemis) / 100) * (1 + parseInt(this.TVA) / 100))
-    taxe = (parseInt(this.qte) * pr.pu) * (1 - (parseInt(this.tauxRemis) / 100) * (parseInt(this.TVA) / 100));
-    this.totLiggneHT = (parseInt(this.qte) * pr.pu) * (1 - parseInt(this.tauxRemis) / 100);
+    console.log(parseInt(this.qte) * pr.pu);
+    this.totLiggneHT = (parseInt(this.qte) * pr.pu);
+    remis = this.totLiggneHT  * (parseInt(this.tauxRemis) / 100);
+    totTtc = this.totLiggneHT *(1 - (parseInt(this.tauxRemis) / 100)) * (1 + parseInt(this.TVA) / 100);
+    taxe = this.totLiggneHT *(parseInt(this.TVA) / 100);
     for (let i = 0; i < this.data.length; i++) {
       if (this.data[i].codeArt == pr.codeArt) {
         this._snackBar.open(
@@ -323,7 +326,6 @@ export class Page3Component implements OnInit {
       totRemis = totRemis + (parseInt(save[i].qte) * save[i].puAgents * (save[i].tauxRemis / 100));
       totTaxes = totTaxes + (parseInt(save[i].qte) * save[i].puAgents * (1 - save[i].tauxRemis / 100));
     };
-
     let body = {
       "dateCreation":new Date(save[0].dateCreation),
       "dealerNbr": dNbr,
@@ -462,6 +464,7 @@ export class DialogImpression {
   numDevis: any;
   dateCreation: any;
   constructor(
+    private router:Router,
     public dialogRef: MatDialogRef<DialogCommandeFerme>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
@@ -486,7 +489,9 @@ export class DialogImpression {
     this.dialogRef.close(null);
   }
 
-  add(): void {
-    console.log(this.listDevis)
+  goToImressionPage()
+  {
+    this.router.navigate(['/page3', this.numDevis]);
+    this.dialogRef.close(null);
   }
 }
