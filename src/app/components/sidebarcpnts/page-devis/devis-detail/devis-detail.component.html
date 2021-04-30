@@ -1,1 +1,73 @@
-<p>devis-detail works!</p>
+<div class="containerPadding">
+    <div id="print-section">
+        <div class="printDevisSection">
+            <div class="titlePrint">DEVIS</div>
+            <div class="headerDevis">
+                <div class="row">
+                    <div class="col-8">
+                        <div>Nom Client : {{this.devisInfo.nomClient}}</div>
+                        <br>
+                        <div>ID Fiscal &nbsp; &nbsp; : {{this.devisInfo.idFisc}}</div>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col" style="text-align: right;">N°Client :</div>
+                            <div class="col"> {{this.devisInfo.nomClient}}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col" style="text-align: right;">N°Devis :</div>
+                            <div class="col"> {{this.devisInfo.numDevis}}</div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col" style="text-align: right;">Date Devis :</div>
+                            <div class="col"> {{this.devisInfo.date_Creation| date :'dd/MM/yyyy'}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tableDevis">
+                <div class="tableHeaderDevis row">
+                    <div class="col">Ligne</div>
+                    <div class="col">Réf Art</div>
+                    <div class="col">libelle</div>
+                    <div class="col">Qte</div>
+                    <div class="col">PU</div>
+                    <div class="col-2">Total HT</div>
+                </div>
+                <div *ngFor="let listDevis of listePrDevis ;let index=index" class="row">
+                    <div class="col colunDevis" style="border-left: rgba(128, 128, 128, 0.186) 1px solid;">{{index+1}}
+                    </div>
+                    <div class="col colunDevis">{{listDevis.codeArt}}</div>
+                    <div class="col colunDevis">{{listDevis.libelle}}</div>
+                    <div class="col colunDevis">{{listDevis.qte}}</div>
+                    <div class="col colunDevis">{{this.formatMoney(listDevis.pu)}}</div>
+                    <div class="col-2 colunDevis" style="border-right: rgba(128, 128, 128, 0.186) 1px solid;">
+                        {{this.formatMoney(listDevis.totLigne)}}</div>
+                </div>
+                <div class="row"
+                    style="border: rgba(128, 128, 128, 0.186) 1px solid;border-bottom-left-radius: 20px;border-bottom-right-radius: 20px;height: 45px;padding: 12px;color: #313131;font-size: 18px;font-weight: 500; background-color: #425c5a0d;">
+                    <div class="col-10" style="text-align: right;">Totale TTC :</div>
+                    <div class="col-2" style="text-align: center;"> {{this.formatMoney(this.devisInfo.totTtc)}}</div>
+                </div>
+            </div>
+            <div class="remaqueText">NB: Le prix est donné à titre indicatif, le prix définitif sera celui du jour de la
+                facturation.</div>
+            <button type="submit" class="printDevis" mat-raised-button printSectionId="print-section"
+                styleSheetFile="devis-detail.component.css" [useExistingCss]="true" ngxPrint>
+                <mat-icon class="printIcon" aria-hidden="false"><span>
+                        print</span>
+                </mat-icon>
+                <span> Imprimer</span>
+            </button>
+            <button type="submit" class="backBtn" mat-raised-button (click)="precedent()">
+                <mat-icon aria-hidden="false"><span>
+                        arrow_back</span>
+                </mat-icon>
+                <span>Precedent</span>
+            </button>
+        </div>
+    </div>
+
+</div>

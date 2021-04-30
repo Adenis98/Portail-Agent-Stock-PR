@@ -36,4 +36,7 @@ export class PageDevisComponent implements OnInit {
     })
     return (euro.format(x));
   }
+  openDevis(ref: any) {
+    this.router.navigate(['/page3', ref])
+  }
 }

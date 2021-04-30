@@ -20,4 +20,9 @@ export class DevisService {
     let url = "http://localhost:8080/devis/getAllDevis/"+dNbr;
     return this.http.get(url, { headers:this.headers_object })
   }
+  getOneDevis(numDevis:any)
+  {
+    let url = "http://localhost:8080/devis/getOneAllDevis/"+numDevis;
+    return this.http.get(url, { headers:this.headers_object })
+  }
 }

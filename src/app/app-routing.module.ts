@@ -15,6 +15,7 @@ import { Page6Component } from './components/sidebarcpnts/stockLocal/page6.compo
 import { CompteGardService } from './services/compteGard/compte-gard.service';
 import { DetailPageComponent } from './components/sidebarcpnts/commande/cmdDetail/detail-page/detail-page.component';
 import { PageDevisComponent } from './components/sidebarcpnts/page-devis/page-devis.component';
+import { DevisDetailComponent } from './components/sidebarcpnts/page-devis/devis-detail/devis-detail.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,11 @@ const routes: Routes = [
   {
     path: "page3",
     component: PageDevisComponent,
+    canActivate: [AuthGuardService]
+  },
+  {
+    path: 'page3/:numDevis',
+    component: DevisDetailComponent,
     canActivate: [AuthGuardService]
   },
   {
@@ -73,6 +79,7 @@ const routes: Routes = [
     component: DetailPageComponent,
     canActivate: [AuthGuardService]
   },
+
   { 
     path: '**',
     component: NotFoundComponent
