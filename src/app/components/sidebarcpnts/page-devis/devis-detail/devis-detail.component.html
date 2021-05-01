@@ -2,7 +2,7 @@
     <div id="print-section">
         <div class="printDevisSection">
             <div class="titlePrint">DEVIS</div>
-            <div class="headerDevis">
+            <div class="headerDevis" @enterAnimationLivrBox>
                 <div class="row">
                     <div class="col-8">
                         <div>Nom Client : {{this.devisInfo.nomClient}}</div>
@@ -27,8 +27,8 @@
                     </div>
                 </div>
             </div>
-            <div class="tableContainer">
-                <div class="tableDevis">
+            <div class="tableContainer" >
+                <div class="tableDevis" @enterAnimationTable>
                     <div class="tableHeaderDevis row">
                         <div class="col">Réf Art</div>
                         <div class="col">libelle</div>
@@ -37,7 +37,7 @@
                         <div class="col">PU</div>
                         <div class="col-2">Total HT</div>
                     </div>
-                    <div *ngFor="let listDevis of listePrDevis ;let index=index" class="row">
+                    <div  *ngFor="let listDevis of listePrDevis ;let index=index" class="row">
                         <div class="col colunDevis">{{listDevis.codeArt}}</div>
                         <div class="col colunDevis">{{listDevis.libelle}}</div>
                         <div class="col colunDevis">{{listDevis.qte}}</div>
@@ -47,7 +47,7 @@
                             {{this.formatMoney(listDevis.totLigne)}}</div>
                     </div>
                 </div>
-                <div class="row tableTotal">
+                <div class="row tableTotal" @enterAnimationTableTotal>
                     <div class="col">
                         <div class="row tableTotalHeadr" style="border-top: 0px;">
                             <div class="col-4 titleFooter">Totale HT :</div>

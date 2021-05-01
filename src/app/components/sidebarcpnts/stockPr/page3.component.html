@@ -141,7 +141,7 @@
                 </mat-form-field>
             </div>
             <div class="row">
-                <button type="submit" class="passerDevis" mat-raised-button [disabled]="!devisForm.valid"
+                <button type="submit" class="passerDevis" mat-raised-button [disabled]="!devisForm.valid || this.data.length==0"
                     (click)="passerDevis()">
                     <!-- <mat-spinner style="margin:auto" diameter="30"></mat-spinner> -->
                     <mat-icon class="addDevisIcon" aria-hidden="false"><span>

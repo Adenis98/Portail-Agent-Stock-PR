@@ -63,3 +63,33 @@ div.composant
     width:100%;
     min-width: 950px;
 }
+.inputData{
+    padding: 30px;
+    width:95%;
+    min-width: 950px;
+    margin: auto;
+    border-radius: 20px;
+    height:190px;
+    background-color: white;
+    position: relative;
+}
+.commanderBtn
+{
+    background-color: #d6a217;
+    margin: auto;
+    margin-top:20px;
+    border-radius: 20px;
+    height: 45px;
+    width: 150px;
+    color: #415959;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+.checkBoxAnnule
+{
+    margin-top: 20px;
+    padding-left: 20px;
+    color: #415959;
+    font-size: 17px
+}

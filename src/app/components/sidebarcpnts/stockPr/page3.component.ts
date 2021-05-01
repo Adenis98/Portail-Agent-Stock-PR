@@ -397,10 +397,6 @@ export class Page3Component implements OnInit {
       height: '180px',
       data: devis
     });
-    /*    dialogRef.afterClosed().subscribe((result: String) => {
-         if (result)
-         
-       }) */
   }
 
 }

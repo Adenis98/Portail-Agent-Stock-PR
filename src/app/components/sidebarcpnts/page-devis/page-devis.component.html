@@ -1,6 +1,35 @@
 <div class="container containerPadding">
+    <div class="inputData shadow">
+        <form #f="ngForm" ngForm class="formStyle">
+            <div class="row">
+                <mat-form-field class="col-3"  >
+                    <mat-label>Nom Client</mat-label>
+                    <input  name="numCmd"  maxlength="10" matInput placeholder="Ex. Youssef" [(ngModel)]="nomClient" name="nomClient">
+                </mat-form-field>
+                <mat-form-field class="col-3"  >
+                    <mat-label>ID Fiscla</mat-label>
+                    <input  name="idFisc"  maxlength="10" [(ngModel)]="idFisc" matInput placeholder="Ex. 99558752">
+                </mat-form-field>
+                <mat-form-field class="col-3">
+                    <mat-label>N° Devis</mat-label>
+                    <input  matInput placeholder="Ex. 123654987" [(ngModel)]="numDevisInput" name="numDevisInput">
+                </mat-form-field>
 
-    
+                <mat-checkbox class="checkBoxAnnule col-3" [(ngModel)]="isArchiver" name="isArchiver" value="1"> &nbsp;
+                    &nbsp;Archiver</mat-checkbox>
+            </div>
+            <div class="row">
+                <button type="submit" class="commanderBtn" mat-raised-button [disabled]="!f.valid" (click)="filtre()">
+                    <mat-spinner *ngIf="loadingRecherchBtn" style="margin:auto" diameter="30"></mat-spinner>
+                    <mat-icon *ngIf="!loadingRecherchBtn" aria-hidden="false"><span>
+                        manage_search</span>
+                    </mat-icon>
+                    <span *ngIf="!loadingRecherchBtn">Rechercher</span>
+                </button>
+            </div>
+        </form>
+    </div>
+
 
     <div class="resultats">
         Devis ({{listeDevis.length}})
@@ -25,7 +54,7 @@
             Total TTC
         </div>
     </div>
-    <div *ngFor="let devis of listeDevis ;let index=index" class="row shadow tableHeader composant">
+    <div *ngFor="let devis of listeDevis ;let index=index" class="row shadow tableHeader composant" @enterAnimation>
         <div class="col">
             <div class="row">
                 <div class="row BtnInvisible">

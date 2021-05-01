@@ -1,8 +1,10 @@
+import { StatsService } from './../../../services/stats/stats.service';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label, SingleDataSet } from 'ng2-charts';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -44,6 +46,7 @@ import { Label, SingleDataSet } from 'ng2-charts';
   ]
 })
 export class DashboardComponent implements OnInit {
+  nbrCmdStockFerme: any=[];
   public barChartOptions: ChartOptions = {
     title: {
       text: 'Top 5 Pièce Commnader',
@@ -116,8 +119,10 @@ export class DashboardComponent implements OnInit {
       enabled: true
     },
   };
+  cmdFerme: number=0;
+  cmdNormale: number=0;
   public pieChartLabels: Label[] = ['Command Stock ', 'Commande Ferme '];
-  public pieChartData: number[] = [300, 500];
+  public pieChartData: number[] = [];
   public pieChartType: ChartType = 'doughnut';
   public pieChartLegend = true;
   public pieChartPlugins = [pluginDataLabels];
@@ -152,7 +157,7 @@ export class DashboardComponent implements OnInit {
     },
   };
   public polarAreaChartLabels: Label[] = ['CommandeEnregistrée ', 'Commande Livrée', 'Commande Facturée'];
-  public polarAreaChartData: SingleDataSet = [300, 500, 200];
+  public polarAreaChartData: SingleDataSet = [];
   public polarAreaLegend = true;
 
   public polarAreaChartType: ChartType = 'polarArea';
@@ -199,9 +204,42 @@ export class DashboardComponent implements OnInit {
     { data: [65, 59, 80, 81, 56, 55, 40, 80, 81, 56, 55, 40], label: 'Commande Ferme' },
     { data: [28, 48, 40, 19, 86, 27, 200, 80, 81, 56, 55, 40], label: 'Comande Stock' }
   ];
-  constructor() { }
 
+ 
+  constructor(private stats:StatsService,
+    private _snackBar: MatSnackBar,) {}
+  getnbrStockFerme()
+  {
+    this.stats.getNbrCmdStockFerme().subscribe((respons:any)=>{
+      this.cmdFerme=respons.cmdFerme;
+      this.cmdNormale=respons.cmdNormale
+      this.pieChartData=[this.cmdNormale,this.cmdFerme]
+    }
+    , (error) => {
+      this._snackBar.open(
+        (error.status==0)?"connexion au serveur impossible !!":error.error.message, "", {
+        verticalPosition: 'top',
+        panelClass: 'red-snackbar',
+        duration: 5000,
+      });
+    })
+  }
+  getCmdByStatus()
+  {
+    this.stats.getCmdByStatus().subscribe((response:any)=>{
+      this.polarAreaChartData=[response.enrg,response.liv,response.fact];
+    }, (error) => {
+      this._snackBar.open(
+        (error.status==0)?"connexion au serveur impossible !!":error.error.message, "", {
+        verticalPosition: 'top',
+        panelClass: 'red-snackbar',
+        duration: 5000,
+      });
+    })
+  }
   ngOnInit(): void {
+    this.getnbrStockFerme();
+    this.getCmdByStatus();
   }
 
 }
