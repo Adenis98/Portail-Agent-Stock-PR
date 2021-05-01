@@ -50,7 +50,7 @@ export class Page2Component implements OnInit {
   newList:any = [];
   listeCmd: any = [];
   sauvgardListe: any = [];
-
+  isArchiver :boolean = false;
   typeCmd = "";
   numCmd = "";
   statutCmd = "";
@@ -133,7 +133,13 @@ export class Page2Component implements OnInit {
   /***************************get liste commande *********************************/
   getListeCmd() {
     this.loading = true;
-    this.commande.getCmd().subscribe(response => {
+    let arch= "0"
+    if(this.isArchiver==false)
+     { console.log(this.isArchiver)
+       arch="0"}
+    else
+      {arch="1"}
+    this.commande.getCmd(arch).subscribe(response => {
       this.listeCmd = response;
       this.listeCmd.reverse();
       this.loading = false;
@@ -186,6 +192,13 @@ export class Page2Component implements OnInit {
         })
         this.getListeCmd()
       }
+    }, (error) => {
+      this._snackBar.open(
+        (error.status == 0) ? "connexion au serveur impossible !!" : error.error.message, "", {
+        verticalPosition: 'top',
+        panelClass: 'red-snackbar',
+        duration: 5000,
+      });
     })
   }
   /****************filtre methode*****************/

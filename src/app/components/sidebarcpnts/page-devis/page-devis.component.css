@@ -1,3 +1,4 @@
+
 div.containerPadding
 {
     padding-top: 70px;
@@ -6,6 +7,21 @@ div.containerPadding
     width: 95%;
     height: 100%;
     transition: 0.9s;
+}
+.btn1
+{
+    max-width: 50px;
+    margin-right: 10px;
+}
+.addPanier
+{
+  position: absolute;
+  top: -12px;
+  z-index: 10;
+  transition : 0.3s;
+}
+.addPanier:hover{
+  color:#eb4d4b;
 }
 .resultats
 {
@@ -72,6 +88,7 @@ div.composant
     height:190px;
     background-color: white;
     position: relative;
+    padding-top: 20px;
 }
 .commanderBtn
 {
@@ -92,4 +109,23 @@ div.composant
     padding-left: 20px;
     color: #415959;
     font-size: 17px
+}
+.formStyle
+{
+margin: 10px;
+}
+.toggleDevis
+{
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #415959;
+  font-weight: 500;
+  letter-spacing: 2px;
+
+}
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-bar {
+background-color: #d5a930a3;
+}
+::ng-deep .mat-slide-toggle.mat-checked:not(.mat-disabled) .mat-slide-toggle-thumb {
+background-color: #d6a217;
 }

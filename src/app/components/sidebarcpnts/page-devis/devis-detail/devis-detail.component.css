@@ -1,4 +1,9 @@
 @media screen {
+  #print-section
+{
+    margin: auto;
+    width: 95%
+}
     div.containerPadding
 {
   padding-top: 20px;

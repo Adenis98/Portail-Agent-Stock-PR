@@ -1,28 +1,27 @@
 <div class="container containerPadding">
     <div class="inputData shadow">
+        <span class="toggleDevis"><mat-slide-toggle (change)="this.isArchiver=!this.isArchiver;this.getDevis()">Devis Archivé</mat-slide-toggle></span>
         <form #f="ngForm" ngForm class="formStyle">
             <div class="row">
-                <mat-form-field class="col-3"  >
+                <mat-form-field class="col-4">
                     <mat-label>Nom Client</mat-label>
-                    <input  name="numCmd"  maxlength="10" matInput placeholder="Ex. Youssef" [(ngModel)]="nomClient" name="nomClient">
+                    <input name="numCmd" maxlength="10" matInput placeholder="Ex. Youssef" [(ngModel)]="nomClient"
+                        name="nomClient">
                 </mat-form-field>
-                <mat-form-field class="col-3"  >
+                <mat-form-field class="col-4">
                     <mat-label>ID Fiscla</mat-label>
-                    <input  name="idFisc"  maxlength="10" [(ngModel)]="idFisc" matInput placeholder="Ex. 99558752">
+                    <input name="idFisc" maxlength="10" [(ngModel)]="idFisc" matInput placeholder="Ex. 99558752">
                 </mat-form-field>
-                <mat-form-field class="col-3">
+                <mat-form-field class="col-4">
                     <mat-label>N° Devis</mat-label>
-                    <input  matInput placeholder="Ex. 123654987" [(ngModel)]="numDevisInput" name="numDevisInput">
+                    <input matInput placeholder="Ex. 123654987" [(ngModel)]="numDevisInput" name="numDevisInput">
                 </mat-form-field>
-
-                <mat-checkbox class="checkBoxAnnule col-3" [(ngModel)]="isArchiver" name="isArchiver" value="1"> &nbsp;
-                    &nbsp;Archiver</mat-checkbox>
             </div>
             <div class="row">
                 <button type="submit" class="commanderBtn" mat-raised-button [disabled]="!f.valid" (click)="filtre()">
                     <mat-spinner *ngIf="loadingRecherchBtn" style="margin:auto" diameter="30"></mat-spinner>
                     <mat-icon *ngIf="!loadingRecherchBtn" aria-hidden="false"><span>
-                        manage_search</span>
+                            manage_search</span>
                     </mat-icon>
                     <span *ngIf="!loadingRecherchBtn">Rechercher</span>
                 </button>
@@ -31,8 +30,11 @@
     </div>
 
 
-    <div class="resultats">
+    <div *ngIf="!this.isArchiver"  class="resultats">
         Devis ({{listeDevis.length}})
+    </div>
+    <div *ngIf="this.isArchiver"  class="resultats">
+        Devis Archivé ({{listeDevis.length}})
     </div>
     <div class="row tableHeader shadow">
         <div class="col-2">
@@ -53,6 +55,9 @@
         <div class="col-2">
             Total TTC
         </div>
+        <div class="col btn1">
+
+        </div>
     </div>
     <div *ngFor="let devis of listeDevis ;let index=index" class="row shadow tableHeader composant" @enterAnimation>
         <div class="col">
@@ -62,7 +67,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-2">
+                <div class="col-1">
                     {{devis.numDevis}}
                 </div>
                 <div class="col-2">
@@ -80,33 +85,37 @@
                 <div class="col-2">
                     {{this.formatMoney(devis.totTtc)}}
                 </div>
+                <div class="col" style="padding-left: 25px;">
+                    <button *ngIf="devis.annulee ==0" mat-mini-fab class="addPanier" color="primary" (click)="openDialog(devis.numDevis)">
+                        <mat-icon class="addPanierIcon deleteBtn">block</mat-icon>
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-    
+
     <div *ngIf="loadingList" class="row tableHeader shadow composant" style="padding-top: 10px;">
         <div class="col">
             <mat-spinner style="margin:auto;top: 0px;" diameter="30"></mat-spinner>
         </div>
     </div>
 
-    <div class="row shadow tableHeader bottomButtons"  >
+    <div class="row shadow tableHeader bottomButtons">
         <div class="col" style="text-align: left;">
-            <button mat-icon-button [disabled]="false"  >
+            <button mat-icon-button [disabled]="false">
                 <mat-icon>keyboard_arrow_left</mat-icon>
             </button>
         </div>
-        
+
         <div class="col" style="font-size: 17px;padding-top:9px">
             P A G E &nbsp;&nbsp; 1
         </div>
 
-        <div class="col" style="text-align: right;" >
-            <button mat-icon-button [disabled]="false" >
+        <div class="col" style="text-align: right;">
+            <button mat-icon-button [disabled]="false">
                 <mat-icon>keyboard_arrow_right</mat-icon>
             </button>
         </div>
-        
+
     </div>
 </div>
-

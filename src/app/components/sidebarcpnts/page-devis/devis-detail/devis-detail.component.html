@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <div class="tableContainer" >
+            <div class="tableContainer">
                 <div class="tableDevis" @enterAnimationTable>
                     <div class="tableHeaderDevis row">
                         <div class="col">Réf Art</div>
@@ -37,7 +37,7 @@
                         <div class="col">PU</div>
                         <div class="col-2">Total HT</div>
                     </div>
-                    <div  *ngFor="let listDevis of listePrDevis ;let index=index" class="row">
+                    <div *ngFor="let listDevis of listePrDevis ;let index=index" class="row">
                         <div class="col colunDevis">{{listDevis.codeArt}}</div>
                         <div class="col colunDevis">{{listDevis.libelle}}</div>
                         <div class="col colunDevis">{{listDevis.qte}}</div>
@@ -51,20 +51,20 @@
                     <div class="col">
                         <div class="row tableTotalHeadr" style="border-top: 0px;">
                             <div class="col-4 titleFooter">Totale HT :</div>
-                            <div  class="col-8 footerValue"> {{this.formatMoney(this.devisInfo.totHt)}}</div>
+                            <div class="col-8 footerValue"> {{this.formatMoney(this.devisInfo.totHt)}}</div>
                         </div>
                         <div class="row tableTotalHeadr">
                             <div class="col-4 titleFooter">Totale TVA :</div>
-                            <div  class="col-8 footerValue"> {{this.formatMoney(this.devisInfo.toTaxes)}}</div>
+                            <div class="col-8 footerValue"> {{this.formatMoney(this.devisInfo.toTaxes)}}</div>
                         </div>
                         <div class="row tableTotalHeadr">
-                            <div class="col-4 titleFooter" >Totale TTC :</div>
-                            <div  class="col-8 footerValue"> {{this.formatMoney(this.devisInfo.totTtc)}}</div>
+                            <div class="col-4 titleFooter">Totale TTC :</div>
+                            <div class="col-8 footerValue"> {{this.formatMoney(this.devisInfo.totTtc)}}</div>
                         </div>
                     </div>
                 </div>
             </div>
-           
+
             <div class="remaqueText">NB: Le prix est donné à titre indicatif, le prix définitif sera celui du jour de la
                 facturation.</div>
             <button type="submit" class="printDevis" mat-raised-button printSectionId="print-section"
