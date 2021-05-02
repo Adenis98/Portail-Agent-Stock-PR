@@ -1,6 +1,6 @@
 <div class="container containerPadding">
     <div class="inputData shadow">
-        <span class="toggleDevis"><mat-slide-toggle (change)="this.isArchiver=!this.isArchiver;this.getDevis()">Devis Archivé</mat-slide-toggle></span>
+        <span class="toggleDevis"><mat-slide-toggle  (change)="devisArch();this.getDevis()"  [checked] = "this.isArchiver">Devis Archivé</mat-slide-toggle></span>
         <form #f="ngForm" ngForm class="formStyle">
             <div class="row">
                 <mat-form-field class="col-4">
@@ -37,7 +37,7 @@
         Devis Archivé ({{listeDevis.length}})
     </div>
     <div class="row tableHeader shadow">
-        <div class="col-2">
+        <div class="col-1">
             N°Devis
         </div>
         <div class="col-2">

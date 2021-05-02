@@ -20,6 +20,7 @@ export interface StockLocak {
   "tauxRemis": number,
   "totLigneHT": number,
   "action": null,
+  "tva":any,
 }
 @Component({
   selector: 'app-page3',
@@ -50,7 +51,7 @@ export interface StockLocak {
 
 export class Page3Component implements OnInit {
   data: any = []
-  displayedColumns: string[] = ['codeArt', 'libelle', 'puAgents', 'qte', 'tauxRemis', 'totLigneHT', 'action'];
+  displayedColumns: string[] = ['codeArt', 'libelle', 'puAgents', 'qte', 'tauxRemis', 'totLigneHT','tva', 'action'];
   dataSource: MatTableDataSource<StockLocak> = new MatTableDataSource(this.data);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -65,7 +66,7 @@ export class Page3Component implements OnInit {
   libelleExiste = false;
   isDevis = false;
   totRemis = 0; totTaxes = 0; totalTtc = 0;
-  TVA = "10";
+  TVA = "19";
   tauxRemis = "0";
   addDevis: boolean = true;
   totLiggneHT: number = 0;
@@ -88,6 +89,17 @@ export class Page3Component implements OnInit {
 
   ngOnInit(): void {
     this.qte = "1";
+    if(localStorage.getItem('anableDevis')=='true')
+    {
+      this.isDevis=true;
+      if (localStorage.devis) {
+        this.resetDevis();
+        this.calucleDevis();
+      }
+    }
+    else{
+      this.isDevis=false;
+    }
   }
   verifLibelle() {
     if (this.libellePr.length <= 0)
@@ -95,7 +107,6 @@ export class Page3Component implements OnInit {
     else
       this.libelleExiste = true
   }
-
   addQte() {
     this.qte = (parseInt(this.qte) + 1).toString();
   }
@@ -206,6 +217,12 @@ export class Page3Component implements OnInit {
     })
     return (euro.format(x));
   }
+  formatMoney2(x: any) {
+    const euro = new Intl.NumberFormat('fr-FR', {
+      minimumFractionDigits: 3
+    })
+    return (euro.format(x));
+  }
 
   getPanierSize() {
     const helper = new JwtHelperService();
@@ -217,10 +234,7 @@ export class Page3Component implements OnInit {
   }
   anableDevis() {
     this.isDevis = !this.isDevis
-    if (localStorage.devis) {
-      this.resetDevis();
-      this.calucleDevis();
-    }
+    localStorage.setItem('anableDevis', ""+this.isDevis)
   }
 
   addToDevis(pr: any) {
@@ -234,7 +248,6 @@ export class Page3Component implements OnInit {
     else{
       dateCreation=this.data[0].dateCreation;
     }
-    console.log(parseInt(this.qte) * pr.pu);
     this.totLiggneHT = (parseInt(this.qte) * pr.pu);
     remis = this.totLiggneHT  * (parseInt(this.tauxRemis) / 100);
     totTtc = this.totLiggneHT *(1 - (parseInt(this.tauxRemis) / 100)) * (1 + parseInt(this.TVA) / 100);
@@ -275,7 +288,7 @@ export class Page3Component implements OnInit {
     this.dataSource = new MatTableDataSource(this.data);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
-    this.calucleDevis;
+    this.calucleDevis();
   }
   resetDevis() {
     const retrievedObject: any = localStorage.getItem('devis')
@@ -295,19 +308,18 @@ export class Page3Component implements OnInit {
   calucleDevis() {
     let remis = 0;
     let taxe = 0;
-    let totTtc = 0;
+    let totTtc = 0.6;
     let totHT = 0;
     for (let i = 0; i < this.data.length; i++) {
       remis = remis + this.data[i].remis;
       taxe = taxe + this.data[i].taxe;
       totTtc = totTtc + this.data[i].totTtc;
-      totHT = totHT + this.data[i].totLigneHT;
+      totHT = totHT + this.data[i].totLigneHT-this.data[i].remis;
     }
     this.totRemis = remis;
     this.totTaxes = taxe;
     this.totalTtc = totTtc;
     this.totalHt = totHT;
-
   }
   passerDevis() {
     this.loadingListeDevis = true;

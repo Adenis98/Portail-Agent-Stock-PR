@@ -1,6 +1,6 @@
 <div class="container containerPadding">
     <div class="inputData shadow">
-        <span class="toggleDevis"><mat-slide-toggle (change)="this.isArchiver=!this.isArchiver;this.getListeCmd()">Devis Archivé</mat-slide-toggle></span>
+        <span class="toggleDevis"><mat-slide-toggle (change)="cmdArch();this.getListeCmd()" [checked] = "this.isArchiver">Commande Archivée</mat-slide-toggle></span>
         <form #f="ngForm" ngForm class="formStyle">
             <div class="row">
                 <mat-form-field class="col-3" >

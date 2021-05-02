@@ -72,7 +72,15 @@ export class Page2Component implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getListeCmd();
+    if(localStorage.getItem('cmdArch')=='true')
+    {
+      this.isArchiver=true;
+      this.getListeCmd();
+    }
+    else{
+      this.getListeCmd();
+      this.isArchiver=false
+    }
   }
   formatMoney(x: any) {
     const euro = new Intl.NumberFormat('fr-FR', {
@@ -81,6 +89,11 @@ export class Page2Component implements OnInit {
       minimumFractionDigits: 3
     })
     return (euro.format(x));
+  }
+  cmdArch()
+  {
+    this.isArchiver=!this.isArchiver
+    localStorage.setItem('cmdArch', ""+this.isArchiver)
   }
   resetValue() {
     const retrievedObject: any = localStorage.getItem('saveList')
@@ -135,8 +148,7 @@ export class Page2Component implements OnInit {
     this.loading = true;
     let arch= "0"
     if(this.isArchiver==false)
-     { console.log(this.isArchiver)
-       arch="0"}
+     {arch="0"}
     else
       {arch="1"}
     this.commande.getCmd(arch).subscribe(response => {
@@ -451,9 +463,7 @@ export class Page2Component implements OnInit {
       let val = this.listeCmd[i] ; 
       this.newList.push(Object.assign({}, val));
     }
-    this.numPage++;
-    console.log(this.newList);
-    
+    this.numPage++;    
   }
 
   pagePrec()
@@ -466,7 +476,6 @@ export class Page2Component implements OnInit {
       this.newList.push(Object.assign({}, val));
     }
     this.numPage--;
-    console.log(this.newList);
   }
 }
 @Component({

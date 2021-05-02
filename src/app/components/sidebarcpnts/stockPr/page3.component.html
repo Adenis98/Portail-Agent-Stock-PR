@@ -1,7 +1,7 @@
 <div class=" containerPadding">
 
     <div class="inputData shadow">
-        <span class="toggleDevis">Panier <mat-slide-toggle (change)="anableDevis()">Devis</mat-slide-toggle></span>
+        <span class="toggleDevis">Panier <mat-slide-toggle (change)="anableDevis()" [checked] = "this.isDevis">Devis</mat-slide-toggle></span>
 
         <form #f="ngForm" ngForm class="" (keydown.enter)="$event.preventDefault()">
             <div class="row">
@@ -119,25 +119,20 @@
     <div *ngIf="this.isDevis" class="inputDataDevis shadow" @consulterStockAnim>
         <form #devisForm="ngForm" ngForm class="formStyle">
             <div class="row">
-                <mat-form-field class="col-3">
+                <mat-form-field class="col-4">
                     <mat-label>Nom Client</mat-label>
                     <input required [(ngModel)]="nomClient" maxlength="8" matInput placeholder="Ex. Youssef"
                         name="nomClient">
                 </mat-form-field>
 
-                <mat-form-field class="col-3">
+                <mat-form-field class="col-4">
                     <mat-label>ID Fiscale</mat-label>
                     <input required type="text" [(ngModel)]="idFiscale" maxlength="8" minlength="8" matInput
                         placeholder="Ex. 12549858" name="idFiscale">
                 </mat-form-field>
-                <mat-form-field class="col-3">
-                    <span matPrefix>% &nbsp;</span>
-                    <mat-label>TVA</mat-label>
-                    <input required [(ngModel)]="TVA" matInput name="TVA">
-                </mat-form-field>
-                <mat-form-field class="col-3">
+                <mat-form-field class="col-4">
                     <mat-label>Timbre</mat-label>
-                    <input required [(ngModel)]="timbre" matInput placeholder="Ex. 20" name="timbre">
+                    <input required matInput  disabled="true" placeholder="Ex. 20" name="timbre">
                 </mat-form-field>
             </div>
             <div class="row">
@@ -170,7 +165,7 @@
             <!-- Name Column -->
             <ng-container matColumnDef="puAgents">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> PU </th>
-                <td mat-cell *matCellDef="let row"> {{formatMoney(row.puAgents)}} </td>
+                <td mat-cell *matCellDef="let row"> {{formatMoney2(row.puAgents)}} </td>
             </ng-container>
             <!-- Color Column -->
             <ng-container matColumnDef="qte">
@@ -179,13 +174,18 @@
             </ng-container>
             <!-- Color Column -->
             <ng-container matColumnDef="totLigneHT">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Total </th>
-                <td mat-cell *matCellDef="let row" [style.color]="row.color">{{ formatMoney(row.totLigneHT)}} </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Total HT </th>
+                <td mat-cell *matCellDef="let row" [style.color]="row.color">{{ formatMoney2(row.totLigneHT)}} </td>
             </ng-container>
             <!-- Color Column -->
             <ng-container matColumnDef="tauxRemis">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header>Taux Remise </th>
-                <td mat-cell *matCellDef="let row" [style.color]="row.color">% {{row.tauxRemis}} </td>
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>Remise </th>
+                <td mat-cell *matCellDef="let row" [style.color]="row.color">{{row.tauxRemis}} %</td>
+            </ng-container>
+             <!-- Color Column -->
+             <ng-container matColumnDef="tva">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>TVA % </th>
+                <td mat-cell *matCellDef="let row" [style.color]="row.color">{{this.TVA}} %</td>
             </ng-container>
             <!-- Color Column -->
             <ng-container matColumnDef="action">
@@ -209,9 +209,10 @@
             </tr>
         </table>
         <div class="devisFooter row">
+            <span class="col"> Total HT = {{this.formatMoney(this.totalHt)}}</span>
             <span class="col">Total Taxes = {{this.formatMoney(this.totTaxes)}}</span>
             <span class="col">Total Remise = {{this.formatMoney(this.totRemis)}}</span>
-            <span class="col"> Total Devis TTC = {{this.formatMoney(this.totalTtc)}}</span>
+            <span class="col"> Total TTC = {{this.formatMoney(this.totalTtc)}}</span>
         </div>
         <mat-paginator hidePageSize="true" class="tableFooter"></mat-paginator>
     </div>

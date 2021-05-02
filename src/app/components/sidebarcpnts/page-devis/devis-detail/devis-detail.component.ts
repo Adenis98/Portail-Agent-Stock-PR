@@ -51,6 +51,12 @@ export class DevisDetailComponent implements OnInit{
     this. getDevisDetail()
     
   }
+  formatMoney2(x: any) {
+    const euro = new Intl.NumberFormat('fr-FR', {
+      minimumFractionDigits: 3
+    })
+    return (euro.format(x));
+  }
   getDevisDetail()
   {
     this.devis.getOneDevis(this.numDevis).subscribe((respons:any)=>{

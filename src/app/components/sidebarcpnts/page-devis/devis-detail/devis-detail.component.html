@@ -20,37 +20,32 @@
                             <div class="col"> {{this.devisInfo.date_Creation| date :'dd/MM/yyyy'}}</div>
                         </div>
                         <br>
-                        <div class="row">
-                            <div class="col" style="text-align: right;">Timbre :</div>
-                            <div class="col"> {{this.devisInfo.timbre}}</div>
-                        </div>
                     </div>
                 </div>
             </div>
             <div class="tableContainer">
                 <div class="tableDevis" @enterAnimationTable>
                     <div class="tableHeaderDevis row">
-                        <div class="col">Réf Art</div>
-                        <div class="col">libelle</div>
+                        <div class="col-2">Réf Art</div>
+                        <div class="col-3">libelle</div>
                         <div class="col">Qte</div>
-                        <div class="col">Remise </div>
-                        <div class="col">PU</div>
+                        <div class="col-2">Remise </div>
+                        <div class="col-2">PU</div>
                         <div class="col-2">Total HT</div>
                     </div>
                     <div *ngFor="let listDevis of listePrDevis ;let index=index" class="row">
-                        <div class="col colunDevis">{{listDevis.codeArt}}</div>
-                        <div class="col colunDevis">{{listDevis.libelle}}</div>
+                        <div class="col-2 colunDevis">{{listDevis.codeArt}}</div>
+                        <div class="col-3 colunDevis">{{listDevis.libelle}}</div>
                         <div class="col colunDevis">{{listDevis.qte}}</div>
-                        <div class="col colunDevis">{{this.formatMoney(listDevis.remise)}}</div>
-                        <div class="col colunDevis">{{this.formatMoney(listDevis.pu)}}</div>
-                        <div class="col-2 colunDevis" style="border-right: rgba(128, 128, 128, 0.186) 1px solid;">
-                            {{this.formatMoney(listDevis.totLigne)}}</div>
+                        <div class="col-2 colunDevis">{{this.formatMoney(listDevis.remise)}}</div>
+                        <div class="col-2 colunDevis">{{this.formatMoney(listDevis.pu)}}</div>
+                        <div class="col-2 colunDevis">{{this.formatMoney(listDevis.totLigne)}}</div>
                     </div>
                 </div>
                 <div class="row tableTotal" @enterAnimationTableTotal>
                     <div class="col">
                         <div class="row tableTotalHeadr" style="border-top: 0px;">
-                            <div class="col-4 titleFooter">Totale HT :</div>
+                            <div class="col-4 titleFooter">Totale Net HT :</div>
                             <div class="col-8 footerValue"> {{this.formatMoney(this.devisInfo.totHt)}}</div>
                         </div>
                         <div class="row tableTotalHeadr">
@@ -58,7 +53,7 @@
                             <div class="col-8 footerValue"> {{this.formatMoney(this.devisInfo.toTaxes)}}</div>
                         </div>
                         <div class="row tableTotalHeadr">
-                            <div class="col-4 titleFooter">Totale TTC :</div>
+                            <div class="col-4 titleFooter">Totale TTC ( Inclut timbre "{{this.formatMoney2(this.devisInfo.timbre)}}" ) :</div>
                             <div class="col-8 footerValue"> {{this.formatMoney(this.devisInfo.totTtc)}}</div>
                         </div>
                     </div>

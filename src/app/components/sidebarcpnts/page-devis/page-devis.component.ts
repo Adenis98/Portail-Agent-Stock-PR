@@ -30,7 +30,7 @@ export class PageDevisComponent implements OnInit {
   nomClient = "";
   idFisc = "";
   numDevisInput = "";
-  isArchiver :boolean = false;
+  isArchiver :boolean=false;
   loadingRecherchBtn = false;
   sauvgardListe: any;
   constructor(private router: Router,
@@ -42,14 +42,21 @@ export class PageDevisComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getDevis()
+    if(localStorage.getItem('devisArch')=='true')
+    {
+      this.isArchiver=true;
+      this.getDevis();
+    }
+    else{
+      this.getDevis();
+      this.isArchiver=false
+    }
   }
   getDevis() {
     this.loadingList = true;
     let arch= "0"
     if(this.isArchiver==false)
-     { console.log(this.isArchiver)
-       arch="0"}
+     {arch="0"}
     else
       {arch="1"}
     
@@ -57,6 +64,12 @@ export class PageDevisComponent implements OnInit {
       this.loadingList = false;
       this.listeDevis = respons.reverse();
       this.sauvgardListe = this.listeDevis;
+
+      if (localStorage.saveListFilter) {
+        this.resetValue()
+        this.filtre()
+        localStorage.removeItem('saveListFilter');
+      }
     }, (error) => {
       this.loadingList = false;
       this._snackBar.open(
@@ -77,6 +90,26 @@ export class PageDevisComponent implements OnInit {
   }
   openDevis(ref: any) {
     this.router.navigate(['/page3', ref])
+    let filterData: any = {
+      "nomClient":this.nomClient,
+      "idFisc":this.idFisc,
+      "numDevisInput":this.numDevisInput
+    }
+    if (this.nomClient || this.idFisc || this.numDevisInput ) {
+      localStorage.setItem('saveListFilter', JSON.stringify(filterData))
+    }
+  }
+  resetValue() {
+    const retrievedObject: any = localStorage.getItem('saveListFilter')
+    let filterData = JSON.parse(retrievedObject)
+    this.nomClient = filterData.nomClient;
+    this.idFisc=filterData.idFisc;
+    this.numDevisInput=filterData.numDevisInput;
+  }
+  devisArch()
+  {
+    this.isArchiver=!this.isArchiver
+    localStorage.setItem('devisArch', ""+this.isArchiver)
   }
   filtre() {
     let listeDevisAux: any = [];
