@@ -121,7 +121,7 @@
             <div class="row">
                 <mat-form-field class="col-4">
                     <mat-label>Nom Client</mat-label>
-                    <input required [(ngModel)]="nomClient" maxlength="8" matInput placeholder="Ex. Youssef"
+                    <input required [(ngModel)]="nomClient" maxlength="20" matInput placeholder="Ex. Youssef"
                         name="nomClient">
                 </mat-form-field>
 
@@ -131,8 +131,8 @@
                         placeholder="Ex. 12549858" name="idFiscale">
                 </mat-form-field>
                 <mat-form-field class="col-4">
-                    <mat-label>Timbre</mat-label>
-                    <input required matInput  disabled="true" placeholder="Ex. 20" name="timbre">
+                    <mat-label>Timbre </mat-label>
+                    <input required matInput value="{{formatMoney2(this.timbre)}}" disabled="true" placeholder="Ex. 20" name="timbre">
                 </mat-form-field>
             </div>
             <div class="row">
