@@ -12,12 +12,12 @@ export class GetcomptesService {
       this.headers_object = new HttpHeaders().append("Authorization","Bearer "+localStorage.getItem("jwt"));
    }
 
-  getCompte() {
+  getCompte(admin:number) {
     
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(localStorage.jwt);
     let dNbr=decodedToken["dealerNbr"]; 
-    let url = "http://localhost:8080/compte/avoirTout/"+dNbr;
+    let url = "http://localhost:8080/compte/avoirTout/"+dNbr+"/"+admin;
     return this.http.get(url, { headers:this.headers_object });
   }
   deletCompte(compt:any)

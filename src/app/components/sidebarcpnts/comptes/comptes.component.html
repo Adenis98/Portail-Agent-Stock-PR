@@ -108,12 +108,23 @@
                              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez votre nom d'utilisateur
                         </mat-hint>
                     </mat-form-field>
-
-                        <mat-radio-group required class="inputField" aria-label="Select an option" [(ngModel)]="permis"
-                        name="permis">
-                        <mat-radio-button required class="radioBtn1" value="1" >Responsable</mat-radio-button>
-                        <mat-radio-button required class="radioBtn2" value="2" >Agent</mat-radio-button>
-                    </mat-radio-group>
+                    <mat-form-field class="inputField">
+                        <mat-label>Dealer number</mat-label>
+                        <input  required 
+                                type="number"
+                                [disabled]="currentUserName!='admin'"
+                                maxlength="5" 
+                                matInput 
+                                placeholder="Ex. 5" 
+                                [(ngModel)]="currentDealerNumber" 
+                                #dNbr="ngModel"
+                                name="currentDealerNumber">
+                        <mat-hint *ngIf="dNbr.touched&&!dNbr.valid" class="hintPsd" >
+                            <mat-icon>error</mat-icon>
+                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez Dealer number valide
+                        </mat-hint>
+                    </mat-form-field>
+                    
                 </div>
 
              
@@ -129,8 +140,7 @@
                                 pattern ="((?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{3,30})" 
                                 [(ngModel)]="psd1"
                                 #mdp1="ngModel" 
-                                (keydown.enter)="f.valid?addUser():''"
-                                >
+                                (keydown.enter)="f.valid?addUser():''">
                         
                         
                         <mat-hint *ngIf="mdp1.touched&&!mdp1.valid" class="hintPsd" >
@@ -158,6 +168,17 @@
                     </mat-form-field>
                 </div>
             </div>
+            <div class="row">
+                <mat-radio-group required class="radioBtnGroup" 
+                            aria-label="Select an option" [(ngModel)]="permis" 
+                    name="permis">
+                    <mat-radio-button required class="radioBtn1" value="1" >Responsable</mat-radio-button>
+                    <mat-radio-button required class="radioBtn2" value="2" >Agent</mat-radio-button>
+                    <mat-radio-button *ngIf="currentUserName=='admin'" required class="radioBtn3" value="3" >Administrateur</mat-radio-button>
+                </mat-radio-group>
+            </div>
+              
+
 
             <div class="row btnAddContainer inputField">
                 <button *ngIf="afficherAUsrImg" type="submit" class="addBtn" mat-raised-button [disabled]="!f.valid" (click)="addUser()">

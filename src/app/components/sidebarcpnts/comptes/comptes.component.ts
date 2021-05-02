@@ -72,14 +72,16 @@ export class ComptesComponent implements OnInit {
     private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.getUser();
+    
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(localStorage.jwt);
     this.currentUserName = decodedToken["sub"];
+    
     this.currentDealerNumber=decodedToken["dealerNbr"];
+    this.getUser();
   }
   getUser() {
-    this.Compte.getCompte().subscribe(data => {
+    this.Compte.getCompte((this.currentUserName=='admin')?1:0).subscribe(data => {
       this.loading = false;
       this.listcompte = data;
       
@@ -129,10 +131,13 @@ export class ComptesComponent implements OnInit {
   }
   addUser() {
 
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(localStorage.jwt);
+
     let body: any =
     {
       "userName": this.userName,
-      "dealer_Number":this.currentDealerNumber,
+      "dealer_Number":(this.currentUserName!='admin')?decodedToken["dealerNbr"]:this.currentDealerNumber,
       "permis": parseInt(this.permis.replace(/\D/g, "")),//hathi tna7i 7rouf w les espaces mel numero (replace.......)
       "password": this.psd1
     };
@@ -206,10 +211,12 @@ export class ComptesComponent implements OnInit {
 
   updateUser() {
     this.loadingBtn =true;
+    const helper = new JwtHelperService();
+    const decodedToken = helper.decodeToken(localStorage.jwt);
     let body: any =
     {
       "userName": this.userName,
-      "dealer_Number": this.currentDealerNumber,
+      "dealer_Number": (this.currentUserName!='admin')?decodedToken["dealerNbr"]:this.currentDealerNumber,
       "permis": parseInt(this.permis.replace(/\D/g, "")),//hathi tna7i 7rouf w les espaces mel numero (replace.......)
       "password": this.psd1
     }
