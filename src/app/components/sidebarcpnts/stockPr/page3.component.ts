@@ -248,10 +248,10 @@ export class Page3Component implements OnInit {
     else{
       dateCreation=this.data[0].dateCreation;
     }
-    this.totLiggneHT = (parseInt(this.qte) * pr.pu);
-    remis = this.totLiggneHT  * (parseInt(this.tauxRemis) / 100);
-    totTtc = this.totLiggneHT *(1 - (parseInt(this.tauxRemis) / 100)) * (1 + parseInt(this.TVA) / 100);
-    taxe = this.totLiggneHT *(parseInt(this.TVA) / 100);
+    this.totLiggneHT = (parseInt(this.qte) * pr.pu)*(1 - (parseInt(this.tauxRemis) / 100));
+    remis =(parseInt(this.qte) * pr.pu)  * (parseInt(this.tauxRemis) / 100);
+    totTtc = (parseInt(this.qte) * pr.pu)  *(1 - (parseInt(this.tauxRemis) / 100)) * (1 + parseInt(this.TVA) / 100);
+    taxe = (parseInt(this.qte) * pr.pu) *(parseInt(this.TVA) / 100);
     for (let i = 0; i < this.data.length; i++) {
       if (this.data[i].codeArt == pr.codeArt) {
         this._snackBar.open(
@@ -314,7 +314,7 @@ export class Page3Component implements OnInit {
       remis = remis + this.data[i].remis;
       taxe = taxe + this.data[i].taxe;
       totTtc = totTtc + this.data[i].totTtc;
-      totHT = totHT + this.data[i].totLigneHT-this.data[i].remis;
+      totHT = totHT + this.data[i].totLigneHT;
     }
     this.totRemis = remis;
     this.totTaxes = taxe;

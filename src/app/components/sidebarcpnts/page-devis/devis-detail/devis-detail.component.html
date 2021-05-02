@@ -39,7 +39,7 @@
                         <div class="col colunDevis">{{listDevis.qte}}</div>
                         <div class="col-2 colunDevis">{{this.formatMoney(listDevis.remise)}}</div>
                         <div class="col-2 colunDevis">{{this.formatMoney(listDevis.pu)}}</div>
-                        <div class="col-2 colunDevis">{{this.formatMoney(listDevis.totLigne)}}</div>
+                        <div class="col-2 colunDevis">{{this.formatMoney(listDevis.totLigne-listDevis.remise)}}</div>
                     </div>
                 </div>
                 <div class="row tableTotal" @enterAnimationTableTotal>
