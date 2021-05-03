@@ -26,6 +26,8 @@ import { DevisService } from 'src/app/services/devis/devis.service';
 })
 export class PageDevisComponent implements OnInit {
   listeDevis: any = [];
+  newList:any ; 
+  numPage:number=1;
   loadingList = false;
   nomClient = "";
   idFisc = "";
@@ -70,6 +72,7 @@ export class PageDevisComponent implements OnInit {
         this.filtre()
         localStorage.removeItem('saveListFilter');
       }
+      this.initialiserNewList();
     }, (error) => {
       this.loadingList = false;
       this._snackBar.open(
@@ -182,6 +185,7 @@ export class PageDevisComponent implements OnInit {
       listeDevisAux = this.sauvgardListe;
     }
     this.listeDevis = listeDevisAux;
+    this.initialiserNewList();
   }
   openDialog(ref: any): void {
     const dialogRef = this.dialog.open(DialogAnnulerDevis, {
@@ -225,6 +229,41 @@ export class PageDevisComponent implements OnInit {
         duration: 5000,
       });
     })
+  }
+  initialiserNewList()
+  {
+    this.newList= new Array();
+    let i : number ; 
+    for(i = 0 ; i<10&&i<this.listeDevis.length; i++)
+    {
+      let val = this.listeDevis[i] ; 
+
+      this.newList.push(Object.assign({}, val));
+    }
+    this.numPage = 1 ; 
+  }
+  pageSuiv()
+  {
+    let i : number ; 
+    this.newList= new Array();
+    for(i = (this.numPage*10) ; i< this.listeDevis.length && i<=(this.numPage*10)+10 ; i++)
+    {
+      let val = this.listeDevis[i] ; 
+      this.newList.push(Object.assign({}, val));
+    }
+    this.numPage++;    
+  }
+
+  pagePrec()
+  {
+    let i : number ; 
+    this.newList= new Array();
+    for(i = (this.numPage*10)-20 ; i<(this.numPage*10)-10; i++)
+    {
+      let val = this.listeDevis[i] ; 
+      this.newList.push(Object.assign({}, val));
+    }
+    this.numPage--;
   }
 }
 

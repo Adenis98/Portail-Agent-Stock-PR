@@ -59,7 +59,7 @@
 
         </div>
     </div>
-    <div *ngFor="let devis of listeDevis ;let index=index" class="row shadow tableHeader composant" @enterAnimation>
+    <div *ngFor="let devis of newList ;let index=index" class="row shadow tableHeader composant" @enterAnimation>
         <div class="col">
             <div class="row">
                 <div class="row BtnInvisible">
@@ -100,22 +100,22 @@
         </div>
     </div>
 
-    <div class="row shadow tableHeader bottomButtons">
+    <div class="row shadow tableHeader bottomButtons"  @enterAnimation>
         <div class="col" style="text-align: left;">
-            <button mat-icon-button [disabled]="false">
+            <button mat-icon-button [disabled]="this.numPage==1" (click)="this.pagePrec()" >
                 <mat-icon>keyboard_arrow_left</mat-icon>
             </button>
         </div>
-
+        
         <div class="col" style="font-size: 17px;padding-top:9px">
-            P A G E &nbsp;&nbsp; 1
+            P A G E &nbsp;&nbsp; {{this.numPage}}
         </div>
 
-        <div class="col" style="text-align: right;">
-            <button mat-icon-button [disabled]="false">
+        <div class="col" style="text-align: right;" >
+            <button mat-icon-button [disabled]="(this.numPage*10)+1>this.listeDevis.length" (click)="this.pageSuiv()">
                 <mat-icon>keyboard_arrow_right</mat-icon>
             </button>
         </div>
-
+        
     </div>
 </div>

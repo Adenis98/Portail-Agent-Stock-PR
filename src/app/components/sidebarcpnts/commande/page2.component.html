@@ -190,6 +190,11 @@
             </div>
         </div>
     </div>
+    <div *ngIf="loading" class="row tableHeader cploading shadow composant" style="padding-top: 10px;">
+        <div class="col">
+            <mat-spinner style="margin:auto;top: 0px;" diameter="30"></mat-spinner>
+        </div>
+    </div>
     <div class="row shadow tableHeader bottomButtons"  @enterAnimation>
         <div class="col" style="text-align: left;">
             <button mat-icon-button [disabled]="this.numPage==1" (click)="this.pagePrec()" >
@@ -208,11 +213,7 @@
         </div>
         
     </div>
-    <div *ngIf="loading" class="row tableHeader cploading shadow composant" style="padding-top: 10px;">
-        <div class="col">
-            <mat-spinner style="margin:auto;top: 0px;" diameter="30"></mat-spinner>
-        </div>
-    </div>
+    
 </div>
 
 
