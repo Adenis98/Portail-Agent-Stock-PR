@@ -8,6 +8,11 @@ div.containerPadding
     height: 100%;
     transition: 0.9s;
 }
+.listeVide
+{
+    font-size: 15px;
+    letter-spacing: 2px;
+}
 .btn1
 {
     max-width: 50px;
@@ -44,7 +49,7 @@ div.containerPadding
   min-width: 950px;
   padding: 13px;
   margin:auto;
-  margin-top: 20px;
+  margin-top: 10px;
   color: #d6a217;
   font-weight: 500;
   font-size: 15px;

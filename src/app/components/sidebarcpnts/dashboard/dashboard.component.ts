@@ -49,7 +49,7 @@ export class DashboardComponent implements OnInit {
   nbrCmdStockFerme: any=[];
   public barChartOptions: ChartOptions = {
     title: {
-      text: 'Top 5 Pièce Commnader',
+      text: 'Les 5 Meilleurs Pièces Commander',
       display: true,
       fontSize: 15,
     },
@@ -104,6 +104,11 @@ export class DashboardComponent implements OnInit {
   /***************************cercle******************** */
 
   public pieChartOptions: ChartOptions = {
+    title: {
+      text: 'Les Commandes',
+      display: true,
+      fontSize: 15,
+    },
     responsive: true,
     legend: {
 
@@ -141,6 +146,11 @@ export class DashboardComponent implements OnInit {
         display: false
       }]
     },
+    title: {
+      text: 'Les Status des Commandes',
+      display: true,
+      fontSize: 15,
+    },
     responsive: true,
     legend: {
 
@@ -169,7 +179,7 @@ export class DashboardComponent implements OnInit {
   /***********last bar chart*************** */
   public barChartOptions2: ChartOptions = {
     title: {
-      text: 'Comande Par Moin',
+      text: 'Les Commandes Par Mois',
       display: true,
       fontSize: 15,
     },

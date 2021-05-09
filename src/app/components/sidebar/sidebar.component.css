@@ -1,6 +1,7 @@
 *{
     user-select: none;
 }
+
 .sidebar {
     min-width: 250px;
     max-width: 250px;
@@ -142,6 +143,7 @@ div.user-logo
     margin-top: -1px;
     text-transform: uppercase;
     transition: 0.3s;
+    letter-spacing: 1px;
 }
 .active
 {

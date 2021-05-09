@@ -55,9 +55,6 @@
                     <input name="VIN" [(ngModel)]="VIN" minlength="17" maxlength="17" matInput
                         placeholder="Ex.1HGBH41JXMN109186" oninput="this.value = this.value.toUpperCase()">
                 </mat-form-field>
-                <section class="checkBoxAnnule col-3">
-                    <mat-checkbox> &nbsp; &nbsp;Selection</mat-checkbox>
-                </section>
             </div>
             <div class="row">
                 <button type="submit" class="commanderBtn" mat-raised-button (click)="filtre()" [disabled]="this.valide">
@@ -98,6 +95,9 @@
         <div class="btn2"></div>
         <div class="col btn1">
         </div>
+    </div>
+    <div *ngIf="this.listeCmd.length==0" class="row shadow tableHeader composant">
+        <span class="listeVide col-12">Liste Vide !!</span>
     </div>
     <div *ngFor="let item of newList ;let index=index">
 

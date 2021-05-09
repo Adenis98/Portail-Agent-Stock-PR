@@ -59,6 +59,9 @@
 
         </div>
     </div>
+    <div *ngIf="this.newList.length==0" class="row shadow tableHeader composant">
+        <span class="listeVide col-12">Liste Vide !!</span>
+    </div>
     <div *ngFor="let devis of newList ;let index=index" class="row shadow tableHeader composant" @enterAnimation>
         <div class="col">
             <div class="row">

@@ -7,16 +7,25 @@ div.containerPadding
     height: 100%;
     transition: 0.9s;
 }
+.listeVide
+{
+    font-size: 15px;
+    letter-spacing: 2px;
+}
 .inputData{
     padding: 30px;
     width:95%;
     min-width: 950px;
     margin: auto;
     border-radius: 20px;
-    height:250px;
+    height:270px;
     background-color: white;
     position: relative;
     padding-top: 20px;
+}
+.formStyle
+{
+    margin-top: 15px;
 }
 .hint{
     color: #d93025;
@@ -73,7 +82,7 @@ div.containerPadding
   min-width: 950px;
   padding: 13px;
   margin:auto;
-  margin-top: 20px;
+  margin-top: 10px;
   color: #d6a217;
   font-weight: 500;
   font-size: 15px;
