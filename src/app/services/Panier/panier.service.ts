@@ -16,13 +16,8 @@ export class PanierService {
   }
 
   getPanierItem() {
-    const helper = new JwtHelperService();
-    const decodedToken = helper.decodeToken(localStorage.jwt);
-    let dNbr = decodedToken["dealerNbr"];
-    let headers = new HttpHeaders({ 'DealerNumber': dNbr.toString() }).append("Authorization", "Bearer " + localStorage.getItem("jwt"))
-    headers?.set('Content-Type', 'application/json');
-    let url = "http://localhost:8080/panier/GetPanierWS";
-    return this.http.get(url, { headers: headers });
+     let url = "http://localhost:8080/panier/GetPanierWS";
+    return this.http.get(url, { headers: this.headers_object });
   }
   deletLignePanier(ref: number) {
     let url = "http://localhost:8080/panier/DeleteLignePanier/" + ref
@@ -30,9 +25,9 @@ export class PanierService {
   }
 
   //******************* numero ligne panier  ************************ */
-  getPanierSize(dNbr : Number )
+  getPanierSize()
   {
-    let url = "http://localhost:8080/panier/GetPanierSize/"+dNbr
+    let url = "http://localhost:8080/panier/GetPanierSize/"
     return this.http.get(url, { headers: this.headers_object},)
   }
  setPanierSizeAttr(s:number)

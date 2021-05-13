@@ -15,9 +15,9 @@ export class InterAgentsStockService {
       this.headers_object?.set('Content-Type', 'application/json');
     }
   }
-  addLineCmd(dNbr:number)
+  addLineCmd()
   {
-    let url = "http://localhost:8080/getAllAgentsStock/"+dNbr;
+    let url = "http://localhost:8080/getAllAgentsStock";
     return this.http.get(url,{headers:this.headers_object });
   }
 }

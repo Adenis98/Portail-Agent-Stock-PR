@@ -13,11 +13,7 @@ export class DevisService {
   }
   getDevis(arch:any)
   {
-    const helper = new JwtHelperService();
-    const decodedToken = helper.decodeToken(localStorage.jwt);
-    let dNbr=decodedToken["dealerNbr"]; 
-
-    let url = "http://localhost:8080/devis/getAllDevis/"+dNbr+"/"+arch;
+    let url = "http://localhost:8080/devis/getAllDevis/"+arch;
     return this.http.get(url, { headers:this.headers_object })
   }
   getOneDevis(numDevis:any)

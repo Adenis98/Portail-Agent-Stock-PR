@@ -228,7 +228,7 @@ export class Page3Component implements OnInit {
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(localStorage.jwt);
     let dNbr = decodedToken["dealerNbr"];
-    this.panier.getPanierSize(dNbr).subscribe((data: any) => {
+    this.panier.getPanierSize().subscribe((data: any) => {
       this.panier.setPanierSizeAttr(data);
     });
   }

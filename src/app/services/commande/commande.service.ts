@@ -18,10 +18,7 @@ export class CommandeService {
   }
   getCmd(arch:any)
   {
-    const helper = new JwtHelperService();
-    const decodedToken = helper.decodeToken(localStorage.jwt);
-    let dNbr=decodedToken["dealerNbr"]; 
-    let url = "http://localhost:8080/commande/afficher/"+dNbr+"/"+arch;
+    let url = "http://localhost:8080/commande/afficher/"+arch;
     return this.http.get(url, { headers:this.headers_object })
   }
   getCmdLine(ref:any)
@@ -31,10 +28,7 @@ export class CommandeService {
   }
   getDealerInfo()
   {
-    const helper = new JwtHelperService();
-    const decodedToken = helper.decodeToken(localStorage.jwt);
-    let dNbr=decodedToken["dealerNbr"]; 
-    let url = "http://localhost:8080/ListeStockAgent/getDealerInfo/"+dNbr;
+    let url = "http://localhost:8080/ListeStockAgent/getDealerInfo";
     return this.http.get(url, { headers:this.headers_object })
   }
   cancelCmd(ref:any)

@@ -17,9 +17,7 @@ export class StockLocalService {
   getStockLocal() {
     const helper = new JwtHelperService();
     this.headers_object?.set('Content-Type', 'application/json');
-    const decodedToken = helper.decodeToken(localStorage.jwt);
-    this.dNbr = decodedToken["dealerNbr"];
-    let url = "http://localhost:8080/ListeStockAgent/monStock/" + this.dNbr;
+    let url = "http://localhost:8080/ListeStockAgent/monStock";
     return this.http.get(url, { headers: this.headers_object });
   }
 }
