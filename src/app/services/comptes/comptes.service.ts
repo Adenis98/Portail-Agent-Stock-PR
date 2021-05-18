@@ -12,7 +12,7 @@ export class GetcomptesService {
    }
 
   getCompte(admin:number) {
-    let url = "http://localhost:8080/compte/avoirTout"+admin;
+    let url = "http://localhost:8080/compte/avoirTout/"+admin;
     return this.http.get(url, { headers:this.headers_object });
   }
   deletCompte(compt:any)
