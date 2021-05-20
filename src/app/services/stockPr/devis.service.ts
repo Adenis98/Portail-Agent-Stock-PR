@@ -9,16 +9,20 @@ export class DevisService {
   headers_object: any;
 
   constructor(private http: HttpClient) {
+    
+   }
+   getLocalStorageJwt(){
     if(localStorage.getItem("jwt")!=null)
     { 
       const helper = new JwtHelperService();
       this.headers_object = new HttpHeaders().append("Authorization","Bearer "+localStorage.getItem("jwt"))
       this.headers_object?.set('Content-Type', 'application/json');
     }
-   }
-   addDevis(body:any)
-   {
-    let url = "http://localhost:8080/devis/ajouterLigneDevis";
-    return this.http.post(url,body,{headers:this.headers_object });
-   }
+  }
+  addDevis(body:any)
+  {
+    this.getLocalStorageJwt();
+  let url = "http://localhost:8080/devis/ajouterLigneDevis";
+  return this.http.post(url,body,{headers:this.headers_object });
+  }
 }

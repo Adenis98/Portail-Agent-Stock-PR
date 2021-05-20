@@ -10,11 +10,15 @@ export class StockLocalService {
   dNbr: any;
 
   constructor(private http: HttpClient) {
+   
+  }
+  getLocalStorageJwt(){
     if(localStorage.getItem("jwt") != null) {
       this.headers_object = new HttpHeaders().append("Authorization", "Bearer " + localStorage.getItem("jwt"))
     }
   }
   getStockLocal() {
+    this.getLocalStorageJwt();
     const helper = new JwtHelperService();
     this.headers_object?.set('Content-Type', 'application/json');
     let url = "http://localhost:8080/ListeStockAgent/monStock";

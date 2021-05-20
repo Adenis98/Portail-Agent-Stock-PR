@@ -6,8 +6,11 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root'
 })
 export class InterAgentsStockService {
-  public headers_object ;
+  public headers_object: HttpHeaders | undefined ;
   constructor(private http: HttpClient) {
+    
+  }
+  getLocalStorageJwt(){
     if(localStorage.getItem("jwt")!=null)
     { 
       const helper = new JwtHelperService();
@@ -17,6 +20,7 @@ export class InterAgentsStockService {
   }
   addLineCmd()
   {
+    this.getLocalStorageJwt();
     let url = "http://localhost:8080/getAllAgentsStock";
     return this.http.get(url,{headers:this.headers_object });
   }
