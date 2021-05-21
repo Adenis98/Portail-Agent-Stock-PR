@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
   animations: [
-    
+
     trigger(
       'enterLeftTop', [
       transition(':enter', [
@@ -46,7 +46,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   ]
 })
 export class DashboardComponent implements OnInit {
-  nbrCmdStockFerme: any=[];
+  nbrCmdStockFerme: any = [];
   public barChartOptions: ChartOptions = {
     title: {
       text: 'Les 5 Meilleurs Pièces Commander',
@@ -81,7 +81,8 @@ export class DashboardComponent implements OnInit {
   public barChartLegend = true;
   public chartColors: Array<any> = [
     { // first color
-      backgroundColor: '#d6a217',},
+      backgroundColor: '#d6a217',
+    },
     { // second color
       backgroundColor: '#364547',
     },
@@ -94,13 +95,7 @@ export class DashboardComponent implements OnInit {
     { // 5 color
       backgroundColor: '#00A492',
     },];
-  public barChartData: ChartDataSets[] = [
-    { data: [90], label: '5F1955426 ' },
-    { data: [80], label: '5F1955426 ' },
-    { data: [60], label: '5F1955426 ' },
-    { data: [45], label: '5F1955426 ' },
-    { data: [30], label: '5F1955426 ' },
-  ];
+  public barChartData: ChartDataSets[] = [];
   /***************************cercle******************** */
 
   public pieChartOptions: ChartOptions = {
@@ -124,8 +119,8 @@ export class DashboardComponent implements OnInit {
       enabled: true
     },
   };
-  cmdFerme: number=0;
-  cmdNormale: number=0;
+  cmdFerme: number = 0;
+  cmdNormale: number = 0;
   public pieChartLabels: Label[] = ['Command Stock ', 'Commande Ferme '];
   public pieChartData: number[] = [];
   public pieChartType: ChartType = 'doughnut';
@@ -215,32 +210,42 @@ export class DashboardComponent implements OnInit {
     { data: [28, 48, 40, 19, 86, 27, 200, 80, 81, 56, 55, 40], label: 'Comande Stock' }
   ];
 
- 
-  constructor(private stats:StatsService,
-    private _snackBar: MatSnackBar,) {}
-  getnbrStockFerme()
-  {
-    this.stats.getNbrCmdStockFerme().subscribe((respons:any)=>{
-      this.cmdFerme=respons.cmdFerme;
-      this.cmdNormale=respons.cmdNormale
-      this.pieChartData=[this.cmdNormale,this.cmdFerme]
+
+  constructor(private stats: StatsService,
+    private _snackBar: MatSnackBar,) { }
+  getnbrStockFerme() {
+    this.stats.getNbrCmdStockFerme().subscribe((respons: any) => {
+      this.cmdFerme = respons.cmdFerme;
+      this.cmdNormale = respons.cmdNormale
+      this.pieChartData = [this.cmdNormale, this.cmdFerme]
     }
-    , (error) => {
+      , (error) => {
+        this._snackBar.open(
+          (error.status == 0) ? "connexion au serveur impossible !!" : error.error.message, "", {
+          verticalPosition: 'top',
+          panelClass: 'red-snackbar',
+          duration: 5000,
+        });
+      })
+  }
+  getCmdByStatus() {
+    this.stats.getCmdByStatus().subscribe((response: any) => {
+      this.polarAreaChartData = [response.enrg, response.liv, response.fact];
+    }, (error) => {
       this._snackBar.open(
-        (error.status==0)?"connexion au serveur impossible !!":error.error.message, "", {
+        (error.status == 0) ? "connexion au serveur impossible !!" : error.error.message, "", {
         verticalPosition: 'top',
         panelClass: 'red-snackbar',
         duration: 5000,
       });
     })
   }
-  getCmdByStatus()
-  {
-    this.stats.getCmdByStatus().subscribe((response:any)=>{
-      this.polarAreaChartData=[response.enrg,response.liv,response.fact];
+  getTop5() {
+    this.stats.getTop5().subscribe((response: any) => {
+      this.barChartData =response;
     }, (error) => {
       this._snackBar.open(
-        (error.status==0)?"connexion au serveur impossible !!":error.error.message, "", {
+        (error.status == 0) ? "connexion au serveur impossible !!" : error.error.message, "", {
         verticalPosition: 'top',
         panelClass: 'red-snackbar',
         duration: 5000,
@@ -250,6 +255,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getnbrStockFerme();
     this.getCmdByStatus();
+    this.getTop5();
   }
 
 }

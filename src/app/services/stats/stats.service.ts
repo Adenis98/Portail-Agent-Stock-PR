@@ -25,5 +25,11 @@ export class StatsService {
     let url = "http://localhost:8080/stat/CmdLivEnrgFact";
     return this.http.get(url, { headers:this.headers_object });
   }
+  getTop5()
+  {
+    this.getLocalStorageJwt();
+    let url = "http://localhost:8080/stat/Top5";
+    return this.http.get(url, { headers:this.headers_object });
+  }
 }
 
