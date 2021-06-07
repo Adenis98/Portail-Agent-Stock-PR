@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,7 +9,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { CropImageDialog, SidebarComponent } from './components/sidebar/sidebar.component';
 import { DashboardComponent } from './components/sidebarcpnts/dashboard/dashboard.component';
 import { DialogAnnuler, Page2Component } from './components/sidebarcpnts/commande/page2.component';
 import { DialogImpression, Page3Component } from './components/sidebarcpnts/stockPr/page3.component';
@@ -40,6 +40,7 @@ import { ChartsModule } from 'ng2-charts';
 import { NgxPrintModule } from 'ngx-print';
 import { DevisDetailComponent } from './components/sidebarcpnts/page-devis/devis-detail/devis-detail.component';
 import { PageDevisComponent } from './components/sidebarcpnts/page-devis/page-devis.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +61,7 @@ import { PageDevisComponent } from './components/sidebarcpnts/page-devis/page-de
     PageDevisComponent,
     DialogImpression,
     DevisDetailComponent,
-
+    CropImageDialog
   ],
   imports: [
     BrowserModule,
@@ -86,7 +87,8 @@ import { PageDevisComponent } from './components/sidebarcpnts/page-devis/page-de
     MatSortModule,
     MatSlideToggleModule,
     ChartsModule,
-    NgxPrintModule
+    NgxPrintModule,
+    ImageCropperModule
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent],

@@ -1,6 +1,7 @@
 import { animate, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { AuthService } from './services/auth/auth.service';
 
 @Component({
@@ -34,6 +35,8 @@ import { AuthService } from './services/auth/auth.service';
 export class AppComponent {
   title = 'hello';
   public showNavSide=false;
+
+
   constructor(public router:Router ,public auth : AuthService){
     if(this.auth.isLoggedIn())
       this.showNavSide=true; 

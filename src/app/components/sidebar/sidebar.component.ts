@@ -2,13 +2,15 @@ import { GetcomptesService } from './../../services/comptes/comptes.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { Component, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
-import { Router, ActivatedRouteSnapshot, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { animate, style, transition, trigger } from '@angular/animations';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AppComponent } from "../../app.component";
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { PanierService } from 'src/app/services/Panier/panier.service';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-sidebar',
@@ -52,7 +54,7 @@ export class SidebarComponent implements OnInit {
     private compte: GetcomptesService,
     private appCmp: AppComponent,
     private _snackBar:MatSnackBar,
-    private panier : PanierService) {
+    private panier : PanierService,public dialog: MatDialog) {
     router.events.subscribe((val) => {
       if (val instanceof NavigationEnd)
         this.dash(val.url.substring(1));
@@ -156,10 +158,7 @@ export class SidebarComponent implements OnInit {
 
 
 
-  inputFunction() {
-    let bt = <HTMLInputElement>document.getElementById("shoseImage");
-    bt.click();
-  }
+  
   inputFunctionValue(event: any) {
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(localStorage.jwt);
@@ -242,4 +241,51 @@ export class SidebarComponent implements OnInit {
       this.panier.setPanierSizeAttr(data);
     });
   }
+  
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CropImageDialog, {
+      minWidth: '500px',maxWidth:'1000px'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      //result hiya el image
+    });
+  }
+}
+
+@Component({
+  selector: 'cropImageDialog',
+  templateUrl: 'cropImageDialog.html',
+  styleUrls: ['./cropImageDialogStyle.css'],
+})
+export class CropImageDialog {
+
+  constructor(
+    public dialogRef: MatDialogRef<CropImageDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
+
+    inputFunction() {
+      let bt = <HTMLInputElement>document.getElementById("chooseImage");
+      bt.click();
+    }
+
+    imageChangedEvent: any = '';
+    croppedImage: any = '';
+  
+    fileChangeEvent(event: any): void {
+        this.imageChangedEvent = event;
+    }
+    imageCropped(event: ImageCroppedEvent) {
+        this.croppedImage = event.base64;
+    }
+    imageLoaded() {
+        // show cropper
+    }
+    cropperReady() {
+        // cropper ready
+    }
+    loadImageFailed() {
+        // show message
+    }
 }

@@ -1,0 +1,36 @@
+<div class="scroll">
+    <div class="row">
+     
+            <button class="uploadBtn" mat-raised-button (click)="inputFunction()">
+                <input class="hideInput" hidden="true" type="file" accept="image/png, image/jpeg" (change)="fileChangeEvent($event)"
+                    id="chooseImage" />
+                <span>Upload Photo</span>
+            </button>
+  
+     
+            <button class="confirmBtn" mat-raised-button >
+                <span>Changer la photo</span>
+            </button>
+
+
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div class="cropper">
+                <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="false"
+                    [roundCropper]="true" [hideResizeSquares]="true" [maintainAspectRatio]="true" [aspectRatio]="1/ 1"
+                    format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
+                    (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
+            </div>
+
+        </div>
+        <div class="col">
+            <div class="preview">
+                <img style="border-radius: 100%;height: 300px;width: 300px;" [src]="croppedImage" alt="0" />
+            </div>
+        </div>
+    </div>
+
+
+</div>
