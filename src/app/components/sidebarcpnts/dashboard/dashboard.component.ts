@@ -201,18 +201,31 @@ export class DashboardComponent implements OnInit {
       },
     }
   };
-  public barChartLabels2: Label[] = ['01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'];
+  public barChartLabels2: Label[] = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
   public barChartType2: ChartType = 'bar';
   public barChartLegend2 = true;
 
   public barChartData2: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40, 80, 81, 56, 55, 40], label: 'Commande Ferme' },
-    { data: [28, 48, 40, 19, 86, 27, 200, 80, 81, 56, 55, 40], label: 'Comande Stock' }
   ];
 
 
   constructor(private stats: StatsService,
     private _snackBar: MatSnackBar,) { }
+  getStatAllCmd() {
+    this.stats.getAllCmdStockFermeMonth().subscribe((response: any) => {
+      this.barChartData2 = [
+        { data: response.dataCmdFerme, label: 'Commande Ferme' },
+        { data: response.dataCmdStock, label: 'Comande Stock' }
+      ]
+    }, (error) => {
+      this._snackBar.open(
+        (error.status == 0) ? "connexion au serveur impossible !!" : error.error.message, "", {
+        verticalPosition: 'top',
+        panelClass: 'red-snackbar',
+        duration: 5000,
+      });
+    })
+  }
   getnbrStockFerme() {
     this.stats.getNbrCmdStockFerme().subscribe((respons: any) => {
       this.cmdFerme = respons.cmdFerme;
@@ -228,6 +241,7 @@ export class DashboardComponent implements OnInit {
         });
       })
   }
+
   getCmdByStatus() {
     this.stats.getCmdByStatus().subscribe((response: any) => {
       this.polarAreaChartData = [response.enrg, response.liv, response.fact];
@@ -242,7 +256,7 @@ export class DashboardComponent implements OnInit {
   }
   getTop5() {
     this.stats.getTop5().subscribe((response: any) => {
-      this.barChartData =response;
+      this.barChartData = response;
     }, (error) => {
       this._snackBar.open(
         (error.status == 0) ? "connexion au serveur impossible !!" : error.error.message, "", {
@@ -256,6 +270,7 @@ export class DashboardComponent implements OnInit {
     this.getnbrStockFerme();
     this.getCmdByStatus();
     this.getTop5();
+    this.getStatAllCmd();
   }
 
 }

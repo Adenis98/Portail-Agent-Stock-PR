@@ -31,5 +31,11 @@ export class StatsService {
     let url = "http://localhost:8080/stat/Top5";
     return this.http.get(url, { headers:this.headers_object });
   }
+  getAllCmdStockFermeMonth()
+  {
+    this.getLocalStorageJwt();
+    let url = "http://localhost:8080/stat/AllCmdStockFermeMonth";
+    return this.http.get(url, { headers:this.headers_object });
+  }
 }
 
