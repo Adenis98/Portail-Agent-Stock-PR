@@ -1,6 +1,10 @@
-<div class="sizeError" *ngIf="imageVolumineux">
-    image très Volumineux (taille maximale 5Mo)
+<div class="sizeError" style="color : black;font-weight: 600;">
+    <p>Mettre à jour votre photo </p>
 </div>
+<div class="sizeError" *ngIf="imageVolumineux">
+    image très Volumineux (taille maximale 1Mo)
+</div>
+
 <div class="scroll" *ngIf="imageVolumineux==false">
     <div class="row">
      
@@ -12,7 +16,7 @@
 
     
         <button class="confirmBtn" mat-raised-button [mat-dialog-close]="imgResultAfterCompress" >
-            <span>Changer la photo</span>
+            <span>Mettre a jour</span>
         </button>
 
 
@@ -21,7 +25,7 @@
     <div class="row" style="margin:auto">
         <div class="col">
             <div class="cropper">
-                <image-cropper style="max-height: 300px;width: 400px;"[imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="false"
+                <image-cropper style="max-height: 300px;width: 300px;"[imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="false"
                     [roundCropper]="true" [hideResizeSquares]="true" [maintainAspectRatio]="true" [aspectRatio]="1/ 1"
                     format="png" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()"
                     (cropperReady)="cropperReady()" (loadImageFailed)="loadImageFailed()"></image-cropper>
