@@ -11,6 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { PanierService } from 'src/app/services/Panier/panier.service';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { NgxImageCompressService } from 'ngx-image-compress';
 
 @Component({
   selector: 'app-sidebar',
@@ -159,41 +160,34 @@ export class SidebarComponent implements OnInit {
 
 
   
-  inputFunctionValue(event: any) {
+  inputFunctionValue(image: any) {
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(localStorage.jwt);
     const userName = decodedToken["sub"];
-    const file = event.target.files[0];
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      if (file.size < 5242880) {//5MO
-        //lezmek taamel slice bech tna7i akil klem melloul 
-        this.checkImg = false;
-        this.compte.updateImg(reader.result?.slice(22),userName).subscribe(response => {
-          this._snackBar.open(
-            "votre photo a été mis a jour", "", {
-            verticalPosition: 'top',
-            panelClass: 'green-snackbar',
-            duration: 2000,
-          });
-          this.avatar = reader.result;
-          this.imgExist=true ; 
-        },(error)=>{
-          this.imgExist=false ; 
-          this._snackBar.open(
-            error.message, "", {
-            verticalPosition: 'top',
-            panelClass: 'red-snackbar',
-            duration : 3000
-          });
-          this.setImg();
-        }
-        )
-      }
-      else
-        this.checkImg = true;
-    };
+    const croppedImage = image;
+    this.checkImg = false;// test sur la taille de l'image introuvable
+
+    this.compte.updateImg(croppedImage?.slice(22),userName).subscribe(response => {
+      this._snackBar.open(
+        "votre photo a été mis a jour", "", {
+        verticalPosition: 'top',
+        panelClass: 'green-snackbar',
+        duration: 2000,
+      });
+      this.avatar = croppedImage;
+      this.imgExist=true ; 
+    },(error)=>{
+      this.imgExist=false ; 
+      this._snackBar.open(
+        error.message, "", {
+        verticalPosition: 'top',
+        panelClass: 'red-snackbar',
+        duration : 3000
+      });
+      this.setImg();
+    }
+    )
+     
   }
   setUsername() {
     const helper = new JwtHelperService();
@@ -248,8 +242,10 @@ export class SidebarComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
+      console.log(result);
       //result hiya el image
+      if(result)
+        this.inputFunctionValue(result);
     });
   }
 }
@@ -263,21 +259,33 @@ export class CropImageDialog {
 
   constructor(
     public dialogRef: MatDialogRef<CropImageDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: any) {}
+    @Inject(MAT_DIALOG_DATA) public data: any,private imageCompress: NgxImageCompressService) {}
+
+  
 
     inputFunction() {
-      let bt = <HTMLInputElement>document.getElementById("chooseImage");
+      let bt = <HTMLInputElement>document.getElementById("choseImage");
       bt.click();
     }
 
     imageChangedEvent: any = '';
     croppedImage: any = '';
-  
+    imageVolumineux :any =false ; 
+
     fileChangeEvent(event: any): void {
+      
+      if(((event.target.files[0].size)*1.37)<=1000000)
+      {
+        this.imageVolumineux=false ; 
         this.imageChangedEvent = event;
+      }
+      else 
+        this.imageVolumineux =true ;
     }
     imageCropped(event: ImageCroppedEvent) {
-        this.croppedImage = event.base64;
+      this.croppedImage = event.base64;
+      this.imgResultBeforeCompress=this.croppedImage;
+      this.compressFile(); 
     }
     imageLoaded() {
         // show cropper
@@ -287,5 +295,24 @@ export class CropImageDialog {
     }
     loadImageFailed() {
         // show message
+    }
+   
+    imgResultBeforeCompress:string='';
+    imgResultAfterCompress:string='';
+    compressFile() {
+    
+  
+        //this.imgResultBeforeCompress = image;
+        console.warn('Size in bytes was:', this.imageCompress.byteCount(this.croppedImage));
+        
+        this.imageCompress.compressFile(this.croppedImage, 40, 40).then(
+          result => {
+            this.imgResultAfterCompress = result;
+            console.warn('Size in bytes is now:', this.imageCompress.byteCount(result));
+          }
+        );
+
+      console.log(this.imgResultAfterCompress);
+      console.log("qdsfhjkdfhjklqdsfkjhqfdskhjlhjkqlfsdhjkl");
     }
 }

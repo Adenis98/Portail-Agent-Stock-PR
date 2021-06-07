@@ -41,6 +41,7 @@ import { NgxPrintModule } from 'ngx-print';
 import { DevisDetailComponent } from './components/sidebarcpnts/page-devis/devis-detail/devis-detail.component';
 import { PageDevisComponent } from './components/sidebarcpnts/page-devis/page-devis.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
+import { NgxImageCompressService } from 'ngx-image-compress';
 @NgModule({
   declarations: [
     AppComponent,
@@ -90,7 +91,7 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     NgxPrintModule,
     ImageCropperModule
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,NgxImageCompressService],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

@@ -3,7 +3,7 @@
     overflow-y: auto; margin:4px, 4px;
     padding:4px;
     min-width: 500px;
-    height: 500px;
+    height: 400px;
 }
 .uploadBtn{
     
@@ -32,10 +32,9 @@
     border-radius: 30px;
  
 }
-.preview{
-    margin : auto ; 
-} 
-.cropper{
-    margin : auto ; 
-    max-height: 400px;width: 400px;
+.sizeError{
+    color : red ; 
+    font-size: 20px;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
 }
