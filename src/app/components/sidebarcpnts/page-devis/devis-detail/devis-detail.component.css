@@ -182,73 +182,87 @@
   margin-left: 20px;
 }
 }
+.ajouterLigneDevisDialog
+{
+  position: absolute;
+  right: 325px;
+  background-color: #ca9b1b;
+  margin-top: 30px;
+  border-radius: 20px;
+  height: 45px;
+  width: 215px;
+  color: #364547;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 2px;
+  margin-left: 20px;
+}
 /**************************************/
 @media print {
-/************print style****************/
-.tableDevis
-{
-    padding-left: 15px;
-    padding-right: 15px;
-    border:1px solid rgba(128, 128, 128, 0.179);
-    border-radius: 20px;overflow:hidden ;
+  .tableDevis
+  {
+      padding-left: 15px;
+      padding-right: 15px;
+      border:1px solid rgba(128, 128, 128, 0.179);
+      border-radius: 20px;overflow:hidden ;
+      
+  }
+  .footerValue
+  {
+    margin: auto;
+    font-weight: 500;
+    color: #364547;
+    text-align: center;
     
-}
-.footerValue
-{
-  margin: auto;
-  font-weight: 500;
-  color: #364547;
-  text-align: center;
-  
-}
+  }
 
-.tableTotal
-{
-  border-radius: 20px;
-  margin: auto;
-  margin-top: 20px;
-  overflow: hidden;
-  border:1px solid rgba(128, 128, 128, 0.179);
-}
-.tableContainer
-{
-  position: relative;
-}
-.tableTotalHeadr
-{
-  background: white;
-  height: 45px;
-  border-top: #e4e4e4 1px solid;
-}
-.titleFooter
-{
-  font-weight: 500;
-  background-color: #425c5a0d;
-  padding: 12px;
-  color: #364547;
-  text-align: center;
-  height: 100%;
-}
+  .tableTotal
+  {
+    border-radius: 20px;
+    margin: auto;
+    margin-top: 20px;
+    overflow: hidden;
+    border:1px solid rgba(128, 128, 128, 0.179);
+  }
+  .tableContainer
+  {
+    position: relative;
+  }
+  .tableTotalHeadr
+  {
+    background: white;
+    height: 45px;
+    border-top: #e4e4e4 1px solid;
+  }
+  .titleFooter
+  {
+    font-weight: 500;
+    background-color: #425c5a0d;
+    padding: 12px;
+    color: #364547;
+    text-align: center;
+    height: 100%;
+  }
 
-    .headerDevis
-    {
+  .headerDevis
+  {
     height: 200px;
     color: #364547;
     font-weight: 500;
     letter-spacing: 1px;
     font-size: 16px;
     margin: auto;
-    }
-    .printDevisSection
-    { 
+  }
+  .printDevisSection
+  { 
     padding: 50px;
     padding-top: 50px;
     background-color: white;
     height: 100%;
     width: 100%!important;
-    }
-    .tableHeaderDevis
-    {
+  }
+  .tableHeaderDevis
+  {
     height:45px ;
     border-bottom: 0px;
     background-color: #425c5a0d;
@@ -259,26 +273,26 @@
     border-top-right-radius: 20px;
     text-align: center;
     font-size: 18px;
-    }
-    .remaqueText
-    {
+  }
+  .remaqueText
+  {
     text-align: center;
     font-size: 10px;
     color:  gray;
     margin-top: 30px;
     padding: 0px;
-    }
-    .colunDevis
-    {
+  }
+  .colunDevis
+  {
     border-top:rgba(128, 128, 128, 0.186) 1px solid;
     height: 45px;
     padding: 12px;
     text-align: center;
     color: #333333;
     font-weight: 500;
-    }
-    .titlePrint
-    {
+  }
+  .titlePrint
+  {
     font-weight: 500;
     margin: auto;
     width: 150px;
@@ -289,13 +303,13 @@
     border: 2px solid black;
     border-radius: 15px;
     margin-bottom: 70px;
-    } 
-    .backBtn
-    {
-        display: none;
-    }
-    .printDevis
-    {
-        display: none;
-    }
+  } 
+  .backBtn
+  {
+    display: none;
+  }
+  .printDevis
+  {
+    display: none;
+  }
 }

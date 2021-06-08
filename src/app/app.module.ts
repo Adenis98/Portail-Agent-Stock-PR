@@ -38,7 +38,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { ChartsModule } from 'ng2-charts';
 import { NgxPrintModule } from 'ngx-print';
-import { DevisDetailComponent } from './components/sidebarcpnts/page-devis/devis-detail/devis-detail.component';
+import { ajouterLigneDevisDialog, DevisDetailComponent } from './components/sidebarcpnts/page-devis/devis-detail/devis-detail.component';
 import { PageDevisComponent } from './components/sidebarcpnts/page-devis/page-devis.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxImageCompressService } from 'ngx-image-compress';
@@ -62,7 +62,8 @@ import { NgxImageCompressService } from 'ngx-image-compress';
     PageDevisComponent,
     DialogImpression,
     DevisDetailComponent,
-    CropImageDialog
+    CropImageDialog,
+    ajouterLigneDevisDialog
   ],
   imports: [
     BrowserModule,

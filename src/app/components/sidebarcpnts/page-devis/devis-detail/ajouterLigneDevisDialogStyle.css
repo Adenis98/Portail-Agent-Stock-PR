@@ -1,0 +1,200 @@
+.inputFieldRef
+{
+  min-width: 250px;
+  max-width: 250px;
+}
+.hint{
+  color: #d93025;
+  font-size: 13px;
+  position: relative ; 
+  line-height: 1.2;
+  font-style: italic;
+}
+.chercherBtn
+{
+  position: absolute;
+  background-color: #d6a217;
+  right: 30px;
+  border-radius: 20px;
+  height: 45px;
+  width: 150px;
+  color: #415959;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+.searchDiv{
+  width : 80%;
+  position : relative;
+  margin:auto;
+  margin-top : 50px;
+  background-color : #e3f2f1 ; 
+  border-radius : 30px;
+  padding : 25px;
+}
+.sizeError{
+  color : red ; 
+  font-size: 23px;
+  text-align: center;
+}
+div.tableHeader
+{
+  background-color: #364547;
+  border-radius: 20px;
+  height: 50px;
+  text-align: center;
+  width:80%;
+  min-width: 600px;
+  padding: 13px;
+  padding-left:0px;
+  margin:auto;
+  margin-top:30px;
+  color: #d6a217;
+  font-weight: 500;
+  font-size: 15px;
+  padding-top: 16px;
+  user-select: none;
+  position: relative ;
+}
+div.composant
+{
+  background-color:  #e3f2f1;
+  margin-top: 20px;
+  color: #415959;
+  position: relative;
+  font-size: 13px;
+  padding: 0px;
+}
+.stockDispoIcon
+{
+  color:#2ecc71 ;
+  font-size: 30px;
+  margin: auto;
+}
+.stockLimitIcon
+{
+  color:#e67e22 ;
+  font-size: 30px;
+  margin: auto;
+}
+.stockNonDispotIcon
+{
+  color: #c0392b;
+  font-size: 30px;
+  margin: auto;
+}
+.dispo
+{
+  padding: 10px;
+  padding-left: 22px;
+}
+div.containerPadding
+{
+  padding-top: 20px;
+  margin: auto;
+  padding-top: 70px;
+  padding-bottom: 50px;
+  min-width: 900px !important;
+  width: 95%;
+  height: 100%;
+  transition: 0.9s;
+}
+.textCompo
+{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+.inputTaux
+{
+  position: absolute;
+  left: 50px;
+  top: -15px;
+  width: 50px;
+}
+.tauxSpiner
+{
+  background-color: white;
+  border-radius: 20px;
+  position: relative;
+  height: 40px;
+  width: 100px;
+  margin: auto;
+}
+.addBtn
+{
+  color: #d6a217;
+  position: absolute;
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  font-size: 20px;
+  right: 0px;
+  height: 40px;
+  width: 30px !important;
+  min-width: unset !important;
+  padding: 0px !important;
+  background-color: transparent !important;
+  z-index: 10;
+}
+.removeBtn
+{
+  color: #d6a217;
+  position: absolute;
+  border-bottom-left-radius: 20px;
+  border-top-left-radius: 20px;
+  border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+  font-size: 30px;
+  font-weight: 400;
+  left: 0px;
+  height: 40px;
+  width: 30px !important;
+  min-width: unset !important;
+  padding: 0px !important;
+  background-color: transparent !important;
+}
+.inputQte
+{
+  color: #415959;
+  max-width: 50px;
+  background-color: transparent;
+  border: 0px transparent;
+  text-align: center;
+  outline: none;
+  padding: 0px;
+  height: 20px;
+  height: 40px;
+}
+input::-webkit-inner-spin-button,
+input::-webkit-outer-spin-button { 
+  -webkit-appearance: none;
+  margin:0;
+}
+.addDevis
+{
+  z-index: 10;
+  transition : 0.3s;
+  background-color: #d6a217;
+  color: white;
+}
+.addDevis:hover{
+  background-color: #364547;
+  color:#d6a217;
+  transition : 0.3s;
+}
+.qteSpiner
+{
+  background-color: white;
+  border-radius: 20px;
+  position: relative;
+  height: 40px;
+  width: 100px;
+  margin: auto;
+}
+.btn1{
+  max-width: 50px;
+  margin-right: 10px;
+  padding: 5px;
+  padding-left: 10px;
+}

@@ -1,8 +1,10 @@
 import { DevisService } from 'src/app/services/devis/devis.service';
-import {  Component, OnInit } from '@angular/core';
+import {  Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { animate, style, transition, trigger } from '@angular/animations';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { StockPrService } from 'src/app/services/stockPr/stock-pr.service';
 
 @Component({
   selector: 'app-devis-detail',
@@ -43,7 +45,9 @@ export class DevisDetailComponent implements OnInit{
   constructor(private routerinfo: ActivatedRoute,
     private router: Router,
     private devis:DevisService,
-    private _snackBar: MatSnackBar,) { }
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog,
+    ) { }
 
   ngOnInit(): void {
     let numDevis = this.routerinfo.snapshot.paramMap.get('numDevis');
@@ -82,5 +86,105 @@ export class DevisDetailComponent implements OnInit{
   precedent() {
     this.router.navigate(['/page3']);
   };
+  openDialog(): void {
+    const dialogRef = this.dialog.open(ajouterLigneDevisDialog, {
+      width: '1000px',
+      height: '500px', 
+      data: {numDevis: this.numDevis}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      
+    });
+  }
+
+}
+
+
+@Component({
+  selector: 'ajouterLigneDevisDialog',
+  templateUrl: 'ajouterLigneDevisDialog.html',
+  styleUrls : ['ajouterLigneDevisDialogStyle.css'],
+  animations: [
+    trigger('consulterStockAnim', [
+      transition('* => void', animate('0.3s 0.2s ease-in',
+        style([{ transform: 'translateX(10%)', opacity: 0 }])
+      )
+      ),
+      transition('void => *',
+        [style([{ transform: 'translateX(-30%)', opacity: 0 }])
+          , animate('0.4s 0.4s ease-out'
+          )]
+      )
+    ]),]
+})
+export class ajouterLigneDevisDialog {
+
+  constructor(private stock: StockPrService,private _snackBar: MatSnackBar,
+    public dialogRef: MatDialogRef<ajouterLigneDevisDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+    ) {}
+
+    
+  loading:boolean =false; 
+  refPr: any ='';
+  listOfPr: any = [];
+  tauxRemise = "0";
+  qte = "0"
+
+  getStock() {
+    this.qte = "1";
+    this.tauxRemise = "0";
+    this.loading = true;
+    let body =
+    {
+      "codeArt": this.refPr,
+      "libelle": ""
+    }
+    this.stock.getStockPr(body).subscribe(response => {
+      this.loading = false;
+      this.listOfPr = [];
+      setTimeout(() => {
+        this.listOfPr = response;
+      }, 200);
+    }, (error:any) => {
+      this.loading = false;
+      this._snackBar.open(
+        (error.status == 0) ? "connexion au serveur impossible !!" : error.error.message, "", {
+        verticalPosition: 'top',
+        panelClass: 'red-snackbar',
+        duration: 5000,
+      });
+    });
+  }
+
+  formatMoney(x: any) {
+    const euro = new Intl.NumberFormat('fr-FR', {
+      style: 'currency',
+      currency: 'TND',
+      minimumFractionDigits: 3
+    })
+    return (euro.format(x));
+  }
+  
+  addTaux() {
+    if (parseInt(this.tauxRemise) < 100)
+      this.tauxRemise = "" + (parseInt(this.tauxRemise) + 1);
+  }
+  removeTaux() {
+    if (parseInt(this.tauxRemise) > 0)
+      this.tauxRemise = "" + (parseInt(this.tauxRemise) - 1);
+  }
+  addQte() {
+    this.qte = (parseInt(this.qte) + 1).toString();
+  }
+  removeQte() {
+    if (parseInt(this.qte) > 1)
+      this.qte = (parseInt(this.qte) - 1).toString();
+  }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
 }

@@ -1,0 +1,96 @@
+<div class="sizeError" style="color : black;font-weight: 300;">
+    <p>Ajouter un article a ce devis (N°{{data.numDevis}}) </p>
+</div>
+<div class="searchDiv shadow">
+    <form #f="ngForm" ngForm class="" (keydown.enter)="$event.preventDefault()">
+        <mat-form-field class="inputFieldRef col">
+            <mat-label>Réf</mat-label>
+            <input   minlength="8" maxlength="15" matInput
+                placeholder="Ex. 5F10991298" name="ref" [(ngModel)]="refPr" #ref="ngModel"
+                oninput="this.value = this.value.toUpperCase()">
+    
+            <mat-hint *ngIf="ref.touched&&!ref.valid" class="hint">
+                <mat-icon>error</mat-icon>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saisissez la réference de la pièce
+            </mat-hint>
+        </mat-form-field>
+    
+        <button type="submit" class=" chercherBtn" mat-raised-button [disabled]="!f.valid"
+            (click)="getStock();this.refPr='';">
+            <mat-spinner *ngIf="loading" style="margin:auto" diameter="30"></mat-spinner>
+            <mat-icon *ngIf="!loading" aria-hidden="false"><span>
+                    manage_search</span>
+            </mat-icon>
+            <span *ngIf="!loading"> Chercher</span>
+    
+        </button>
+    </form>
+</div>
+<div class="row tableHeader shadow">   
+    <div class="col">
+        Dispo
+    </div>
+    <div class="col">
+        Réf Art
+    </div>
+    <div class="col-2">
+        Libellé
+    </div>
+    <div class="col">
+        PU
+    </div>
+    <div  class="col-2">
+        Remise %
+    </div>
+    <div class="col">
+        Qté
+    </div>
+
+    <div class="col btn1">
+    </div>
+</div>
+<div *ngIf="loading" class="row tableHeader lodingSpiner composant shadow">
+    <mat-spinner style="margin:auto" diameter="30"></mat-spinner>
+</div>
+<div class="scroll" >
+    <div *ngFor="let pr of listOfPr;let index=index" class="row tableHeader composant shadow" @consulterStockAnim>
+        <div class="col dispo" style="margin-right :10px">
+            <mat-icon *ngIf="pr.stock > 5" class="stockDispoIcon">assignment_turned_in</mat-icon>
+            <mat-icon *ngIf="pr.stock > 0 && pr.stock < 5" class="stockLimitIcon">assignment_late</mat-icon>
+            <mat-icon *ngIf="!pr.stock" class="stockNonDispotIcon">cancel</mat-icon>
+            <mat-icon *ngIf="pr.stock == -1" class="stockNonDispotIcon">production_quantity_limits</mat-icon>
+        </div>
+       
+        <div class="col textCompo"><span>{{pr.codeArt}}</span></div>
+        <div class="col-2 textCompo"><span>{{pr.libelle}}</span></div>
+        <div class="col textCompo"><span>{{this.formatMoney(pr.pu)}}</span></div>
+        <div class="col-2" style="padding-top: 5px;">
+            <div class="tauxSpiner shadow-sm">
+                <button mat-flat-button class="addBtn" (click)="addTaux()">
+                    <span>+</span>
+                </button>
+                <input maxlength="2" pattern="\d{2}" type="text" name="qte" class="inputQte" [(ngModel)]="tauxRemise">
+                <button mat-flat-button class="removeBtn" (click)="removeTaux()">
+                    <span>-</span>
+                </button>
+            </div>
+        </div>
+        <div class="col"  style="padding-top: 5px;">
+            <div class="qteSpiner shadow-sm">
+                <button mat-flat-button class="addBtn" (click)="addQte()">
+                    <span>+</span>
+                </button>
+                <input type="number" name="qte" class="inputQte" [(ngModel)]="qte">
+                <button mat-flat-button class="removeBtn" (click)="removeQte()">
+                    <span>-</span>
+                </button>
+            </div>
+        </div>
+        <div class="col btn1 btnDevis" >
+            <button  [ngClass]="{'addDevis': pr.stock != -1}"  mat-mini-fab class="addDevis "  [disabled]="pr.stock == -1">
+                <span class="material-icons"> note_add </span>
+            </button>
+        </div>
+    </div>
+   
+</div>
