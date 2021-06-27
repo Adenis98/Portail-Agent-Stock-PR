@@ -16,7 +16,7 @@
         </mat-form-field>
     
         <button type="submit" class=" chercherBtn" mat-raised-button [disabled]="!f.valid"
-            (click)="getStock();this.refPr='';">
+            (click)="getStock();this.codArt=this.refPr;this.refPr='';">
             <mat-spinner *ngIf="loading" style="margin:auto" diameter="30"></mat-spinner>
             <mat-icon *ngIf="!loading" aria-hidden="false"><span>
                     manage_search</span>
@@ -87,7 +87,7 @@
             </div>
         </div>
         <div class="col btn1 btnDevis" >
-            <button  [ngClass]="{'addDevis': pr.stock != -1}"  mat-mini-fab class="addDevis "  [disabled]="pr.stock == -1">
+            <button  [ngClass]="{'addDevis': pr.stock != -1}"  mat-mini-fab class="addDevis " (click)="ajouterArticle()"  [disabled]="pr.stock == -1">
                 <span class="material-icons"> note_add </span>
             </button>
         </div>

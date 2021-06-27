@@ -95,7 +95,7 @@ export class DevisDetailComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      
+      this. getDevisDetail();
     });
   }
 
@@ -121,7 +121,8 @@ export class DevisDetailComponent implements OnInit{
 })
 export class ajouterLigneDevisDialog {
 
-  constructor(private stock: StockPrService,private _snackBar: MatSnackBar,
+  constructor(private stock: StockPrService,private devis : DevisService,
+    private _snackBar: MatSnackBar,
     public dialogRef: MatDialogRef<ajouterLigneDevisDialog>,
     @Inject(MAT_DIALOG_DATA) public data: any
     ) {}
@@ -131,7 +132,8 @@ export class ajouterLigneDevisDialog {
   refPr: any ='';
   listOfPr: any = [];
   tauxRemise = "0";
-  qte = "0"
+  qte = "0";
+  codArt ="";
 
   getStock() {
     this.qte = "1";
@@ -186,5 +188,29 @@ export class ajouterLigneDevisDialog {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  ajouterArticle(){
+    this.devis.ajouterAutreLigneDevis(this.data.numDevis, parseFloat(this.tauxRemise) , this.codArt , parseInt(this.qte)).subscribe(
+      (response:any)=>{
+        this._snackBar.open(
+          "Le Devis «" + this.data.numDevis + "» a été mis a jour ✓", "", {
+          verticalPosition: 'top',
+          panelClass: 'green-snackbar',
+          duration: 5000,
+        });
+        this.onNoClick();
+      },
+      (error:any)=>{
+        this._snackBar.open(
+          error.error.message.substr(error.error.message.indexOf(":")+1), "", {
+          verticalPosition: 'top',
+          panelClass: 'red-snackbar',
+          duration: 5000,
+        });
+      }
+    );
+  }
+  
 
 }
+
+

@@ -34,4 +34,11 @@ export class DevisService {
     let url = "http://localhost:8080/devis/annuler/"+numDevis;
     return this.http.post(url,body, { headers:this.headers_object })
   }
+
+  ajouterAutreLigneDevis(numDevis: Number , remise : Number , codArt : String ,qte :Number){
+    this.getLocalStorageJwt();
+    let body={"codArt" : codArt,"qte" : qte};
+    let url = "http://localhost:8080/devis/ajouterUnLigneDevis/"+remise+"/"+numDevis;
+    return this.http.post(url,body ,{ headers:this.headers_object });
+  }
 }
