@@ -151,11 +151,14 @@ export class ComptesComponent implements OnInit {
       });
       this.afficherAMUsr = false;
       console.log("response : " + Response);
-      this.listcompte.push(Response);
+      if(parseInt(this.permis.replace(/\D/g, ""))==3)
+      {
+        this.listcompte.push(Response);
+      }
     }, (error) => {
         this.loading = false;
         this._snackBar.open(
-          "echec d'ajout de l'utilisateur , message d'erreur :"+error.error.message, "", {
+          "echec d'ajout l'utilisateur ,"+error.error.message, "", {
           verticalPosition: 'top',
           panelClass: 'red-snackbar',
           duration: 5000,

@@ -82,6 +82,11 @@ export class SidebarComponent implements OnInit {
     const helper = new JwtHelperService();
     const decodedToken = helper.decodeToken(localStorage.jwt);
     this.permis = decodedToken["permis"];
+    
+    if(this.permis==3)
+    {
+      this.router.navigate(['/comptes']);
+    }
 
     //**************************** */
     //**************************** */
